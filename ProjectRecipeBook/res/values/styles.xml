@@ -1,0 +1,9 @@
+<resources>
+
+    <style name="AppTheme" parent="android:Theme.Light" />
+    <color name="fb_blue1">#3b5998</color>
+    <color name="fb_blue2">#8b9dc3</color>
+    <color name="fb_greyblue">#f7f7f7</color>
+    <color name="fb_white">#dfe3ee</color>
+
+</resources>
