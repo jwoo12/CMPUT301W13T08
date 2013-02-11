@@ -16,6 +16,11 @@
             android:label="@string/title_bar_text" 
          
             >
+              <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
               </activity>
              <activity
             android:name=".TitleBarOverride"
@@ -29,11 +34,7 @@
             android:label="@string/title_bar_text" 
          >
       </activity>
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
+          
        
     </application>
 
