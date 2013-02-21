@@ -24,5 +24,7 @@
     <string name="recipeDetails_instructions">1. Preheat your oven at whatever degree Celcius\n2. do something...\n3. Do something else...\n4. blahblah</string>
     <string name="share">Share with friends</string>
     <string name="otherButtons">Other buttons here...</string>
+    <string name="recipe_title">Recipe Title</string>
+    <string name="manage_pic">Manage\nPicture</string>
 
 </resources>

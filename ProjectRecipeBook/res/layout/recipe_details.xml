@@ -62,6 +62,7 @@
             </RelativeLayout>
 
             <RelativeLayout
+                android:id="@+id/descLayout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:paddingBottom="16dp" >
@@ -85,6 +86,7 @@
             </RelativeLayout>
 
             <RelativeLayout
+                android:id="@+id/categoryLayout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:paddingBottom="16dp" >
@@ -107,6 +109,7 @@
             </RelativeLayout>
 
             <RelativeLayout
+                android:id="@+id/ingredientsLayout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:paddingBottom="16dp" >
@@ -129,6 +132,7 @@
             </RelativeLayout>
 
             <RelativeLayout
+                android:id="@+id/instLayout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:paddingBottom="16dp" >

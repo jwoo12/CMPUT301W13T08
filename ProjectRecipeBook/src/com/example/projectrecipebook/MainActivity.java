@@ -24,7 +24,12 @@ public class MainActivity extends TitleBarOverride {
 		
 		
 		
+		
+		
+		
+		
 		// anything below this line will be deleted later
+		///////////////////////////////////////////////////
 		Button seeWhatICanMake;
 		seeWhatICanMake = (Button) findViewById(R.id.myFridgeSeeWhatICanMake);
 		seeWhatICanMake.setOnClickListener(new OnClickListener() {
@@ -36,6 +41,7 @@ public class MainActivity extends TitleBarOverride {
 				startActivity(intent);
 			}
 		});
+		/////////////////////////////////////////////////
 		
 	}
 
