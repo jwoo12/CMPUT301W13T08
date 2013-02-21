@@ -1,0 +1,161 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/LinearLayout1"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" >
+
+        <QuickContactBadge
+            android:id="@+id/quickContactBadge1"
+            android:layout_width="112dp"
+            android:layout_height="wrap_content"
+            android:padding="16dp"
+            android:src="@color/fb_blue1" />
+
+        <TextView
+            android:id="@+id/recipeDetails_foodName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_toRightOf="@+id/quickContactBadge1"
+            android:text="@string/food_name" />
+
+    </RelativeLayout>
+
+    <ScrollView
+        android:id="@+id/scrollView1"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" >
+
+        <LinearLayout
+            android:id="@+id/LinearLayout2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical" >
+
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:paddingBottom="16dp" >
+
+                <TextView
+                    android:id="@+id/recipeDetails_authorLabel"
+                    android:layout_width="96dp"
+                    android:layout_height="wrap_content"
+                    android:gravity="right"
+                    android:text="@string/author" />
+
+                <TextView
+                    android:id="@+id/recipeDetails_author"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="16dp"
+                    android:layout_marginRight="16dp"
+                    android:layout_toRightOf="@id/recipeDetails_authorLabel"
+                    android:text="@string/author_name" />
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingBottom="16dp" >
+
+                <TextView
+                    android:id="@+id/recipeDetails_descLabel"
+                    android:layout_width="96dp"
+                    android:layout_height="wrap_content"
+                    android:gravity="right"
+                    android:text="@string/desc" />
+
+                <TextView
+                    android:id="@+id/recipeDetails_desc"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="16dp"
+                    android:layout_marginRight="16dp"
+                    android:layout_toRightOf="@id/recipeDetails_descLabel"
+                    android:text="@string/desc_here" />
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingBottom="16dp" >
+
+                <TextView
+                    android:id="@+id/recipeDetails_categoryLabel"
+                    android:layout_width="96dp"
+                    android:layout_height="wrap_content"
+                    android:gravity="right"
+                    android:text="@string/category" />
+
+                <TextView
+                    android:id="@+id/recipeDetails_category"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="16dp"
+                    android:layout_marginRight="16dp"
+                    android:layout_toRightOf="@id/recipeDetails_categoryLabel"
+                    android:text="@string/category_here" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingBottom="16dp" >
+
+                <TextView
+                    android:id="@+id/recipeDetails_ingredientsLabel"
+                    android:layout_width="96dp"
+                    android:layout_height="wrap_content"
+                    android:gravity="right"
+                    android:text="@string/ingredients_label" />
+
+                <TextView
+                    android:id="@+id/recipeDetails_ingredients"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="16dp"
+                    android:layout_marginRight="16dp"
+                    android:layout_toRightOf="@id/recipeDetails_ingredientsLabel"
+                    android:text="@string/ingredients_here" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingBottom="16dp" >
+
+                <TextView
+                    android:id="@+id/recipeDetails_instructionsLabel"
+                    android:layout_width="96dp"
+                    android:layout_height="wrap_content"
+                    android:gravity="right"
+                    android:text="@string/instructions" />
+
+                <TextView
+                    android:id="@+id/recipeDetails_instructions"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="16dp"
+                    android:layout_marginRight="16dp"
+                    android:layout_toRightOf="@id/recipeDetails_instructionsLabel"
+                    android:text="@string/recipeDetails_instructions" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingBottom="16dp" >
+            </RelativeLayout>
+
+        </LinearLayout>
+    </ScrollView>
+
+</LinearLayout>
