@@ -12,9 +12,9 @@
         <QuickContactBadge
             android:id="@+id/quickContactBadge1"
             android:layout_width="112dp"
-            android:layout_height="wrap_content"
+            android:layout_height="112dp"
             android:padding="16dp"
-            android:src="@color/fb_blue1" />
+            android:src="@color/fb_white" />
 
         <TextView
             android:id="@+id/recipeDetails_foodName"
@@ -38,6 +38,7 @@
             android:orientation="vertical" >
 
             <RelativeLayout
+                android:id="@+id/authorLayout"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:paddingBottom="16dp" >
@@ -150,9 +151,32 @@
             </RelativeLayout>
 
             <RelativeLayout
+                android:id="@+id/recipeDetails_shareButtonLayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingBottom="8dp" >
+
+                <Button
+                    android:id="@+id/recipeDetails_shareButton"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
+                    android:text="@string/share" />
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/otherButtons_to_be_deleted"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:paddingBottom="16dp" >
+
+                <Button
+                    android:id="@+id/Button01"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
+                    android:text="@string/otherButtons" />
             </RelativeLayout>
 
         </LinearLayout>
