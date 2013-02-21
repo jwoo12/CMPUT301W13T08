@@ -16,9 +16,9 @@
     <string name="author">Author</string>
     <string name="desc">Description</string>
     <string name="desc_here">Description of the food here. this could be more than one line. 1231231232132131232131232131312321321312321312312312</string>
-    <string name="category">Category</string>
-    <string name="category here">Categories. there could be multiple. each occupying one line.</string>
     <string name="ingredients_label">Ingredients</string>
     <string name="ingredients_here">ingredient1 (230g)\ningredient2 (3 tea spoons)</string>
+    <string name="category">Category</string>
+    <string name="category_here">Simple\nItalian\nPizza</string>
 
 </resources>
