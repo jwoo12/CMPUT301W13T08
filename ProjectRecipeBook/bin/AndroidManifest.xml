@@ -13,29 +13,33 @@
         android:theme="@style/AppTheme" >
         <activity
             android:name=".MainActivity"
-            android:label="@string/title_bar_text" 
-         
-            >
-              <intent-filter>
+            android:label="@string/myFridgeTitleBar" >
+            <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-              </activity>
-             <activity
+        </activity>
+        <activity
+            android:name=".LocalRecipeBook"
+            android:label="@string/local_recipe_book_title" >
+            <intent-filter>
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".RecipeDetailsActivity"
+            android:label="@string/recipe_details_title_bar" >
+            <intent-filter>
+            </intent-filter>
+        </activity>
+        <activity
             android:name=".TitleBarOverride"
-            android:label="@string/title_bar_text" 
-         
-            >
-            </activity>
-            
-            <activity
+            android:label="@string/title_bar_text" >
+        </activity>
+        <activity
             android:name=".FoodBookData"
-            android:label="@string/title_bar_text" 
-         >
-      </activity>
-          
-       
+            android:label="@string/title_bar_text" >
+        </activity>
     </application>
 
 </manifest>
