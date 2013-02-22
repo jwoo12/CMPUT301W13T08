@@ -40,6 +40,9 @@ public class MainActivity extends TitleBarOverride {
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
+				
+				// Shouldn't this go to "My Recipes" instead of making a new recipe?  -Jasmine
+				
 				Intent intent = new Intent(MainActivity.this, RecipeDetailsActivity.class);
 				startActivity(intent);
 			}
@@ -48,11 +51,6 @@ public class MainActivity extends TitleBarOverride {
 		
 	}
 
-	@Override
-	public boolean onCreateOptionsMenu(Menu menu) {
-		super.onCreateOptionsMenu(menu);
-		return true;
 
-	}
 
 }
