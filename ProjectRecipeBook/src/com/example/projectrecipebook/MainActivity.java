@@ -47,7 +47,7 @@ public class MainActivity extends TitleBarOverride {
 
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
-		getMenuInflater().inflate(R.menu.activity_main, menu);
+		super.onCreateOptionsMenu(menu);
 		return true;
 
 	}
