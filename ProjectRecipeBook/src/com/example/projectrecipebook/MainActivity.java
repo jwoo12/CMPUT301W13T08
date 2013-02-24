@@ -25,32 +25,7 @@ public class MainActivity extends TitleBarOverride {
 		// SQLiteDatabase database = databasehelper.getWritableDatabase();
 		
 		
-		
-		
-		
-		
-		
-		
-		// anything below this line will be deleted later
-		///////////////////////////////////////////////////
-		Button seeWhatICanMake;
-		seeWhatICanMake = (Button) findViewById(R.id.myFridgeSeeWhatICanMake);
-		seeWhatICanMake.setOnClickListener(new OnClickListener() {
-			
-			@Override
-			public void onClick(View v) {
-				// TODO Auto-generated method stub
-				
-				// Shouldn't this go to "My Recipes" instead of making a new recipe?  -Jasmine
-				
-				Intent intent = new Intent(MainActivity.this, RecipeDetailsActivity.class);
-				startActivity(intent);
-			}
-		});
-		/////////////////////////////////////////////////
-		
 	}
-
-
+	
 
 }

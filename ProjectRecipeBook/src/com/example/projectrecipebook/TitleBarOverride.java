@@ -50,7 +50,7 @@ public class TitleBarOverride extends Activity {
     	recipebook.setClass(getApplicationContext(), LocalRecipeBook.class);
     	
     	Intent makerecipe = new Intent();
-    	makerecipe.setClass(getApplicationContext(), RecipeDetailsActivity.class);
+    	makerecipe.setClass(getApplicationContext(), RecipeDetailsClose.class);
 		
 	    switch (item.getItemId()) {
 	    case R.id.menu_myRecipe:
