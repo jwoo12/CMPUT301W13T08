@@ -12,7 +12,7 @@ public class RecipeDetailsActivity extends TitleBarOverride {
 		setContentView(R.layout.recipe_details);
 		
 		RelativeLayout deleteThisone = (RelativeLayout) findViewById(R.id.recipeDetails_shareButtonLayout);
-		deleteThisone.setVisibility(RelativeLayout.GONE);
+		//deleteThisone.setVisibility(RelativeLayout.GONE);
 	}
 	
 }
