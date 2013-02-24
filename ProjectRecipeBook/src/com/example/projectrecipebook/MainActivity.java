@@ -13,7 +13,6 @@ public class MainActivity extends TitleBarOverride {
 	// GLOBAL VARIABLES
 
 	
-	// Trying to setup GitHub on my laptop. Don't mind me! kthxbai -Jasmine 
 	
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
