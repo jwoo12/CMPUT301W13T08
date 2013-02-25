@@ -40,10 +40,31 @@
         </activity>
         <activity
             android:name=".EditRecipeActivity"
-            android:label="@string/recipe_details_title_bar" >
+            android:label="@string/edit_recipe" >
             <intent-filter>
             </intent-filter>
         </activity>
+        <activity
+            android:name=".MakeRecipeActivity"
+            android:label="@string/new_recipe" >
+            <intent-filter>
+            </intent-filter>
+        </activity>
+        
+        <activity
+            android:name=".Search"
+            android:label="@string/search" >
+            <intent-filter>
+            </intent-filter>
+        </activity>
+        
+        <activity
+            android:name=".SearchResult"
+            android:label="@string/search_result" >
+            <intent-filter>
+            </intent-filter>
+        </activity>
+        
         <activity
             android:name=".TitleBarOverride"
             android:label="@string/title_bar_text" >
@@ -52,6 +73,7 @@
             android:name=".FoodBookData"
             android:label="@string/title_bar_text" >
         </activity>
+        
     </application>
 
     

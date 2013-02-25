@@ -48,11 +48,16 @@ public class TitleBarOverride extends Activity {
     	recipebook.setClass(getApplicationContext(), LocalRecipeBook.class);
     	
     	Intent makerecipe = new Intent();
-    	makerecipe.setClass(getApplicationContext(), EditRecipeActivity.class);
+    	makerecipe.setClass(getApplicationContext(), MakeRecipeActivity.class);
     	
     	Intent postRecipe = new Intent();
     	postRecipe.setClass(getApplicationContext(), RecipeDetailsActivity.class);
 		
+    	Intent search = new Intent();
+    	search.setClass(getApplicationContext(), Search.class);
+    	
+    	Intent settings = new Intent();
+    	
 	    switch (item.getItemId()) {
 	    case R.id.menu_myRecipe:
 	    	startActivity(recipebook);
@@ -65,6 +70,8 @@ public class TitleBarOverride extends Activity {
 	    	// this is temporary. to be deleted. (TODO)
 	    	startActivity(postRecipe);
 	    	break;
+	    case R.id.menu_searchOnline:
+	    	startActivity(search);
 	    default:
 	      break;
 	    }

@@ -29,5 +29,12 @@
     <string name="emptyString"></string>
     <string name="separate_by_comma">Separate by comma</string>
     <string name="save">Save</string>
+    <string name="new_recipe">New Recipe</string>
+    <string name="edit_recipe">Edit Recipe</string>
+    <string name="online_search">Online Search</string>
+    <string name="search_by_recipe_name">Search by recipe name</string>
+    <string name="search">Search</string>
+    <string name="seasrch_by_ingredients">Search by ingredients</string>
+    <string name="search_result">Search Result/s</string>
 
 </resources>

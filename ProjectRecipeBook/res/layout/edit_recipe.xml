@@ -42,13 +42,6 @@
             android:orientation="vertical" >
 
             <EditText
-                android:id="@+id/editRecipeAuthor"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="@string/author"
-                android:inputType="textPersonName" />
-
-            <EditText
                 android:id="@+id/editRecipeDesc"
                 android:layout_width="match_parent"
                 android:layout_height="150dp"

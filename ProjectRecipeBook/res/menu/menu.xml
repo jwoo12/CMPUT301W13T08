@@ -7,10 +7,10 @@
         android:showAsAction="ifRoom"
  >
         <menu>
-            <item android:id="@+id/menu_myRecipe" android:title="My Recipe"/>
-            <item android:id="@+id/menu_makeRecipe" android:title="Make a recipe"/>
+            <item android:id="@+id/menu_myRecipe" android:title="My Recipe Book"/>
+            <item android:id="@+id/menu_makeRecipe" android:title="Make a new recipe"/>
             <item android:id="@+id/menu_postRecipe" android:title="Post a recipe"/>
-            <item android:id="@+id/menu_searchOnline" android:title="Search recipes online"/>
+            <item android:id="@+id/menu_searchOnline" android:title="Online Search"/>
         </menu>
     </item>
     
