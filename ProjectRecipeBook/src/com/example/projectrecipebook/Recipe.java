@@ -18,6 +18,9 @@ public class Recipe {
 	private String recipename, recipeinstructions, locationinserted;
 	private float teaspoon, tablespoon, cup, ratiovalue;
 	private int recipeid, numtablespoons, numteaspoons;
+	
+	// we will allow user to change the display name freely. So we will need to give each user a unique id of some kind.
+	// this id will be used for online actions.
 
 	// private Date insert date; SHOULD NOT NEED>> WE'LL SEE.
 	/*
