@@ -1,7 +1,7 @@
 package com.example.projectrecipebook;
 
 import android.os.Bundle;
-//:SLDKFJS:LKDJ:SLDKJF:LSKJF:LSDKJF:LSDJF:LSD TEST
+//No comment
 public class EditRecipeActivity extends TitleBarOverride {
 
 	@Override
