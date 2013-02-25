@@ -25,7 +25,6 @@ import android.view.SubMenu;
 
 public class TitleBarOverride extends Activity {
  
-	
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -38,7 +37,6 @@ public class TitleBarOverride extends Activity {
     	MenuInflater menuI = getMenuInflater();
     	menuI.inflate(R.menu.menu, menu);
     	
-   
     	//Log.v("Tests", "menu size" + menu.size() );
     	
 		return true;
@@ -50,14 +48,22 @@ public class TitleBarOverride extends Activity {
     	recipebook.setClass(getApplicationContext(), LocalRecipeBook.class);
     	
     	Intent makerecipe = new Intent();
-    	makerecipe.setClass(getApplicationContext(), RecipeDetailsClose.class);
+    	makerecipe.setClass(getApplicationContext(), EditRecipeActivity.class);
+    	
+    	Intent postRecipe = new Intent();
+    	postRecipe.setClass(getApplicationContext(), RecipeDetailsActivity.class);
 		
 	    switch (item.getItemId()) {
 	    case R.id.menu_myRecipe:
 	    	startActivity(recipebook);
 	    	break;
 	    case R.id.menu_makeRecipe:
+	    	// make a new recipe object and feed in (TODO)
 	    	startActivity(makerecipe);
+	    	break;
+	    case R.id.menu_postRecipe:
+	    	// this is temporary. to be deleted. (TODO)
+	    	startActivity(postRecipe);
 	    	break;
 	    default:
 	      break;

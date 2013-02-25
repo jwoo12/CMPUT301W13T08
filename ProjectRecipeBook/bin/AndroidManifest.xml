@@ -32,8 +32,14 @@
             <intent-filter>
             </intent-filter>
         </activity>
-                <activity
+        <activity
             android:name=".RecipeDetailsClose"
+            android:label="@string/recipe_details_title_bar" >
+            <intent-filter>
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".EditRecipeActivity"
             android:label="@string/recipe_details_title_bar" >
             <intent-filter>
             </intent-filter>
@@ -48,4 +54,6 @@
         </activity>
     </application>
 
+    
+    
 </manifest>

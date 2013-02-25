@@ -9,24 +9,20 @@
         android:layout_height="wrap_content"
         android:paddingBottom="16dp" >
 
-        <Button
-            android:id="@+id/editRecipe_managePicButton"
-            android:layout_width="96dp"
-            android:layout_height="96dp"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentTop="true"
-            android:layout_marginLeft="16dp"
-            android:layout_marginTop="16dp"
-            android:text="@string/manage_pic" />
+        <QuickContactBadge
+            android:id="@+id/editIcon"
+            android:layout_width="84dp"
+            android:layout_height="84dp"
+            android:layout_margin="16dp"
+            android:src="@color/fb_white" />
 
         <EditText
-            android:id="@+id/editRecipe_name"
+            android:id="@+id/editRecipeName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignBaseline="@id/editRecipe_managePicButton"
-            android:layout_centerVertical="false"
-            android:layout_margin="16dp"
-            android:layout_toRightOf="@+id/editRecipe_managePicButton"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="16dp"
+            android:layout_toRightOf="@+id/editIcon"
             android:ems="10"
             android:hint="@string/recipe_title" >
 
@@ -37,13 +33,59 @@
     <ScrollView
         android:id="@+id/scrollView1"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" >
+        android:layout_height="match_parent" >
 
         <LinearLayout
             android:id="@+id/LinearLayout1"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical" >
+
+            <EditText
+                android:id="@+id/editRecipeAuthor"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/author"
+                android:inputType="textPersonName" />
+
+            <EditText
+                android:id="@+id/editRecipeDesc"
+                android:layout_width="match_parent"
+                android:layout_height="150dp"
+                android:ems="10"
+                android:hint="@string/desc"
+                android:inputType="textMultiLine" />
+
+            <EditText
+                android:id="@+id/editRecipeCategory"
+                android:layout_width="match_parent"
+                android:layout_height="100dp"
+                android:ems="10"
+                android:hint="@string/category"
+                android:inputType="textMultiLine" />
+
+            <EditText
+                android:id="@+id/editRecipeIngredients"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:hint="@string/ingredients_label"
+                android:inputType="textMultiLine" />
+
+            <EditText
+                android:id="@+id/editRecipeInst"
+                android:layout_width="match_parent"
+                android:layout_height="150dp"
+                android:ems="10"
+                android:hint="@string/instructions"
+                android:inputType="textMultiLine" />
+
+            <Button
+                android:id="@+id/editRecipeSaveButton"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/save" />
+
         </LinearLayout>
     </ScrollView>
 
