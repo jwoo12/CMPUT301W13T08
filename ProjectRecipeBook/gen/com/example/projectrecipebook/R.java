@@ -17,8 +17,13 @@ public final class R {
         public static final int fb_white=0x7f060003;
     }
     public static final class drawable {
-        public static final int ic_action_search=0x7f020000;
-        public static final int ic_launcher=0x7f020001;
+        public static final int av_upload=0x7f020000;
+        public static final int collections_new_label=0x7f020001;
+        public static final int collections_view_as_list=0x7f020002;
+        public static final int content_edit=0x7f020003;
+        public static final int ic_action_search=0x7f020004;
+        public static final int ic_launcher=0x7f020005;
+        public static final int location_web_site=0x7f020006;
     }
     public static final class id {
         public static final int Button01=0x7f080028;
