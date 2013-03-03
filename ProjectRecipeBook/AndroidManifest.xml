@@ -1,5 +1,5 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.projectrecipebook"
+    package="com.foodbook.foodbook"
     android:versionCode="1"
     android:versionName="1.0" >
 
@@ -12,7 +12,7 @@
         android:label="@string/app_name"
         android:theme="@style/AppTheme" >
         <activity
-            android:name=".MainActivity"
+            android:name="com.foodbook.foodbook.FridgeActivity"
             android:label="@string/myFridgeTitleBar" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -21,59 +21,61 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".LocalRecipeBook"
+            android:launchMode="singleInstance" 
+            android:name="com.foodbook.foodbook.RecipeBookActivity"
             android:label="@string/local_recipe_book_title" >
             <intent-filter>
             </intent-filter>
         </activity>
         <activity
-            android:name=".RecipeDetailsActivity"
+            android:name="com.foodbook.foodbook.ViewRecipeBookActivity"
             android:label="@string/recipe_details_title_bar" >
             <intent-filter>
             </intent-filter>
         </activity>
         <activity
-            android:name=".RecipeDetailsClose"
+            android:name="com.foodbook.foodbook.CloseActivity"
             android:label="@string/recipe_details_title_bar" >
             <intent-filter>
             </intent-filter>
         </activity>
         <activity
-            android:name=".EditRecipeActivity"
+            android:name="com.foodbook.foodbook.EditRecipeActivity"
             android:label="@string/edit_recipe" >
             <intent-filter>
             </intent-filter>
         </activity>
         <activity
-            android:name=".MakeRecipeActivity"
+            android:launchMode="singleInstance"
+            android:name="com.foodbook.foodbook.MakeRecipeActivity"
             android:label="@string/new_recipe" >
             <intent-filter>
             </intent-filter>
         </activity>
         
         <activity
-            android:name=".Search"
+            android:name="com.foodbook.foodbook.Search"
             android:label="@string/search" >
             <intent-filter>
             </intent-filter>
         </activity>
         
         <activity
-            android:name=".SearchResult"
+            android:name="com.foodbook.foodbook.SearchResult"
             android:label="@string/search_result" >
             <intent-filter>
             </intent-filter>
         </activity>
         
         <activity
-            android:name=".TitleBarOverride"
-            android:label="@string/title_bar_text" >
-        </activity>
-        <activity
-            android:name=".FoodBookData"
+            android:name="com.foodbook.foodbook.TitleBarOverride"
             android:label="@string/title_bar_text" >
         </activity>
         
+         <activity
+            android:name="com.foodbook.onlinemanager.OnlineSearch"
+            android:label="@string/title_bar_text" >
+        </activity>
     </application>
 
     

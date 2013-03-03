@@ -74,9 +74,11 @@
                 android:inputType="textMultiLine" />
 
             <Button
+              	
                 android:id="@+id/editRecipeSaveButton"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:onClick="saveButtonClicked"
                 android:text="@string/save" />
 
         </LinearLayout>
