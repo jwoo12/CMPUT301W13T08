@@ -6,7 +6,6 @@
  */
 package com.foodbook.foodbook;
 
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
 
@@ -18,9 +17,9 @@ import java.util.Date;
  * @author rjanes
  * 
  */
-public class Recipe implements Serializable{
+
+public class Recipe{
 	
-	private static final long serialVersionUID = 1L;
 	private static final String NULL = null;
 	
 	private String recipename;
@@ -31,7 +30,7 @@ public class Recipe implements Serializable{
 	private ArrayList<String> category; // there can be multiple categories (somewhat similar to the idea of "tagging")
 	final String recipeid; // recipeid is permanent, and will be in this format: (userid) + (date in milisecond) 
 	final String userid; // userid is permanent.
-	
+
 	// userid is perminant id, given to each user, this will be used to identify the owner of recipes.
 
 	public String getRecipeDescriptions() {
@@ -82,9 +81,6 @@ public class Recipe implements Serializable{
 		this.category = category;
 	}
 
-	public static long getSerialversionuid() {
-		return serialVersionUID;
-	}
 
 	public static String getNull() {
 		return NULL;
@@ -109,11 +105,28 @@ public class Recipe implements Serializable{
 		this.recipeid = userid + String.valueOf((new Date()).getTime());
 	}
 	
+	
+	
+	public Recipe(String recipename, String recipeinstructions,
+			String recipeDescriptions, String username,
+			ArrayList<String> ingredients, ArrayList<String> category,
+			String recipeid, String userid) {
+		super();
+		this.recipename = recipename;
+		this.recipeinstructions = recipeinstructions;
+		this.recipeDescriptions = recipeDescriptions;
+		this.username = username;
+		this.ingredients = ingredients;
+		this.category = category;
+		this.recipeid = recipeid;
+		this.userid = userid;
+	}
+
 	public String getIngredientsString() {
 		
 		/**
 		 * This method will return list of ingredients as a string, in the following format:
-		 * ingr_0, ingr_1, ingr_2 ... ing_n
+		 * ingr_0, ingr_1, ingr_2 ... ingr_n
 		 * If there is no ingredients added yet, then empty string is returned.
 		 */
 		

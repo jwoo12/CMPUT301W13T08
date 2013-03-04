@@ -29,6 +29,7 @@ public final class R {
         public static final int Button01=0x7f080029;
         public static final int LinearLayout1=0x7f080006;
         public static final int LinearLayout2=0x7f080016;
+        public static final int all_list=0x7f08002a;
         public static final int authorLayout=0x7f080017;
         public static final int categoryLayout=0x7f08001d;
         public static final int descLayout=0x7f08001a;
@@ -46,11 +47,13 @@ public final class R {
         public static final int instLayout=0x7f080023;
         public static final int linearLayout1=0x7f080010;
         public static final int listView1=0x7f080002;
-        public static final int menu1=0x7f08002a;
-        public static final int menu_makeRecipe=0x7f08002c;
-        public static final int menu_myRecipe=0x7f08002b;
-        public static final int menu_postRecipe=0x7f08002d;
-        public static final int menu_searchOnline=0x7f08002e;
+        public static final int list_downloads=0x7f08002b;
+        public static final int list_mine=0x7f08002c;
+        public static final int menu1=0x7f08002d;
+        public static final int menu_makeRecipe=0x7f08002f;
+        public static final int menu_myRecipe=0x7f08002e;
+        public static final int menu_postRecipe=0x7f080030;
+        public static final int menu_searchOnline=0x7f080031;
         public static final int myFridgeAddButton=0x7f080001;
         public static final int otherButtons_to_be_deleted=0x7f080028;
         public static final int quickContactBadge1=0x7f080014;
@@ -81,7 +84,10 @@ public final class R {
         public static final int online_search=0x7f030003;
         public static final int online_search_result=0x7f030004;
         public static final int recipe_details=0x7f030005;
-        public static final int search_result=0x7f030006;
+        public static final int recipe_view_all=0x7f030006;
+        public static final int recipe_view_downloads=0x7f030007;
+        public static final int recipe_view_mine=0x7f030008;
+        public static final int search_result=0x7f030009;
     }
     public static final class menu {
         public static final int activity_main=0x7f070000;

@@ -10,16 +10,26 @@ import android.widget.Button;
 import android.widget.EditText;
 
 public class EditRecipeActivity extends TitleBarOverride {
+	
+	/**
+	 * This activity is used to change details of a selected recipe.
+	 * Only the owner of the recipe can access this recipe.
+	 */
 
-	protected Recipe recipe;
 	protected Intent returningIntent;
 	protected int position;
 	
-	protected EditText recipeName;
-	protected EditText description;
-	protected EditText category;
-	protected EditText ingredients;
-	protected EditText instructions;
+	protected String name;
+	protected String descriptions;
+	protected String category;
+	protected String ingredients;
+	protected String instructions;
+	
+	protected EditText recipeNameField;
+	protected EditText descriptionField;
+	protected EditText categoryField;
+	protected EditText ingredientsField;
+	protected EditText instructionsField;
 	
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -27,15 +37,19 @@ public class EditRecipeActivity extends TitleBarOverride {
 		setContentView(R.layout.edit_recipe);
 		
 		// retrieve recipeobject from intent
-		recipe = (Recipe) getIntent().getSerializableExtra("recipe");
 		position = getIntent().getIntExtra("position", -1);
+		name = getIntent().getStringExtra("name");
+		descriptions = getIntent().getStringExtra("descriptions");
+		category = getIntent().getStringExtra("category");
+		ingredients = getIntent().getStringExtra("ingredients");
+		instructions = getIntent().getStringExtra("instructions");
 		
 		// setup textfields
-		recipeName = (EditText) findViewById(R.id.editRecipeName);
-		description = (EditText) findViewById(R.id.editRecipeDesc);
-		category = (EditText) findViewById(R.id.editRecipeCategory);
-		ingredients = (EditText) findViewById(R.id.editRecipeIngredients);
-		instructions = (EditText) findViewById(R.id.editRecipeInst);
+		recipeNameField = (EditText) findViewById(R.id.editRecipeName);
+		descriptionField = (EditText) findViewById(R.id.editRecipeDesc);
+		categoryField = (EditText) findViewById(R.id.editRecipeCategory);
+		ingredientsField = (EditText) findViewById(R.id.editRecipeIngredients);
+		instructionsField = (EditText) findViewById(R.id.editRecipeInst);
 		
 		// setup save button
 		Button saveButton = (Button) findViewById(R.id.editRecipeSaveButton);
@@ -47,35 +61,49 @@ public class EditRecipeActivity extends TitleBarOverride {
 			}
 		});
 		
-		// 
+		// update text fields
 		updateTextFields();
 	}
 	
 	private void updateTextFields() {
+		
 		/**
 		 * This function sets the contents of text fields according to the recipe.
+		 * If recipe has no information (ie. when creating a new recipe), then everything will be blank.
 		 */
-		recipeName.setText(recipe.getRecipename());
-		description.setText(recipe.getRecipeDescriptions());
-		category.setText(recipe.getCategoryString());
-		ingredients.setText(recipe.getIngredientsString());
-		instructions.setText(recipe.getRecipeinstructions());
+		
+		if (position == -1) {
+			// position == -1 represents "new recipe"
+			return;
+		}
+		
+		recipeNameField.setText(name);
+		descriptionField.setText(descriptions);
+		categoryField.setText(category);
+		ingredientsField.setText(ingredients);
+		instructionsField.setText(instructions);
 	}
 	
 	protected void readTextfields() {
 		/**
-		 * This function reads contents of textfields, and then puts into the recipe.
+		 * This function reads contents of textfields.
 		 */
 	}
 
 	public void saveButtonClicked() {
+		
+		/**
+		 * This function edits the existing recipe object in the RecipeBook
+		 */
+		
+		// TODO
+		// this function needs to be revised when JSON is setup properly.
 		
 		// read contents of textfields
 		readTextfields();
 		
 		// setup returning intent
 		returningIntent = new Intent();
-		returningIntent.putExtra("recipe", recipe);
 		returningIntent.putExtra("position", position);
 		setResult(2, returningIntent);
 		/*

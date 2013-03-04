@@ -3,17 +3,14 @@ package com.foodbook.foodbook;
 
 
 
-import com.foodbook.foodbook.R;
-import com.foodbook.onlinemanager.OnlineSearch;
-
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
-import android.view.SubMenu;
+
+import com.foodbook.onlinemanager.OnlineSearch;
 
 /*
  * Menu details. 
@@ -58,8 +55,6 @@ public class TitleBarOverride extends Activity {
 	    case R.id.menu_makeRecipe:
 	    	Intent makeRecipe = new Intent();
 	    	makeRecipe.setClass(getApplicationContext(), MakeRecipeActivity.class);
-	    	Recipe newRecipe = new Recipe("userid123", "username123");// TODO temprary
-	    	makeRecipe.putExtra("recipe", newRecipe);
 	    	startActivityForResult(makeRecipe, 1);
 	    	break;
 	    case R.id.menu_postRecipe:
@@ -77,5 +72,10 @@ public class TitleBarOverride extends Activity {
 	    }
 	    return true;
 	  } 
+    
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent returnedIntent) {
+    	//TODO
+    }
     
 }
