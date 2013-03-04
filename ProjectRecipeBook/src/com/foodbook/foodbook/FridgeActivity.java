@@ -11,9 +11,6 @@ public class FridgeActivity extends TitleBarOverride {
 		super.onCreate(savedInstanceState);
 		getApplicationContext();
 		setContentView(R.layout.activity_main);
-		
-		
-	}
-	
 
+	}
 }

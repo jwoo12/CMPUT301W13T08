@@ -26,14 +26,16 @@ import android.view.SubMenu;
  * 
  */
 
-
-
 public class TitleBarOverride extends Activity {
- 
 
+	RecipeBook myRecipeBook;
+	Fridge myFridge;
+	
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        myRecipeBook = new RecipeBook();
+        myFridge = new Fridge();
     }
     
     @Override
@@ -42,40 +44,33 @@ public class TitleBarOverride extends Activity {
     	MenuInflater menuI = getMenuInflater();
     	menuI.inflate(R.menu.menu, menu);
     	
-    	//Log.v("Tests", "menu size" + menu.size() );
-    	
 		return true;
     }
     
     public boolean onOptionsItemSelected(MenuItem item) {
-		
-    	Intent recipebook = new Intent();
-    	recipebook.setClass(getApplicationContext(), RecipeBookActivity.class);
-    	
-    	Intent makerecipe = new Intent();
-    	makerecipe.setClass(getApplicationContext(), MakeRecipeActivity.class);
-    	
-    	Intent postRecipe = new Intent();
-    	postRecipe.setClass(getApplicationContext(), ViewRecipeBookActivity.class);
-		
-    	Intent search = new Intent();
-    	search.setClass(getApplicationContext(), OnlineSearch.class);
-    	
-    	Intent settings = new Intent();
     	
 	    switch (item.getItemId()) {
 	    case R.id.menu_myRecipe:
-	    	startActivity(recipebook);
+	    	Intent myRecipeBook = new Intent();
+	    	myRecipeBook.setClass(getApplicationContext(), RecipeBookActivity.class);
+	    	startActivity(myRecipeBook);
 	    	break;
 	    case R.id.menu_makeRecipe:
-	    	// make a new recipe object and feed in (TODO)
-	    	startActivity(makerecipe);
+	    	Intent makeRecipe = new Intent();
+	    	makeRecipe.setClass(getApplicationContext(), MakeRecipeActivity.class);
+	    	Recipe newRecipe = new Recipe("userid123", "username123");// TODO temprary
+	    	makeRecipe.putExtra("recipe", newRecipe);
+	    	startActivityForResult(makeRecipe, 1);
 	    	break;
 	    case R.id.menu_postRecipe:
 	    	// this is temporary. to be deleted. (TODO)
+	    	Intent postRecipe = new Intent();
+	    	postRecipe.setClass(getApplicationContext(), ViewRecipeBookActivity.class);
 	    	startActivity(postRecipe);
 	    	break;
 	    case R.id.menu_searchOnline:
+	    	Intent search = new Intent();
+	    	search.setClass(getApplicationContext(), OnlineSearch.class);
 	    	startActivity(search);
 	    default:
 	      break;

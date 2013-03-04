@@ -6,7 +6,9 @@
  */
 package com.foodbook.foodbook;
 
+import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Date;
 
 /**
  * This class will be fixed guys, I'm just trying to create an object to get the
@@ -16,41 +18,28 @@ import java.util.ArrayList;
  * @author rjanes
  * 
  */
-public class Recipe {
+public class Recipe implements Serializable{
+	
+	private static final long serialVersionUID = 1L;
 	private static final String NULL = null;
-	private String recipename, category, recipeinstructions, user;
+	
+	private String recipename;
+	private String recipeinstructions;
+	private String recipeDescriptions;
+	private String username; // username will be changable at any time.
 	private ArrayList<String> ingredients;
-	final int recipeid;
+	private ArrayList<String> category; // there can be multiple categories (somewhat similar to the idea of "tagging")
+	final String recipeid; // recipeid is permanent, and will be in this format: (userid) + (date in milisecond) 
+	final String userid; // userid is permanent.
 	
-	// we will allow user to change the display name freely. So we will need to give each user a unique id of some kind.
-	// this id will be used for online actions.
+	// userid is perminant id, given to each user, this will be used to identify the owner of recipes.
 
-	
+	public String getRecipeDescriptions() {
+		return recipeDescriptions;
+	}
 
-	public Recipe(int recipeid, String user, String recipename, String category, String recipeinstructions, ArrayList<String> ingredients) {
-		
-		this.recipename = recipename;
-		if (recipename == null){
-			recipename = "NoName";
-		}
-		this.category = category;
-		if (category == null){
-			category = "NoCategorySelected";
-		}
-		this.recipeinstructions = recipeinstructions;
-		if (recipeinstructions == null){
-			recipeinstructions = "NoInstructionsIncluded";
-		}
-		this.user = user;
-		if (user == null){
-			user = "Anonymous";
-		}
-		this.ingredients = ingredients;
-		if (ingredients.isEmpty()){
-			ingredients.add("No Ingredients Listed");
-		}
-		this.recipeid = recipeid;
-		
+	public void setRecipeDescriptions(String recipeDescriptions) {
+		this.recipeDescriptions = recipeDescriptions;
 	}
 
 	public String getRecipename() {
@@ -61,14 +50,6 @@ public class Recipe {
 		this.recipename = recipename;
 	}
 
-	public String getCategory() {
-		return category;
-	}
-
-	public void setCategory(String category) {
-		this.category = category;
-	}
-
 	public String getRecipeinstructions() {
 		return recipeinstructions;
 	}
@@ -77,12 +58,12 @@ public class Recipe {
 		this.recipeinstructions = recipeinstructions;
 	}
 
-	public String getUser() {
-		return user;
+	public String getUsername() {
+		return username;
 	}
 
-	public void setUser(String user) {
-		this.user = user;
+	public void setUsername(String username) {
+		this.username = username;
 	}
 
 	public ArrayList<String> getIngredients() {
@@ -93,11 +74,80 @@ public class Recipe {
 		this.ingredients = ingredients;
 	}
 
-	public int getRecipeid() {
+	public ArrayList<String> getCategory() {
+		return category;
+	}
+
+	public void setCategory(ArrayList<String> category) {
+		this.category = category;
+	}
+
+	public static long getSerialversionuid() {
+		return serialVersionUID;
+	}
+
+	public static String getNull() {
+		return NULL;
+	}
+
+	public String getRecipeid() {
 		return recipeid;
 	}
-	public String toString() {
-		return "Recipe [id=" + recipeid + ", user=" + user + "Category= " + category + "name=" + recipename + ", ingredients="
-				+ ingredients + ", directions=" + recipeinstructions + "]";
+
+	public String getUserid() {
+		return userid;
+	}
+
+	public Recipe(String userid, String username) {
+		this.recipename = "";
+		this.recipeinstructions = "";
+		this.recipeDescriptions = "";
+		this.username = username;
+		this.ingredients = new ArrayList<String>();
+		this.category = new ArrayList<String>();
+		this.userid = userid;
+		this.recipeid = userid + String.valueOf((new Date()).getTime());
+	}
+	
+	public String getIngredientsString() {
+		
+		/**
+		 * This method will return list of ingredients as a string, in the following format:
+		 * ingr_0, ingr_1, ingr_2 ... ing_n
+		 * If there is no ingredients added yet, then empty string is returned.
+		 */
+		
+		if (this.ingredients.size() == 0) {
+			return "";
+		}
+		
+		String listOfIngr = this.ingredients.get(0);
+		int i;
+		for (i=1; i < this.ingredients.size(); i++) {
+			listOfIngr += ", " + this.ingredients.get(i);
+		}
+		
+		return listOfIngr;
+	}
+	
+	public String getCategoryString() {
+		
+		/**
+		 * This method will return list of categories as a string, in the following format:
+		 * categ_0, categ_1, categ_2 ... categ_n
+		 * If there is no categories added yet, then empty string is returned.
+		 */
+		
+		if (this.category.size() == 0) {
+			return "";
+		}
+		
+		String listOfCateg = this.category.get(0);
+		int i;
+		for (i=1; i < this.category.size(); i++) {
+			listOfCateg += ", " + this.category.get(i);
+		}
+		
+		return listOfCateg;
 	}
 }

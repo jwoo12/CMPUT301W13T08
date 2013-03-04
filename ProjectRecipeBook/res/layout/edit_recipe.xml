@@ -52,7 +52,7 @@
             <EditText
                 android:id="@+id/editRecipeCategory"
                 android:layout_width="match_parent"
-                android:layout_height="100dp"
+                android:layout_height="wrap_content"
                 android:ems="10"
                 android:hint="@string/category"
                 android:inputType="textMultiLine" />

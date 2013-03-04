@@ -1,13 +1,27 @@
 package com.foodbook.foodbook;
 
-public class MakeRecipeActivity extends EditRecipeActivity {
+import android.content.Intent;
 
+public class MakeRecipeActivity extends EditRecipeActivity {
+	@Override
 	public void saveButtonClicked() {
-		// add this recipe to the recipe book
 		
-		// popup the recipe details and destroy this activity.
+		/**
+		 * A variation of EditRecipeActivity class.
+		 * When returning the recipe through intent, it sets the result code to 1.
+		 * By convention, code 1 is "making a new recipe" and 2 is "editing an existing recipe".
+		 */ 
+		
+		// read contents of textfields
+		readTextfields();
+		
+		// setup returning intent
+		returningIntent = new Intent();
+		returningIntent.putExtra("recipe", recipe);
+		setResult(1, returningIntent);
+		
+		// close the activity
+		finish();
 		
 	}
-	
-	
 }

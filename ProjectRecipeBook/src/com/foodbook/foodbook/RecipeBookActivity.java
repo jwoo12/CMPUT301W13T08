@@ -12,8 +12,5 @@ public class RecipeBookActivity extends TitleBarOverride {
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.local_recipe_book);
-
-		
 	}
-	
 }
