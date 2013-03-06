@@ -31,8 +31,6 @@ public class TitleBarOverride extends Activity {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        myRecipeBook = new RecipeBook();
-        myFridge = new Fridge();
     }
     
     @Override

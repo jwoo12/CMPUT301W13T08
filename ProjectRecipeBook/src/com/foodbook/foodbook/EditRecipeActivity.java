@@ -36,7 +36,7 @@ public class EditRecipeActivity extends TitleBarOverride {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.edit_recipe);
 		
-		// retrieve recipeobject from intent
+		// retrieve recipe object from intent
 		position = getIntent().getIntExtra("position", -1);
 		name = getIntent().getStringExtra("name");
 		descriptions = getIntent().getStringExtra("descriptions");
