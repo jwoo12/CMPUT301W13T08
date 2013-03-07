@@ -4,7 +4,6 @@ package com.foodbook.foodbook;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Vector;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -29,14 +28,14 @@ public class EditRecipeActivity extends TitleBarOverride {
 	protected String ingredients;
 	protected String instructions;
 	
-	ArrayList<String> categoryArrayList;
-	ArrayList<String> ingredientsArrayList;
-	
 	protected EditText recipeNameField;
 	protected EditText descriptionField;
 	protected EditText categoryField;
 	protected EditText ingredientsField;
 	protected EditText instructionsField;
+	
+	protected ArrayList<String> categoryArrayList;
+	protected ArrayList<String> ingredientsArrayList;
 	
 	@Override
 	public void onCreate(Bundle savedInstanceState) {

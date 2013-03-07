@@ -1,9 +1,5 @@
 package com.foodbook.foodbook;
 
-import java.util.ArrayList;
-import java.util.Vector;
-
-
 public class MakeRecipeActivity extends EditRecipeActivity {
 	
 	/**
