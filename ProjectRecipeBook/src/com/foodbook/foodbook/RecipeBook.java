@@ -58,8 +58,16 @@ public class RecipeBook {
 	
 	public void addRecipe(String recipename, String recipeinstructions, String recipeDescriptions, ArrayList<String> ingredients,
 			ArrayList<String> category) {
+		/**
+		 * This function receives details of a recipe, and creates/adds a new recipe to the local RecipeBook.
+		 */
 		Recipe newRecipe = new Recipe(recipename, recipeinstructions, recipeDescriptions, username, ingredients, category, userid);
 		mine.add(newRecipe);
+	}
+	
+	public void editRecipe(String recipename, String recipeinstructions, String recipeDescriptions, ArrayList<String> ingredients,
+			ArrayList<String> category, int position) {
+		
 	}
 	
 }

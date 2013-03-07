@@ -1,7 +1,5 @@
 package com.foodbook.foodbook;
 
-
-
 import java.util.ArrayList;
 import java.util.Arrays;
 
@@ -63,7 +61,9 @@ public class EditRecipeActivity extends TitleBarOverride {
 			
 			@Override
 			public void onClick(View v) {
+				readTextfields();
 				saveButtonClicked();
+				finish();
 			}
 		});
 		
@@ -75,12 +75,11 @@ public class EditRecipeActivity extends TitleBarOverride {
 		
 		/**
 		 * This function sets the contents of text fields according to the recipe.
-		 * If recipe has no information (ie. when creating a new recipe), then everything will be blank.
+		 * If recipe has no information (ie. when creating a new recipe), everything will be blank.
 		 */
 		
 		if (position == -1) {
-			// position == -1 represents "new recipe"
-			// do not need to set any text.
+			// position == -1 means "new recipe". do not need to set any text.
 			return;
 		}
 		
@@ -118,18 +117,9 @@ public class EditRecipeActivity extends TitleBarOverride {
 		 * This function edits the existing recipe object in the RecipeBook
 		 */
 		
-		// read contents of textfields
-		readTextfields();
-		
-		// setup returning intent
-		returningIntent = new Intent();
-		returningIntent.putExtra("position", position);
-		setResult(2, returningIntent);
-		/*
-		Intent intent = new Intent(this, FridgeActivity.class);
-		startActivity(intent);
-		*/
-		finish();
+		// edit the recipe details
+		// TODO right now we are putting "position" in because we are arraylist. when we get SQL ready, we will change this to recipe ID.
+		myRecipeBook.editRecipe(name, instructions, descriptions, ingredientsArrayList, categoryArrayList, position);
 	}
 	
 }

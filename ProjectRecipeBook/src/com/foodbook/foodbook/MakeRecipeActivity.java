@@ -14,14 +14,8 @@ public class MakeRecipeActivity extends EditRecipeActivity {
 		 * This function creates a new recipe from the user input, and then puts it into the local recipe book.
 		 */
 		
-		// read contents of textfields
-		readTextfields();
-		
 		// Add to the recipe book
 		myRecipeBook.addRecipe(name, descriptions, descriptions, ingredientsArrayList, categoryArrayList);
-		
-		// close the activity
-		finish();
 		
 	}
 }

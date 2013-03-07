@@ -50,7 +50,7 @@ public class FridgeActivity extends TitleBarOverride {
 			}
 			
 		});
-		
+
 		// setup add button
 		addButton = (Button) findViewById(R.id.myFridgeAddButton);
 		addButton.setOnClickListener(new OnClickListener() {
