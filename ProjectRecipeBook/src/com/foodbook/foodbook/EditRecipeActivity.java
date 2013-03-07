@@ -62,6 +62,10 @@ public class EditRecipeActivity extends TitleBarOverride {
 			@Override
 			public void onClick(View v) {
 				readTextfields();
+				if (!requiredInfoCheckOK()) {
+					// tell user that recipe is missing some important info
+					return;
+				}
 				saveButtonClicked();
 				finish();
 			}
@@ -69,6 +73,19 @@ public class EditRecipeActivity extends TitleBarOverride {
 		
 		// update text fields
 		updateTextFields();
+	}
+	
+	private boolean requiredInfoCheckOK() {
+		
+		/**
+		 * This function is used to check whether or not required fields are empty.
+		 * If a recipe is missing important information (ex. name), then this function will
+		 * return false.
+		 */
+		
+		// TODO write if statements to test the textfields
+		
+		return true;
 	}
 	
 	private void updateTextFields() {
