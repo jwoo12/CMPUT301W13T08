@@ -14,14 +14,19 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.ListView;
+import android.widget.Toast;
 
 public class FridgeActivity extends TitleBarOverride {
 
+	static RecipeBook myRecipeBook;
+	static String userid = "temporary_user_id";
+	static String username = "tmp_username";
+	
 	private Fridge myFridge;
 	private Context context;
-	private ListView listView;
 	
-	private String ingredient = "";
+	private ListView listView;
+	private String ingredient;
 	private Button addButton;
 	
 	@Override
@@ -71,6 +76,7 @@ public class FridgeActivity extends TitleBarOverride {
 			@Override
 			public void onClick(DialogInterface dialog, int which) {
 				ingredient = addText.getText().toString();
+				// TODO: empty string check
 				if (add) {
 					myFridge.addIngredient(ingredient);
 				}
@@ -107,6 +113,15 @@ public class FridgeActivity extends TitleBarOverride {
 			}
 		});
 		alertdg.show(); 
+	}
+	
+	public void showInValidInputMessage() {
+		Context context = getApplicationContext();
+		CharSequence text = "Invalid Input";
+		int duration = Toast.LENGTH_SHORT;
+
+		Toast toast = Toast.makeText(context, text, duration);
+		toast.show();
 	}
 	
 	private void updateListView(Fridge myFridgeToBeDisplayed, ListView listView) {

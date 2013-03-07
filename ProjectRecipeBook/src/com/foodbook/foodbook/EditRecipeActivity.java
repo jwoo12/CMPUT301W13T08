@@ -2,6 +2,10 @@ package com.foodbook.foodbook;
 
 
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Vector;
+
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -24,6 +28,9 @@ public class EditRecipeActivity extends TitleBarOverride {
 	protected String category;
 	protected String ingredients;
 	protected String instructions;
+	
+	ArrayList<String> categoryArrayList;
+	ArrayList<String> ingredientsArrayList;
 	
 	protected EditText recipeNameField;
 	protected EditText descriptionField;
@@ -74,6 +81,7 @@ public class EditRecipeActivity extends TitleBarOverride {
 		
 		if (position == -1) {
 			// position == -1 represents "new recipe"
+			// do not need to set any text.
 			return;
 		}
 		
@@ -85,9 +93,24 @@ public class EditRecipeActivity extends TitleBarOverride {
 	}
 	
 	protected void readTextfields() {
+		
 		/**
 		 * This function reads contents of textfields.
 		 */
+		
+		// these are regular strings
+		name = recipeNameField.getText().toString();
+		descriptions = descriptionField.getText().toString();
+		instructions = instructionsField.getText().toString();
+		
+		// these are meant to be array of strings.
+		category = categoryField.getText().toString();
+		String[] categoryArray = category.split(",");
+		categoryArrayList = new ArrayList<String>(Arrays.asList(categoryArray));
+		ingredients = ingredientsField.getText().toString();
+		String[] ingredientsArray = ingredients.split(",");
+		ingredientsArrayList = new ArrayList<String>(Arrays.asList(ingredientsArray));
+		
 	}
 
 	public void saveButtonClicked() {
@@ -95,9 +118,6 @@ public class EditRecipeActivity extends TitleBarOverride {
 		/**
 		 * This function edits the existing recipe object in the RecipeBook
 		 */
-		
-		// TODO
-		// this function needs to be revised when JSON is setup properly.
 		
 		// read contents of textfields
 		readTextfields();

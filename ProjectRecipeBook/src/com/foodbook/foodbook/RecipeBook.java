@@ -11,19 +11,35 @@ public class RecipeBook {
 	
 	ArrayList<Recipe> mine;
 	ArrayList<Recipe> downloads;
-	String userid = "dsfuabsiuf3528fb923r72b3eiw"; // TODO this needs to be changed
-	String username = "me!!!!"; // username can be changed TODO this needs to be changed
+	private String userid = "dsfuabsiuf3528fb923r72b3eiw"; // TODO this needs to be changed
+	private String username = "me!!!!"; // username can be changed TODO this needs to be changed
 	
 	public RecipeBook() {
 		
 		/**
-		 * This is a constructor method for RecipeBook. It creates a new ArrayList object.
+		 * This is a constructor method for RecipeBook. It creates new ArrayList of Recipe.
 		 */
 		
 		mine = new ArrayList<Recipe>();
 		downloads = new ArrayList<Recipe>();
 	}
 	
+	public ArrayList<Recipe> getMine() {
+		return mine;
+	}
+
+	public void setMine(ArrayList<Recipe> mine) {
+		this.mine = mine;
+	}
+
+	public ArrayList<Recipe> getDownloads() {
+		return downloads;
+	}
+
+	public void setDownloads(ArrayList<Recipe> downloads) {
+		this.downloads = downloads;
+	}
+
 	public ArrayList<Recipe> getRecipeBook() {
 		
 		/**
@@ -38,6 +54,12 @@ public class RecipeBook {
 		
 		return combinedRecipeBook;
 		
+	}
+	
+	public void addRecipe(String recipename, String recipeinstructions, String recipeDescriptions, ArrayList<String> ingredients,
+			ArrayList<String> category) {
+		Recipe newRecipe = new Recipe(recipename, recipeinstructions, recipeDescriptions, username, ingredients, category, userid);
+		mine.add(newRecipe);
 	}
 	
 }

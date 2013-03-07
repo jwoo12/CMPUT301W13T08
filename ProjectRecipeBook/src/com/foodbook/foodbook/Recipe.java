@@ -94,6 +94,7 @@ public class Recipe{
 		return userid;
 	}
 
+	/*
 	public Recipe(String userid, String username) {
 		this.recipename = "";
 		this.recipeinstructions = "";
@@ -102,15 +103,14 @@ public class Recipe{
 		this.ingredients = new ArrayList<String>();
 		this.category = new ArrayList<String>();
 		this.userid = userid;
-		this.recipeid = userid + String.valueOf((new Date()).getTime());
+		
 	}
-	
-	
+	*/
 	
 	public Recipe(String recipename, String recipeinstructions,
 			String recipeDescriptions, String username,
 			ArrayList<String> ingredients, ArrayList<String> category,
-			String recipeid, String userid) {
+			String userid) {
 		super();
 		this.recipename = recipename;
 		this.recipeinstructions = recipeinstructions;
@@ -118,7 +118,7 @@ public class Recipe{
 		this.username = username;
 		this.ingredients = ingredients;
 		this.category = category;
-		this.recipeid = recipeid;
+		this.recipeid = userid + String.valueOf((new Date()).getTime());
 		this.userid = userid;
 	}
 

@@ -1,5 +1,8 @@
 package com.foodbook.foodbook;
 
+import java.util.ArrayList;
+import java.util.Vector;
+
 
 public class MakeRecipeActivity extends EditRecipeActivity {
 	
@@ -11,11 +14,15 @@ public class MakeRecipeActivity extends EditRecipeActivity {
 	@Override
 	public void saveButtonClicked() {
 		
+		/**
+		 * This function creates a new recipe from the user input, and then puts it into the local recipe book.
+		 */
+		
 		// read contents of textfields
 		readTextfields();
 		
 		// Add to the recipe book
-		// Recipe.addNewRecipe(name, blahblah);
+		myRecipeBook.addRecipe(name, descriptions, descriptions, ingredientsArrayList, categoryArrayList);
 		
 		// close the activity
 		finish();

@@ -58,7 +58,8 @@ public class TitleBarOverride extends Activity {
 	    case R.id.menu_postRecipe:
 	    	// this is temporary. to be deleted. (TODO)
 	    	Intent postRecipe = new Intent();
-	    	postRecipe.setClass(getApplicationContext(), ViewRecipeBookActivity.class);
+	    	postRecipe.setClass(getApplicationContext(), RecipeBookActivity.class);
+	    	postRecipe.putExtra("showMineOnly", true);
 	    	startActivity(postRecipe);
 	    	break;
 	    case R.id.menu_searchOnline:
