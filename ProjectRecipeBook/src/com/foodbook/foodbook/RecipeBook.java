@@ -11,8 +11,8 @@ public class RecipeBook {
 	
 	ArrayList<Recipe> mine;
 	ArrayList<Recipe> downloads;
-	private String userid = "dsfuabsiuf3528fb923r72b3eiw"; // TODO this needs to be changed
-	private String username = "me!!!!"; // username can be changed TODO this needs to be changed
+	private String userid; // TODO this needs to be changed
+	private String username; // username can be changed TODO this needs to be changed
 	
 	public RecipeBook() {
 		
@@ -22,6 +22,8 @@ public class RecipeBook {
 		
 		mine = new ArrayList<Recipe>();
 		downloads = new ArrayList<Recipe>();
+		this.userid = "dsfuabsiuf3528fb923r72b3eiw";
+		this.username = "example name";
 	}
 	
 	public ArrayList<Recipe> getMine() {
@@ -56,17 +58,25 @@ public class RecipeBook {
 		
 	}
 	
-	public void addRecipe(String recipename, String recipeinstructions, String recipeDescriptions, ArrayList<String> ingredients,
+	public void addRecipe(String recipename,
+			String recipeDescriptions,
+			String recipeinstructions,
+			ArrayList<String> ingredients,
 			ArrayList<String> category) {
 		/**
 		 * This function receives details of a recipe, and creates/adds a new recipe to the local RecipeBook.
 		 */
-		Recipe newRecipe = new Recipe(recipename, recipeinstructions, recipeDescriptions, username, ingredients, category, userid);
-		mine.add(newRecipe);
+		Recipe newRecipe = new Recipe(recipename, recipeDescriptions, recipeinstructions, ingredients, category, this.userid, this.username);
+		this.mine.add(newRecipe);
 	}
 	
-	public void editRecipe(String recipename, String recipeinstructions, String recipeDescriptions, ArrayList<String> ingredients,
+	public void editRecipe(String recipename, String recipeDescriptions, String recipeinstructions, ArrayList<String> ingredients,
 			ArrayList<String> category, int position) {
+		
+		/**
+		 * This methods is used to modify existing recipes in the recipe book.
+		 * Given the details about the recipe and the recipe ID, this method will apply changes.
+		 */
 		
 	}
 	

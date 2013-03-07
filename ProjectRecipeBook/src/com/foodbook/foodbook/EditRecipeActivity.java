@@ -119,7 +119,7 @@ public class EditRecipeActivity extends TitleBarOverride {
 		
 		// edit the recipe details
 		// TODO right now we are putting "position" in because we are arraylist. when we get SQL ready, we will change this to recipe ID.
-		myRecipeBook.editRecipe(name, instructions, descriptions, ingredientsArrayList, categoryArrayList, position);
+		myRecipeBook.editRecipe(name, descriptions, instructions, ingredientsArrayList, categoryArrayList, position);
 	}
 	
 }

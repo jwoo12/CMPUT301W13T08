@@ -9,7 +9,7 @@ public class Fridge {
 	private ArrayList<String> ingredients;
 	
 	public Fridge(Context context) {
-		// try to load from file
+		// TODO try to load from file
 		// if file doesn't exist, make a new ArrayList and save to file.
 		this.ingredients = new ArrayList<String>();
 	}

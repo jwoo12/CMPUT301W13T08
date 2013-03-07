@@ -37,6 +37,7 @@ public class FridgeActivity extends TitleBarOverride {
 		setContentView(R.layout.activity_main);
 		context = getApplicationContext();
 		myFridge = new Fridge(context);
+		myRecipeBook = new RecipeBook();
 		
 		// setup List View
 		listView = (ListView) findViewById(R.id.fridgeList);

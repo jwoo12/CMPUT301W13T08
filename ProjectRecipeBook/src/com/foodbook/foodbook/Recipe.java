@@ -94,26 +94,16 @@ public class Recipe{
 		return userid;
 	}
 
-	/*
-	public Recipe(String userid, String username) {
-		this.recipename = "";
-		this.recipeinstructions = "";
-		this.recipeDescriptions = "";
-		this.username = username;
-		this.ingredients = new ArrayList<String>();
-		this.category = new ArrayList<String>();
-		this.userid = userid;
-		
-	}
-	*/
 	
-	public Recipe(String recipename, String recipeinstructions,
-			String recipeDescriptions, String username,
-			ArrayList<String> ingredients, ArrayList<String> category,
-			String userid) {
-		super();
+	public Recipe(String recipename,
+			String recipeDescriptions,
+			String recipeInstructions,
+			ArrayList<String> ingredients,
+			ArrayList<String> category,
+			String userid,
+			String username) {
 		this.recipename = recipename;
-		this.recipeinstructions = recipeinstructions;
+		this.recipeinstructions = recipeInstructions;
 		this.recipeDescriptions = recipeDescriptions;
 		this.username = username;
 		this.ingredients = ingredients;

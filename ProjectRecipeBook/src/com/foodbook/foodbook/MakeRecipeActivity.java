@@ -15,7 +15,7 @@ public class MakeRecipeActivity extends EditRecipeActivity {
 		 */
 		
 		// Add to the recipe book
-		myRecipeBook.addRecipe(name, descriptions, descriptions, ingredientsArrayList, categoryArrayList);
+		FridgeActivity.myRecipeBook.addRecipe(name, descriptions, instructions, ingredientsArrayList, categoryArrayList);
 		
 	}
 }
