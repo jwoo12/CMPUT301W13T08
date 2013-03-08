@@ -17,7 +17,6 @@ public class EditRecipeActivity extends TitleBarOverride {
 	 * Only the owner of the recipe can access this recipe.
 	 */
 
-	protected Intent returningIntent;
 	protected int position;
 	
 	protected String name;

@@ -1,8 +1,5 @@
 package com.foodbook.foodbook;
 
-
-
-
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
@@ -12,18 +9,15 @@ import android.view.MenuItem;
 
 import com.foodbook.onlinemanager.OnlineSearch;
 
-/*
- * Menu details. 
- * 
- * I've added some implementation to the "Actions" menu. Clicking the "My Recipes" option will 
- * bring the User to the (local) Recipe Book activity. Clicking the "Make Recipe" will 
- * go to the RecipeDetailsActivity. We can add the implementation for posting and searching
- * once we have the code for that :) Let me know if the way I coded this (will all the
- * intents and stuff) won't work with the rest of the code.  -Jasmine
- * 
- */
-
 public class TitleBarOverride extends Activity {
+	
+	/**
+	 * This class contains the implementation of title bar menu button.
+	 * This button can be used to navigate through different activities within the app.
+	 * Since this class extends Activity, all activities that need to have the button will
+	 * extend this one, so that they will all have button and behave as activities.
+	 */
+	
 
 	RecipeBook myRecipeBook;
 	Fridge myFridge;
@@ -53,7 +47,7 @@ public class TitleBarOverride extends Activity {
 	    case R.id.menu_makeRecipe:
 	    	Intent makeRecipe = new Intent();
 	    	makeRecipe.setClass(getApplicationContext(), MakeRecipeActivity.class);
-	    	startActivityForResult(makeRecipe, 1);
+	    	startActivity(makeRecipe);
 	    	break;
 	    case R.id.menu_postRecipe:
 	    	Intent postRecipe = new Intent();
