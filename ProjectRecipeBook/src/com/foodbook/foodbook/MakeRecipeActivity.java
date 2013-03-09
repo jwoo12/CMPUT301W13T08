@@ -14,13 +14,13 @@ package com.foodbook.foodbook;
 public class MakeRecipeActivity extends EditRecipeActivity {
 	
 	
-	
+	/**
+	 * This function creates a new recipe from the user input, and then puts it into the local recipe book.
+	 */
 	@Override
 	public void saveButtonClicked() {
 		
-		/**
-		 * This function creates a new recipe from the user input, and then puts it into the local recipe book.
-		 */
+		
 		
 		// Add to the recipe book
 		FridgeActivity.myRecipeBook.addRecipe(name, descriptions, instructions, ingredientsArrayList, categoryArrayList);

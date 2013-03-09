@@ -51,6 +51,7 @@ public class FridgeActivity extends TitleBarOverride {
 	private String ingredient;
 	private Button addButton;
 	
+
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		
@@ -85,6 +86,17 @@ public class FridgeActivity extends TitleBarOverride {
 		});
 	}
 	
+	/**
+	 * 
+	 * Create an alert dialog to handle ingredient modification
+	 *
+	 * @see AlertDialog
+	 * 
+	 * 
+	 * @param add User wants to add an ingredient
+	 * @param defaultString if the user does not add text to an ingredient a blank string is assigned
+	 * @param position element at which the ingredient is added
+	 */
 	private void showInputDialog(final boolean add, String defaultString, final int position) {
 		AlertDialog.Builder alertdg = new AlertDialog.Builder(this);
 		alertdg.setTitle("Add Ingredient ");
@@ -118,6 +130,13 @@ public class FridgeActivity extends TitleBarOverride {
 		alertdg.show(); 
 	}
 	
+	/**
+	 * 
+	 * Alert dialog created to show the options of an ingredient. The user is able to "Edit" or "Delete" an ingredient
+	 * 
+	 * @see AlertDialog
+	 * @param position element at which the selected ingredient is located
+	 */
 	private void showOptionDialog(final int position) {
 		AlertDialog.Builder alertdg = new AlertDialog.Builder(this);
 		final String titleOfDialog = myFridge.getIngredientAtIndex(position);
@@ -138,6 +157,12 @@ public class FridgeActivity extends TitleBarOverride {
 		alertdg.show(); 
 	}
 	
+	/**
+	 * A toast to handle the event of an invalid input. If a User enters no text, the toast is displayed.
+	 * 
+	 * @see Toast
+	 * 
+	 */
 	public void showInValidInputMessage() {
 		Context context = getApplicationContext();
 		CharSequence text = "Invalid Input";
@@ -146,6 +171,16 @@ public class FridgeActivity extends TitleBarOverride {
 		Toast toast = Toast.makeText(context, text, duration);
 		toast.show();
 	}
+	
+	/**
+	 * 
+	 * A view in the MVC architecture. Handles displaying of ingredients to screen
+	 * 
+	 * @see ArrayAdapter
+	 * 
+	 * @param myFridgeToBeDisplayed Fridge object being displayed
+	 * @param listView Space in which ingredients are listed
+	 */
 	
 	private void updateListView(Fridge myFridgeToBeDisplayed, ListView listView) {
 		ArrayList<String> ingredients = myFridgeToBeDisplayed.getIngredients();

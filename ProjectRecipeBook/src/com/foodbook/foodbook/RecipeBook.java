@@ -27,11 +27,15 @@ public class RecipeBook {
 	private String userid; // TODO this needs to be changed
 	private String username; // username can be changed TODO this needs to be changed
 	
+	/**
+	* This is a constructor method for RecipeBook. It creates new ArrayList of Recipe.
+	* 
+	* 
+	* 
+	*/
 	public RecipeBook() {
 		
-		/**
-		 * This is a constructor method for RecipeBook. It creates new ArrayList of Recipe.
-		 */
+		
 		
 		mine = new ArrayList<Recipe>();
 		downloads = new ArrayList<Recipe>();
@@ -54,13 +58,17 @@ public class RecipeBook {
 	public void setDownloads(ArrayList<Recipe> downloads) {
 		this.downloads = downloads;
 	}
-
+	/**
+	* This is a getter for the entire RecipeBook.
+	* Since there are two recipe books ("mine" and "downloaded"),
+	* this method will simply combine them and return the resulting array.
+	* 
+	* 
+	* @return List of downloaded and local Recipes 
+	*/
 	public ArrayList<Recipe> getRecipeBook() {
 		
-		/**
-		 * This is a getter for the entire RecipeBook.
-		 * Since there are two recipe books ("mine" and "downloaded"), this method will simply combine them and return the resulting array.
-		 */
+		
 		
 		// do you guys think sorting is something that has to be done here? - Jaeseo
 		
@@ -71,25 +79,40 @@ public class RecipeBook {
 		
 	}
 	
+	/**
+	* This function receives details of a recipe, and creates/adds a new recipe to the local RecipeBook.
+	* 
+	* @param recipename name of recipe
+	* @param recipeDescriptions description of recipe
+	* @param recipeinstructions recipe instructions
+	* @param ingredients list of ingredients
+	* @param category genre
+	* 
+	*/
+	
 	public void addRecipe(String recipename,
 			String recipeDescriptions,
 			String recipeinstructions,
 			ArrayList<String> ingredients,
 			ArrayList<String> category) {
-		/**
-		 * This function receives details of a recipe, and creates/adds a new recipe to the local RecipeBook.
-		 */
+		
 		Recipe newRecipe = new Recipe(recipename, recipeDescriptions, recipeinstructions, ingredients, category, this.userid, this.username);
 		this.mine.add(newRecipe);
 	}
 	
+	/**
+	* This methods is used to modify existing recipes in the recipe book.
+	* Given the details about the recipe and the recipe ID, this method will apply changes.
+	* @param recipename name of recipe
+	* @param recipeDescriptions description of recipe
+	* @param recipeinstructions recipe instructions
+	* @param ingredients list of ingredients
+	* @param category genre
+	*/
 	public void editRecipe(String recipename, String recipeDescriptions, String recipeinstructions, ArrayList<String> ingredients,
 			ArrayList<String> category, int position) {
 		
-		/**
-		 * This methods is used to modify existing recipes in the recipe book.
-		 * Given the details about the recipe and the recipe ID, this method will apply changes.
-		 */
+		
 		
 	}
 	

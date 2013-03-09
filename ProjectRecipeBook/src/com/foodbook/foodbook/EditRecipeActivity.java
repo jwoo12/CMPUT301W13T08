@@ -81,25 +81,32 @@ public class EditRecipeActivity extends TitleBarOverride {
 		updateTextFields();
 	}
 	
+	/**
+	* This function is used to check whether or not required fields are empty.
+	* If a recipe is missing important information (ex. name), then this function will
+	* return false.
+	* 
+	* 
+	* @return false if any required fields are empty
+	*/
 	private boolean requiredInfoCheckOK() {
 		
-		/**
-		 * This function is used to check whether or not required fields are empty.
-		 * If a recipe is missing important information (ex. name), then this function will
-		 * return false.
-		 */
+		
 		
 		// TODO write if statements to test the textfields
 		
 		return true;
 	}
-	
+	/**
+	* This function sets the contents of text fields according to the recipe.
+	* If recipe has no information (ie. when creating a new recipe), everything will be blank.
+	* 
+	* 
+	* 
+	*/
 	private void updateTextFields() {
 		
-		/**
-		 * This function sets the contents of text fields according to the recipe.
-		 * If recipe has no information (ie. when creating a new recipe), everything will be blank.
-		 */
+		
 		
 		if (position == -1) {
 			// position == -1 means "new recipe". do not need to set any text.
@@ -112,12 +119,15 @@ public class EditRecipeActivity extends TitleBarOverride {
 		ingredientsField.setText(ingredients);
 		instructionsField.setText(instructions);
 	}
-	
+	/**
+	* This function reads contents of the edited text fields and saves them in global variables.
+	* 
+	* 
+	* 
+	*/
 	protected void readTextfields() {
 		
-		/**
-		 * This function reads contents of textfields.
-		 */
+		
 		
 		// these are regular strings
 		name = recipeNameField.getText().toString();
@@ -133,12 +143,15 @@ public class EditRecipeActivity extends TitleBarOverride {
 		ingredientsArrayList = new ArrayList<String>(Arrays.asList(ingredientsArray));
 		
 	}
-
+	/**
+	* This function edits the existing recipe object in the RecipeBook using the User edited text.
+	* 
+	* @see readTextfields 
+	* 
+	*/
 	public void saveButtonClicked() {
 		
-		/**
-		 * This function edits the existing recipe object in the RecipeBook
-		 */
+		
 		
 		// edit the recipe details
 		// TODO right now we are putting "position" in because we are arraylist. when we get SQL ready, we will change this to recipe ID.

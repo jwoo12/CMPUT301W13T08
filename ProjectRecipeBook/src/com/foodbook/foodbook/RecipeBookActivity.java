@@ -45,11 +45,12 @@ public class RecipeBookActivity extends TitleBarOverride {
 			switchTab(2);
 		}
 	}
-
+	
+	/**
+	* This function switches the selected tab. 
+	*/
 	private void switchTab(int i) {
-		/**
-		 * This function switches the selected tab. 
-		 */
+		
 		
 	}
 	

@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import java.util.Date;
 
 /**
- * A recipe is a set of instructions that a User can record or “save” to describe how to prepare a food item.
+ * A recipe is a set of instructions that a User can record or save to describe how to prepare a food item.
  * 
  * <p> Recipes contain: </p>
  * <ul> 
@@ -38,67 +38,179 @@ public class Recipe{
 
 	// userid is perminant id, given to each user, this will be used to identify the owner of recipes.
 
+	/**
+	 * Description "getter" for a given recipe
+	 * 
+	 * return recipeDescriptions a description of the recipe
+	 */
+	
 	public String getRecipeDescriptions() {
 		return recipeDescriptions;
 	}
 
+	/**
+	 * Description "setter" for a given recipe
+	 * 
+	 * @param recipeDescriptions a description of the recipe
+	 */
+	
 	public void setRecipeDescriptions(String recipeDescriptions) {
 		this.recipeDescriptions = recipeDescriptions;
 	}
 
+	/**
+	 * Recipe's name "getter"
+	 * 
+	 * @return recipename the name of the recipe
+	 */
+	
 	public String getRecipename() {
 		return recipename;
 	}
 
+	/**
+	 * Recipe's name "setter"
+	 * 
+	 * @param recipename the name of the recipe
+	 */
+	
 	public void setRecipename(String recipename) {
 		this.recipename = recipename;
 	}
 
+	/**
+	 * Recipe's instructions "getter"
+	 * 
+	 * @return recipeinstructions instructions of the recipe 
+	 */
+	
 	public String getRecipeinstructions() {
 		return recipeinstructions;
 	}
 
+	/**
+	 * 
+	 * Recipe's instructions "setter"
+	 * 
+	 * @param recipeinstructions instructions of the recipe 
+	 */
+	
 	public void setRecipeinstructions(String recipeinstructions) {
 		this.recipeinstructions = recipeinstructions;
 	}
 
+	/**
+	 * 
+	 * Recipe's username "getter"
+	 * 
+	 * @param username author's username of the recipe 
+	 */
+	
 	public String getUsername() {
 		return username;
 	}
 
+	/**
+	 * 
+	 * Recipe's username "setter"
+	 * 
+	 * @param username author's username of the recipe 
+	 */
+	
 	public void setUsername(String username) {
 		this.username = username;
 	}
 
+	/**
+	 * 
+	 * Recipe's list of required ingredients "getter"
+	 * 
+	 * @param ingredients a list of ingredients for the recipe 
+	 */
+	
 	public ArrayList<String> getIngredients() {
 		return ingredients;
 	}
 
+	/**
+	 * 
+	 * Recipe's list of required ingredients "setter"
+	 * 
+	 * @param ingredients a list of ingredients for the recipe 
+	 */
+	
 	public void setIngredients(ArrayList<String> ingredients) {
 		this.ingredients = ingredients;
 	}
 
+	/**
+	 * 
+	 * Recipe's category "getter"
+	 * 
+	 * @param category the genre of the recipe 
+	 */
+	
 	public ArrayList<String> getCategory() {
 		return category;
 	}
 
+	/**
+	 * 
+	 * Recipe's category "setter"
+	 * 
+	 * @param category the genre of the recipe 
+	 */
+	
 	public void setCategory(ArrayList<String> category) {
 		this.category = category;
 	}
 
 
+	/**
+	 * 
+	 * If no input is given, a NULL value is assigned
+	 * 
+	 * @param NULL
+	 */
+	
 	public static String getNull() {
 		return NULL;
 	}
 
+	/**
+	 * 
+	 * Recipe's id "getter"
+	 * 
+	 * @param recipeid the identification code of the recipe 
+	 */
+	
 	public String getRecipeid() {
 		return recipeid;
 	}
 
+	/**
+	 * 
+	 * Recipe's id "setter"
+	 * 
+	 * @param recipeid the identification code of the recipe 
+	 */
+	
 	public String getUserid() {
 		return userid;
 	}
 
+	/**
+	 * 
+	 * Creates a new Recipe object.  
+	 * 
+	 * @param recipename name of recipe
+	 * @param recipeDescriptions description of recipe
+	 * @param recipeInstructions recipe instructions
+	 * @param ingredients list of ingredients needed
+	 * @param category genre of recipe	
+	 * @param userid id of user 
+	 * @param username name of user
+	 */
 	
 	public Recipe(String recipename,
 			String recipeDescriptions,
@@ -116,14 +228,15 @@ public class Recipe{
 		this.recipeid = userid + String.valueOf((new Date()).getTime());
 		this.userid = userid;
 	}
-
+	
+	/**
+	* This method will return list of ingredients as a string, in the following format:
+	* ingr_0, ingr_1, ingr_2 ... ingr_n
+	* If there is no ingredients added yet, then empty string is returned.
+	*/
+		
 	public String getIngredientsString() {
 		
-		/**
-		 * This method will return list of ingredients as a string, in the following format:
-		 * ingr_0, ingr_1, ingr_2 ... ingr_n
-		 * If there is no ingredients added yet, then empty string is returned.
-		 */
 		
 		if (this.ingredients.size() == 0) {
 			return "";
@@ -138,13 +251,14 @@ public class Recipe{
 		return listOfIngr;
 	}
 	
+	/**
+	* This method will return list of categories as a string, in the following format:
+	* categ_0, categ_1, categ_2 ... categ_n
+	* If there is no categories added yet, then empty string is returned.
+	*/
+		
 	public String getCategoryString() {
 		
-		/**
-		 * This method will return list of categories as a string, in the following format:
-		 * categ_0, categ_1, categ_2 ... categ_n
-		 * If there is no categories added yet, then empty string is returned.
-		 */
 		
 		if (this.category.size() == 0) {
 			return "";
