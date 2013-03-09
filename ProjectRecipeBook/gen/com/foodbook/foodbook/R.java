@@ -21,9 +21,11 @@ public final class R {
         public static final int collections_new_label=0x7f020001;
         public static final int collections_view_as_list=0x7f020002;
         public static final int content_edit=0x7f020003;
-        public static final int ic_action_search=0x7f020004;
-        public static final int ic_launcher=0x7f020005;
-        public static final int location_web_site=0x7f020006;
+        public static final int foodsearch=0x7f020004;
+        public static final int fridge=0x7f020005;
+        public static final int ic_action_search=0x7f020006;
+        public static final int ic_launcher=0x7f020007;
+        public static final int location_web_site=0x7f020008;
     }
     public static final class id {
         public static final int Button01=0x7f08002a;
@@ -41,12 +43,12 @@ public final class R {
         public static final int editRecipeInst=0x7f08000a;
         public static final int editRecipeName=0x7f080004;
         public static final int editRecipeSaveButton=0x7f08000b;
-        public static final int foodbookTitleLabel=0x7f080013;
+        public static final int foodbookTitleLabel=0x7f080012;
         public static final int fridgeList=0x7f080002;
         public static final int fridgeSeeWhatICanMake=0x7f080000;
         public static final int ingredientsLayout=0x7f080021;
         public static final int instLayout=0x7f080024;
-        public static final int linearLayout1=0x7f080010;
+        public static final int linearLayout1=0x7f080013;
         public static final int listView1=0x7f08002e;
         public static final int list_downloads=0x7f08002c;
         public static final int list_mine=0x7f08002d;
@@ -73,8 +75,8 @@ public final class R {
         public static final int recipeDetails_shareButtonLayout=0x7f080027;
         public static final int recipebookTabHost=0x7f08000c;
         public static final int scrollView1=0x7f080005;
-        public static final int searchBar=0x7f080011;
-        public static final int searchButton=0x7f080012;
+        public static final int searchBar=0x7f080010;
+        public static final int searchButton=0x7f080011;
         public static final int tab1=0x7f08000d;
         public static final int tab2=0x7f08000e;
         public static final int tab3=0x7f08000f;
@@ -135,5 +137,7 @@ public final class R {
     }
     public static final class style {
         public static final int AppTheme=0x7f050000;
+        public static final int fridgeTheme=0x7f050001;
+        public static final int searchTheme=0x7f050002;
     }
 }

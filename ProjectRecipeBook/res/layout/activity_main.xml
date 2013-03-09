@@ -1,7 +1,8 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent" >
+    android:layout_height="match_parent" 
+    android:background="@drawable/fridge" >
 
     <Button
         android:id="@+id/fridgeSeeWhatICanMake"
@@ -9,7 +10,9 @@
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_alignParentRight="true"
-        android:text="@string/see_what_i_can_make" />
+        android:text="@string/see_what_i_can_make"
+        android:textColor="@color/fb_blue1"
+        android:textColorHint="@color/fb_blue1" />
 
     <Button
         android:id="@+id/myFridgeAddButton"
@@ -18,7 +21,9 @@
         android:layout_alignParentBottom="true"
         android:layout_alignParentLeft="true"
         android:layout_toLeftOf="@+id/fridgeSeeWhatICanMake"
-        android:text="@string/add" />
+        android:text="@string/add"
+        android:textColor="@color/fb_blue1"
+        android:textColorHint="@color/fb_blue1" />
 
     <ListView
         android:id="@+id/fridgeList"
@@ -26,7 +31,8 @@
         android:layout_height="wrap_content"
         android:layout_above="@+id/fridgeSeeWhatICanMake"
         android:layout_alignParentLeft="true"
-        android:layout_alignParentTop="true" >
+        android:layout_alignParentTop="true" 
+        android:textColor="@color/fb_blue1">
 
     </ListView>
 
