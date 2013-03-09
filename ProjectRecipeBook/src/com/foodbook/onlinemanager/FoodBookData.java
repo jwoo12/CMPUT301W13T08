@@ -4,7 +4,7 @@ import android.database.sqlite.SQLiteDatabase;
 
 /**
  * 
- * 
+ * SQLite implementation
  * 
  * 
  * 

@@ -8,7 +8,7 @@ import android.database.sqlite.SQLiteDatabase.CursorFactory;
 import android.database.sqlite.SQLiteOpenHelper;
 
 /**
- * 
+ * SQLite implementation 
  * 
  * 
  * 

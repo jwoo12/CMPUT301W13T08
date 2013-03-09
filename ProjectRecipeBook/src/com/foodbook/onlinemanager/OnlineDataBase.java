@@ -3,7 +3,7 @@ package com.foodbook.onlinemanager;
 
 /**
  * 
- * 
+ * HTTP and web service implementation
  * 
  * 
  * 

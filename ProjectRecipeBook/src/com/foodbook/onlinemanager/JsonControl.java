@@ -2,7 +2,7 @@ package com.foodbook.onlinemanager;
 
 /**
  * 
- * 
+ * Json implementation
  * 
  * 
  * 
