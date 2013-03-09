@@ -32,7 +32,8 @@
         android:layout_above="@+id/fridgeSeeWhatICanMake"
         android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true" 
-        android:textColor="@color/fb_blue1">
+        android:textColor="#FF0000"
+        android:textSize="50sp">
 
     </ListView>
 
