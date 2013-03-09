@@ -1,11 +1,19 @@
 package com.foodbook.foodbook;
-
+/**
+* <p> A subclass of EditRecipeActivity. </p>
+* <p> Only difference is that this will make a new recipe when Save button is clicked, 
+* instead of changing an existing recipe. </p>
+*     
+*     
+* @see EditRecipeActivity     
+* 
+*  
+* @author Jaeseo Park (jaeseo1), Jasmine Woo (jwoo), Nhu Bui (nbui), Robert Janes (rjanes) 
+*  
+*  */ 
 public class MakeRecipeActivity extends EditRecipeActivity {
 	
-	/**
-	 * A subclass of EditRecipeActivity.
-	 * Only difference is that this will make a new recipe when Save button is clicked, instead of changing an existing recipe.
-	 */ 
+	
 	
 	@Override
 	public void saveButtonClicked() {

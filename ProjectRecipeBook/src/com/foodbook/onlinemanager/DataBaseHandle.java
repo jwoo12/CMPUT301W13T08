@@ -6,13 +6,18 @@ import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteDatabase.CursorFactory;
 import android.database.sqlite.SQLiteOpenHelper;
+
 /**
- * DatabaseSQL is what will make our actual database. This
- * Needs to be PERFECTLY set up to query(get, edit, remove)
- * items properly in the app.
- * @author rjanes
+ * 
+ * 
+ * 
+ * 
+ * 
+ * @author Jaeseo Park (jaeseo1), Jasmine Woo (jwoo), Nhu Bui (nbui), Robert Janes (rjanes)
  *
  */
+
+
 public class DataBaseHandle extends SQLiteOpenHelper{
 	//Static Variables: need one for each part.//
 

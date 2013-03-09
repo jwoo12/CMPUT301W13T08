@@ -8,15 +8,19 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 
 import com.foodbook.onlinemanager.OnlineSearch;
-
+/**
+	 * <p> This class contains the implementation of title bar menu button. </p>
+	 * 
+	 * <p> This button can be used to navigate through different activities within the app.
+	 * Since this class extends Activity, all activities that need to have the button will
+	 * extend this one, so that they will all have button and behave as activities. </p>
+	 * 
+	 * @author Jaeseo Park (jaeseo1), Jasmine Woo (jwoo), Nhu Bui (nbui), Robert Janes (rjanes)
+	 * 
+	 */
 public class TitleBarOverride extends Activity {
 	
-	/**
-	 * This class contains the implementation of title bar menu button.
-	 * This button can be used to navigate through different activities within the app.
-	 * Since this class extends Activity, all activities that need to have the button will
-	 * extend this one, so that they will all have button and behave as activities.
-	 */
+	
 	
 
 	RecipeBook myRecipeBook;

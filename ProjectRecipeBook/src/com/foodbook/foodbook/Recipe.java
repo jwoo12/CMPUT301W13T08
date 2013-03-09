@@ -1,20 +1,25 @@
-/**
- * Recipe: This class is the RecipeBook object.  The user
- * can create recipes.  *Add more as we know more*
- * @author rjanes
- * @version 1.0
- */
+
 package com.foodbook.foodbook;
 
 import java.util.ArrayList;
 import java.util.Date;
 
 /**
- * This class will be fixed guys, I'm just trying to create an object to get the
- * database set up. But SHOULD OUR RECIPE INPUT BE A STRING OR A TOUCH INTERFACE
- * WITH CUPS TEASPOONS ETC.
+ * A recipe is a set of instructions that a User can record or “save” to describe how to prepare a food item.
  * 
- * @author rjanes
+ * <p> Recipes contain: </p>
+ * <ul> 
+ * 		<li> a title </li>
+ * 		<li> a list of ingredients </li>
+ * 		<li> instructions </li>
+ * 		<li> a recipe id </li>
+ * 		<li> a user id </li>
+ * 		<li> photos (optional) </li>
+ * 		<li> category (optional) </li>
+ * 
+ * </ul>
+ * 
+ * @author Jaeseo Park (jaeseo1), Jasmine Woo (jwoo), Nhu Bui (nbui), Robert Janes (rjanes)
  * 
  */
 

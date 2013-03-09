@@ -5,6 +5,17 @@ import com.foodbook.foodbook.TitleBarOverride;
 
 import android.os.Bundle;
 
+
+/**
+ * 
+ * <p> Implementation for the ability to query recipes </p>
+ * 
+ * 
+ * @see Recipe
+ * @author Jaeseo Park (jaeseo1), Jasmine Woo (jwoo), Nhu Bui (nbui), Robert Janes (rjanes)
+ *
+ */
+
 public class OnlineSearch extends TitleBarOverride {
 
 	@Override

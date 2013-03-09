@@ -2,12 +2,25 @@ package com.foodbook.foodbook;
 
 import java.util.ArrayList;
 
+	/**
+	 * <p> RecipeBook is a collection of local and downloaded recipes. </p>
+	 * 
+	 * <p> This class is the centre of the Model. 
+	 *     It has the collection of local (and downloaded) recipes, and class methods associated with it. </p>
+	 *  
+	 * 
+	 * @see Recipe
+	 * 
+	 * @author Jaeseo Park (jaeseo1), Jasmine Woo (jwoo), Nhu Bui (nbui), Robert Janes (rjanes)
+	 * 
+	 * 
+	 * 
+	 * 
+	 */
+
 public class RecipeBook {
 
-	/**
-	 * This class is the centre of the Model.
-	 * it has the collection of local (and downloaded) recipes, and class methods associated with it.
-	 */
+	
 	
 	ArrayList<Recipe> mine;
 	ArrayList<Recipe> downloads;

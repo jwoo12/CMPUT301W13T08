@@ -2,6 +2,17 @@ package com.foodbook.onlinemanager;
 
 import android.database.sqlite.SQLiteDatabase;
 
+/**
+ * 
+ * 
+ * 
+ * 
+ * 
+ * @author Jaeseo Park (jaeseo1), Jasmine Woo (jwoo), Nhu Bui (nbui), Robert Janes (rjanes)
+ *
+ */
+
+
 public class FoodBookData {
 	SQLiteDatabase database;
 	private FoodBookData(SQLiteDatabase newdatabase){

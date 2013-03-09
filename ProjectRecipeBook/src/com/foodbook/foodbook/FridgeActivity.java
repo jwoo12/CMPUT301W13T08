@@ -16,6 +16,28 @@ import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.Toast;
 
+/**
+ * 
+ * <p> This class is an activity class for Ingredients. </p>
+ * <p> Once a User has created an ingredient, it is displayed. </p>
+ * 
+ * <p> The User has the option to : </p>
+ * 
+ * <ul> 
+ * 		<li> Add an ingredient </li>
+ * 		<li> Edit an ingredient </li>
+ * 		<li> Remove an ingredient </li>
+ * 		<li> Search for recipes based on ingredients </li>
+ * </ul>
+ * 
+ * @see Fridge
+ * 
+ * @author Jaeseo Park (jaeseo1), Jasmine Woo (jwoo), Nhu Bui (nbui), Robert Janes (rjanes)
+ *
+ */
+
+
+
 public class FridgeActivity extends TitleBarOverride {
 
 	static RecipeBook myRecipeBook;

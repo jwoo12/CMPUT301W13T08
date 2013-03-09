@@ -4,14 +4,21 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.widget.ListView;
 import android.widget.TabHost;
-
+/**
+	 * <p> This class is an activity class for local recipes. </p>
+	 * 
+	 * <p> There are three tabs that users can select. "All", "Mine", and "Downloads"
+	 * 	   Upon clicking of each tab, the corresponding list of recipes will be displayed. </p>
+	 * 
+	 * 
+	 * 
+	 * 
+	 * @author Jaeseo Park (jaeseo1), Jasmine Woo (jwoo), Nhu Bui (nbui), Robert Janes (rjanes)
+	 * 
+	 */
 public class RecipeBookActivity extends TitleBarOverride {
 
-	/**
-	 * This class is an activity class for local recipes.
-	 * There are three tabs that users can select. "All", "Mine", and "Downloads"
-	 * Upon clicking of each tab, the corresponding list of recipes will be displayed.
-	 */
+	
 	
 	private Intent in;
 	private boolean showMineOnly;

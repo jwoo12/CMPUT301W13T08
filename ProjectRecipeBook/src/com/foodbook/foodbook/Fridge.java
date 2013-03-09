@@ -4,6 +4,19 @@ import java.util.ArrayList;
 
 import android.content.Context;
 
+/**
+ * <p> Fridge is a collection of User created ingredients. </p>
+ * 
+ * <p> The User is able to record/edit/view/modify ingredients listed within the "Fridge". </p>
+ * 
+ * 
+ * 
+ * @author Jaeseo Park (jaeseo1), Jasmine Woo (jwoo), Nhu Bui (nbui), Robert Janes (rjanes)
+ * 
+ */
+
+
+
 public class Fridge {
 
 	private ArrayList<String> ingredients;
