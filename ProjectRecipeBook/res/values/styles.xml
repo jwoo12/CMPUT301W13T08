@@ -12,8 +12,7 @@
         <item name="android:windowTitleSize">45dp</item>
     </style>
     <style name="searchTheme" parent="@android:style/Theme">
-        <item name="android:windowBackground">@drawable/foodsearch</item>
-        <item name="android:windowTitleSize">45dp</item>
+      
     </style>
     
 </resources>
