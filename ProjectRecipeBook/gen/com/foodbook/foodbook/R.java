@@ -116,6 +116,7 @@ public final class R {
         public static final int online_search=0x7f04001f;
         public static final int otherButtons=0x7f040017;
         public static final int recipeDetails_instructions=0x7f040015;
+        public static final int recipe_details=0x7f040027;
         public static final int recipe_details_title_bar=0x7f040008;
         public static final int recipe_title=0x7f040018;
         public static final int save=0x7f04001c;

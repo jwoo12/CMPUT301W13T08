@@ -6,7 +6,7 @@
     android:versionName="1.0" >
 
     <uses-sdk
-        android:minSdkVersion="8"
+        android:minSdkVersion="7"
         android:targetSdkVersion="15" />
 
     <application
@@ -23,7 +23,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:launchMode="singleTask"
+            android:launchMode="singleTop" 
             android:name="com.foodbook.foodbook.RecipeBookActivity"
             android:label="@string/local_recipe_book_title" >
             <intent-filter>
@@ -80,6 +80,11 @@
             android:label="@string/title_bar_text" >
         </activity>
         
+         <activity
+             android:name="com.foodbook.foodbook.RecipeDetailsActivity"
+             android:label="@string/recipe_details" >
+             
+         </activity>
 
             
     </application>

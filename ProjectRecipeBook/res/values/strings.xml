@@ -39,5 +39,6 @@
     <string name="all">All</string>
     <string name="mine">Mine</string>
     <string name="downloads">Downloads</string>
+    <string name="recipe_details">Recipe Details</string>
 
 </resources>

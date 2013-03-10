@@ -22,18 +22,21 @@ public class MakeRecipeActivity extends EditRecipeActivity {
 	@Override
 	public void saveButtonClicked() {
 		
-		// Add to the recipe book
+		// Add to the recipe book and get the recipe id back
 		String recipeid = FridgeActivity.myRecipeBook.addRecipe(name, descriptions, instructions, ingredientsArrayList, categoryArrayList);
-		boolean recipeExists = FridgeActivity.myRecipeBook.doesThisRecipeExist(recipeid);
 		
-		if (recipeExists) {
-			Intent recipeDetails = new Intent();
-			recipeDetails.setClass(this, RecipeDetailsActivity.class);
-			
-		}
-		else {
-			// TODO error
-		}
+		// make a new intent for viewing the details of the newly created recipe (this recipe)
+		Intent recipeDetailsIntent = new Intent();
+		recipeDetailsIntent.setClass(getApplicationContext(), RecipeDetailsActivity.class);
+		recipeDetailsIntent.putExtra("recipeid", recipeid);
+		recipeDetailsIntent.putExtra("name", name);
+		recipeDetailsIntent.putExtra("descriptions", descriptions);
+		recipeDetailsIntent.putExtra("instructions", instructions);
+		recipeDetailsIntent.putExtra("ingredients", ingredients);
+		recipeDetailsIntent.putExtra("category", category);
+		recipeDetailsIntent.putExtra("author", FridgeActivity.myRecipeBook.getAuthor());
 		
+		// start a new activity
+		startActivity(recipeDetailsIntent);
 	}
 }

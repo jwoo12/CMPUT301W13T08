@@ -91,15 +91,16 @@ public class RecipeBookActivity extends TitleBarOverride {
 					break;
 				}
 				ArrayList<String> recipeInfo = FridgeActivity.myRecipeBook.getRecipeInfo(recipeid);
-				openRecipeDetails(recipeInfo, getApplicationContext());
+				openRecipeDetails(recipeInfo);
 			}
+			
+			public void openRecipeDetails(ArrayList<String> recipeInfo) {
+				Intent recipeDetailsIntent = new Intent();
+				recipeDetailsIntent.setClass(getApplicationContext(), RecipeDetailsActivity.class);
+				startActivity(recipeDetailsIntent);
+			}
+
 		});
-		
-	}
-	
-	public static void openRecipeDetails(ArrayList<String> recipeInfo, Context context) {
-		Intent recipeDetailsIntent = new Intent();
-		recipeDetailsIntent.setClass(context, RecipeDetailsActivity.class);
 		
 	}
 	
@@ -117,12 +118,6 @@ public class RecipeBookActivity extends TitleBarOverride {
 		setIntent(newIntent);
 	}
 	
-	@Override
-	public void onPause() {
-		super.onPause();
-		
-	}
-	
 	private void reloadRecipeBook() {
 		sourceAll = RecipeBook.convertRecipeBookToStringArray(FridgeActivity.myRecipeBook.getRecipeBook());
 		sourceMine = RecipeBook.convertRecipeBookToStringArray(FridgeActivity.myRecipeBook.getMine());
@@ -133,7 +128,7 @@ public class RecipeBookActivity extends TitleBarOverride {
 	}
 	
 	private void updateListView(ArrayList<String> sourceList, ListView targetListView) {
-		ArrayAdapter<String> adapter = new ArrayAdapter<String>(getApplicationContext(), android.R.layout.simple_list_item_1, sourceList);
+		ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, sourceList);
 		targetListView.setAdapter(adapter);
 	}
 	

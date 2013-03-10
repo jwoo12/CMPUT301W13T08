@@ -23,7 +23,7 @@ public class RecipeBook {
 	ArrayList<Recipe> mine;
 	ArrayList<Recipe> downloads;
 	private String userid; // TODO this needs to be changed
-	private String username; // username can be changed TODO this needs to be changed
+	private String author; // author can be changed TODO this needs to be changed
 	
 	/**
 	* This is a constructor method for RecipeBook. It creates new ArrayList of Recipe.
@@ -36,7 +36,7 @@ public class RecipeBook {
 		mine = new ArrayList<Recipe>();
 		downloads = new ArrayList<Recipe>();
 		this.userid = "dsfuabsiuf3528fb923r72b3eiw";
-		this.username = "example name";
+		this.author = "example name";
 		
 	}
 	
@@ -114,12 +114,28 @@ public class RecipeBook {
 			ArrayList<String> ingredients,
 			ArrayList<String> category) {
 		
-		Recipe newRecipe = new Recipe(recipename, recipeDescriptions, recipeinstructions, ingredients, category, this.userid, this.username);
+		Recipe newRecipe = new Recipe(recipename, recipeDescriptions, recipeinstructions, ingredients, category, this.userid, this.author);
 		this.mine.add(newRecipe);
 		
 		return newRecipe.getRecipeid();
 	}
 	
+	public String getUserid() {
+		return userid;
+	}
+
+	public void setUserid(String userid) {
+		this.userid = userid;
+	}
+
+	public String getAuthor() {
+		return author;
+	}
+
+	public void setAuthor(String author) {
+		this.author = author;
+	}
+
 	/**
 	* This methods is used to modify existing recipes in the recipe book.
 	* Given the details about the recipe and the recipe ID, this method will apply changes.

@@ -30,7 +30,7 @@ public class Recipe{
 	private String recipename;
 	private String recipeinstructions;
 	private String recipeDescriptions;
-	private String username; // username will be changable at any time.
+	private String author; // author will be changable at any time.
 	private ArrayList<String> ingredients;
 	private ArrayList<String> category; // there can be multiple categories (somewhat similar to the idea of "tagging")
 	final String recipeid; // recipeid is permanent, and will be in this format: (userid) + (date in milisecond) 
@@ -101,24 +101,24 @@ public class Recipe{
 
 	/**
 	 * 
-	 * Recipe's username "getter"
+	 * Recipe's author "getter"
 	 * 
-	 * @param username author's username of the recipe 
+	 * @param author author's author of the recipe 
 	 */
 	
-	public String getUsername() {
-		return username;
+	public String getauthor() {
+		return author;
 	}
 	
 	/**
 	 * 
-	 * Recipe's username "setter"
+	 * Recipe's author "setter"
 	 * 
-	 * @param username author's username of the recipe 
+	 * @param author author's author of the recipe 
 	 */
 	
-	public void setUsername(String username) {
-		this.username = username;
+	public void setauthor(String author) {
+		this.author = author;
 	}
 	
 	/**
@@ -209,7 +209,7 @@ public class Recipe{
 	 * @param ingredients list of ingredients needed
 	 * @param category genre of recipe	
 	 * @param userid id of user 
-	 * @param username name of user
+	 * @param author name of user
 	 */
 	
 	public Recipe(String recipename,
@@ -218,11 +218,11 @@ public class Recipe{
 			ArrayList<String> ingredients,
 			ArrayList<String> category,
 			String userid,
-			String username) {
+			String author) {
 		this.recipename = recipename;
 		this.recipeinstructions = recipeInstructions;
 		this.recipeDescriptions = recipeDescriptions;
-		this.username = username;
+		this.author = author;
 		this.ingredients = ingredients;
 		this.category = category;
 		this.recipeid = userid + String.valueOf((new Date()).getTime());
