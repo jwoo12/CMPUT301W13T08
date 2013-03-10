@@ -27,7 +27,7 @@ public class MakeRecipeActivity extends EditRecipeActivity {
 		
 		// make a new intent for viewing the details of the newly created recipe (this recipe)
 		Intent recipeDetailsIntent = new Intent();
-		recipeDetailsIntent.setClass(getApplicationContext(), RecipeDetailsActivity.class);
+		recipeDetailsIntent.setClass(this, RecipeDetailsActivity.class);
 		recipeDetailsIntent.putExtra("recipeid", recipeid);
 		recipeDetailsIntent.putExtra("name", name);
 		recipeDetailsIntent.putExtra("descriptions", descriptions);

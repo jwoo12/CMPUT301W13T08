@@ -81,9 +81,9 @@
         </activity>
         
          <activity
+             android:launchMode="singleTop"
              android:name="com.foodbook.foodbook.RecipeDetailsActivity"
              android:label="@string/recipe_details" >
-             
          </activity>
 
             
