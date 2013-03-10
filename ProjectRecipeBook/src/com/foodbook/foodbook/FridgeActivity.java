@@ -36,8 +36,6 @@ import android.widget.Toast;
  *
  */
 
-
-
 public class FridgeActivity extends TitleBarOverride {
 
 	public static RecipeBook myRecipeBook;

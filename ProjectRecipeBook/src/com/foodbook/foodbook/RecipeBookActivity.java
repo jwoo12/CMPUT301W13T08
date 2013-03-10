@@ -2,10 +2,13 @@ package com.foodbook.foodbook;
 
 import java.util.ArrayList;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
@@ -20,9 +23,7 @@ import android.widget.ListView;
 	 */
 public class RecipeBookActivity extends TitleBarOverride {
 
-	
 	private Intent in;
-	private boolean showMineOnly;
 
 	private ListView listView;
 	
@@ -30,14 +31,17 @@ public class RecipeBookActivity extends TitleBarOverride {
 	private ArrayList<String> sourceMine;
 	private ArrayList<String> sourceDownloads;
 	
+	private ArrayList<String> idAll;
+	private ArrayList<String> idMine;
+	private ArrayList<String> idDownloads;
+	
 	private int currentTab;
 	
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.local_recipe_book);
-
-		listView = (ListView) findViewById(R.id.recipeBookList);
+		
 		Button allButton = (Button) findViewById(R.id.recipeBookAllButton);
 		Button mineButton = (Button) findViewById(R.id.recipeBookMineButton);
 		Button downloadsButton = (Button) findViewById(R.id.recipeBookDownloadsButton);
@@ -67,20 +71,50 @@ public class RecipeBookActivity extends TitleBarOverride {
 			}
 		});
 		
+		listView = (ListView) findViewById(R.id.recipeBookList);
+		listView.setOnItemClickListener(new OnItemClickListener() {
+
+			@Override
+			public void onItemClick(AdapterView<?> arg0, View arg1, int position, long arg3) {
+				String recipeid = new String();
+				switch (currentTab) {
+				case 1:
+					recipeid = idAll.get(position);
+					break;
+				case 2:
+					recipeid = idMine.get(position);
+					break;
+				case 3:
+					recipeid = idDownloads.get(position);
+					break;
+				default:
+					break;
+				}
+				ArrayList<String> recipeInfo = FridgeActivity.myRecipeBook.getRecipeInfo(recipeid);
+				openRecipeDetails(recipeInfo, getApplicationContext());
+			}
+		});
+		
+	}
+	
+	public static void openRecipeDetails(ArrayList<String> recipeInfo, Context context) {
+		Intent recipeDetailsIntent = new Intent();
+		recipeDetailsIntent.setClass(context, RecipeDetailsActivity.class);
+		
 	}
 	
 	@Override
 	public void onResume() {
 		super.onResume();
 		in = getIntent();
-		showMineOnly = in.getBooleanExtra("showMineOnly", false);
-		if (!showMineOnly) {
-			currentTab = 1; // set the current tab to "All"
-		}
-		else {
-			currentTab = 2; // set the current tab to "Mine"
-		}
+		currentTab = in.getIntExtra("currentTab", 1);
 		refreshTabs();
+	}
+	
+	@Override
+	public void onNewIntent(Intent newIntent) {
+		super.onNewIntent(newIntent);
+		setIntent(newIntent);
 	}
 	
 	@Override
@@ -93,6 +127,9 @@ public class RecipeBookActivity extends TitleBarOverride {
 		sourceAll = RecipeBook.convertRecipeBookToStringArray(FridgeActivity.myRecipeBook.getRecipeBook());
 		sourceMine = RecipeBook.convertRecipeBookToStringArray(FridgeActivity.myRecipeBook.getMine());
 		sourceDownloads = RecipeBook.convertRecipeBookToStringArray(FridgeActivity.myRecipeBook.getDownloads());
+		idAll = RecipeBook.getAllRecipeid(FridgeActivity.myRecipeBook.getRecipeBook());
+		idMine = RecipeBook.getAllRecipeid(FridgeActivity.myRecipeBook.getMine());
+		idDownloads = RecipeBook.getAllRecipeid(FridgeActivity.myRecipeBook.getDownloads());
 	}
 	
 	private void updateListView(ArrayList<String> sourceList, ListView targetListView) {

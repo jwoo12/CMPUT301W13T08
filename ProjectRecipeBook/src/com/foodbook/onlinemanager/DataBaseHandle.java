@@ -1,10 +1,7 @@
 package com.foodbook.onlinemanager;
 
-import com.foodbook.foodbook.FridgeActivity;
-
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
-import android.database.sqlite.SQLiteDatabase.CursorFactory;
 import android.database.sqlite.SQLiteOpenHelper;
 
 /**

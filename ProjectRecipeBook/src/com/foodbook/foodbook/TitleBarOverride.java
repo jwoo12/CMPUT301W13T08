@@ -53,7 +53,7 @@ public class TitleBarOverride extends Activity {
 	    case R.id.menu_postRecipe:
 	    	Intent postRecipe = new Intent();
 	    	postRecipe.setClass(getApplicationContext(), RecipeBookActivity.class);
-	    	postRecipe.putExtra("showMineOnly", true);
+	    	postRecipe.putExtra("currentTab", 2);
 	    	startActivity(postRecipe);
 	    	break;
 	    case R.id.menu_searchOnline:

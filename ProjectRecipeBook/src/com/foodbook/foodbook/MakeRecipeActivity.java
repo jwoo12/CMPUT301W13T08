@@ -1,4 +1,7 @@
 package com.foodbook.foodbook;
+
+import android.content.Intent;
+
 /**
 * <p> A subclass of EditRecipeActivity. </p>
 * <p> Only difference is that this will make a new recipe when Save button is clicked, 
@@ -13,7 +16,6 @@ package com.foodbook.foodbook;
 *  */ 
 public class MakeRecipeActivity extends EditRecipeActivity {
 	
-	
 	/**
 	 * This function creates a new recipe from the user input, and then puts it into the local recipe book.
 	 */
@@ -21,7 +23,17 @@ public class MakeRecipeActivity extends EditRecipeActivity {
 	public void saveButtonClicked() {
 		
 		// Add to the recipe book
-		FridgeActivity.myRecipeBook.addRecipe(name, descriptions, instructions, ingredientsArrayList, categoryArrayList);
+		String recipeid = FridgeActivity.myRecipeBook.addRecipe(name, descriptions, instructions, ingredientsArrayList, categoryArrayList);
+		boolean recipeExists = FridgeActivity.myRecipeBook.doesThisRecipeExist(recipeid);
+		
+		if (recipeExists) {
+			Intent recipeDetails = new Intent();
+			recipeDetails.setClass(this, RecipeDetailsActivity.class);
+			
+		}
+		else {
+			// TODO error
+		}
 		
 	}
 }

@@ -67,7 +67,7 @@ public class Recipe{
 	public String getRecipename() {
 		return recipename;
 	}
-
+	
 	/**
 	 * Recipe's name "setter"
 	 * 
@@ -109,7 +109,7 @@ public class Recipe{
 	public String getUsername() {
 		return username;
 	}
-
+	
 	/**
 	 * 
 	 * Recipe's username "setter"
@@ -120,7 +120,7 @@ public class Recipe{
 	public void setUsername(String username) {
 		this.username = username;
 	}
-
+	
 	/**
 	 * 
 	 * Recipe's list of required ingredients "getter"
@@ -201,7 +201,7 @@ public class Recipe{
 
 	/**
 	 * 
-	 * Creates a new Recipe object.  
+	 * Creates a new Recipe object.
 	 * 
 	 * @param recipename name of recipe
 	 * @param recipeDescriptions description of recipe
@@ -271,5 +271,6 @@ public class Recipe{
 		}
 		
 		return listOfCateg;
+		
 	}
 }

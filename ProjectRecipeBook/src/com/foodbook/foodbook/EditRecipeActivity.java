@@ -124,8 +124,6 @@ public class EditRecipeActivity extends TitleBarOverride {
 	*/
 	protected void readTextfields() {
 		
-		
-		
 		// these are regular strings
 		name = recipeNameField.getText().toString();
 		descriptions = descriptionField.getText().toString();
@@ -147,9 +145,6 @@ public class EditRecipeActivity extends TitleBarOverride {
 	* 
 	*/
 	public void saveButtonClicked() {
-		
-		
-		
 		// edit the recipe details
 		// TODO right now we are putting "position" in because we are arraylist. when we get SQL ready, we will change this to recipe ID.
 		myRecipeBook.editRecipe(name, descriptions, instructions, ingredientsArrayList, categoryArrayList, position);

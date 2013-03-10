@@ -63,6 +63,16 @@ public class RecipeBook {
 		return outputArray;
 	}
 	
+	public static ArrayList<String> getAllRecipeid(ArrayList<Recipe> inputArray) {
+		ArrayList<String> outputArrayList = new ArrayList<String>();
+		
+		for (Recipe recipe : inputArray) {
+			outputArrayList.add(recipe.getRecipeid());
+		}
+		
+		return outputArrayList;
+	}
+	
 
 	public void setDownloads(ArrayList<Recipe> downloads) {
 		this.downloads = downloads;
@@ -76,8 +86,6 @@ public class RecipeBook {
 	* @return List of downloaded and local Recipes 
 	*/
 	public ArrayList<Recipe> getRecipeBook() {
-		
-		
 		
 		// do you guys think sorting is something that has to be done here? - Jaeseo
 		
@@ -100,7 +108,7 @@ public class RecipeBook {
 	* 
 	*/
 	
-	public void addRecipe(String recipename,
+	public String addRecipe(String recipename,
 			String recipeDescriptions,
 			String recipeinstructions,
 			ArrayList<String> ingredients,
@@ -108,6 +116,8 @@ public class RecipeBook {
 		
 		Recipe newRecipe = new Recipe(recipename, recipeDescriptions, recipeinstructions, ingredients, category, this.userid, this.username);
 		this.mine.add(newRecipe);
+		
+		return newRecipe.getRecipeid();
 	}
 	
 	/**
@@ -119,9 +129,28 @@ public class RecipeBook {
 	* @param ingredients list of ingredients
 	* @param category genre
 	*/
+	
 	public void editRecipe(String recipename, String recipeDescriptions, String recipeinstructions, ArrayList<String> ingredients,
 			ArrayList<String> category, int position) {
 		
 	}
+	
+	public boolean doesThisRecipeExist(String recipeid) {
+		
+		for (Recipe recipe : this.getRecipeBook()) {
+			if (recipe.getRecipeid() == recipeid) {
+				return true;
+			}
+		}
+		
+		return false;
+	}
+
+	public ArrayList<String> getRecipeInfo(String recipeid) {
+		// TODO
+		ArrayList<String> outputArray = null;
+		return outputArray;
+	}
+	
 	
 }
