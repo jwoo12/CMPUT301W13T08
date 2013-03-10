@@ -36,5 +36,8 @@
     <string name="search">Search</string>
     <string name="seasrch_by_ingredients">Search by ingredients</string>
     <string name="search_result">Search Result/s</string>
+    <string name="all">All</string>
+    <string name="mine">Mine</string>
+    <string name="downloads">Downloads</string>
 
 </resources>

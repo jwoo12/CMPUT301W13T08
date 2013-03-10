@@ -16,7 +16,6 @@ import android.os.Bundle;
  *
  */
 
-
 public class SearchResult extends TitleBarOverride {
 	
 	@Override

@@ -20,9 +20,6 @@ import com.foodbook.onlinemanager.OnlineSearch;
 	 */
 public class TitleBarOverride extends Activity {
 	
-	
-	
-
 	RecipeBook myRecipeBook;
 	Fridge myFridge;
 	

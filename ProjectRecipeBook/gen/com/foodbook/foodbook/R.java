@@ -27,13 +27,13 @@ public final class R {
         public static final int location_web_site=0x7f020007;
     }
     public static final class id {
-        public static final int Button01=0x7f08002a;
+        public static final int Button01=0x7f08002b;
         public static final int LinearLayout1=0x7f080006;
-        public static final int LinearLayout2=0x7f080017;
-        public static final int ListView1=0x7f080014;
-        public static final int authorLayout=0x7f080018;
-        public static final int categoryLayout=0x7f08001e;
-        public static final int descLayout=0x7f08001b;
+        public static final int LinearLayout2=0x7f08000d;
+        public static final int ListView1=0x7f080016;
+        public static final int authorLayout=0x7f080019;
+        public static final int categoryLayout=0x7f08001f;
+        public static final int descLayout=0x7f08001c;
         public static final int editIcon=0x7f080003;
         public static final int editRecipeCategory=0x7f080008;
         public static final int editRecipeDesc=0x7f080007;
@@ -41,40 +41,41 @@ public final class R {
         public static final int editRecipeInst=0x7f08000a;
         public static final int editRecipeName=0x7f080004;
         public static final int editRecipeSaveButton=0x7f08000b;
-        public static final int foodbookTitleLabel=0x7f080012;
+        public static final int foodbookTitleLabel=0x7f080014;
         public static final int fridgeList=0x7f080002;
         public static final int fridgeSeeWhatICanMake=0x7f080000;
-        public static final int ingredientsLayout=0x7f080021;
-        public static final int instLayout=0x7f080024;
-        public static final int linearLayout1=0x7f080013;
-        public static final int menu1=0x7f08002b;
-        public static final int menu_makeRecipe=0x7f08002d;
-        public static final int menu_myRecipe=0x7f08002c;
-        public static final int menu_postRecipe=0x7f08002e;
-        public static final int menu_searchOnline=0x7f08002f;
+        public static final int ingredientsLayout=0x7f080022;
+        public static final int instLayout=0x7f080025;
+        public static final int linearLayout1=0x7f080015;
+        public static final int menu1=0x7f08002c;
+        public static final int menu_makeRecipe=0x7f08002e;
+        public static final int menu_myRecipe=0x7f08002d;
+        public static final int menu_postRecipe=0x7f08002f;
+        public static final int menu_searchOnline=0x7f080030;
         public static final int myFridgeAddButton=0x7f080001;
-        public static final int otherButtons_to_be_deleted=0x7f080029;
-        public static final int quickContactBadge1=0x7f080015;
-        public static final int recipeDetails_author=0x7f08001a;
-        public static final int recipeDetails_authorLabel=0x7f080019;
-        public static final int recipeDetails_category=0x7f080020;
-        public static final int recipeDetails_categoryLabel=0x7f08001f;
-        public static final int recipeDetails_desc=0x7f08001d;
-        public static final int recipeDetails_descLabel=0x7f08001c;
-        public static final int recipeDetails_foodName=0x7f080016;
-        public static final int recipeDetails_ingredients=0x7f080023;
-        public static final int recipeDetails_ingredientsLabel=0x7f080022;
-        public static final int recipeDetails_instructions=0x7f080026;
-        public static final int recipeDetails_instructionsLabel=0x7f080025;
-        public static final int recipeDetails_shareButton=0x7f080028;
-        public static final int recipeDetails_shareButtonLayout=0x7f080027;
-        public static final int recipebookTabHost=0x7f08000c;
+        public static final int otherButtons_to_be_deleted=0x7f08002a;
+        public static final int quickContactBadge1=0x7f080017;
+        public static final int recipeBookAllButton=0x7f08000e;
+        public static final int recipeBookDownloadsButton=0x7f080010;
+        public static final int recipeBookLayout=0x7f08000c;
+        public static final int recipeBookList=0x7f080011;
+        public static final int recipeBookMineButton=0x7f08000f;
+        public static final int recipeDetails_author=0x7f08001b;
+        public static final int recipeDetails_authorLabel=0x7f08001a;
+        public static final int recipeDetails_category=0x7f080021;
+        public static final int recipeDetails_categoryLabel=0x7f080020;
+        public static final int recipeDetails_desc=0x7f08001e;
+        public static final int recipeDetails_descLabel=0x7f08001d;
+        public static final int recipeDetails_foodName=0x7f080018;
+        public static final int recipeDetails_ingredients=0x7f080024;
+        public static final int recipeDetails_ingredientsLabel=0x7f080023;
+        public static final int recipeDetails_instructions=0x7f080027;
+        public static final int recipeDetails_instructionsLabel=0x7f080026;
+        public static final int recipeDetails_shareButton=0x7f080029;
+        public static final int recipeDetails_shareButtonLayout=0x7f080028;
         public static final int scrollView1=0x7f080005;
-        public static final int searchBar=0x7f080010;
-        public static final int searchButton=0x7f080011;
-        public static final int tab1=0x7f08000d;
-        public static final int tab2=0x7f08000e;
-        public static final int tab3=0x7f08000f;
+        public static final int searchBar=0x7f080012;
+        public static final int searchButton=0x7f080013;
     }
     public static final class layout {
         public static final int activity_main=0x7f030000;
@@ -90,6 +91,7 @@ public final class R {
     }
     public static final class string {
         public static final int add=0x7f040006;
+        public static final int all=0x7f040024;
         public static final int app_name=0x7f040000;
         public static final int author=0x7f04000d;
         public static final int author_name=0x7f04000c;
@@ -97,6 +99,7 @@ public final class R {
         public static final int category_here=0x7f040013;
         public static final int desc=0x7f04000e;
         public static final int desc_here=0x7f04000f;
+        public static final int downloads=0x7f040026;
         public static final int edit_recipe=0x7f04001e;
         public static final int emptyString=0x7f04001a;
         public static final int food_name=0x7f04000b;
@@ -107,6 +110,7 @@ public final class R {
         public static final int local_recipe_book_title=0x7f040009;
         public static final int manage_pic=0x7f040019;
         public static final int menu_settings=0x7f040002;
+        public static final int mine=0x7f040025;
         public static final int myFridgeTitleBar=0x7f040005;
         public static final int new_recipe=0x7f04001d;
         public static final int online_search=0x7f04001f;

@@ -35,12 +35,11 @@ public class RecipeBook {
 	*/
 	public RecipeBook() {
 		
-		
-		
 		mine = new ArrayList<Recipe>();
 		downloads = new ArrayList<Recipe>();
 		this.userid = "dsfuabsiuf3528fb923r72b3eiw";
 		this.username = "example name";
+		
 	}
 	
 	public ArrayList<Recipe> getMine() {
@@ -55,7 +54,7 @@ public class RecipeBook {
 		return downloads;
 	}
 	
-	public ArrayList<String> convertRecipeBookToStringArray(ArrayList<Recipe> inputArray) {
+	public static ArrayList<String> convertRecipeBookToStringArray(ArrayList<Recipe> inputArray) {
 		
 		ArrayList<String> outputArray = new ArrayList<String>();
 		
@@ -84,7 +83,8 @@ public class RecipeBook {
 		
 		// do you guys think sorting is something that has to be done here? - Jaeseo
 		
-		ArrayList<Recipe> combinedRecipeBook = this.mine;
+		ArrayList<Recipe> combinedRecipeBook = new ArrayList<Recipe>();
+		combinedRecipeBook.addAll(this.mine);
 		combinedRecipeBook.addAll(this.downloads);
 		
 		return combinedRecipeBook;
@@ -123,8 +123,6 @@ public class RecipeBook {
 	*/
 	public void editRecipe(String recipename, String recipeDescriptions, String recipeinstructions, ArrayList<String> ingredients,
 			ArrayList<String> category, int position) {
-		
-		
 		
 	}
 	
