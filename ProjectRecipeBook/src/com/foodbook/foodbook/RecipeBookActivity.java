@@ -4,12 +4,14 @@ import java.util.ArrayList;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 /**
 	 * <p> This class is an activity class for local recipes. </p>
@@ -89,20 +91,21 @@ public class RecipeBookActivity extends TitleBarOverride {
 				default:
 					break;
 				}
-				ArrayList<String> recipeInfo = FridgeActivity.myRecipeBook.getRecipeInfo(recipeid);
-				/*
-				Intent recipeDetailsIntent = new Intent();
-				recipeDetailsIntent.setClass(getApplicationContext(), RecipeDetailsActivity.class);
 				
-				recipeDetailsIntent.putExtra("recipeid", recipeInfo.get(0));
-				recipeDetailsIntent.putExtra("name", recipeInfo.get(1));
-				recipeDetailsIntent.putExtra("author", recipeInfo.get(2));
-				recipeDetailsIntent.putExtra("descriptions", recipeInfo.get(3));
-				recipeDetailsIntent.putExtra("instructions", recipeInfo.get(4));
-				recipeDetailsIntent.putExtra("ingredients", recipeInfo.get(5));
-				recipeDetailsIntent.putExtra("category", recipeInfo.get(6));
-				startActivity(recipeDetailsIntent);
-				*/
+				ArrayList<String> recipeInfo = FridgeActivity.myRecipeBook.getRecipeInfo(recipeid);
+				if (recipeInfo != null) {
+					Intent recipeDetailsIntent = new Intent();
+					recipeDetailsIntent.setClass(getApplicationContext(), RecipeDetailsActivity.class);
+					
+					recipeDetailsIntent.putExtra("recipeid", recipeInfo.get(0));
+					recipeDetailsIntent.putExtra("name", recipeInfo.get(1));
+					recipeDetailsIntent.putExtra("author", recipeInfo.get(2));
+					recipeDetailsIntent.putExtra("descriptions", recipeInfo.get(3));
+					recipeDetailsIntent.putExtra("instructions", recipeInfo.get(4));
+					recipeDetailsIntent.putExtra("ingredients", recipeInfo.get(5));
+					recipeDetailsIntent.putExtra("category", recipeInfo.get(6));
+					startActivity(recipeDetailsIntent);
+				}
 			}
 
 		});

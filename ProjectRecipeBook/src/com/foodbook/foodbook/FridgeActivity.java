@@ -39,8 +39,6 @@ import android.widget.Toast;
 public class FridgeActivity extends TitleBarOverride {
 
 	public static RecipeBook myRecipeBook;
-	static String userid = "temporary_user_id";
-	static String username = "tmp_username";
 	
 	private Fridge myFridge;
 	private Context context;
@@ -60,14 +58,10 @@ public class FridgeActivity extends TitleBarOverride {
 		myFridge = new Fridge(context);
 		myRecipeBook = new RecipeBook();
 		
-		myRecipeBook.addRecipe("mine1", "", "", null, null);
-		myRecipeBook.addRecipe("mine2", "", "", null, null);
-		myRecipeBook.addRecipe("mine3", "", "", null, null);
+		myRecipeBook.addRecipe("mine1", "descriptions\nline2!!!!", "1. boil water\n2. do something\n3.blabla", new ArrayList<String>(), new ArrayList<String>());
 		
-		Recipe down1 = new Recipe("down1", "", "", null, null, userid, username);
+		Recipe down1 = new Recipe("down1", "", "", new ArrayList<String>(), new ArrayList<String>(), myRecipeBook.getUserid(), myRecipeBook.getAuthor());
 		myRecipeBook.downloads.add(down1);
-		Recipe down2 = new Recipe("down21", "", "", null, null, userid, username);
-		myRecipeBook.downloads.add(down2);
 		
 		// setup List View
 		listView = (ListView) findViewById(R.id.fridgeList);

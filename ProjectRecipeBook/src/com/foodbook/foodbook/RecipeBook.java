@@ -2,6 +2,8 @@ package com.foodbook.foodbook;
 
 import java.util.ArrayList;
 
+import android.util.Log;
+
 	/**
 	 * <p> RecipeBook is a collection of local and downloaded recipes. </p>
 	 * 
@@ -36,7 +38,7 @@ public class RecipeBook {
 		mine = new ArrayList<Recipe>();
 		downloads = new ArrayList<Recipe>();
 		this.userid = "dsfuabsiuf3528fb923r72b3eiw";
-		this.author = "example name";
+		this.author = "i am the author";
 		
 	}
 	
@@ -151,17 +153,6 @@ public class RecipeBook {
 		
 	}
 	
-	public boolean doesThisRecipeExist(String recipeid) {
-		
-		for (Recipe recipe : this.getRecipeBook()) {
-			if (recipe.getRecipeid() == recipeid) {
-				return true;
-			}
-		}
-		
-		return false;
-	}
-
 	public ArrayList<String> getRecipeInfo(String recipeid) {
 		ArrayList<String> outputArray = new ArrayList<String>();
 		for (Recipe recipe : this.getRecipeBook()) {
@@ -173,6 +164,7 @@ public class RecipeBook {
 				outputArray.add(recipe.getRecipeinstructions());
 				outputArray.add(recipe.getIngredientsString());
 				outputArray.add(recipe.getCategoryString());
+				return outputArray;
 			}
 		}
 		return null;
