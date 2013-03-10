@@ -90,13 +90,19 @@ public class RecipeBookActivity extends TitleBarOverride {
 					break;
 				}
 				ArrayList<String> recipeInfo = FridgeActivity.myRecipeBook.getRecipeInfo(recipeid);
-				openRecipeDetails(recipeInfo);
-			}
-			
-			public void openRecipeDetails(ArrayList<String> recipeInfo) {
+				/*
 				Intent recipeDetailsIntent = new Intent();
 				recipeDetailsIntent.setClass(getApplicationContext(), RecipeDetailsActivity.class);
+				
+				recipeDetailsIntent.putExtra("recipeid", recipeInfo.get(0));
+				recipeDetailsIntent.putExtra("name", recipeInfo.get(1));
+				recipeDetailsIntent.putExtra("author", recipeInfo.get(2));
+				recipeDetailsIntent.putExtra("descriptions", recipeInfo.get(3));
+				recipeDetailsIntent.putExtra("instructions", recipeInfo.get(4));
+				recipeDetailsIntent.putExtra("ingredients", recipeInfo.get(5));
+				recipeDetailsIntent.putExtra("category", recipeInfo.get(6));
 				startActivity(recipeDetailsIntent);
+				*/
 			}
 
 		});

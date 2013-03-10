@@ -163,9 +163,19 @@ public class RecipeBook {
 	}
 
 	public ArrayList<String> getRecipeInfo(String recipeid) {
-		// TODO
-		ArrayList<String> outputArray = null;
-		return outputArray;
+		ArrayList<String> outputArray = new ArrayList<String>();
+		for (Recipe recipe : this.getRecipeBook()) {
+			if (recipe.getRecipeid() == recipeid) {
+				outputArray.add(recipeid);
+				outputArray.add(recipe.getRecipename());
+				outputArray.add(recipe.getauthor());
+				outputArray.add(recipe.getRecipeDescriptions());
+				outputArray.add(recipe.getRecipeinstructions());
+				outputArray.add(recipe.getIngredientsString());
+				outputArray.add(recipe.getCategoryString());
+			}
+		}
+		return null;
 	}
 	
 	
