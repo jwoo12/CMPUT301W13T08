@@ -2,6 +2,8 @@ package com.foodbook.foodbook;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
+import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
@@ -57,7 +59,36 @@ public class RecipeDetailsActivity extends TitleBarOverride {
 		categoryField = (TextView) findViewById(R.id.recipeDetails_category);
 		
 		shareLayout = (RelativeLayout) findViewById(R.id.recipeDetails_shareButtonLayout);
+		
 		shareButton = (Button) findViewById(R.id.recipeDetails_shareButton);
+		
+		shareButton.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				
+				Intent emailIntent = new Intent(android.content.Intent.ACTION_SEND);
+
+				String[] recipients = new String[]{"my@email.com", "",};
+
+				emailIntent.putExtra(android.content.Intent.EXTRA_EMAIL, recipients);
+
+				emailIntent.putExtra(android.content.Intent.EXTRA_SUBJECT, "Test");
+
+				emailIntent.putExtra(android.content.Intent.EXTRA_TEXT, "This is email's message");
+
+				emailIntent.setType("text/plain");
+
+				startActivity(Intent.createChooser(emailIntent, "Send mail..."));
+
+				finish();
+				
+				
+			}
+		});
+        
+		
+		
 		
 		updateTextViews();
 	}
