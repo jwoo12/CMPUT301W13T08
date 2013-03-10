@@ -22,7 +22,7 @@ public class SearchResult extends TitleBarOverride {
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.search_result);
+		setContentView(R.layout.online_search_result);
 	}
 	
 }

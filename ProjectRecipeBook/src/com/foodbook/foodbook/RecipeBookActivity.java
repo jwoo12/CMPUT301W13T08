@@ -35,7 +35,6 @@ public class RecipeBookActivity extends TitleBarOverride {
 		showMineOnly = in.getBooleanExtra("showMineOnly", false);
 
 		tabHost = (TabHost) findViewById(R.id.recipebookTabHost);
-		list_all = (ListView) findViewById(R.id.all_list);
 		
 		// setup the tabs
 		//... do things here
