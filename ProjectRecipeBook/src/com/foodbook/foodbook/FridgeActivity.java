@@ -62,7 +62,7 @@ public class FridgeActivity extends TitleBarOverride {
 		
 		Recipe down1 = new Recipe("down1", "", "", new ArrayList<String>(), new ArrayList<String>(), myRecipeBook.getUserid(), myRecipeBook.getAuthor());
 		myRecipeBook.downloads.add(down1);
-		
+		 
 		// setup List View
 		listView = (ListView) findViewById(R.id.fridgeList);
 		updateListView(myFridge, listView);
