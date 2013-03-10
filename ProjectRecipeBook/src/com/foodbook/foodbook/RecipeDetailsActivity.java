@@ -62,10 +62,20 @@ public class RecipeDetailsActivity extends TitleBarOverride {
 		
 		shareButton = (Button) findViewById(R.id.recipeDetails_shareButton);
 		
+		
+		
 		shareButton.setOnClickListener(new OnClickListener() {
 			
 			@Override
 			public void onClick(View v) {
+				
+				
+				String formatRecipe = "Recipe: " + name + "\n\n" + "Ingredients: " + "\n" 
+								+ ingredients + "\n\n" + "Instructions: " + "\n" + instructions 
+								+ "\n\n" + "Description: " + "\n" + descriptions + "\n" 
+								+ "Category: " + category + "\n\n" +
+								"Author: " + author + "\n";
+				
 				
 				Intent emailIntent = new Intent(android.content.Intent.ACTION_SEND);
 
@@ -73,9 +83,9 @@ public class RecipeDetailsActivity extends TitleBarOverride {
 
 				emailIntent.putExtra(android.content.Intent.EXTRA_EMAIL, recipients);
 
-				emailIntent.putExtra(android.content.Intent.EXTRA_SUBJECT, "Test");
+				emailIntent.putExtra(android.content.Intent.EXTRA_SUBJECT, FridgeActivity.myRecipeBook.getAuthor() + " shared " + name + " with you");
 
-				emailIntent.putExtra(android.content.Intent.EXTRA_TEXT, "This is email's message");
+				emailIntent.putExtra(android.content.Intent.EXTRA_TEXT, formatRecipe);
 
 				emailIntent.setType("text/plain");
 
