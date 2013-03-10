@@ -23,7 +23,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:launchMode="singleInstance" 
+            android:launchMode="singleTask"
             android:name="com.foodbook.foodbook.RecipeBookActivity"
             android:label="@string/local_recipe_book_title" >
             <intent-filter>

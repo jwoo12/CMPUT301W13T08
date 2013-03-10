@@ -67,6 +67,11 @@ public class RecipeBookActivity extends TitleBarOverride {
 			}
 		});
 		
+	}
+	
+	@Override
+	public void onResume() {
+		super.onResume();
 		in = getIntent();
 		showMineOnly = in.getBooleanExtra("showMineOnly", false);
 		if (!showMineOnly) {
@@ -76,13 +81,12 @@ public class RecipeBookActivity extends TitleBarOverride {
 			currentTab = 2; // set the current tab to "Mine"
 		}
 		refreshTabs();
-		
 	}
 	
 	@Override
-	public void onResume() {
-		super.onResume();
-		refreshTabs();
+	public void onPause() {
+		super.onPause();
+		
 	}
 	
 	private void reloadRecipeBook() {
