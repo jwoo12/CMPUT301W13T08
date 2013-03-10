@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Button;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 public class RecipeDetailsActivity extends TitleBarOverride {
@@ -25,7 +26,7 @@ public class RecipeDetailsActivity extends TitleBarOverride {
 	private TextView ingredientsField;
 	private TextView categoryField;
 	
-	private LinearLayout shareLayout;
+	private RelativeLayout shareLayout;
 	private Button shareButton;
 
 	@Override
@@ -55,7 +56,7 @@ public class RecipeDetailsActivity extends TitleBarOverride {
 		ingredientsField = (TextView) findViewById(R.id.recipeDetails_ingredients);
 		categoryField = (TextView) findViewById(R.id.recipeDetails_category);
 		
-		shareLayout = (LinearLayout) findViewById(R.id.recipeDetails_shareButtonLayout);
+		shareLayout = (RelativeLayout) findViewById(R.id.recipeDetails_shareButtonLayout);
 		shareButton = (Button) findViewById(R.id.recipeDetails_shareButton);
 		
 		updateTextViews();
