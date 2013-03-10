@@ -30,15 +30,13 @@ public class RecipeBookActivity extends TitleBarOverride {
 	private ArrayList<String> sourceMine;
 	private ArrayList<String> sourceDownloads;
 	
+	private int currentTab;
+	
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.local_recipe_book);
 
-		in = getIntent();
-		showMineOnly = in.getBooleanExtra("showMineOnly", false);
-		
-		
 		listView = (ListView) findViewById(R.id.recipeBookList);
 		Button allButton = (Button) findViewById(R.id.recipeBookAllButton);
 		Button mineButton = (Button) findViewById(R.id.recipeBookMineButton);
@@ -48,40 +46,43 @@ public class RecipeBookActivity extends TitleBarOverride {
 			
 			@Override
 			public void onClick(View v) {
-				reloadRecipeBook();
-				updateRecipeList(sourceAll, listView);
+				currentTab = 1;
+				refreshTabs();
 			}
 		});
 		mineButton.setOnClickListener(new OnClickListener() {
 			
 			@Override
 			public void onClick(View v) {
-				reloadRecipeBook();
-				updateRecipeList(sourceMine, listView);
+				currentTab = 2;
+				refreshTabs();
 			}
 		});
 		downloadsButton.setOnClickListener(new OnClickListener() {
 			
 			@Override
 			public void onClick(View v) {
-				reloadRecipeBook();
-				updateRecipeList(sourceDownloads, listView);
+				currentTab = 3;
+				refreshTabs();
 			}
 		});
 		
-		allButton.callOnClick();
-		
-		if (showMineOnly) {
-			mineButton.callOnClick();
+		in = getIntent();
+		showMineOnly = in.getBooleanExtra("showMineOnly", false);
+		if (!showMineOnly) {
+			currentTab = 1; // set the current tab to "All"
 		}
+		else {
+			currentTab = 2; // set the current tab to "Mine"
+		}
+		refreshTabs();
 		
 	}
 	
 	@Override
 	public void onResume() {
 		super.onResume();
-		reloadRecipeBook();
-		// TODO update the list
+		refreshTabs();
 	}
 	
 	private void reloadRecipeBook() {
@@ -90,9 +91,26 @@ public class RecipeBookActivity extends TitleBarOverride {
 		sourceDownloads = RecipeBook.convertRecipeBookToStringArray(FridgeActivity.myRecipeBook.getDownloads());
 	}
 	
-	private void updateRecipeList(ArrayList<String> sourceList, ListView targetListView) {
+	private void updateListView(ArrayList<String> sourceList, ListView targetListView) {
 		ArrayAdapter<String> adapter = new ArrayAdapter<String>(getApplicationContext(), android.R.layout.simple_list_item_1, sourceList);
 		targetListView.setAdapter(adapter);
+	}
+	
+	private void refreshTabs(){
+		reloadRecipeBook();
+		switch (currentTab) {
+		case 1:
+			updateListView(sourceAll, listView);
+			break;
+		case 2:
+			updateListView(sourceMine, listView);
+			break;
+		case 3:
+			updateListView(sourceDownloads, listView);
+			break;
+		default:
+			break;
+		}
 	}
 	
 }

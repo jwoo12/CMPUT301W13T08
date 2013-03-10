@@ -20,8 +20,6 @@ public class MakeRecipeActivity extends EditRecipeActivity {
 	@Override
 	public void saveButtonClicked() {
 		
-		
-		
 		// Add to the recipe book
 		FridgeActivity.myRecipeBook.addRecipe(name, descriptions, instructions, ingredientsArrayList, categoryArrayList);
 		

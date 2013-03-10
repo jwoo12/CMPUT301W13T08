@@ -66,9 +66,4 @@ public class TitleBarOverride extends Activity {
 	    return true;
 	  } 
     
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent returnedIntent) {
-    	//TODO
-    }
-    
 }

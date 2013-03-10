@@ -20,8 +20,6 @@ import java.util.ArrayList;
 
 public class RecipeBook {
 
-	
-	
 	ArrayList<Recipe> mine;
 	ArrayList<Recipe> downloads;
 	private String userid; // TODO this needs to be changed
