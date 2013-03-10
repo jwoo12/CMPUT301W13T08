@@ -21,11 +21,10 @@ public final class R {
         public static final int collections_new_label=0x7f020001;
         public static final int collections_view_as_list=0x7f020002;
         public static final int content_edit=0x7f020003;
-        public static final int foodsearch=0x7f020004;
-        public static final int fridge=0x7f020005;
-        public static final int ic_action_search=0x7f020006;
-        public static final int ic_launcher=0x7f020007;
-        public static final int location_web_site=0x7f020008;
+        public static final int fridge=0x7f020004;
+        public static final int ic_action_search=0x7f020005;
+        public static final int ic_launcher=0x7f020006;
+        public static final int location_web_site=0x7f020007;
     }
     public static final class id {
         public static final int Button01=0x7f08002a;
@@ -49,14 +48,14 @@ public final class R {
         public static final int ingredientsLayout=0x7f080021;
         public static final int instLayout=0x7f080024;
         public static final int linearLayout1=0x7f080013;
-        public static final int listView1=0x7f08002e;
-        public static final int list_downloads=0x7f08002c;
-        public static final int list_mine=0x7f08002d;
-        public static final int menu1=0x7f08002f;
-        public static final int menu_makeRecipe=0x7f080031;
-        public static final int menu_myRecipe=0x7f080030;
-        public static final int menu_postRecipe=0x7f080032;
-        public static final int menu_searchOnline=0x7f080033;
+        public static final int listView1=0x7f080030;
+        public static final int list_downloads=0x7f08002d;
+        public static final int list_mine=0x7f08002e;
+        public static final int menu1=0x7f080031;
+        public static final int menu_makeRecipe=0x7f080033;
+        public static final int menu_myRecipe=0x7f080032;
+        public static final int menu_postRecipe=0x7f080034;
+        public static final int menu_searchOnline=0x7f080035;
         public static final int myFridgeAddButton=0x7f080001;
         public static final int otherButtons_to_be_deleted=0x7f080029;
         public static final int quickContactBadge1=0x7f080015;
@@ -77,9 +76,11 @@ public final class R {
         public static final int scrollView1=0x7f080005;
         public static final int searchBar=0x7f080010;
         public static final int searchButton=0x7f080011;
+        public static final int seekBar1=0x7f08002f;
         public static final int tab1=0x7f08000d;
         public static final int tab2=0x7f08000e;
         public static final int tab3=0x7f08000f;
+        public static final int toggleButton1=0x7f08002c;
     }
     public static final class layout {
         public static final int activity_main=0x7f030000;

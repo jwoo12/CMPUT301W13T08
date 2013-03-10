@@ -54,6 +54,18 @@ public class RecipeBook {
 	public ArrayList<Recipe> getDownloads() {
 		return downloads;
 	}
+	
+	public ArrayList<String> convertRecipeBookToStringArray(ArrayList<Recipe> inputArray) {
+		
+		ArrayList<String> outputArray = new ArrayList<String>();
+		
+		for (Recipe recipe : inputArray) {
+			outputArray.add(recipe.getRecipename());
+		}
+		
+		return outputArray;
+	}
+	
 
 	public void setDownloads(ArrayList<Recipe> downloads) {
 		this.downloads = downloads;
