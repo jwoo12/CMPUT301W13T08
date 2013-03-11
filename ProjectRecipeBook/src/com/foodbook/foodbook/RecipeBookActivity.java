@@ -99,7 +99,6 @@ public class RecipeBookActivity extends TitleBarOverride {
 				}
 			}
 
-
 		});
 	}
 	

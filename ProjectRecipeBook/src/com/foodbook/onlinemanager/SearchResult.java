@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ListView;
 
@@ -50,6 +51,10 @@ public class SearchResult extends TitleBarOverride {
 		localResults = in.getStringArrayListExtra("localResults");
 		localID = in.getStringArrayListExtra("localID");
 		
+		
+		combinedResults.addAll(localResults);
+		combinedID.addAll(localID);
+		
 		resultListView = (ListView) findViewById(R.id.searchResults_listview);
 		resultListView.setOnItemClickListener(new OnItemClickListener() {
 
@@ -77,6 +82,15 @@ public class SearchResult extends TitleBarOverride {
 		setIntent(newIntent);
 	}
 	
+	@Override
+	public void onResume() {
+		super.onResume();
+		updateListView(combinedResults, resultListView);
+	}
 	
+	private void updateListView(ArrayList<String> sourceList, ListView targetListView) {
+		ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, sourceList);
+		targetListView.setAdapter(adapter);
+	}
 	
 }
