@@ -64,8 +64,12 @@ public class FridgeActivity extends TitleBarOverride {
 
 		myFridge = new Fridge(context);
 		myFridge.loadFromFile(getApplicationContext());
-
-		myRecipeBook = RecipeBookIO.loadFromFile(getApplicationContext());
+		
+		myRecipeBook = new RecipeBook();
+		boolean recipeLoadResultOK = myRecipeBook.loadFromFile(getApplicationContext());
+		if (!recipeLoadResultOK) {
+			askForNewName(true);
+		}
 
 		// setup List View
 		listView = (ListView) findViewById(R.id.fridgeList);
@@ -212,7 +216,7 @@ public class FridgeActivity extends TitleBarOverride {
 	public void onPause() {
 		super.onPause();
 		myFridge.saveToFile(getApplicationContext());
-		RecipeBookIO.saveToFile(getApplicationContext(), myRecipeBook);
+		myRecipeBook.saveToFile(getApplicationContext());
 	}
 
 }

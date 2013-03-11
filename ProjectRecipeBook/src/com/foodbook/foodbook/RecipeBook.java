@@ -1,54 +1,73 @@
 package com.foodbook.foodbook;
 
+import java.io.EOFException;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.io.Serializable;
+import java.math.BigInteger;
+import java.security.SecureRandom;
 import java.util.ArrayList;
 
-	/**
-	 * <p> RecipeBook is a collection of local and downloaded recipes. </p>
-	 * 
-	 * <p> This class is the centre of the Model. 
-	 *     It has the collection of local (and downloaded) recipes, and class methods associated with it. </p>
-	 *  
-	 * 
-	 * @see Recipe
-	 * 
-	 * @author Jaeseo Park (jaeseo1), Jasmine Woo (jwoo), Nhu Bui (nbui), Robert Janes (rjanes)
-	 * 
-	 * 
-	 * 
-	 * 
-	 */
+import android.content.Context;
+import android.util.Log;
+
+/**
+ * <p>
+ * RecipeBook is a collection of local and downloaded recipes.
+ * </p>
+ * 
+ * <p>
+ * This class is the centre of the Model. It has the collection of local (and
+ * downloaded) recipes, and class methods associated with it.
+ * </p>
+ * 
+ * 
+ * @see Recipe
+ * 
+ * @author Jaeseo Park (jaeseo1), Jasmine Woo (jwoo), Nhu Bui (nbui), Robert
+ *         Janes (rjanes)
+ * 
+ * 
+ * 
+ * 
+ */
 
 @SuppressWarnings("serial")
 public class RecipeBook implements Serializable {
 
-	ArrayList<Recipe> mine;
-	ArrayList<Recipe> downloads;
+	private ArrayList<Recipe> mine;
+	private ArrayList<Recipe> downloads;
 	private String userid;
 	private String author;
-	
+
+	public static final String RecipeBookFilename = "recipe.sav";
+
 	/**
-	* This is a constructor method for RecipeBook. It creates new ArrayList of Recipe.
-	* 
-	* 
-	* 
-	*/
+	 * This is a constructor method for RecipeBook. It creates new ArrayList of
+	 * Recipe.
+	 * 
+	 * 
+	 * 
+	 */
 	public RecipeBook() {
-		
-		mine = new ArrayList<Recipe>();
-		downloads = new ArrayList<Recipe>();
-		this.userid = "dsfuabsiuf3528fb923r72b3eiw";
-		this.author = "i am the author";
-		
+
+		this.mine = new ArrayList<Recipe>();
+		this.downloads = new ArrayList<Recipe>();
+		this.userid = this.generateNewUserid();
+		this.author = "defaultAuthor";
+		Log.v("newRecipeBook", userid);
+
 	}
-	
+
 	/**
 	 * 
 	 * "Getter" method to return user created recipes
 	 * 
 	 * @return a list of user created recipes
 	 */
-	
+
 	public ArrayList<Recipe> getMine() {
 		return mine;
 	}
@@ -57,10 +76,10 @@ public class RecipeBook implements Serializable {
 	 * 
 	 * "Setter" method to assign user created recipes
 	 * 
-	 * @param mine a list of user created recipes
+	 * @param mine
+	 *            a list of user created recipes
 	 */
-	
-	
+
 	public void setMine(ArrayList<Recipe> mine) {
 		this.mine = mine;
 	}
@@ -71,114 +90,122 @@ public class RecipeBook implements Serializable {
 	 * 
 	 * @return a list of downloaded recipes
 	 */
-	
-	
+
 	public ArrayList<Recipe> getDownloads() {
 		return downloads;
 	}
-	
+
 	/**
 	 * 
 	 * Takes a given list of recipes and converts them to an array of strings
 	 * 
-	 * @param inputArray a list of recipes to be converted to strings
+	 * @param inputArray
+	 *            a list of recipes to be converted to strings
 	 * @return outputArray an ArrayList of strings representing recipes
 	 * 
 	 * 
 	 */
-	
-	
-	public static ArrayList<String> convertRecipeBookToStringArray(ArrayList<Recipe> inputArray) {
-		
+
+	public static ArrayList<String> convertRecipeBookToStringArray(
+			ArrayList<Recipe> inputArray) {
+
 		ArrayList<String> outputArray = new ArrayList<String>();
-		
+
 		for (Recipe recipe : inputArray) {
 			outputArray.add(recipe.getRecipename());
 		}
-		
+
 		return outputArray;
 	}
-	
-	
+
 	/**
 	 * 
 	 * Returns the identification code for a recipe
 	 * 
 	 * 
-	 * @param inputArray recipe list
+	 * @param inputArray
+	 *            recipe list
 	 * @return a list of recipes
 	 */
-	
-	
+
 	public static ArrayList<String> getAllRecipeid(ArrayList<Recipe> inputArray) {
 		ArrayList<String> outputArrayList = new ArrayList<String>();
-		
+
 		for (Recipe recipe : inputArray) {
 			outputArrayList.add(recipe.getRecipeid());
 		}
-		
+
 		return outputArrayList;
 	}
-	
+
 	/**
 	 * 
 	 * "Getter" method for downloaded recipes
 	 * 
-	 * @param downloads a list of downloaded recipes
+	 * @param downloads
+	 *            a list of downloaded recipes
 	 */
 
 	public void setDownloads(ArrayList<Recipe> downloads) {
 		this.downloads = downloads;
 	}
+
 	/**
-	* This is a getter for the entire RecipeBook.
-	* Since there are two recipe books ("mine" and "downloaded"),
-	* this method will simply combine them and return the resulting array.
-	* 
-	* 
-	* @return List of downloaded and local Recipes 
-	*/
+	 * This is a getter for the entire RecipeBook. Since there are two recipe
+	 * books ("mine" and "downloaded"), this method will simply combine them and
+	 * return the resulting array.
+	 * 
+	 * 
+	 * @return List of downloaded and local Recipes
+	 */
 	public ArrayList<Recipe> getRecipeBook() {
-		
-		// do you guys think sorting is something that has to be done here? - Jaeseo
-		
+
+		// do you guys think sorting is something that has to be done here? -
+		// Jaeseo
+
 		ArrayList<Recipe> combinedRecipeBook = new ArrayList<Recipe>();
 		combinedRecipeBook.addAll(this.mine);
 		combinedRecipeBook.addAll(this.downloads);
-		
+
 		return combinedRecipeBook;
-		
+
 	}
-	
+
 	/**
-	* This function receives details of a recipe, and creates/adds a new recipe to the local RecipeBook.
-	* 
-	* @param recipename name of recipe
-	* @param recipeDescriptions description of recipe
-	* @param recipeinstructions recipe instructions
-	* @param ingredients list of ingredients
-	* @param category genre
-	* 
-	*/
-	
-	public String addRecipe(String recipename,
-			String recipeDescriptions,
-			String recipeinstructions,
-			ArrayList<String> ingredients,
+	 * This function receives details of a recipe, and creates/adds a new recipe
+	 * to the local RecipeBook.
+	 * 
+	 * @param recipename
+	 *            name of recipe
+	 * @param recipeDescriptions
+	 *            description of recipe
+	 * @param recipeinstructions
+	 *            recipe instructions
+	 * @param ingredients
+	 *            list of ingredients
+	 * @param category
+	 *            genre
+	 * 
+	 */
+
+	public String addRecipe(String recipename, String recipeDescriptions,
+			String recipeinstructions, ArrayList<String> ingredients,
 			ArrayList<String> category) {
-		
-		Recipe newRecipe = new Recipe(recipename, recipeDescriptions, recipeinstructions, ingredients, category, this.userid, this.author);
+
+		Recipe newRecipe = new Recipe(recipename, recipeDescriptions,
+				recipeinstructions, ingredients, category, this.userid,
+				this.author);
 		this.mine.add(newRecipe);
-		
+
 		return newRecipe.getRecipeid();
 	}
-	
+
 	/**
 	 * "getter" method for a userid
 	 * 
 	 * @return userid assigned id
 	 */
-	
+
 	public String getUserid() {
 		return userid;
 	}
@@ -187,49 +214,58 @@ public class RecipeBook implements Serializable {
 	 * 
 	 * "setter" method for a userid
 	 * 
-	 * @param userid id to assign
+	 * @param userid
+	 *            id to assign
 	 */
-	
+
 	public void setUserid(String userid) {
 		this.userid = userid;
 	}
 
 	/**
 	 * 
-	 * "getter" method for a recipe's author 
+	 * "getter" method for a recipe's author
 	 * 
 	 * @return the recipe's author
 	 */
-	
+
 	public String getAuthor() {
 		return author;
 	}
 
-	
 	/**
 	 * "setter" method for a recipe's author
 	 * 
-	 * @param author a string to be assigned to an author
+	 * @param author
+	 *            a string to be assigned to an author
 	 */
-	
+
 	public void setAuthor(String author) {
 		this.author = author;
 	}
 
 	/**
-	* This methods is used to modify existing recipes in the recipe book.
-	* Given the details about the recipe and the recipe ID, this method will apply changes.
-	* @param recipename name of recipe
-	* @param recipeDescriptions description of recipe
-	* @param recipeinstructions recipe instructions
-	* @param ingredients list of ingredients
-	* @param category genre
-	*/
-	
-	public void editRecipe(String recipename, String recipeDescriptions, String recipeinstructions, ArrayList<String> ingredients,
+	 * This methods is used to modify existing recipes in the recipe book. Given
+	 * the details about the recipe and the recipe ID, this method will apply
+	 * changes.
+	 * 
+	 * @param recipename
+	 *            name of recipe
+	 * @param recipeDescriptions
+	 *            description of recipe
+	 * @param recipeinstructions
+	 *            recipe instructions
+	 * @param ingredients
+	 *            list of ingredients
+	 * @param category
+	 *            genre
+	 */
+
+	public void editRecipe(String recipename, String recipeDescriptions,
+			String recipeinstructions, ArrayList<String> ingredients,
 			ArrayList<String> category, String recipeid) {
 		ArrayList<Recipe> combinedList = this.getRecipeBook();
-		for (int i=0; i < combinedList.size(); i++) {
+		for (int i = 0; i < combinedList.size(); i++) {
 			if (combinedList.get(i).getRecipeid().equals(recipeid)) {
 				int offset = i - this.getMine().size();
 				if (offset < 0) {
@@ -238,30 +274,34 @@ public class RecipeBook implements Serializable {
 					this.mine.get(i).setRecipeinstructions(recipeinstructions);
 					this.mine.get(i).setIngredients(ingredients);
 					this.mine.get(i).setCategory(category);
-					this.mine.get(i).setauthor(FridgeActivity.myRecipeBook.getAuthor());
-				}
-				else {
+					this.mine.get(i).setauthor(
+							FridgeActivity.myRecipeBook.getAuthor());
+				} else {
 					this.downloads.get(offset).setRecipename(recipename);
-					this.downloads.get(offset).setRecipeDescriptions(recipeDescriptions);
-					this.downloads.get(offset).setRecipeinstructions(recipeinstructions);
+					this.downloads.get(offset).setRecipeDescriptions(
+							recipeDescriptions);
+					this.downloads.get(offset).setRecipeinstructions(
+							recipeinstructions);
 					this.downloads.get(offset).setIngredients(ingredients);
 					this.downloads.get(offset).setCategory(category);
-					this.downloads.get(offset).setauthor(FridgeActivity.myRecipeBook.getAuthor());
+					this.downloads.get(offset).setauthor(
+							FridgeActivity.myRecipeBook.getAuthor());
 				}
 				return;
 			}
 		}
 	}
-	
+
 	/**
 	 * 
-	 * Converts a recipe to an ArrayList of Strings 
+	 * Converts a recipe to an ArrayList of Strings
 	 * 
 	 * 
-	 * @param recipeid the id of a recipe to be printed
+	 * @param recipeid
+	 *            the id of a recipe to be printed
 	 * @return an Arraylist of strings representing a recipe
 	 */
-	
+
 	public ArrayList<String> getRecipeInfo(String recipeid) {
 		ArrayList<String> outputArray = new ArrayList<String>();
 		for (Recipe recipe : this.getRecipeBook()) {
@@ -279,21 +319,72 @@ public class RecipeBook implements Serializable {
 		}
 		return null;
 	}
-	
+
 	protected void deleteById(String recipeid) {
 		ArrayList<Recipe> combinedList = this.getRecipeBook();
-		for (int i=0; i < combinedList.size(); i++) {
+		for (int i = 0; i < combinedList.size(); i++) {
 			if (combinedList.get(i).getRecipeid().equals(recipeid)) {
 				int offset = i - this.getMine().size();
 				if (offset < 0) {
 					this.mine.remove(i);
-				}
-				else {
+				} else {
 					this.downloads.remove(offset);
 				}
 				return;
 			}
 		}
 	}
+	
+	private String generateNewUserid() {
+		SecureRandom randomKey = new SecureRandom();
+		return (new BigInteger(130, randomKey).toString(32));
+	}
 
+	public boolean saveToFile(Context context) {
+		
+		try{
+			context.deleteFile(RecipeBookFilename);
+            ObjectOutputStream out = new ObjectOutputStream(context.openFileOutput(RecipeBookFilename, Context.MODE_APPEND));
+            out.writeObject(this.getMine());
+            out.writeObject(this.getDownloads());
+            out.writeObject(this.getUserid());
+            out.writeObject(this.getAuthor());
+            out.close();
+            
+            return true;
+            
+        } catch (FileNotFoundException e) { 
+            e.printStackTrace(); 
+        } catch (IOException e) { 
+            e.printStackTrace(); 
+        }
+		
+		return false;
+	}
+
+	@SuppressWarnings("unchecked")
+	public boolean loadFromFile(Context context) {
+		try {
+			ObjectInputStream in = new ObjectInputStream(
+					context.openFileInput(RecipeBookFilename));
+			ArrayList<Recipe> mineIn = (ArrayList<Recipe>) in.readObject();
+			ArrayList<Recipe> downloadsIn = (ArrayList<Recipe>) in.readObject();
+			String useridIn = (String) in.readObject();
+			String authorIn = (String) in.readObject();
+			in.close();
+			this.setMine(mineIn);
+			this.setDownloads(downloadsIn);
+			this.setUserid(useridIn);
+			this.setAuthor(authorIn);
+			
+			return true;
+
+		} catch (EOFException eof) {
+		} catch (IOException e) {
+			e.printStackTrace();
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		}
+		return false;
+	}
 }

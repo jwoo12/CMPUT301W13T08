@@ -1,6 +1,7 @@
 
 package com.foodbook.foodbook;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
 
@@ -23,7 +24,8 @@ import java.util.Date;
  * 
  */
 
-public class Recipe{
+@SuppressWarnings("serial")
+public class Recipe implements Serializable{
 	
 	private static final String NULL = null;
 	
