@@ -64,6 +64,7 @@ public class TitleBarOverride extends Activity {
 	    	Intent search = new Intent();
 	    	search.setClass(getApplicationContext(), OnlineSearch.class);
 	    	startActivity(search);
+	    	break;
 	    case R.id.menu_changeName:
 	    	askForNewName();
 	    default:
@@ -74,7 +75,7 @@ public class TitleBarOverride extends Activity {
 
 	private void askForNewName() {
 		AlertDialog.Builder alertdg = new AlertDialog.Builder(this);
-		alertdg.setTitle("Add Ingredient ");
+		alertdg.setTitle("New name");
 		final EditText nameField = new EditText(this);
 		nameField.setText(FridgeActivity.myRecipeBook.getAuthor());
 		LinearLayout layout = new LinearLayout(this);

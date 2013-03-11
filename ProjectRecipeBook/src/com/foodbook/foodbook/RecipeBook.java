@@ -252,6 +252,7 @@ public class RecipeBook {
 				outputArray.add(recipe.getRecipeinstructions());
 				outputArray.add(recipe.getIngredientsString());
 				outputArray.add(recipe.getCategoryString());
+				outputArray.add(recipe.getUserid());
 				return outputArray;
 			}
 		}
