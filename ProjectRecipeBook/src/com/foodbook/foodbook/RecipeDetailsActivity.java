@@ -161,6 +161,12 @@ public class RecipeDetailsActivity extends TitleBarOverride {
 		updateTextViews();
 	}
 	
+	/**
+	 * Used to create a new intent directing to the edit recipe activity
+	 * 
+	 * 
+	 */
+	
 	public void editRecipe() {
 		Intent editIntent = new Intent();
 		editIntent.setClass(getApplicationContext(), EditRecipeActivity.class);

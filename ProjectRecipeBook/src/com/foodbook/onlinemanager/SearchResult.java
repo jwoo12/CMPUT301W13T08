@@ -96,7 +96,7 @@ public class SearchResult extends TitleBarOverride {
 	}
 	
 	/**
-	 * 
+	 * Part of the view in the model-view-controller architecture 
 	 * 
 	 * 
 	 * @param sourceList

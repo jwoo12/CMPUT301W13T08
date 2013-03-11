@@ -288,6 +288,23 @@ public class RecipeBook implements Serializable {
 
 	}
 
+	/**
+	 * 
+	 * Change details of a recipe by finding the ID then update to new values
+	 * 
+	 * @param recipename
+	 *            name to be changed
+	 * @param recipeDescriptions
+	 *            description to be changed
+	 * @param recipeinstructions
+	 *            instructions to be changed
+	 * @param ingredients
+	 *            ingredients to be changed
+	 * @param category
+	 *            category to be changed
+	 * @param recipeid
+	 */
+
 	public void editRecipe(String recipename, String recipeDescriptions,
 			String recipeinstructions, ArrayList<String> ingredients,
 			ArrayList<String> category, String recipeid) {
@@ -351,6 +368,13 @@ public class RecipeBook implements Serializable {
 		return null;
 	}
 
+	/**
+	 * Remove a recipe by finding it with its ID
+	 * 
+	 * @param recipeid
+	 *            recipe to be deleted
+	 */
+
 	public void deleteById(String recipeid) {
 		ArrayList<Recipe> combinedList = this.getRecipeBook();
 		for (int i = 0; i < combinedList.size(); i++) {
@@ -365,6 +389,13 @@ public class RecipeBook implements Serializable {
 			}
 		}
 	}
+
+	/**
+	 * 
+	 * Creates a random generated code representing the user ID
+	 * 
+	 * @return String representing a new ID
+	 */
 
 	private String generateNewUserid() {
 		SecureRandom randomKey = new SecureRandom();
@@ -395,6 +426,14 @@ public class RecipeBook implements Serializable {
 		return false;
 	}
 
+	/**
+	 * 
+	 * Load previous recipes from file
+	 * 
+	 * @param context
+	 * @return old recipes
+	 */
+
 	@SuppressWarnings("unchecked")
 	public boolean loadFromFile(Context context) {
 		try {
@@ -421,24 +460,25 @@ public class RecipeBook implements Serializable {
 		return false;
 	}
 
+	/**
+	 * Upon change of author (username), this method will go through each recipe
+	 * in "mine" array, and will update "author" field.
+	 */
+
 	public void updateAuthorInAllRecipes() {
-		/**
-		 * Upon change of author (username), this method will go through each
-		 * recipe in "mine" array, and will update "author" field.
-		 */
 
 		for (Recipe eachRecipe : this.mine) {
 			eachRecipe.setauthor(this.getAuthor());
 		}
 	}
 
+	/**
+	 * This function searches local database for foods that user can make with
+	 * ingredients that are currently in their fridge.
+	 * 
+	 */
 	public ArrayList<Recipe> searchByIngredientsLocal(
 			ArrayList<String> whatsInMyFridge) {
-		/**
-		 * This function searches local database for foods that user can make
-		 * with ingredients that are currently in their fridge.
-		 * 
-		 */
 
 		ArrayList<Recipe> output = new ArrayList<Recipe>();
 		boolean skip;
@@ -456,20 +496,29 @@ public class RecipeBook implements Serializable {
 		}
 		return output;
 	}
-	
+
 	/**
 	 * 
 	 * @param recipeArray
 	 * @return
 	 */
-	
-	public static ArrayList<ArrayList<String>> getNamesAndIDs(ArrayList<Recipe> recipeArray) {
+
+	public static ArrayList<ArrayList<String>> getNamesAndIDs(
+			ArrayList<Recipe> recipeArray) {
 		ArrayList<ArrayList<String>> output = new ArrayList<ArrayList<String>>();
 		output.add(convertRecipeBookToStringArray(recipeArray));
 		output.add(getAllRecipeid(recipeArray));
-		return output; 
+		return output;
 	}
-	
+
+	/**
+	 * 
+	 * Searches recipe book if it contains the given recipe ID
+	 * 
+	 * @param recipeidIn
+	 * @return true if found 
+	 * @return false if not found
+	 */
 	
 	public boolean containsRecipeOfID(String recipeidIn) {
 		for (Recipe eachRecipe : this.getRecipeBook()) {

@@ -4,7 +4,9 @@
 package com.foodbook.onlinemanager.tests;
 
 
+import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.io.UnsupportedEncodingException;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
@@ -105,41 +107,9 @@ public class OnlineTests extends TestCase {
 		assert (response != null);
 	}
 	
-	/**
-	 * 
-	 * Test to retrieve a recipe
-	 * @throws IOException 
-	 * @throws ClientProtocolException 
-	 * 
-	 * 
-	 */
+
 	
+
 	
-	@Test
-	
-	public void retrieve() throws ClientProtocolException, IOException{
-		
-		HttpGet getRequest = new HttpGet("http://cmput301.softwareprocess.es:8080/testing/lab02/999?pretty=1");//S4bRPFsuSwKUDSJImbCE2g?pretty=1
-
-		getRequest.addHeader("Accept","application/json");
-
-		HttpResponse response = httpclient.execute(getRequest);
-
-		String status = response.getStatusLine().toString();
-		
-//		String json = getEntityContent(response);
-//
-//		// We have to tell GSON what type we expect
-//		Type elasticSearchResponseType = new TypeToken<ElasticSearchResponse<Recipe>>(){}.getType();
-//		// Now we expect to get a Recipe response
-//		ElasticSearchResponse<Recipe> esResponse = gson.fromJson(json, elasticSearchResponseType);
-//		// We get the recipe from it!
-//		Recipe recipe = esResponse.getSource();
-//		
-		
-		
-		
-	}
-
 }
 

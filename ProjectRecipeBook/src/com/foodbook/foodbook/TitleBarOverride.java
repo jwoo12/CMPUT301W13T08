@@ -83,6 +83,14 @@ public class TitleBarOverride extends Activity {
 		return true;
 	}
 
+	/**
+	 * Prompt User for author name. Automatically executed on first run. The ability to change 
+	 * the name is availbe from the actions menu
+	 * 
+	 * 
+	 */
+	
+	
 	protected void askForNewName() {
 		AlertDialog.Builder alertdg = new AlertDialog.Builder(this);
 		alertdg.setTitle("New username");

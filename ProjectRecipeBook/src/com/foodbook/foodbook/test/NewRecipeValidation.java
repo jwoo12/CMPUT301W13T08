@@ -39,7 +39,7 @@ public class NewRecipeValidation extends ActivityInstrumentationTestCase2 {
 	private Recipe r;
 
 	/**
-	 * method to inherit from EditRecipeACtivity
+	 * method to inherit from fridgeactivity
 	 */
 	@SuppressWarnings({ "unchecked", "deprecation" })
 	public NewRecipeValidation() {
@@ -57,7 +57,7 @@ public class NewRecipeValidation extends ActivityInstrumentationTestCase2 {
 	}
 
 	/**
-	 * method to test the creation of a new recipe and if it got saved
+	 * method to test the creation of a new recipe and adding to the recipebook
 	 */
 	public void testNewRecipe() {
 		try{
@@ -75,7 +75,7 @@ public class NewRecipeValidation extends ActivityInstrumentationTestCase2 {
     }
 
 	/**
-	 * method for testing if no title was inputed in EditRecipeActivity
+	 * testing the ability to remove a recipe from a recipebook
 	 */
 
 	public void testDeleteRecipe() {

@@ -72,6 +72,14 @@ public class Fridge {
 		this.ingredients.set(ingredientIndex, newName);
 	}
 	
+	/**
+	 * 
+	 * change an ingredient by name instead of ID
+	 * 
+	 * @param oldName name to be changed
+	 * @param newName new name to be assigned
+	 */
+	
 	public void editIngredientByName (String oldName, String newName) {
 		ArrayList<String> tmp = this.getIngredients();
 		for (int i=0; i < tmp.size(); i++) {
@@ -93,6 +101,14 @@ public class Fridge {
 	public void removeIngredientByIndex(int ingrdIndex) {
 		this.ingredients.remove(ingrdIndex);
 	}
+	
+	/**
+	 * 
+	 * Remove an ingredient from the Fridge list by name instead of ID
+	 * 
+	 * @param targetName
+	 */
+	
 	
 	public void removeIngredientByName (String targetName) {
 		ArrayList<String> tmp = this.getIngredients();
@@ -185,6 +201,11 @@ public class Fridge {
 		return this.ingredients.get(index);
 	}
 
+	/**
+	 * Remove all items from the fridge list
+	 * 
+	 */
+	
 	public void clearFridge() {
 		this.ingredients.clear();
 	}

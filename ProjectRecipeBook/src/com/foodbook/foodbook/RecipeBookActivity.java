@@ -102,6 +102,16 @@ public class RecipeBookActivity extends TitleBarOverride {
 		});
 	}
 	
+	/**
+	 * 
+	 * Takes an intent and a recipe's info, and it puts the info into intent then returns new intent
+	 * 
+	 * 
+	 * @param recipeDetailsIntent intent to be updated
+	 * @param recipeInfo list containing information 
+	 * @return new intent with updated info
+	 */
+	
 	public static Intent putExtraFromRecipeInfo(Intent recipeDetailsIntent,
 			ArrayList<String> recipeInfo) {
 		

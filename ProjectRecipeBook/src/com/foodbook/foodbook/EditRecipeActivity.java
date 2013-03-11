@@ -86,10 +86,17 @@ public class EditRecipeActivity extends TitleBarOverride {
 		updateTextFields();
 	}
 	
+	/**
+	 * make an intent for RecipeDetailsActivity. 
+	 * info about the recipe will be displayed in RecipeDetailsActivity.
+	 * 
+	 * 
+	 * 
+	 */
+	
 	protected void makeNewIntent() {
 		
-		// make an intent for RecipeDetailsActivity.
-		// info about the recipe will be displayed in RecipeDetailsActivity.
+		
 		
 		Intent recipeDetailsIntent = new Intent();
 		recipeDetailsIntent.setClass(getApplicationContext(), RecipeDetailsActivity.class);
