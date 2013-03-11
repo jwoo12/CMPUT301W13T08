@@ -15,6 +15,7 @@
                   android:icon="@drawable/av_upload"/>
             <item android:id="@+id/menu_searchOnline" android:title="Online Search"
                   android:icon="@drawable/location_web_site"/>
+            <item android:id="@+id/menu_changeName" android:title="Change my name"/>
         </menu>
     </item>
     

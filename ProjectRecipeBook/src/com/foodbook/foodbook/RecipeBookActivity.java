@@ -159,7 +159,6 @@ public class RecipeBookActivity extends TitleBarOverride {
 		targetListView.setAdapter(adapter);
 	}
 	
-	
 	/**
 	 * Part of a view within a RecipeBook's model. Helper to update view.
 	 * 

@@ -1,11 +1,15 @@
 package com.foodbook.foodbook;
 
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.widget.EditText;
+import android.widget.LinearLayout;
 
 import com.foodbook.onlinemanager.OnlineSearch;
 /**
@@ -60,10 +64,37 @@ public class TitleBarOverride extends Activity {
 	    	Intent search = new Intent();
 	    	search.setClass(getApplicationContext(), OnlineSearch.class);
 	    	startActivity(search);
+	    case R.id.menu_changeName:
+	    	askForNewName();
 	    default:
 	      break;
 	    }
 	    return true;
-	  } 
+    }
+
+	private void askForNewName() {
+		AlertDialog.Builder alertdg = new AlertDialog.Builder(this);
+		alertdg.setTitle("Add Ingredient ");
+		final EditText nameField = new EditText(this);
+		nameField.setText(FridgeActivity.myRecipeBook.getAuthor());
+		LinearLayout layout = new LinearLayout(this);
+		layout.addView(nameField);
+		alertdg.setView(layout);
+		alertdg.setPositiveButton("Save", new DialogInterface.OnClickListener() {
+			@Override
+			public void onClick(DialogInterface dialog, int which) {
+				String newName = nameField.getText().toString();
+				FridgeActivity.myRecipeBook.setAuthor(newName);
+			}
+		});
+		alertdg.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+			@Override
+			public void onClick(DialogInterface dialog, int which) {
+				// do nothing for "cancel"
+			}
+		});
+		alertdg.show(); 
+	} 
+    
     
 }

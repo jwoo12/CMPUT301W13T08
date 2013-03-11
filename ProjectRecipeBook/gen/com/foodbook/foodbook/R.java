@@ -47,6 +47,7 @@ public final class R {
         public static final int instLayout=0x7f080025;
         public static final int linearLayout1=0x7f080015;
         public static final int menu1=0x7f080032;
+        public static final int menu_changeName=0x7f080037;
         public static final int menu_makeRecipe=0x7f080034;
         public static final int menu_myRecipe=0x7f080033;
         public static final int menu_postRecipe=0x7f080035;
