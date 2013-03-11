@@ -33,8 +33,8 @@ public class Recipe{
 	private String author; // author will be changable at any time.
 	private ArrayList<String> ingredients;
 	private ArrayList<String> category; // there can be multiple categories (somewhat similar to the idea of "tagging")
-	final String recipeid; // recipeid is permanent, and will be in this format: (userid) + (date in milisecond) 
-	final String userid; // userid is permanent.
+	private String recipeid; // recipeid is permanent, and will be in this format: (userid) + (date in milisecond) 
+	private String userid; // userid is permanent.
 
 	// userid is perminant id, given to each user, this will be used to identify the owner of recipes.
 

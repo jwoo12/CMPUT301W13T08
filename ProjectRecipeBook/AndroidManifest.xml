@@ -52,7 +52,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:launchMode="singleInstance"
+            android:launchMode="singleTop"
             android:name="com.foodbook.foodbook.MakeRecipeActivity"
             android:label="@string/new_recipe" >
             <intent-filter>
@@ -60,7 +60,7 @@
         </activity>
         
         <activity
-            android:launchMode="singleInstance"
+            android:launchMode="singleTop"
             android:name="com.foodbook.foodbook.Search"
             android:label="@string/search" >
             <intent-filter>
@@ -68,6 +68,7 @@
         </activity>
         
         <activity
+            android:launchMode="singleTop"
             android:name="com.foodbook.foodbook.SearchResult"
             android:label="@string/search_result" >
             <intent-filter>
@@ -80,6 +81,7 @@
         </activity>
         
          <activity
+             android:launchMode="singleTop"
             android:name="com.foodbook.onlinemanager.OnlineSearch"
             android:label="@string/title_bar_text" >
         </activity>

@@ -102,12 +102,11 @@ public class RecipeBookActivity extends TitleBarOverride {
 					recipeDetailsIntent.putExtra("instructions", recipeInfo.get(4));
 					recipeDetailsIntent.putExtra("ingredients", recipeInfo.get(5));
 					recipeDetailsIntent.putExtra("category", recipeInfo.get(6));
+					recipeDetailsIntent.putExtra("userid", recipeInfo.get(7));
 					startActivity(recipeDetailsIntent);
 				}
 			}
-
 		});
-		
 	}
 	
 	@Override

@@ -2,6 +2,7 @@ package com.foodbook.foodbook;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
@@ -35,6 +36,9 @@ public class RecipeDetailsActivity extends TitleBarOverride {
 	private String instructions;
 	private String ingredients;
 	private String category;
+	private String userid;
+	
+	private boolean onlineRecipe;
 	
 	private TextView nameField;
 	private TextView authorField;
@@ -77,7 +81,8 @@ public class RecipeDetailsActivity extends TitleBarOverride {
 		instructions = in.getStringExtra("instructions");
 		ingredients = in.getStringExtra("ingredients").replace(", ", "\n").replace(",", "\n");
 		category = in.getStringExtra("category").replace(", ", "\n").replace(",", "\n");
-		//TODO userid also here
+		userid = in.getStringExtra("userid");
+		onlineRecipe = in.getBooleanExtra("onlineRecipe", false);
 		
 		// bind views to variables
 		nameField = (TextView) findViewById(R.id.recipeDetails_foodName);
@@ -158,6 +163,7 @@ public class RecipeDetailsActivity extends TitleBarOverride {
 		});
         
 		// update the textviews
+		hideUnnecessaryButtons();
 		updateTextViews();
 	}
 	
@@ -192,7 +198,13 @@ public class RecipeDetailsActivity extends TitleBarOverride {
 	* @author Jaeseo Park (jaeseo1), Jasmine Woo (jwoo), Nhu Bui (nbui), Robert Janes (rjanes)
 	*/
 	private void hideUnnecessaryButtons() {
-		//if (FridgeActivity.myRecipeBook.getUserid() != userid) {
-			// hide edit, delete, publish buttons
+		if (!FridgeActivity.myRecipeBook.getUserid().equals(userid)) {
+			editLayout.setVisibility(View.GONE);
+			deleteLayout.setVisibility(View.GONE);
+			publishLayout.setVisibility(View.GONE);
+		}
+		if (!onlineRecipe) {
+			downloadLayout.setVisibility(View.GONE);
 		}
 	}
+}
