@@ -85,7 +85,7 @@ public class NewRecipeValidation extends ActivityInstrumentationTestCase2 {
 
     }
 	
-	/*public void testNoTitle() {
+	public void testNoTitle() {
 		ArrayList<String> ingred = new ArrayList<String>();
 		ArrayList<String> category = new ArrayList<String>();
 		Recipe recipe = new Recipe(null, INGRED_DSCRIPTION, INGRED_INSTRUCTION, ingred , category, "userid","username");
@@ -114,7 +114,7 @@ public class NewRecipeValidation extends ActivityInstrumentationTestCase2 {
 		ArrayList<String> category = new ArrayList<String>();
 		Recipe recipe = new Recipe(INGRED_TITLE,INGRED_DSCRIPTION,INGRED_INSTRUCTION, ingred , null, "userid","username");
         assertTrue("recipe should not be added without Category",recipe.getIngredients().size()==1);
-    }*/
+    }
 
 
 }
