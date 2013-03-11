@@ -36,6 +36,7 @@ public class MakeRecipeActivity extends EditRecipeActivity {
 		recipeDetailsIntent.putExtra("ingredients", ingredients);
 		recipeDetailsIntent.putExtra("category", category);
 		recipeDetailsIntent.putExtra("author", FridgeActivity.myRecipeBook.getAuthor());
+		recipeDetailsIntent.putExtra("userid", FridgeActivity.myRecipeBook.getUserid());
 		
 		// start a new activity
 		startActivity(recipeDetailsIntent);

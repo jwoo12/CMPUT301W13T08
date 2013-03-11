@@ -24,8 +24,8 @@ public class RecipeBook {
 
 	ArrayList<Recipe> mine;
 	ArrayList<Recipe> downloads;
-	private String userid; // TODO this needs to be changed
-	private String author; // author can be changed TODO this needs to be changed
+	private String userid;
+	private String author;
 	
 	/**
 	* This is a constructor method for RecipeBook. It creates new ArrayList of Recipe.
@@ -239,7 +239,6 @@ public class RecipeBook {
 	 * @param recipeid the id of a recipe to be printed
 	 * @return an Arraylist of strings representing a recipe
 	 */
-	
 	
 	public ArrayList<String> getRecipeInfo(String recipeid) {
 		ArrayList<String> outputArray = new ArrayList<String>();

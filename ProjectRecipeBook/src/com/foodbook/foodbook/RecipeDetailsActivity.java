@@ -2,7 +2,6 @@ package com.foodbook.foodbook;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
@@ -173,14 +172,12 @@ public class RecipeDetailsActivity extends TitleBarOverride {
 		setIntent(newIntent);
 	}
 	
-	
 	/**
 	 * 
 	 * Displays a recipe's details on screen
 	 * 
 	 * @author Jaeseo Park (jaeseo1), Jasmine Woo (jwoo), Nhu Bui (nbui), Robert Janes (rjanes)
 	 */
-	
 	
 	public void updateTextViews() {
 		nameField.setText(name);
@@ -190,6 +187,7 @@ public class RecipeDetailsActivity extends TitleBarOverride {
 		ingredientsField.setText(ingredients);
 		categoryField.setText(category);
 	}
+	
 	/**
 	* This methods hides unnecessary buttons. For instance, removes "downloads" buttons for local (cached) recipes,
 	* or removes "edit" button for recipes that the owner (author) is not the user himself/herself.
@@ -197,6 +195,7 @@ public class RecipeDetailsActivity extends TitleBarOverride {
 	* 
 	* @author Jaeseo Park (jaeseo1), Jasmine Woo (jwoo), Nhu Bui (nbui), Robert Janes (rjanes)
 	*/
+	
 	private void hideUnnecessaryButtons() {
 		if (!FridgeActivity.myRecipeBook.getUserid().equals(userid)) {
 			editLayout.setVisibility(View.GONE);
