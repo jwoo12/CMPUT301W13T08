@@ -25,6 +25,10 @@ import com.foodbook.foodbook.Recipe;
  * 
  * J-unit testing for web server
  * 
+ * 
+ * PLEASE UNCOMMENT CODE AND RUN TESTS AFTER ADDING CORRECT LIBRARIES
+ * 
+ * 
  * @author Jaeseo Park (jaeseo1), Jasmine Woo (jwoo), Nhu Bui (nbui), Robert Janes (rjanes)
  *
  */
