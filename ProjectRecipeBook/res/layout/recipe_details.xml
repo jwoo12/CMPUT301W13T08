@@ -136,7 +136,7 @@
                 android:id="@+id/instLayout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:paddingBottom="16dp" >
+                android:paddingBottom="12dp" >
 
                 <TextView
                     android:id="@+id/recipeDetails_instructionsLabel"
@@ -156,10 +156,74 @@
             </RelativeLayout>
 
             <RelativeLayout
+                android:id="@+id/recipeDetails_editLayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingTop="4dp"
+                android:paddingBottom="4dp" >
+
+                <Button
+                    android:id="@+id/recipeDetails_editButton"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
+                    android:onClick="testButtonClick"
+                    android:text="@string/edit_recipe" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/recipeDetails_deleteLayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingTop="4dp"
+                android:paddingBottom="4dp" >
+
+                <Button
+                    android:id="@+id/recipeDetails_deleteButton"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
+                    android:onClick="testButtonClick"
+                    android:text="@string/delete_recipe" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/recipeDetails_publishLayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingTop="4dp"
+                android:paddingBottom="4dp" >
+
+                <Button
+                    android:id="@+id/recipeDetails_publishButton"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
+                    android:onClick="testButtonClick"
+                    android:text="@string/publish" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/recipeDetails_downloadLayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingBottom="4dp"
+                android:paddingTop="4dp" >
+
+                <Button
+                    android:id="@+id/recipeDetails_downloadButton"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
+                    android:onClick="testButtonClick"
+                    android:text="@string/download" />
+
+            </RelativeLayout><RelativeLayout
                 android:id="@+id/recipeDetails_shareButtonLayout"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:paddingBottom="8dp" >
+                android:paddingTop="4dp"
+                android:paddingBottom="16dp" >
 
                 <Button
                     android:id="@+id/recipeDetails_shareButton"
@@ -168,22 +232,6 @@
                     android:layout_centerHorizontal="true"
                     android:onClick="testButtonClick"
                     android:text="@string/share" />
-
-            </RelativeLayout>
-
-            <RelativeLayout
-                android:id="@+id/otherButtons_to_be_deleted"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:paddingBottom="16dp" >
-
-                <Button
-                    android:id="@+id/Button01"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_centerHorizontal="true"
-                    android:onClick="testButtonClick"
-                    android:text="@string/otherButtons" />
             </RelativeLayout>
 
         </LinearLayout>
