@@ -246,8 +246,8 @@ public class Recipe implements Serializable {
 		this.recipeinstructions = recipeInstructions;
 		this.recipeDescriptions = recipeDescriptions;
 		this.author = author;
-		this.ingredients = formatStringArrayListEntries(ingredients);
-		this.category = formatStringArrayListEntries(category);
+		this.ingredients = ingredients;
+		this.category = category;
 		this.recipeid = userid + String.valueOf((new Date()).getTime())
 				+ recipename.charAt(0);
 		this.userid = userid;
@@ -268,38 +268,12 @@ public class Recipe implements Serializable {
 		String listOfIngr = this.ingredients.get(0);
 		int i;
 		for (i = 1; i < this.ingredients.size(); i++) {
-			listOfIngr += "\n" + this.ingredients.get(i);
+			listOfIngr += ", " + this.ingredients.get(i);
 		}
 
 		return listOfIngr;
 	}
 
-	public static ArrayList<String> formatStringArrayListEntries(ArrayList<String> input) {
-		/**
-		 * This function formats string-arraylist entries so that all entries have no
-		 * leading or trailing whitespaces, and makes sure that there is no
-		 * empty entry, etc...
-		 * 
-		 */
-		
-		ArrayList<String> output = new ArrayList<String>();
-		
-		for (String inputEntry : input) {
-			if (inputEntry.equals("")) {
-				continue;
-			}
-			String outputEntry = inputEntry;
-			while (outputEntry.contains("  ")) {
-				outputEntry.replace("  ", " ");
-			}
-			outputEntry.trim();
-			output.add(outputEntry);
-		}
-		
-		return output;
-		
-	}
-	
 	/**
 	 * This method will return list of categories as a string, in the following
 	 * format: categ_0\ncateg_1\ncateg_2 ... categ_n If there is no categories
@@ -315,7 +289,7 @@ public class Recipe implements Serializable {
 		String listOfCateg = this.category.get(0);
 		int i;
 		for (i = 1; i < this.category.size(); i++) {
-			listOfCateg += "\n" + this.category.get(i);
+			listOfCateg += ", " + this.category.get(i);
 		}
 
 		return listOfCateg;

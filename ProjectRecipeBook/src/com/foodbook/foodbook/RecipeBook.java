@@ -11,7 +11,6 @@ import java.security.SecureRandom;
 import java.util.ArrayList;
 
 import android.content.Context;
-import android.util.Log;
 
 /**
  * <p>
@@ -192,7 +191,8 @@ public class RecipeBook implements Serializable {
 			ArrayList<String> category) {
 
 		Recipe newRecipe = new Recipe(recipename, recipeDescriptions,
-				recipeinstructions, ingredients, category, this.userid,
+				recipeinstructions, formatStringArrayListEntries(ingredients),
+				formatStringArrayListEntries(category), this.userid,
 				this.author);
 		this.mine.add(newRecipe);
 
@@ -260,6 +260,34 @@ public class RecipeBook implements Serializable {
 	 *            genre
 	 */
 
+	public static ArrayList<String> formatStringArrayListEntries(
+			ArrayList<String> input) {
+		/**
+		 * This function formats string-arraylist entries so that all entries
+		 * have no leading or trailing whitespaces, and makes sure that there is
+		 * no empty entry, etc...
+		 * 
+		 */
+
+		ArrayList<String> output = new ArrayList<String>();
+
+		for (String inputEntry : input) {
+			String outputEntry = inputEntry;
+			outputEntry = outputEntry.replace("\n", "");
+			while (outputEntry.contains("  ")) {
+				outputEntry = outputEntry.replace("  ", " ");
+			}
+			outputEntry = outputEntry.trim();
+
+			if (!outputEntry.equals("")) {
+				output.add(outputEntry);
+			}
+		}
+
+		return output;
+
+	}
+
 	public void editRecipe(String recipename, String recipeDescriptions,
 			String recipeinstructions, ArrayList<String> ingredients,
 			ArrayList<String> category, String recipeid) {
@@ -271,8 +299,10 @@ public class RecipeBook implements Serializable {
 					this.mine.get(i).setRecipename(recipename);
 					this.mine.get(i).setRecipeDescriptions(recipeDescriptions);
 					this.mine.get(i).setRecipeinstructions(recipeinstructions);
-					this.mine.get(i).setIngredients(Recipe.formatStringArrayListEntries(ingredients));
-					this.mine.get(i).setCategory(Recipe.formatStringArrayListEntries(category));
+					this.mine.get(i).setIngredients(
+							formatStringArrayListEntries(ingredients));
+					this.mine.get(i).setCategory(
+							formatStringArrayListEntries(category));
 					this.mine.get(i).setauthor(
 							FridgeActivity.myRecipeBook.getAuthor());
 				} else {
@@ -281,8 +311,10 @@ public class RecipeBook implements Serializable {
 							recipeDescriptions);
 					this.downloads.get(offset).setRecipeinstructions(
 							recipeinstructions);
-					this.downloads.get(offset).setIngredients(Recipe.formatStringArrayListEntries(ingredients));
-					this.downloads.get(offset).setCategory(Recipe.formatStringArrayListEntries(category));
+					this.downloads.get(offset).setIngredients(
+							formatStringArrayListEntries(ingredients));
+					this.downloads.get(offset).setCategory(
+							formatStringArrayListEntries(category));
 					this.downloads.get(offset).setauthor(
 							FridgeActivity.myRecipeBook.getAuthor());
 				}
@@ -394,7 +426,7 @@ public class RecipeBook implements Serializable {
 		 * Upon change of author (username), this method will go through each
 		 * recipe in "mine" array, and will update "author" field.
 		 */
-		
+
 		for (Recipe eachRecipe : this.mine) {
 			eachRecipe.setauthor(this.getAuthor());
 		}

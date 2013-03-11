@@ -167,8 +167,8 @@ public class RecipeDetailsActivity extends TitleBarOverride {
 		editIntent.putExtra("recipeid", recipeid);
 		editIntent.putExtra("name", name);
 		editIntent.putExtra("descriptions", descriptions);
-		editIntent.putExtra("category", category);
-		editIntent.putExtra("ingredients", ingredients);
+		editIntent.putExtra("category", category.replace("\n", ", "));
+		editIntent.putExtra("ingredients", ingredients.replace("\n", ", "));
 		editIntent.putExtra("instructions", instructions);
 		startActivity(editIntent);
 	}
@@ -213,4 +213,5 @@ public class RecipeDetailsActivity extends TitleBarOverride {
 			downloadLayout.setVisibility(View.GONE);
 		}
 	}
+	
 }

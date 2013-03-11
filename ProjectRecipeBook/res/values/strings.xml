@@ -16,9 +16,9 @@
     <string name="author">Author</string>
     <string name="desc">Description</string>
     <string name="desc_here">Description of the food here. this could be more than one line.</string>
-    <string name="ingredients_label">Ingredients (Separated by newline)</string>
+    <string name="ingredients_label">Ingredients (Separated by comma)</string>
     <string name="ingredients_here">ingredient1 (230g)\ningredient2 (3 tea spoons)</string>
-    <string name="category">Category (Separated by newline)</string>
+    <string name="category">Category (Separated by comma)</string>
     <string name="category_here">Simple\nItalian\nPizza</string>
     <string name="instructions">Instructions</string>
     <string name="recipeDetails_instructions">1. Preheat your oven at whatever degree Celcius\n2. do something...\n3. Do something else...\n4. blahblah</string>
@@ -27,7 +27,7 @@
     <string name="recipe_title">Recipe Title</string>
     <string name="manage_pic">Manage\nPicture</string>
     <string name="emptyString"></string>
-    <string name="separate_by_newline">Separate by newline</string>
+    <string name="separate_by_comma">Separate by comma</string>
     <string name="save">Save</string>
     <string name="new_recipe">New Recipe</string>
     <string name="edit_recipe">Edit</string>
