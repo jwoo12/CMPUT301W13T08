@@ -42,17 +42,51 @@ public class RecipeBook {
 		
 	}
 	
+	/**
+	 * 
+	 * "Getter" method to return user created recipes
+	 * 
+	 * @return a list of user created recipes
+	 */
+	
 	public ArrayList<Recipe> getMine() {
 		return mine;
 	}
 
+	/**
+	 * 
+	 * "Setter" method to assign user created recipes
+	 * 
+	 * @param mine a list of user created recipes
+	 */
+	
+	
 	public void setMine(ArrayList<Recipe> mine) {
 		this.mine = mine;
 	}
 
+	/**
+	 * "Getter" method to return downloaded recipes
+	 * 
+	 * 
+	 * @return a list of downloaded recipes
+	 */
+	
+	
 	public ArrayList<Recipe> getDownloads() {
 		return downloads;
 	}
+	
+	/**
+	 * 
+	 * Takes a given list of recipes and converts them to an array of strings
+	 * 
+	 * @param inputArray a list of recipes to be converted to strings
+	 * @return outputArray an ArrayList of strings representing recipes
+	 * 
+	 * 
+	 */
+	
 	
 	public static ArrayList<String> convertRecipeBookToStringArray(ArrayList<Recipe> inputArray) {
 		
@@ -65,6 +99,17 @@ public class RecipeBook {
 		return outputArray;
 	}
 	
+	
+	/**
+	 * 
+	 * Returns the identification code for a recipe
+	 * 
+	 * 
+	 * @param inputArray recipe list
+	 * @return a list of recipes
+	 */
+	
+	
 	public static ArrayList<String> getAllRecipeid(ArrayList<Recipe> inputArray) {
 		ArrayList<String> outputArrayList = new ArrayList<String>();
 		
@@ -75,6 +120,12 @@ public class RecipeBook {
 		return outputArrayList;
 	}
 	
+	/**
+	 * 
+	 * "Getter" method for downloaded recipes
+	 * 
+	 * @param downloads a list of downloaded recipes
+	 */
 
 	public void setDownloads(ArrayList<Recipe> downloads) {
 		this.downloads = downloads;
@@ -122,18 +173,45 @@ public class RecipeBook {
 		return newRecipe.getRecipeid();
 	}
 	
+	/**
+	 * "getter" method for a userid
+	 * 
+	 * @return userid assigned id
+	 */
+	
 	public String getUserid() {
 		return userid;
 	}
 
+	/**
+	 * 
+	 * "setter" method for a userid
+	 * 
+	 * @param userid id to assign
+	 */
+	
 	public void setUserid(String userid) {
 		this.userid = userid;
 	}
 
+	/**
+	 * 
+	 * "getter" method for a recipe's author 
+	 * 
+	 * @return the recipe's author
+	 */
+	
 	public String getAuthor() {
 		return author;
 	}
 
+	
+	/**
+	 * "setter" method for a recipe's author
+	 * 
+	 * @param author a string to be assigned to an author
+	 */
+	
 	public void setAuthor(String author) {
 		this.author = author;
 	}
@@ -152,6 +230,16 @@ public class RecipeBook {
 			ArrayList<String> category, int position) {
 		
 	}
+	
+	/**
+	 * 
+	 * Converts a recipe to an ArrayList of Strings 
+	 * 
+	 * 
+	 * @param recipeid the id of a recipe to be printed
+	 * @return an Arraylist of strings representing a recipe
+	 */
+	
 	
 	public ArrayList<String> getRecipeInfo(String recipeid) {
 		ArrayList<String> outputArray = new ArrayList<String>();
