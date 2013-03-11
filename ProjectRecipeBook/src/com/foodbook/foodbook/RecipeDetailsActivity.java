@@ -56,7 +56,6 @@ public class RecipeDetailsActivity extends TitleBarOverride {
 	private RelativeLayout downloadLayout;
 	private Button downloadButton;
 	
-	private RelativeLayout shareLayout;
 	private Button shareButton;
 	
 	@Override
@@ -98,7 +97,6 @@ public class RecipeDetailsActivity extends TitleBarOverride {
 		publishButton = (Button) findViewById(R.id.recipeDetails_publishButton);
 		downloadLayout = (RelativeLayout) findViewById(R.id.recipeDetails_downloadLayout);
 		downloadButton = (Button) findViewById(R.id.recipeDetails_downloadButton);
-		shareLayout = (RelativeLayout) findViewById(R.id.recipeDetails_shareButtonLayout);
 		shareButton = (Button) findViewById(R.id.recipeDetails_shareButton);
 		
 		// set button listeners

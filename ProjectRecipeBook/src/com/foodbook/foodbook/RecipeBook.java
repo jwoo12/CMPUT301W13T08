@@ -2,8 +2,6 @@ package com.foodbook.foodbook;
 
 import java.util.ArrayList;
 
-import android.util.Log;
-
 	/**
 	 * <p> RecipeBook is a collection of local and downloaded recipes. </p>
 	 * 

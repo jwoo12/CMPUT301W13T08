@@ -23,7 +23,7 @@ public class MakeRecipeActivity extends EditRecipeActivity {
 		
 		// Add to the recipe book and get the recipe id back
 		String recipeidNew = FridgeActivity.myRecipeBook.addRecipe(name, descriptions, instructions, ingredientsArrayList, categoryArrayList);
-		recipeid = recipeid;
+		recipeid = recipeidNew;
 		makeNewIntent();
 	}
 }
