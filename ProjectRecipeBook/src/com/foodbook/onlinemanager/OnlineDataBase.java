@@ -1,5 +1,9 @@
 package com.foodbook.onlinemanager;
 
+import java.util.ArrayList;
+
+import com.foodbook.foodbook.Recipe;
+
 
 /**
  * 
@@ -13,5 +17,16 @@ package com.foodbook.onlinemanager;
 
 
 public class OnlineDataBase {
+
+	public static ArrayList<Recipe> searchByKeyword(String keyword) {
+		ArrayList<Recipe> ouput = new ArrayList<Recipe>();
+		return ouput;
+	}
+
+	public static ArrayList<Recipe> searchByIngredientsOnline(
+			ArrayList<String> ingredients) {
+		ArrayList<Recipe> ouput = new ArrayList<Recipe>();
+		return ouput;
+	}
 
 }

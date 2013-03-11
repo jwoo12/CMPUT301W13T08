@@ -4,7 +4,6 @@ import java.util.ArrayList;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
@@ -32,14 +31,14 @@ public class SearchResult extends TitleBarOverride {
 	
 	private Intent in;
 	
-	private ArrayList<String> localResults;
-	private ArrayList<String> localID;
+	private ArrayList<String> localResults = new ArrayList<String>();
+	private ArrayList<String> localID = new ArrayList<String>();
 	
-	private ArrayList<String> onlineResults;
-	private ArrayList<String> onlineID;
+	private ArrayList<String> onlineResults = new ArrayList<String>();
+	private ArrayList<String> onlineID = new ArrayList<String>();
 	
-	private ArrayList<String> combinedResults;
-	private ArrayList<String> combinedID;
+	private ArrayList<String> combinedResults = new ArrayList<String>();
+	private ArrayList<String> combinedID = new ArrayList<String>();
 	
 	private ListView resultListView;
 	
@@ -49,16 +48,19 @@ public class SearchResult extends TitleBarOverride {
 		setContentView(R.layout.search_result);
 
 		in = getIntent();
-		localResults = in.getStringArrayListExtra("localResults");
-		localID = in.getStringArrayListExtra("localID");
-		// TODO add online results (later)
+		if (in.hasExtra("localResults")) {
+			localResults = in.getStringArrayListExtra("localResults");
+			localID = in.getStringArrayListExtra("localID");			
+		}
+		if (in.hasExtra("onlineResults")) {
+			onlineResults = in.getStringArrayListExtra("onlineResults");
+			onlineID = in.getStringArrayListExtra("onlineID");
+		}
 
-		combinedResults = new ArrayList<String>();
-		combinedID = new ArrayList<String>();
-		
 		combinedResults.addAll(localResults);
+		combinedResults.addAll(onlineResults);
 		combinedID.addAll(localID);
-		// add online stuff too (later)
+		combinedID.addAll(onlineID);
 		
 		resultListView = (ListView) findViewById(R.id.searchResult_listView);
 
@@ -75,7 +77,7 @@ public class SearchResult extends TitleBarOverride {
 					recipeDetailsIntent.setClass(getApplicationContext(), RecipeDetailsActivity.class);
 					recipeDetailsIntent = RecipeBookActivity.putExtraFromRecipeInfo(recipeDetailsIntent, recipeInfo);
 					startActivity(recipeDetailsIntent);
-					// TODO distinguish online/offline recipies here by inserting "onlineRecipe = true" to intent
+					// TODO distinguish online/offline recipes here by inserting "onlineRecipe = true" to intent
 				} 
 			}
 		});
@@ -92,6 +94,14 @@ public class SearchResult extends TitleBarOverride {
 		super.onNewIntent(newIntent);
 		setIntent(newIntent);
 	}
+	
+	/**
+	 * 
+	 * 
+	 * 
+	 * @param sourceList
+	 * @param targetListView
+	 */
 	
 	private void updateListView(ArrayList<String> sourceList, ListView targetListView) {
 		ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, sourceList);

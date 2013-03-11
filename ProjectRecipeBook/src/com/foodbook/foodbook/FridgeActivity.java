@@ -7,7 +7,6 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.AdapterView;
@@ -17,7 +16,9 @@ import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.Toast;
-import com.foodbook.onlinemanager.*;
+
+import com.foodbook.onlinemanager.OnlineDataBase;
+import com.foodbook.onlinemanager.SearchResult;
 
 /**
  * 
@@ -105,19 +106,26 @@ public class FridgeActivity extends TitleBarOverride {
 			
 			@Override
 			public void onClick(View v) {
-				ArrayList<String> localResults, localID;
-				localResults = RecipeBook.convertRecipeBookToStringArray(myRecipeBook.searchByIngredientsLocal(myFridge.getIngredients()));
-				localID = RecipeBook.getAllRecipeid(myRecipeBook.searchByIngredientsLocal(myFridge.getIngredients()));
-				// TODO online results...
 				
+				// local results of 'see what I can make' search
+				ArrayList<String> localResults, localID;
+				ArrayList<ArrayList<String>> localNamesAndIDs = RecipeBook.getNamesAndIDs(myRecipeBook.searchByIngredientsLocal(myFridge.getIngredients())); 
+				localResults = localNamesAndIDs.get(0);
+				localID = localNamesAndIDs.get(1);
+				
+				// online results of 'see what I can make' search
+				ArrayList<String> onlineResults, onlineID;
+				ArrayList<ArrayList<String>> onlineNamesAndIDs = RecipeBook.getNamesAndIDs(OnlineDataBase.searchByIngredientsOnline(myFridge.getIngredients()));
+				onlineResults = onlineNamesAndIDs.get(0);
+				onlineID = onlineNamesAndIDs.get(1);
+				
+				// display results
 				Intent ingredientSeach = new Intent();
 				ingredientSeach.setClass(getApplicationContext(), SearchResult.class);
-				//ingredientSeach.putStringArrayListExtra("localResults", localResults);
-				//ingredientSeach.putStringArrayListExtra("localID", localID);
 				ingredientSeach.putExtra("localResults", localResults);
 				ingredientSeach.putExtra("localID", localID);
-				// TODO online results...
-				
+				ingredientSeach.putExtra("onlineResults", onlineResults);
+				ingredientSeach.putExtra("onlineID", onlineID);
 				startActivity(ingredientSeach);
 			}
 		});

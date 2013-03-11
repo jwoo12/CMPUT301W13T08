@@ -456,4 +456,18 @@ public class RecipeBook implements Serializable {
 		}
 		return output;
 	}
+	
+	/**
+	 * 
+	 * @param recipeArray
+	 * @return
+	 */
+	
+	public static ArrayList<ArrayList<String>> getNamesAndIDs(ArrayList<Recipe> recipeArray) {
+		ArrayList<ArrayList<String>> output = new ArrayList<ArrayList<String>>();
+		output.add(convertRecipeBookToStringArray(recipeArray));
+		output.add(getAllRecipeid(recipeArray));
+		return output; 
+	}
+	
 }

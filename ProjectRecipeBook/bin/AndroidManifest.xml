@@ -57,7 +57,7 @@
         <activity
             android:name="com.foodbook.onlinemanager.SearchResult"
             android:label="@string/search_result"
-            android:launchMode="singleTop" >
+            android:launchMode="singleInstance" >
             <intent-filter>
             </intent-filter>
         </activity>
@@ -68,7 +68,7 @@
         <activity
             android:name="com.foodbook.onlinemanager.OnlineSearch"
             android:label="@string/title_bar_text"
-            android:launchMode="singleTop" >
+            android:launchMode="singleInstance" >
         </activity>
     </application>
 
