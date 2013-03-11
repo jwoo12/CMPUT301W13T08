@@ -84,31 +84,45 @@ public class NewRecipeValidation extends ActivityInstrumentationTestCase2 {
 
 
     }
-	
+	 /**
+     * method for testing if no title was inputed in EditRecipeActivity
+     */
 	public void testNoTitle() {
 		ArrayList<String> ingred = new ArrayList<String>();
 		ArrayList<String> category = new ArrayList<String>();
 		Recipe recipe = new Recipe(null, INGRED_DSCRIPTION, INGRED_INSTRUCTION, ingred , category, "userid","username");
         assertTrue("recipe should not be added without title",recipe.getIngredients().size()==0);
     }
+	 /**
+     * method for testing if no description was inputed in EditRecipeActivity
+     */
 	public void testNoDescription() {
 		ArrayList<String> ingred = new ArrayList<String>();
 		ArrayList<String> category = new ArrayList<String>();
 		Recipe recipe = new Recipe(INGRED_TITLE,null, INGRED_INSTRUCTION, ingred , category, "userid","username");
         assertTrue("recipe should not be added without ingredient",recipe.getIngredients().size()==0);
     }
+	 /**
+     * method for testing if no instruction was inputed in EditRecipeActivity
+     */
 	public void testNoInstruction() {
 		ArrayList<String> ingred = new ArrayList<String>();
 		ArrayList<String> category = new ArrayList<String>();
 		Recipe recipe = new Recipe(INGRED_TITLE,INGRED_DSCRIPTION, null, ingred , category, "userid","username");
         assertTrue("recipe should not be added without instruction",recipe.getIngredients().size()==0);
     }
+	 /**
+     * method for testing if no ingredient was inputed in EditRecipeActivity
+     */
 	public void testNoIngredient() {
 		ArrayList<String> ingred = new ArrayList<String>();
 		ArrayList<String> category = new ArrayList<String>();
 		Recipe recipe = new Recipe(INGRED_TITLE,INGRED_DSCRIPTION,INGRED_INSTRUCTION, null , category, "userid","username");
         assertTrue("recipe should not be added without indredient",recipe.getIngredients().size()==0);
     }
+	 /**
+     * method for testing if no category was inputed in EditRecipeActivity
+     */
 	public void testNoCategory() {
 		ArrayList<String> ingred = new ArrayList<String>();
 		ArrayList<String> category = new ArrayList<String>();
