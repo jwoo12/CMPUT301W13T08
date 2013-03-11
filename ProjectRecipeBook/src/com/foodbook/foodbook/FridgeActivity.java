@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -15,6 +16,7 @@ import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.Toast;
+import com.foodbook.onlinemanager.*;
 
 /**
  * 
@@ -53,6 +55,7 @@ public class FridgeActivity extends TitleBarOverride {
 	private ListView listView;
 	private String ingredient;
 	private Button addButton;
+	private Button showWhatICanMakeButton;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -64,9 +67,10 @@ public class FridgeActivity extends TitleBarOverride {
 
 		myFridge = new Fridge(context);
 		myFridge.loadFromFile(getApplicationContext());
-		
+
 		myRecipeBook = new RecipeBook();
-		boolean recipeLoadResultOK = myRecipeBook.loadFromFile(getApplicationContext());
+		boolean recipeLoadResultOK = myRecipeBook
+				.loadFromFile(getApplicationContext());
 		if (!recipeLoadResultOK) {
 			askForNewName();
 		}
@@ -91,6 +95,27 @@ public class FridgeActivity extends TitleBarOverride {
 			@Override
 			public void onClick(View v) {
 				showInputDialog(true, "", -1);
+			}
+		});
+
+		// setup 'Show what I can make' button
+		showWhatICanMakeButton = (Button) findViewById(R.id.fridgeSeeWhatICanMake);
+		showWhatICanMakeButton.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				ArrayList<String> localResults, localID;
+				localResults = RecipeBook.convertRecipeBookToStringArray(myRecipeBook.searchByIngredientsLocal(myFridge.getIngredients()));
+				localID = RecipeBook.getAllRecipeid(myRecipeBook.searchByIngredientsLocal(myFridge.getIngredients()));
+				// TODO online results...
+				
+				Intent ingredientSeach = new Intent();
+				ingredientSeach.setClass(getApplicationContext(), SearchResult.class);
+				ingredientSeach.putStringArrayListExtra("localResults", localResults);
+				ingredientSeach.putStringArrayListExtra("localID", localID);
+				// TODO online results...
+				
+				startActivity(ingredientSeach);
 			}
 		});
 	}

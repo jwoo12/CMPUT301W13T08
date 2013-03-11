@@ -30,7 +30,6 @@ public final class R {
     public static final class id {
         public static final int LinearLayout1=0x7f080006;
         public static final int LinearLayout2=0x7f08000d;
-        public static final int ListView1=0x7f080016;
         public static final int authorLayout=0x7f080019;
         public static final int categoryLayout=0x7f08001f;
         public static final int descLayout=0x7f08001c;
@@ -84,6 +83,7 @@ public final class R {
         public static final int scrollView1=0x7f080005;
         public static final int searchBar=0x7f080012;
         public static final int searchButton=0x7f080013;
+        public static final int searchResults_listview=0x7f080016;
     }
     public static final class layout {
         public static final int activity_main=0x7f030000;

@@ -1,9 +1,10 @@
 package com.foodbook.onlinemanager;
 
-import com.foodbook.foodbook.R;
-import com.foodbook.foodbook.TitleBarOverride;
-
 import android.os.Bundle;
+
+import com.foodbook.foodbook.R;
+import com.foodbook.foodbook.Recipe;
+import com.foodbook.foodbook.TitleBarOverride;
 
 
 /**

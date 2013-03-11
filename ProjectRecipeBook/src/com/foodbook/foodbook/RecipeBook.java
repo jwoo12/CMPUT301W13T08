@@ -430,6 +430,30 @@ public class RecipeBook implements Serializable {
 		for (Recipe eachRecipe : this.mine) {
 			eachRecipe.setauthor(this.getAuthor());
 		}
+	}
 
+	public ArrayList<Recipe> searchByIngredientsLocal(
+			ArrayList<String> whatsInMyFridge) {
+		/**
+		 * This function searches local database for foods that user can make
+		 * with ingredients that are currently in their fridge.
+		 * 
+		 */
+
+		ArrayList<Recipe> output = new ArrayList<Recipe>();
+		boolean skip;
+		for (Recipe recipe : this.getRecipeBook()) {
+			skip = false;
+			for (String ingredient : recipe.getIngredients()) {
+				if (!whatsInMyFridge.contains(ingredient)) {
+					skip = true;
+					break;
+				}
+			}
+			if (!skip) {
+				output.add(recipe);
+			}
+		}
+		return output;
 	}
 }

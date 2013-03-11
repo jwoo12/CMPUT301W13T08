@@ -94,19 +94,28 @@ public class RecipeBookActivity extends TitleBarOverride {
 				if (recipeInfo != null) {
 					Intent recipeDetailsIntent = new Intent();
 					recipeDetailsIntent.setClass(getApplicationContext(), RecipeDetailsActivity.class);
-					
-					recipeDetailsIntent.putExtra("recipeid", recipeInfo.get(0));
-					recipeDetailsIntent.putExtra("name", recipeInfo.get(1));
-					recipeDetailsIntent.putExtra("author", recipeInfo.get(2));
-					recipeDetailsIntent.putExtra("descriptions", recipeInfo.get(3));
-					recipeDetailsIntent.putExtra("instructions", recipeInfo.get(4));
-					recipeDetailsIntent.putExtra("ingredients", recipeInfo.get(5));
-					recipeDetailsIntent.putExtra("category", recipeInfo.get(6));
-					recipeDetailsIntent.putExtra("userid", recipeInfo.get(7));
+					recipeDetailsIntent = putExtraFromRecipeInfo(recipeDetailsIntent, recipeInfo);
 					startActivity(recipeDetailsIntent);
 				}
 			}
+
+
 		});
+	}
+	
+	public static Intent putExtraFromRecipeInfo(Intent recipeDetailsIntent,
+			ArrayList<String> recipeInfo) {
+		
+		recipeDetailsIntent.putExtra("recipeid", recipeInfo.get(0));
+		recipeDetailsIntent.putExtra("name", recipeInfo.get(1));
+		recipeDetailsIntent.putExtra("author", recipeInfo.get(2));
+		recipeDetailsIntent.putExtra("descriptions", recipeInfo.get(3));
+		recipeDetailsIntent.putExtra("instructions", recipeInfo.get(4));
+		recipeDetailsIntent.putExtra("ingredients", recipeInfo.get(5));
+		recipeDetailsIntent.putExtra("category", recipeInfo.get(6));
+		recipeDetailsIntent.putExtra("userid", recipeInfo.get(7));
+		
+		return recipeDetailsIntent;
 	}
 	
 	@Override
