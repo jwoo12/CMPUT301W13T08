@@ -1,12 +1,10 @@
 package com.foodbook.foodbook;
 
 import android.content.Intent;
-
 import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
-import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -45,9 +43,21 @@ public class RecipeDetailsActivity extends TitleBarOverride {
 	private TextView ingredientsField;
 	private TextView categoryField;
 	
+	private RelativeLayout editLayout;
+	private Button editButton;
+	
+	private RelativeLayout deleteLayout;
+	private Button deleteButton;
+	
+	private RelativeLayout publishLayout;
+	private Button publishButton;
+	
+	private RelativeLayout downloadLayout;
+	private Button downloadButton;
+	
 	private RelativeLayout shareLayout;
 	private Button shareButton;
-
+	
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -58,8 +68,8 @@ public class RecipeDetailsActivity extends TitleBarOverride {
 		TextView ingredientsLabel = (TextView) findViewById(R.id.recipeDetails_ingredientsLabel);
 		ingredientsLabel.setText("Ingredients");
 
+		// read intent
 		in = getIntent();
-		
 		recipeid = in.getStringExtra("recipeid");
 		name = in.getStringExtra("name");
 		author = in.getStringExtra("author");
@@ -67,25 +77,68 @@ public class RecipeDetailsActivity extends TitleBarOverride {
 		instructions = in.getStringExtra("instructions");
 		ingredients = in.getStringExtra("ingredients").replace(", ", "\n").replace(",", "\n");
 		category = in.getStringExtra("category").replace(", ", "\n").replace(",", "\n");
+		//TODO userid also here
 		
+		// bind views to variables
 		nameField = (TextView) findViewById(R.id.recipeDetails_foodName);
 		authorField = (TextView) findViewById(R.id.recipeDetails_author);
 		descriptionsField = (TextView) findViewById(R.id.recipeDetails_desc);
 		instructionsField = (TextView) findViewById(R.id.recipeDetails_instructions);
 		ingredientsField = (TextView) findViewById(R.id.recipeDetails_ingredients);
 		categoryField = (TextView) findViewById(R.id.recipeDetails_category);
-		
+
+		// bind buttons (and layouts containing buttons) to variables
+		editLayout = (RelativeLayout) findViewById(R.id.recipeDetails_editLayout);
+		editButton = (Button) findViewById(R.id.recipeDetails_editButton);
+		deleteLayout = (RelativeLayout) findViewById(R.id.recipeDetails_deleteLayout);
+		deleteButton = (Button) findViewById(R.id.recipeDetails_deleteButton);
+		publishLayout = (RelativeLayout) findViewById(R.id.recipeDetails_publishLayout);
+		publishButton = (Button) findViewById(R.id.recipeDetails_publishButton);
+		downloadLayout = (RelativeLayout) findViewById(R.id.recipeDetails_downloadLayout);
+		downloadButton = (Button) findViewById(R.id.recipeDetails_downloadButton);
 		shareLayout = (RelativeLayout) findViewById(R.id.recipeDetails_shareButtonLayout);
-		
 		shareButton = (Button) findViewById(R.id.recipeDetails_shareButton);
 		
+		// set button listeners
+		editButton.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				// TODO Auto-generated method stub
+				
+			}
+		});
 		
+		deleteButton.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				// TODO Auto-generated method stub
+				
+			}
+		});
+		
+		publishButton.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				// TODO Auto-generated method stub
+				
+			}
+		});
+		
+		downloadButton.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				// TODO download
+			}
+		});
 		
 		shareButton.setOnClickListener(new OnClickListener() {
 			
 			@Override
 			public void onClick(View v) {
-				
 				
 				String formatRecipe = "Recipe: " + name + "\n\n" + "Ingredients: " + "\n" 
 								+ ingredients + "\n\n" + "Instructions: " + "\n" + instructions 
@@ -93,30 +146,18 @@ public class RecipeDetailsActivity extends TitleBarOverride {
 								+ "Category: " + category + "\n\n" +
 								"Author: " + author + "\n";
 				
-				
 				Intent emailIntent = new Intent(android.content.Intent.ACTION_SEND);
-
 				String[] recipients = new String[]{"my@email.com", "",};
-
 				emailIntent.putExtra(android.content.Intent.EXTRA_EMAIL, recipients);
-
 				emailIntent.putExtra(android.content.Intent.EXTRA_SUBJECT, FridgeActivity.myRecipeBook.getAuthor() + " shared " + name + " with you");
-
 				emailIntent.putExtra(android.content.Intent.EXTRA_TEXT, formatRecipe);
-
 				emailIntent.setType("text/plain");
-
 				startActivity(Intent.createChooser(emailIntent, "Send mail..."));
-
-				finish();
-				
 				
 			}
 		});
         
-		
-		
-		
+		// update the textviews
 		updateTextViews();
 	}
 	
@@ -151,13 +192,7 @@ public class RecipeDetailsActivity extends TitleBarOverride {
 	* @author Jaeseo Park (jaeseo1), Jasmine Woo (jwoo), Nhu Bui (nbui), Robert Janes (rjanes)
 	*/
 	private void hideUnnecessaryButtons() {
-		
+		//if (FridgeActivity.myRecipeBook.getUserid() != userid) {
+			// hide edit, delete, publish buttons
+		}
 	}
-	
-	@Override
-	public void onResume() {
-		super.onResume();
-
-		
-	}
-}
