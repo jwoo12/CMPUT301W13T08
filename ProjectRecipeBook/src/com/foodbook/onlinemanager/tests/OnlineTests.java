@@ -4,12 +4,11 @@
 package com.foodbook.onlinemanager.tests;
 
 
-import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.InputStreamReader;
 import java.io.UnsupportedEncodingException;
-import java.lang.reflect.Type;
 import java.util.ArrayList;
+
+import junit.framework.TestCase;
 
 import org.apache.http.HttpResponse;
 import org.apache.http.client.ClientProtocolException;
@@ -20,14 +19,7 @@ import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.junit.Test;
 
-import junit.framework.TestCase;
-
-
-
-import com.foodbook.foodbook.*;
-
-import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
+import com.foodbook.foodbook.Recipe;
 
 /**
  * 
@@ -40,7 +32,7 @@ public class OnlineTests extends TestCase {
 
 	// Http Connector
 	private HttpClient httpclient = new DefaultHttpClient();
-	
+/*	
 	// JSON Utilities
 		private Gson gson = new Gson();
 
@@ -62,7 +54,7 @@ public class OnlineTests extends TestCase {
 	 * 
 	 * @throws ClientProtocolException
 	 * @throws IOException
-	 */
+	 
 	
 	@Test
 	
@@ -76,13 +68,12 @@ public class OnlineTests extends TestCase {
 	}
 
 	
-	/**
 	 * Test to insert recipe
 	 * @throws IOException 
 	 * @throws ClientProtocolException 
 	 * 
 	 * 
-	 */
+	 *//*
 	
 	@Test
 	
@@ -107,7 +98,7 @@ public class OnlineTests extends TestCase {
 		assert (response != null);
 	}
 	
-
+*/
 	
 
 	
