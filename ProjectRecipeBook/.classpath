@@ -5,10 +5,6 @@
 	<classpathentry kind="con" path="com.android.ide.eclipse.adt.ANDROID_FRAMEWORK"/>
 	<classpathentry kind="con" path="com.android.ide.eclipse.adt.LIBRARIES"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.junit.JUNIT_CONTAINER/4"/>
-	<classpathentry kind="lib" path="/home/dsk10/ugrad/jwoo/httpcomponents-core-4.2.3-bin.zip"/>
-	<classpathentry kind="lib" path="/home/dsk10/ugrad/jwoo/httpcomponents-client-4.2.3-bin.zip"/>
 	<classpathentry kind="lib" path="/home/dsk10/ugrad/jwoo/google-gson-2.2.2/gson-2.2.2.jar"/>
-	<classpathentry kind="lib" path="/home/dsk10/ugrad/jwoo/google-gson-2.2.2/gson-2.2.2-javadoc.jar"/>
-	<classpathentry kind="lib" path="/home/dsk10/ugrad/jwoo/google-gson-2.2.2/gson-2.2.2-sources.jar"/>
 	<classpathentry kind="output" path="bin/classes"/>
 </classpath>
