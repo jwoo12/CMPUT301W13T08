@@ -30,6 +30,8 @@ public class EditRecipeActivity extends TitleBarOverride {
 	protected String category;
 	protected String ingredients;
 	protected String instructions;
+	protected String recipeid;
+	protected String author;
 	
 	protected EditText recipeNameField;
 	protected EditText descriptionField;

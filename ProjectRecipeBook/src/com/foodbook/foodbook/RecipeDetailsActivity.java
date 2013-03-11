@@ -22,8 +22,6 @@ import android.widget.TextView;
  */
 
 
-
-
 public class RecipeDetailsActivity extends TitleBarOverride {
 	
 	private Intent in;
@@ -117,8 +115,8 @@ public class RecipeDetailsActivity extends TitleBarOverride {
 			
 			@Override
 			public void onClick(View v) {
-				// TODO Auto-generated method stub
-				
+				FridgeActivity.myRecipeBook.deleteById(recipeid);
+				finish();
 			}
 		});
 		

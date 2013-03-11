@@ -243,7 +243,7 @@ public class RecipeBook {
 	public ArrayList<String> getRecipeInfo(String recipeid) {
 		ArrayList<String> outputArray = new ArrayList<String>();
 		for (Recipe recipe : this.getRecipeBook()) {
-			if (recipe.getRecipeid() == recipeid) {
+			if (recipe.getRecipeid().equals(recipeid)) {
 				outputArray.add(recipeid);
 				outputArray.add(recipe.getRecipename());
 				outputArray.add(recipe.getauthor());
@@ -258,5 +258,19 @@ public class RecipeBook {
 		return null;
 	}
 	
-	
+	protected void deleteById(String recipeid) {
+		ArrayList<Recipe> combinedList = this.getRecipeBook();
+		for (int i=0; i < combinedList.size(); i++) {
+			if (combinedList.get(i).getRecipeid().equals(recipeid)) {
+				int offset = i - this.getMine().size();
+				if (offset < 0) {
+					this.mine.remove(i);
+				}
+				else {
+					this.downloads.remove(offset);
+				}
+			}
+		}
+	}
+
 }
