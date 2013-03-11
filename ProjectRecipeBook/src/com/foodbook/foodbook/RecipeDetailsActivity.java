@@ -209,7 +209,11 @@ public class RecipeDetailsActivity extends TitleBarOverride {
 			deleteLayout.setVisibility(View.GONE);
 			publishLayout.setVisibility(View.GONE);
 		}
-		if (!onlineRecipe) {
+		if (onlineRecipe) {
+			publishLayout.setVisibility(View.GONE);
+			editLayout.setVisibility(View.GONE);
+		}
+		else {
 			downloadLayout.setVisibility(View.GONE);
 		}
 	}

@@ -7,6 +7,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.AdapterView;
@@ -111,8 +112,10 @@ public class FridgeActivity extends TitleBarOverride {
 				
 				Intent ingredientSeach = new Intent();
 				ingredientSeach.setClass(getApplicationContext(), SearchResult.class);
-				ingredientSeach.putStringArrayListExtra("localResults", localResults);
-				ingredientSeach.putStringArrayListExtra("localID", localID);
+				//ingredientSeach.putStringArrayListExtra("localResults", localResults);
+				//ingredientSeach.putStringArrayListExtra("localID", localID);
+				ingredientSeach.putExtra("localResults", localResults);
+				ingredientSeach.putExtra("localID", localID);
 				// TODO online results...
 				
 				startActivity(ingredientSeach);
