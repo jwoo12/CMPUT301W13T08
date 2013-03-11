@@ -1,5 +1,6 @@
 package com.foodbook.foodbook;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
 	/**
@@ -18,7 +19,8 @@ import java.util.ArrayList;
 	 * 
 	 */
 
-public class RecipeBook {
+@SuppressWarnings("serial")
+public class RecipeBook implements Serializable {
 
 	ArrayList<Recipe> mine;
 	ArrayList<Recipe> downloads;

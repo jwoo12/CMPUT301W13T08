@@ -97,5 +97,4 @@ public class TitleBarOverride extends Activity {
 		alertdg.show(); 
 	} 
     
-    
 }
