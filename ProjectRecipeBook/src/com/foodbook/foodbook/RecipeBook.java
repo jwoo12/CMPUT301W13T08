@@ -42,14 +42,37 @@ public class RecipeBook {
 		
 	}
 	
+	/**
+	 * 
+	 * "Getter" method to return user created recipes
+	 * 
+	 * @return a list of user created recipes
+	 */
+	
 	public ArrayList<Recipe> getMine() {
 		return mine;
 	}
 
+	/**
+	 * 
+	 * "Setter" method to assign user created recipes
+	 * 
+	 * @param mine a list of user created recipes
+	 */
+	
+	
 	public void setMine(ArrayList<Recipe> mine) {
 		this.mine = mine;
 	}
 
+	/**
+	 * 
+	 * 
+	 * 
+	 * @return 
+	 */
+	
+	
 	public ArrayList<Recipe> getDownloads() {
 		return downloads;
 	}

@@ -119,7 +119,7 @@ public class EditRecipeActivity extends TitleBarOverride {
 	/**
 	* This function reads contents of the edited text fields and saves them in global variables.
 	* 
-	* 
+	* @author Jaeseo Park (jaeseo1), Jasmine Woo (jwoo), Nhu Bui (nbui), Robert Janes (rjanes)
 	* 
 	*/
 	protected void readTextfields() {
