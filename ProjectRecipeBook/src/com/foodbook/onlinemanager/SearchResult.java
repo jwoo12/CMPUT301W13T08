@@ -76,7 +76,7 @@ public class SearchResult extends TitleBarOverride {
 					recipeDetailsIntent = RecipeBookActivity.putExtraFromRecipeInfo(recipeDetailsIntent, recipeInfo);
 					startActivity(recipeDetailsIntent);
 					// TODO distinguish online/offline recipies here by inserting "onlineRecipe = true" to intent
-				}
+				} 
 			}
 		});
 	}
