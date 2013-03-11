@@ -56,8 +56,7 @@ public class RecipeBook implements Serializable {
 		this.mine = new ArrayList<Recipe>();
 		this.downloads = new ArrayList<Recipe>();
 		this.userid = this.generateNewUserid();
-		this.author = "defaultAuthor";
-		Log.v("newRecipeBook", userid);
+		this.author = "noname";
 
 	}
 
@@ -272,8 +271,8 @@ public class RecipeBook implements Serializable {
 					this.mine.get(i).setRecipename(recipename);
 					this.mine.get(i).setRecipeDescriptions(recipeDescriptions);
 					this.mine.get(i).setRecipeinstructions(recipeinstructions);
-					this.mine.get(i).setIngredients(ingredients);
-					this.mine.get(i).setCategory(category);
+					this.mine.get(i).setIngredients(Recipe.formatStringArrayListEntries(ingredients));
+					this.mine.get(i).setCategory(Recipe.formatStringArrayListEntries(category));
 					this.mine.get(i).setauthor(
 							FridgeActivity.myRecipeBook.getAuthor());
 				} else {
@@ -282,8 +281,8 @@ public class RecipeBook implements Serializable {
 							recipeDescriptions);
 					this.downloads.get(offset).setRecipeinstructions(
 							recipeinstructions);
-					this.downloads.get(offset).setIngredients(ingredients);
-					this.downloads.get(offset).setCategory(category);
+					this.downloads.get(offset).setIngredients(Recipe.formatStringArrayListEntries(ingredients));
+					this.downloads.get(offset).setCategory(Recipe.formatStringArrayListEntries(category));
 					this.downloads.get(offset).setauthor(
 							FridgeActivity.myRecipeBook.getAuthor());
 				}
@@ -334,31 +333,33 @@ public class RecipeBook implements Serializable {
 			}
 		}
 	}
-	
+
 	private String generateNewUserid() {
 		SecureRandom randomKey = new SecureRandom();
 		return (new BigInteger(130, randomKey).toString(32));
 	}
 
 	public boolean saveToFile(Context context) {
-		
-		try{
+
+		try {
 			context.deleteFile(RecipeBookFilename);
-            ObjectOutputStream out = new ObjectOutputStream(context.openFileOutput(RecipeBookFilename, Context.MODE_APPEND));
-            out.writeObject(this.getMine());
-            out.writeObject(this.getDownloads());
-            out.writeObject(this.getUserid());
-            out.writeObject(this.getAuthor());
-            out.close();
-            
-            return true;
-            
-        } catch (FileNotFoundException e) { 
-            e.printStackTrace(); 
-        } catch (IOException e) { 
-            e.printStackTrace(); 
-        }
-		
+			ObjectOutputStream out = new ObjectOutputStream(
+					context.openFileOutput(RecipeBookFilename,
+							Context.MODE_APPEND));
+			out.writeObject(this.getMine());
+			out.writeObject(this.getDownloads());
+			out.writeObject(this.getUserid());
+			out.writeObject(this.getAuthor());
+			out.close();
+
+			return true;
+
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+
 		return false;
 	}
 
@@ -376,7 +377,7 @@ public class RecipeBook implements Serializable {
 			this.setDownloads(downloadsIn);
 			this.setUserid(useridIn);
 			this.setAuthor(authorIn);
-			
+
 			return true;
 
 		} catch (EOFException eof) {
@@ -386,5 +387,17 @@ public class RecipeBook implements Serializable {
 			e.printStackTrace();
 		}
 		return false;
+	}
+
+	public void updateAuthorInAllRecipes() {
+		/**
+		 * Upon change of author (username), this method will go through each
+		 * recipe in "mine" array, and will update "author" field.
+		 */
+		
+		for (Recipe eachRecipe : this.mine) {
+			eachRecipe.setauthor(this.getAuthor());
+		}
+
 	}
 }

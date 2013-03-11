@@ -76,20 +76,17 @@ public class TitleBarOverride extends Activity {
 			startActivity(search);
 			break;
 		case R.id.menu_changeName:
-			askForNewName(false);
+			askForNewName();
 		default:
 			break;
 		}
 		return true;
 	}
 
-	protected void askForNewName(boolean newUser) {
+	protected void askForNewName() {
 		AlertDialog.Builder alertdg = new AlertDialog.Builder(this);
 		alertdg.setTitle("New username");
 		final EditText nameField = new EditText(this);
-		if (!newUser) {
-			nameField.setText(FridgeActivity.myRecipeBook.getAuthor());
-		}
 		LinearLayout layout = new LinearLayout(this);
 		layout.addView(nameField);
 		alertdg.setView(layout);
@@ -99,6 +96,7 @@ public class TitleBarOverride extends Activity {
 					public void onClick(DialogInterface dialog, int which) {
 						String newName = nameField.getText().toString();
 						FridgeActivity.myRecipeBook.setAuthor(newName);
+						FridgeActivity.myRecipeBook.updateAuthorInAllRecipes();
 					}
 				});
 		alertdg.setNegativeButton("Cancel",

@@ -136,7 +136,7 @@ public final class R {
         public static final int search_result=0x7f040023;
         public static final int seasrch_by_ingredients=0x7f040022;
         public static final int see_what_i_can_make=0x7f040007;
-        public static final int separate_by_comma=0x7f04001b;
+        public static final int separate_by_newline=0x7f04001b;
         public static final int share=0x7f040016;
         public static final int title_activity_main=0x7f040003;
         public static final int title_bar_text=0x7f040004;

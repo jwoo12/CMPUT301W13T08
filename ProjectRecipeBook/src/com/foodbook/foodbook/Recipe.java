@@ -1,4 +1,3 @@
-
 package com.foodbook.foodbook;
 
 import java.io.Serializable;
@@ -6,46 +5,55 @@ import java.util.ArrayList;
 import java.util.Date;
 
 /**
- * A recipe is a set of instructions that a User can record or save to describe how to prepare a food item.
+ * A recipe is a set of instructions that a User can record or save to describe
+ * how to prepare a food item.
  * 
- * <p> Recipes contain: </p>
- * <ul> 
- * 		<li> a title </li>
- * 		<li> a list of ingredients </li>
- * 		<li> instructions </li>
- * 		<li> a recipe id </li>
- * 		<li> a user id </li>
- * 		<li> photos (optional) </li>
- * 		<li> category (optional) </li>
+ * <p>
+ * Recipes contain:
+ * </p>
+ * <ul>
+ * <li>a title</li>
+ * <li>a list of ingredients</li>
+ * <li>instructions</li>
+ * <li>a recipe id</li>
+ * <li>a user id</li>
+ * <li>photos (optional)</li>
+ * <li>category (optional)</li>
  * 
  * </ul>
  * 
- * @author Jaeseo Park (jaeseo1), Jasmine Woo (jwoo), Nhu Bui (nbui), Robert Janes (rjanes)
+ * @author Jaeseo Park (jaeseo1), Jasmine Woo (jwoo), Nhu Bui (nbui), Robert
+ *         Janes (rjanes)
  * 
  */
 
 @SuppressWarnings("serial")
-public class Recipe implements Serializable{
-	
+public class Recipe implements Serializable {
+
 	private static final String NULL = null;
-	
+
 	private String recipename;
 	private String recipeinstructions;
 	private String recipeDescriptions;
 	private String author; // author will be changable at any time.
 	private ArrayList<String> ingredients;
-	private ArrayList<String> category; // there can be multiple categories (somewhat similar to the idea of "tagging")
-	private String recipeid; // recipeid is permanent, and will be in this format: (userid) + (date in milisecond) + (first character of the food name) 
+	private ArrayList<String> category; // there can be multiple categories
+										// (somewhat similar to the idea of
+										// "tagging")
+	private String recipeid; // recipeid is permanent, and will be in this
+								// format: (userid) + (date in milisecond) +
+								// (first character of the food name)
 	private String userid; // userid is permanent.
 
-	// userid is perminant id, given to each user, this will be used to identify the owner of recipes.
+	// userid is perminant id, given to each user, this will be used to identify
+	// the owner of recipes.
 
 	/**
 	 * Description "getter" for a given recipe
 	 * 
 	 * return recipeDescriptions a description of the recipe
 	 */
-	
+
 	public String getRecipeDescriptions() {
 		return recipeDescriptions;
 	}
@@ -53,9 +61,10 @@ public class Recipe implements Serializable{
 	/**
 	 * Description "setter" for a given recipe
 	 * 
-	 * @param recipeDescriptions a description of the recipe
+	 * @param recipeDescriptions
+	 *            a description of the recipe
 	 */
-	
+
 	public void setRecipeDescriptions(String recipeDescriptions) {
 		this.recipeDescriptions = recipeDescriptions;
 	}
@@ -65,17 +74,18 @@ public class Recipe implements Serializable{
 	 * 
 	 * @return recipename the name of the recipe
 	 */
-	
+
 	public String getRecipename() {
 		return recipename;
 	}
-	
+
 	/**
 	 * Recipe's name "setter"
 	 * 
-	 * @param recipename the name of the recipe
+	 * @param recipename
+	 *            the name of the recipe
 	 */
-	
+
 	public void setRecipename(String recipename) {
 		this.recipename = recipename;
 	}
@@ -83,9 +93,9 @@ public class Recipe implements Serializable{
 	/**
 	 * Recipe's instructions "getter"
 	 * 
-	 * @return recipeinstructions instructions of the recipe 
+	 * @return recipeinstructions instructions of the recipe
 	 */
-	
+
 	public String getRecipeinstructions() {
 		return recipeinstructions;
 	}
@@ -94,9 +104,10 @@ public class Recipe implements Serializable{
 	 * 
 	 * Recipe's instructions "setter"
 	 * 
-	 * @param recipeinstructions instructions of the recipe 
+	 * @param recipeinstructions
+	 *            instructions of the recipe
 	 */
-	
+
 	public void setRecipeinstructions(String recipeinstructions) {
 		this.recipeinstructions = recipeinstructions;
 	}
@@ -105,31 +116,34 @@ public class Recipe implements Serializable{
 	 * 
 	 * Recipe's author "getter"
 	 * 
-	 * @param author author's author of the recipe 
+	 * @param author
+	 *            author's author of the recipe
 	 */
-	
+
 	public String getauthor() {
 		return author;
 	}
-	
+
 	/**
 	 * 
 	 * Recipe's author "setter"
 	 * 
-	 * @param author author's author of the recipe 
+	 * @param author
+	 *            author's author of the recipe
 	 */
-	
+
 	public void setauthor(String author) {
 		this.author = author;
 	}
-	
+
 	/**
 	 * 
 	 * Recipe's list of required ingredients "getter"
 	 * 
-	 * @param ingredients a list of ingredients for the recipe 
+	 * @param ingredients
+	 *            a list of ingredients for the recipe
 	 */
-	
+
 	public ArrayList<String> getIngredients() {
 		return ingredients;
 	}
@@ -138,9 +152,10 @@ public class Recipe implements Serializable{
 	 * 
 	 * Recipe's list of required ingredients "setter"
 	 * 
-	 * @param ingredients a list of ingredients for the recipe 
+	 * @param ingredients
+	 *            a list of ingredients for the recipe
 	 */
-	
+
 	public void setIngredients(ArrayList<String> ingredients) {
 		this.ingredients = ingredients;
 	}
@@ -149,9 +164,10 @@ public class Recipe implements Serializable{
 	 * 
 	 * Recipe's category "getter"
 	 * 
-	 * @param category the genre of the recipe 
+	 * @param category
+	 *            the genre of the recipe
 	 */
-	
+
 	public ArrayList<String> getCategory() {
 		return category;
 	}
@@ -160,13 +176,13 @@ public class Recipe implements Serializable{
 	 * 
 	 * Recipe's category "setter"
 	 * 
-	 * @param category the genre of the recipe 
+	 * @param category
+	 *            the genre of the recipe
 	 */
-	
+
 	public void setCategory(ArrayList<String> category) {
 		this.category = category;
 	}
-
 
 	/**
 	 * 
@@ -174,7 +190,7 @@ public class Recipe implements Serializable{
 	 * 
 	 * @param NULL
 	 */
-	
+
 	public static String getNull() {
 		return NULL;
 	}
@@ -183,9 +199,10 @@ public class Recipe implements Serializable{
 	 * 
 	 * Recipe's id "getter"
 	 * 
-	 * @param recipeid the identification code of the recipe 
+	 * @param recipeid
+	 *            the identification code of the recipe
 	 */
-	
+
 	public String getRecipeid() {
 		return recipeid;
 	}
@@ -194,9 +211,10 @@ public class Recipe implements Serializable{
 	 * 
 	 * Recipe's id "setter"
 	 * 
-	 * @param recipeid the identification code of the recipe 
+	 * @param recipeid
+	 *            the identification code of the recipe
 	 */
-	
+
 	public String getUserid() {
 		return userid;
 	}
@@ -205,74 +223,102 @@ public class Recipe implements Serializable{
 	 * 
 	 * Creates a new Recipe object.
 	 * 
-	 * @param recipename name of recipe
-	 * @param recipeDescriptions description of recipe
-	 * @param recipeInstructions recipe instructions
-	 * @param ingredients list of ingredients needed
-	 * @param category genre of recipe	
-	 * @param userid id of user 
-	 * @param author name of user
+	 * @param recipename
+	 *            name of recipe
+	 * @param recipeDescriptions
+	 *            description of recipe
+	 * @param recipeInstructions
+	 *            recipe instructions
+	 * @param ingredients
+	 *            list of ingredients needed
+	 * @param category
+	 *            genre of recipe
+	 * @param userid
+	 *            id of user
+	 * @param author
+	 *            name of user
 	 */
-	
-	public Recipe(String recipename,
-			String recipeDescriptions,
-			String recipeInstructions,
-			ArrayList<String> ingredients,
-			ArrayList<String> category,
-			String userid,
-			String author) {
+
+	public Recipe(String recipename, String recipeDescriptions,
+			String recipeInstructions, ArrayList<String> ingredients,
+			ArrayList<String> category, String userid, String author) {
 		this.recipename = recipename;
 		this.recipeinstructions = recipeInstructions;
 		this.recipeDescriptions = recipeDescriptions;
 		this.author = author;
-		this.ingredients = ingredients;
-		this.category = category;
-		this.recipeid = userid + String.valueOf((new Date()).getTime()) + recipename.charAt(0);
+		this.ingredients = formatStringArrayListEntries(ingredients);
+		this.category = formatStringArrayListEntries(category);
+		this.recipeid = userid + String.valueOf((new Date()).getTime())
+				+ recipename.charAt(0);
 		this.userid = userid;
 	}
-	
+
 	/**
-	* This method will return list of ingredients as a string, in the following format:
-	* ingr_0, ingr_1, ingr_2 ... ingr_n
-	* If there is no ingredients added yet, then empty string is returned.
-	*/
-		
+	 * This method will return list of ingredients as a string, in the following
+	 * format: ingr_0\ningr_1\ningr_2 ... ingr_n If there is no ingredients
+	 * added yet, then empty string is returned.
+	 */
+
 	public String getIngredientsString() {
-		
-		
+
 		if (this.ingredients.size() == 0) {
 			return "";
 		}
-		
+
 		String listOfIngr = this.ingredients.get(0);
 		int i;
-		for (i=1; i < this.ingredients.size(); i++) {
-			listOfIngr += ", " + this.ingredients.get(i);
+		for (i = 1; i < this.ingredients.size(); i++) {
+			listOfIngr += "\n" + this.ingredients.get(i);
+		}
+
+		return listOfIngr;
+	}
+
+	public static ArrayList<String> formatStringArrayListEntries(ArrayList<String> input) {
+		/**
+		 * This function formats string-arraylist entries so that all entries have no
+		 * leading or trailing whitespaces, and makes sure that there is no
+		 * empty entry, etc...
+		 * 
+		 */
+		
+		ArrayList<String> output = new ArrayList<String>();
+		
+		for (String inputEntry : input) {
+			if (inputEntry.equals("")) {
+				continue;
+			}
+			String outputEntry = inputEntry;
+			while (outputEntry.contains("  ")) {
+				outputEntry.replace("  ", " ");
+			}
+			outputEntry.trim();
+			output.add(outputEntry);
 		}
 		
-		return listOfIngr;
+		return output;
+		
 	}
 	
 	/**
-	* This method will return list of categories as a string, in the following format:
-	* categ_0, categ_1, categ_2 ... categ_n
-	* If there is no categories added yet, then empty string is returned.
-	*/
-		
+	 * This method will return list of categories as a string, in the following
+	 * format: categ_0\ncateg_1\ncateg_2 ... categ_n If there is no categories
+	 * added yet, then empty string is returned.
+	 */
+
 	public String getCategoryString() {
-		
-		
+
 		if (this.category.size() == 0) {
 			return "";
 		}
-		
+
 		String listOfCateg = this.category.get(0);
 		int i;
-		for (i=1; i < this.category.size(); i++) {
-			listOfCateg += ", " + this.category.get(i);
+		for (i = 1; i < this.category.size(); i++) {
+			listOfCateg += "\n" + this.category.get(i);
 		}
-		
+
 		return listOfCateg;
-		
+
 	}
 }

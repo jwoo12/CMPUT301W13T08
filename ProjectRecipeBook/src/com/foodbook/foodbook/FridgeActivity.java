@@ -68,7 +68,7 @@ public class FridgeActivity extends TitleBarOverride {
 		myRecipeBook = new RecipeBook();
 		boolean recipeLoadResultOK = myRecipeBook.loadFromFile(getApplicationContext());
 		if (!recipeLoadResultOK) {
-			askForNewName(true);
+			askForNewName();
 		}
 
 		// setup List View
