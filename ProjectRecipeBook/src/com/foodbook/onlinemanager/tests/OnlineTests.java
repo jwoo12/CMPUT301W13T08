@@ -3,10 +3,29 @@
  */
 package com.foodbook.onlinemanager.tests;
 
+
+import java.io.IOException;
+import java.io.UnsupportedEncodingException;
+import java.lang.reflect.Type;
+import java.util.ArrayList;
+
+import org.apache.http.HttpResponse;
+import org.apache.http.client.ClientProtocolException;
+import org.apache.http.client.HttpClient;
+import org.apache.http.client.methods.HttpGet;
+import org.apache.http.client.methods.HttpPost;
+import org.apache.http.entity.StringEntity;
+import org.apache.http.impl.client.DefaultHttpClient;
+import org.junit.Test;
+
 import junit.framework.TestCase;
-import com.foodbook.onlinemanager.*;
+
+
+
 import com.foodbook.foodbook.*;
 
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 
 /**
  * 
@@ -17,28 +36,110 @@ import com.foodbook.foodbook.*;
  */
 public class OnlineTests extends TestCase {
 
+	// Http Connector
+	private HttpClient httpclient = new DefaultHttpClient();
+	
+	// JSON Utilities
+		private Gson gson = new Gson();
+
+
+	String rName = "name"; 
+	String rDesc = "desc"; 
+	String rInst = "inst";
+	ArrayList<String> rIng = new ArrayList<String>(); 
+	ArrayList<String> rCate = new ArrayList<String>(); 
+	String rUserID = "123"; 
+	String rAuth = "auth";
+	
+	
+	private Recipe r = new Recipe(rName,rDesc,rInst,rIng,rCate,rUserID,rAuth);
+	
 	/**
 	 * 
+	 * Test the connection
 	 * 
-	 * 
-	 * @param name
+	 * @throws ClientProtocolException
+	 * @throws IOException
 	 */
-	public OnlineTests(String name) {
-		super(name);
+	
+	@Test
+	
+	public void testConnection() throws ClientProtocolException, IOException {
+	
+		HttpGet getRequest = new HttpGet("http://cmput301.softwareprocess.es:8080/CMPUT301W13T08/");
+	
+		HttpResponse response = httpclient.execute(getRequest);
+		
+		assert (response != null);
 	}
 
-	/* (non-Javadoc)
-	 * @see junit.framework.TestCase#setUp()
+	
+	/**
+	 * Test to insert recipe
+	 * @throws IOException 
+	 * @throws ClientProtocolException 
+	 * 
+	 * 
 	 */
-	protected void setUp() throws Exception {
-		super.setUp();
-	}
+	
+	@Test
+	
+	public void insert () throws ClientProtocolException, IOException{
+		HttpPost httpPost = new HttpPost("http://cmput301.softwareprocess.es:8080/CMPUT301W13T08/"+r.getRecipeid());
+		StringEntity stringentity = null;
+		
+		try {
+			stringentity = new StringEntity(gson.toJson(r));
+		} catch (UnsupportedEncodingException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		httpPost.setHeader("Accept","application/json");
 
-	/* (non-Javadoc)
-	 * @see junit.framework.TestCase#tearDown()
+		httpPost.setEntity(stringentity);
+		HttpResponse response = null;
+		
+		response = httpclient.execute(httpPost);
+		
+		assert (response != null);
+	}
+	
+	/**
+	 * 
+	 * Test to retrieve a recipe
+	 * @throws IOException 
+	 * @throws ClientProtocolException 
+	 * 
+	 * 
 	 */
-	protected void tearDown() throws Exception {
-		super.tearDown();
+	
+	
+	@Test
+	
+	public void retrieve() throws ClientProtocolException, IOException{
+		
+		HttpGet getRequest = new HttpGet("http://cmput301.softwareprocess.es:8080/testing/lab02/999?pretty=1");//S4bRPFsuSwKUDSJImbCE2g?pretty=1
+
+		getRequest.addHeader("Accept","application/json");
+
+		HttpResponse response = httpclient.execute(getRequest);
+
+		String status = response.getStatusLine().toString();
+		
+//		String json = getEntityContent(response);
+//
+//		// We have to tell GSON what type we expect
+//		Type elasticSearchResponseType = new TypeToken<ElasticSearchResponse<Recipe>>(){}.getType();
+//		// Now we expect to get a Recipe response
+//		ElasticSearchResponse<Recipe> esResponse = gson.fromJson(json, elasticSearchResponseType);
+//		// We get the recipe from it!
+//		Recipe recipe = esResponse.getSource();
+//		
+		
+		
+		
 	}
 
 }
+

@@ -351,7 +351,7 @@ public class RecipeBook implements Serializable {
 		return null;
 	}
 
-	protected void deleteById(String recipeid) {
+	public void deleteById(String recipeid) {
 		ArrayList<Recipe> combinedList = this.getRecipeBook();
 		for (int i = 0; i < combinedList.size(); i++) {
 			if (combinedList.get(i).getRecipeid().equals(recipeid)) {
@@ -470,4 +470,13 @@ public class RecipeBook implements Serializable {
 		return output; 
 	}
 	
+	
+	public boolean containsRecipeOfID(String recipeidIn) {
+		for (Recipe eachRecipe : this.getRecipeBook()) {
+			if (eachRecipe.getRecipeid().equals(recipeidIn)) {
+				return true;
+			}
+		}
+		return false;
+	}
 }

@@ -41,7 +41,7 @@ public class Fridge {
 	 *            the application context
 	 */
 
-	public Fridge(Context context) {
+	public Fridge() {
 		this.ingredients = new ArrayList<String>();
 
 	}
@@ -71,6 +71,16 @@ public class Fridge {
 	public void editIngredient(int ingredientIndex, String newName) {
 		this.ingredients.set(ingredientIndex, newName);
 	}
+	
+	public void editIngredientByName (String oldName, String newName) {
+		ArrayList<String> tmp = this.getIngredients();
+		for (int i=0; i < tmp.size(); i++) {
+			if (tmp.get(i).equals(oldName)) {
+				this.editIngredient(i, newName);
+				return;
+			}
+		}
+	}
 
 	/**
 	 * 
@@ -82,6 +92,16 @@ public class Fridge {
 
 	public void removeIngredientByIndex(int ingrdIndex) {
 		this.ingredients.remove(ingrdIndex);
+	}
+	
+	public void removeIngredientByName (String targetName) {
+		ArrayList<String> tmp = this.getIngredients();
+		for (int i=0; i < tmp.size(); i++) {
+			if (tmp.get(i).equals(targetName)) {
+				this.removeIngredientByIndex(i);
+				return;
+			}
+		}
 	}
 
 	/**
@@ -165,5 +185,8 @@ public class Fridge {
 		return this.ingredients.get(index);
 	}
 
+	public void clearFridge() {
+		this.ingredients.clear();
+	}
 
 }

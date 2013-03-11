@@ -1,154 +1,103 @@
 package com.foodbook.foodbook.test;
 
 import java.util.ArrayList;
-import java.util.List;
-
-import com.foodbook.foodbook.EditRecipeActivity;
-import com.foodbook.foodbook.FridgeActivity;
-import com.foodbook.foodbook.MakeRecipeActivity;
-import com.foodbook.foodbook.R;
-import com.foodbook.foodbook.Recipe;
-import com.foodbook.foodbook.RecipeBook;
-import com.foodbook.foodbook.RecipeBookActivity;
 
 import android.test.ActivityInstrumentationTestCase2;
-import android.util.Log;
-import android.widget.ListView;
 
+import com.foodbook.foodbook.FridgeActivity;
+import com.foodbook.foodbook.Recipe;
+import com.foodbook.foodbook.RecipeBook;
 
 /**
- * <p> This class is testing the creation of recipe in EditRecipeActivity
- * test add title, description, ingredient, instruction,category able to save
- * test exclude title-not able to save- 
- * test exclude description -not able to save- 
- * test exclude ingredient -not able to save- 
- * test exclude category  -able to save- 
- * test add a photo
- *  </p>
- * @author Jaeseo Park (jaeseo1), Jasmine Woo (jwoo), Nhu Bui (nbui), Robert Janes (rjanes)
- *
+ * <p>
+ * This class is testing the creation of recipe in EditRecipeActivity test add
+ * title, description, ingredient, instruction,category able to save test
+ * exclude title-not able to save- test exclude description -not able to save-
+ * test exclude ingredient -not able to save- test exclude category -able to
+ * save- test add a photo
+ * </p>
+ * 
+ * @author Jaeseo Park (jaeseo1), Jasmine Woo (jwoo), Nhu Bui (nbui), Robert
+ *         Janes (rjanes)
+ * 
  */
 
 public class NewRecipeValidation extends ActivityInstrumentationTestCase2 {
 	private String getrecipe;
 	private ArrayList<String> idAll;
+
+	private RecipeBook testRecipeBook;
+
+	String rName = "name";
+	String rDesc = "desc";
+	String rInst = "inst";
+	ArrayList<String> rIng = new ArrayList<String>();
+	ArrayList<String> rCate = new ArrayList<String>();
+	String rUserID = "123";
+	String rAuth = "auth";
+
+	private Recipe r;
+
 	/**
 	 * method to inherit from EditRecipeACtivity
 	 */
+	@SuppressWarnings({ "unchecked", "deprecation" })
 	public NewRecipeValidation() {
-		super("com.foodbook.foodbook.test",EditRecipeActivity.class);
+		super("com.foodbook.foodbook.test", FridgeActivity.class);
 	}
+
 	/**
-	 * method create a new setup/activity 
+	 * method create a new setup/activity
 	 */
 	@Override
 	protected void setUp() throws Exception {
 		super.setUp();
-		EditRecipeActivity EditRecipeActivity = (com.foodbook.foodbook.EditRecipeActivity) getActivity(); 
+
+		testRecipeBook = new RecipeBook();
 	}
-	
-	private static final String INGRED_TITLE = "T I T L E";
-    private static final String INGRED_DSCRIPTION = "A SPACE D E S C R I P T I O N";
-    private static final String INGRED_INGREDIENT = "S U G A R";
-    private static final String INGRED_INSTRUCTION = "M I X SPACE I T";
+
 	/**
 	 * method to test the creation of a new recipe and if it got saved
 	 */
 	public void testNewRecipe() {
-		try{ArrayList<String> ingred = new ArrayList<String>();
-		ArrayList<String> category = new ArrayList<String>();
-		Recipe recipe = new Recipe(INGRED_TITLE, INGRED_DSCRIPTION, INGRED_INSTRUCTION, ingred , category, "userid","username");
-        // we use sendKeys instead of setText so it goes through entry
-        // click on add tab
-    	sendKeys(INGRED_TITLE);
-    	sendKeys("TAB");
-    	sendKeys(INGRED_DSCRIPTION);
-    	//add ingredient
-       // sendKeys(INGRED_TEA);
-        //click on save tab
-        sendKeys("TAB");
-    	sendKeys(INGRED_INGREDIENT);
-    	sendKeys("TAB");
-    	sendKeys(INGRED_INSTRUCTION);
-    	sendKeys("TAB");
-    	sendKeys("ENTER");
-        // get result
-    	//assertTrue(recipe.getIngredients().size()==1);
-        assertEquals(INGRED_TITLE, recipe.getRecipename());
-        assertEquals(INGRED_DSCRIPTION, recipe.getRecipeDescriptions());
-        assertEquals(INGRED_INGREDIENT, recipe.getIngredientsString());
-        assertEquals(INGRED_INSTRUCTION, recipe.getRecipeinstructions());
-        
-		} catch (Exception e) {
+		try{
+			int oldSize = testRecipeBook.getRecipeBook().size();
+			testRecipeBook.addRecipe(rName, rDesc, rInst, rIng, rCate);
+			
+			int newSize = testRecipeBook.getRecipeBook().size();
+			assertTrue(oldSize + 1 == newSize);
+			
+			assertTrue(testRecipeBook.getMine().get(newSize-1).getRecipename().equals(rName));
+			
+			} catch (Exception e) {
             fail("Exception occurred");
         }
     }
-	 /**
-     * method for testing if no title was inputed in EditRecipeActivity
-     */
+
+	/**
+	 * method for testing if no title was inputed in EditRecipeActivity
+	 */
+
+	public void testDeleteRecipe() {
+		try{
+			
+			// adding a new recipe
+			int oldSize = testRecipeBook.getRecipeBook().size();
+			testRecipeBook.addRecipe(rName, rDesc, rInst, rIng, rCate);
+			int newSize = testRecipeBook.getRecipeBook().size();
+			assertTrue(oldSize + 1 == newSize);
+			assertTrue(testRecipeBook.getMine().get(newSize-1).getRecipename().equals(rName));
+			
+			// deleting the recipe
+			String recipeID = testRecipeBook.getMine().get(newSize-1).getRecipeid();
+			testRecipeBook.deleteById(recipeID);
+			
+			// check if it's really deleted
+			assertFalse(testRecipeBook.containsRecipeOfID(recipeID));
+			
+			} catch (Exception e) {
+            fail("Exception occurred");
+        }
+	}
 	
-	public void testNoTitle() {
-		try{
-		ArrayList<String> ingred = new ArrayList<String>();
-		ArrayList<String> category = new ArrayList<String>();
-		Recipe recipe = new Recipe(null, INGRED_DSCRIPTION, INGRED_INSTRUCTION, ingred , category, "userid","username");
-        assertTrue("recipe should not be added without title",recipe.getIngredients().size()==0);
-		} catch (Exception e) {
-            fail("Exception occurred");
-        }
-    }
-/*	 *//**
-     * method for testing if no description was inputed in EditRecipeActivity
-     *//*
-	public void testNoDescription() {
-		try{
-		ArrayList<String> ingred = new ArrayList<String>();
-		ArrayList<String> category = new ArrayList<String>();
-		Recipe recipe = new Recipe(INGRED_TITLE,null, INGRED_INSTRUCTION, ingred , category, "userid","username");
-        assertTrue("recipe should not be added without ingredient",recipe.getIngredients().size()==0);
-		} catch (Exception e) {
-            fail("Exception occurred");
-        }
-    }
-	 *//**
-     * method for testing if no instruction was inputed in EditRecipeActivity
-     *//*
-	public void testNoInstruction() {
-		try{
-		ArrayList<String> ingred = new ArrayList<String>();
-		ArrayList<String> category = new ArrayList<String>();
-		Recipe recipe = new Recipe(INGRED_TITLE,INGRED_DSCRIPTION, null, ingred , category, "userid","username");
-        assertTrue("recipe should not be added without instruction",recipe.getIngredients().size()==0);
-		} catch (Exception e) {
-            fail("Exception occurred");
-        }
-    }
-	 *//**
-     * method for testing if no ingredient was inputed in EditRecipeActivity
-     *//*
-	public void testNoIngredient() {
-		try{
-		ArrayList<String> ingred = new ArrayList<String>();
-		ArrayList<String> category = new ArrayList<String>();
-		Recipe recipe = new Recipe(INGRED_TITLE,INGRED_DSCRIPTION,INGRED_INSTRUCTION, null , category, "userid","username");
-        assertTrue("recipe should not be added without indredient",recipe.getIngredients().size()==0);
-		} catch (Exception e) {
-            fail("Exception occurred");
-        }
-    }
-	 *//**
-     * method for testing if no category was inputed in EditRecipeActivity
-     *//*
-	public void testNoCategory() {
-		try{
-		ArrayList<String> ingred = new ArrayList<String>();
-		ArrayList<String> category = new ArrayList<String>();
-		Recipe recipe = new Recipe(INGRED_TITLE,INGRED_DSCRIPTION,INGRED_INSTRUCTION, ingred , null, "userid","username");
-        assertTrue("recipe should not be added without Category",recipe.getIngredients().size()==1);
-		} catch (Exception e) {
-            fail("Exception occurred");
-        }
-    }*/
-
-
 }
