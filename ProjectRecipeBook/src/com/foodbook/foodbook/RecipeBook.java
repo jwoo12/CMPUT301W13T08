@@ -227,8 +227,30 @@ public class RecipeBook {
 	*/
 	
 	public void editRecipe(String recipename, String recipeDescriptions, String recipeinstructions, ArrayList<String> ingredients,
-			ArrayList<String> category, int position) {
-		
+			ArrayList<String> category, String recipeid) {
+		ArrayList<Recipe> combinedList = this.getRecipeBook();
+		for (int i=0; i < combinedList.size(); i++) {
+			if (combinedList.get(i).getRecipeid().equals(recipeid)) {
+				int offset = i - this.getMine().size();
+				if (offset < 0) {
+					this.mine.get(i).setRecipename(recipename);
+					this.mine.get(i).setRecipeDescriptions(recipeDescriptions);
+					this.mine.get(i).setRecipeinstructions(recipeinstructions);
+					this.mine.get(i).setIngredients(ingredients);
+					this.mine.get(i).setCategory(category);
+					this.mine.get(i).setauthor(FridgeActivity.myRecipeBook.getAuthor());
+				}
+				else {
+					this.downloads.get(offset).setRecipename(recipename);
+					this.downloads.get(offset).setRecipeDescriptions(recipeDescriptions);
+					this.downloads.get(offset).setRecipeinstructions(recipeinstructions);
+					this.downloads.get(offset).setIngredients(ingredients);
+					this.downloads.get(offset).setCategory(category);
+					this.downloads.get(offset).setauthor(FridgeActivity.myRecipeBook.getAuthor());
+				}
+				return;
+			}
+		}
 	}
 	
 	/**
@@ -269,6 +291,7 @@ public class RecipeBook {
 				else {
 					this.downloads.remove(offset);
 				}
+				return;
 			}
 		}
 	}

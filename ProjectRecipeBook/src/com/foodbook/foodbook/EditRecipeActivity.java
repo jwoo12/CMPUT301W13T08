@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -22,8 +23,6 @@ import android.widget.Toast;
 * 
 */
 public class EditRecipeActivity extends TitleBarOverride {
-	
-	protected int position;
 	
 	protected String name;
 	protected String descriptions;
@@ -48,7 +47,7 @@ public class EditRecipeActivity extends TitleBarOverride {
 		setContentView(R.layout.edit_recipe);
 		
 		// retrieve recipe object from intent
-		position = getIntent().getIntExtra("position", -1);
+		recipeid = getIntent().getStringExtra("recipeid");
 		name = getIntent().getStringExtra("name");
 		descriptions = getIntent().getStringExtra("descriptions");
 		category = getIntent().getStringExtra("category");
@@ -87,6 +86,27 @@ public class EditRecipeActivity extends TitleBarOverride {
 		updateTextFields();
 	}
 	
+	protected void makeNewIntent() {
+		
+		// make an intent for RecipeDetailsActivity.
+		// info about the recipe will be displayed in RecipeDetailsActivity.
+		
+		Intent recipeDetailsIntent = new Intent();
+		recipeDetailsIntent.setClass(getApplicationContext(), RecipeDetailsActivity.class);
+		recipeDetailsIntent.putExtra("recipeid", recipeid);
+		recipeDetailsIntent.putExtra("name", name);
+		recipeDetailsIntent.putExtra("descriptions", descriptions);
+		recipeDetailsIntent.putExtra("instructions", instructions);
+		recipeDetailsIntent.putExtra("ingredients", ingredients);
+		recipeDetailsIntent.putExtra("category", category);
+		recipeDetailsIntent.putExtra("author", FridgeActivity.myRecipeBook.getAuthor());
+		recipeDetailsIntent.putExtra("userid", FridgeActivity.myRecipeBook.getUserid());
+		
+		// start a new activity
+		startActivity(recipeDetailsIntent);
+
+	}
+	
 	/**
 	* This function is used to check whether or not required fields are empty.
 	* If a recipe is missing important information (ex. name), then this function will
@@ -113,9 +133,8 @@ public class EditRecipeActivity extends TitleBarOverride {
 	private void updateTextFields() {
 		
 		
-		
-		if (position == -1) {
-			// position == -1 means "new recipe". do not need to set any text.
+		if (recipeid == null) {
+			// recipeid == null means it's a new recipe
 			return;
 		}
 		
@@ -154,9 +173,7 @@ public class EditRecipeActivity extends TitleBarOverride {
 	* 
 	*/
 	public void saveButtonClicked() {
-		// edit the recipe details
-		// TODO right now we are putting "position" in because we are arraylist. when we get SQL ready, we will change this to recipe ID.
-		myRecipeBook.editRecipe(name, descriptions, instructions, ingredientsArrayList, categoryArrayList, position);
+		FridgeActivity.myRecipeBook.editRecipe(name, descriptions, instructions, ingredientsArrayList, categoryArrayList, recipeid);
 	}
 	
 }

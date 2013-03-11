@@ -1,8 +1,6 @@
 
 package com.foodbook.foodbook;
 
-import android.content.Intent;
-
 /**
 * <p> A subclass of EditRecipeActivity. </p>
 * <p> Only difference is that this will make a new recipe when Save button is clicked, 
@@ -24,21 +22,8 @@ public class MakeRecipeActivity extends EditRecipeActivity {
 	public void saveButtonClicked() {
 		
 		// Add to the recipe book and get the recipe id back
-		String recipeid = FridgeActivity.myRecipeBook.addRecipe(name, descriptions, instructions, ingredientsArrayList, categoryArrayList);
-		
-		// make a new intent for viewing the details of the newly created recipe (this recipe)
-		Intent recipeDetailsIntent = new Intent();
-		recipeDetailsIntent.setClass(this, RecipeDetailsActivity.class);
-		recipeDetailsIntent.putExtra("recipeid", recipeid);
-		recipeDetailsIntent.putExtra("name", name);
-		recipeDetailsIntent.putExtra("descriptions", descriptions);
-		recipeDetailsIntent.putExtra("instructions", instructions);
-		recipeDetailsIntent.putExtra("ingredients", ingredients);
-		recipeDetailsIntent.putExtra("category", category);
-		recipeDetailsIntent.putExtra("author", FridgeActivity.myRecipeBook.getAuthor());
-		recipeDetailsIntent.putExtra("userid", FridgeActivity.myRecipeBook.getUserid());
-		
-		// start a new activity
-		startActivity(recipeDetailsIntent);
+		String recipeidNew = FridgeActivity.myRecipeBook.addRecipe(name, descriptions, instructions, ingredientsArrayList, categoryArrayList);
+		recipeid = recipeid;
+		makeNewIntent();
 	}
 }

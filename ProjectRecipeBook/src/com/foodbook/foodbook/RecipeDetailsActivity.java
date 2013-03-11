@@ -106,8 +106,7 @@ public class RecipeDetailsActivity extends TitleBarOverride {
 			
 			@Override
 			public void onClick(View v) {
-				// TODO Auto-generated method stub
-				
+				editRecipe();
 			}
 		});
 		
@@ -162,6 +161,18 @@ public class RecipeDetailsActivity extends TitleBarOverride {
 		// update the textviews
 		hideUnnecessaryButtons();
 		updateTextViews();
+	}
+	
+	public void editRecipe() {
+		Intent editIntent = new Intent();
+		editIntent.setClass(getApplicationContext(), EditRecipeActivity.class);
+		editIntent.putExtra("recipeid", recipeid);
+		editIntent.putExtra("name", name);
+		editIntent.putExtra("descriptions", descriptions);
+		editIntent.putExtra("category", category);
+		editIntent.putExtra("ingredients", ingredients);
+		editIntent.putExtra("instructions", instructions);
+		startActivity(editIntent);
 	}
 	
 	@Override
