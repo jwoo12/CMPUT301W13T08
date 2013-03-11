@@ -62,7 +62,7 @@ public class IngredientValidation extends ActivityInstrumentationTestCase2 <Frid
      * method for testing adding ingredients in fridgeActivity
      */
     public void testAddIngredients() {
-    	//testFridge = new Fridge(INGRED_TEA);
+    	try{//testFridge = new Fridge(INGRED_TEA);
         // we use sendKeys instead of setText so it goes through entry
         // click on add tab
     	ingredient =INGRED_TEA;
@@ -83,13 +83,15 @@ public class IngredientValidation extends ActivityInstrumentationTestCase2 <Frid
 
     	assertTrue("added ingredient should be "+INGRED_TEA, temp.get(0).contains(INGRED_TEA)); 
     	assertTrue(testlistView.getChildCount()==1); 
-
+    	} catch (Exception e) {
+            fail("Exception occurred");
+        }
     }
     /**
      * method for testing editing ingredients in fridgeActivity
      */
     public void testEditIngredients() {
-        // we use sendKeys instead of setText so it goes through entry
+        try{// we use sendKeys instead of setText so it goes through entry
         // click on first ingredient
     	// click on add tab
     	ingredient =INGRED_GREENTEA;
@@ -127,12 +129,15 @@ public class IngredientValidation extends ActivityInstrumentationTestCase2 <Frid
 
     	assertTrue("added ingredient should be "+INGRED_TEA, temp.get(0).contains(INGRED_GREENTEA)); 
     	assertTrue("added ingredient list should be 1", testlistView.getChildCount()==1); 
+        } catch (Exception e) {
+            fail("Exception occurred");
+        }
     }
     /**
      * method for testing deleting ingredients in fridgeActivity
      */
     public void testDeleteIngredients() {
-        // we use sendKeys instead of setText so it goes through entry
+        try{// we use sendKeys instead of setText so it goes through entry
         // click on first ingredient
     	sendKeys("TAB");
     	sendKeys("TAB");
@@ -154,13 +159,16 @@ public class IngredientValidation extends ActivityInstrumentationTestCase2 <Frid
     	temp.addAll(testFridge.getIngredients());
 
     	assertTrue("added ingredient list should be 1", testlistView.getChildCount()==0); 
+        } catch (Exception e) {
+            fail("Exception occurred");
+        }
     }
 
     /**
      * method for testing the see what I can make button in fridgeActivity
      */
     public void testMakeResult() {
-        // we use sendKeys instead of setText so it goes through entry
+        try{// we use sendKeys instead of setText so it goes through entry
         // click on see what i can make button
     	sendKeys("TAB");
     	sendKeys("TAB");
@@ -178,6 +186,9 @@ public class IngredientValidation extends ActivityInstrumentationTestCase2 <Frid
 
     	// get result
     	assertTrue("list result contains only the ingredient in the fridge", results.getChildCount()==2); 
+        } catch (Exception e) {
+            fail("Exception occurred");
+        }
  
     }
 }
