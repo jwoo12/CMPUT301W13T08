@@ -37,8 +37,9 @@ public class DataBaseController extends Activity{
 		//handle.open();
 		Cursor c = handle.getRecipe(1);
 		DisplayRecipe(c);
-		handle.getSingle("1");
-		handle.close();
+		handle.getSingleNoReturn(1); ///THIS RETURNS ONE VALUE in a recipe,
+									//CAN BE CHANGED to RETURN any amount.
+		//handle.close();
 		List<String> getalllist = new ArrayList<String>();
 		handle.getAllRecipes(getalllist);
 		//List<String> list = handle.wtf();
@@ -50,7 +51,7 @@ public class DataBaseController extends Activity{
 	    setListAdapter(adapter);
 	  }
 	  */
-		System.out.println(getalllist);
+		//System.out.println(getalllist);
 		//System.out.println(list);
 		Log.i("TAGGG", "MAKING HANDLE HERE");
 		
@@ -61,10 +62,10 @@ public class DataBaseController extends Activity{
 	public void createPracticeRows(){
 		//---add an assignment---
 		
-		handle.open();
-		long id = handle.insertRecipe("POOP", "JAE", "YUCKY", "BROWNSMELL", "YESTERDAYS LUNCH", "BEANS, POTATOES, EGG");
-		id = handle.insertRecipe("GLASS SHARDS", "JAS", "HURTY", "BLOODYMESS", "WINDOW", "small pieces, large pieces");
-		handle.close();
+		//handle.open();
+		//long id = handle.insertRecipe("Fruit Loops", "JAE", "cold cereal", "tastes fruity", "Cereals", "milk, dry cereal", "recipeidhere", "UserId1");
+		//id = handle.insertRecipe("GLASS SHARDS", "JAS", "HURTY", "BLOODYMESS", "WINDOW", "small pieces, large pieces:", "jazzrecipeid", "jazzwooid");
+		//handle.close();
 		
 //		---get all Records---
 		/*

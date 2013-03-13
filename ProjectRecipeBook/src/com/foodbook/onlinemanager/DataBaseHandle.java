@@ -100,10 +100,15 @@ public class DataBaseHandle extends SQLiteOpenHelper {
 
 		String CREATE_RECIPE_TABLE = "CREATE TABLE IF NOT EXISTS "
 				+ RECIPE_TABLE + " "
-				+ "(r_id INTEGER PRIMARY KEY AUTOINCREMENT, " + RECIPE_TITLE
-				+ " TEXT, " + RECIPE_USERNAME + " TEXT, " + RECIPE_DESCRIPTION
-				+ " TEXT, " + RECIPE_CATEGORY + " TEXT, " + RECIPE_INGREDIENTS
-				+ " TEXT, " + RECIPE_INSTRUCTIONS + " TEXT, " + RECIPE_ID + " TEXT " + USER_ID + " TEXT);";
+				+ "(r_id INTEGER PRIMARY KEY AUTOINCREMENT, " + 
+				RECIPE_TITLE + " TEXT, " + 
+				RECIPE_USERNAME + " TEXT, " + 
+				RECIPE_DESCRIPTION + " TEXT, " +
+				RECIPE_CATEGORY + " TEXT, " +
+				RECIPE_INGREDIENTS + " TEXT, " +
+				RECIPE_INSTRUCTIONS + " TEXT, " +
+				RECIPE_ID + " TEXT " + 
+				USER_ID + " TEXT);";
 		db.execSQL(CREATE_RECIPE_TABLE);
 
 		// String CREATE_RECIPE_TABLE =
@@ -203,15 +208,15 @@ public class DataBaseHandle extends SQLiteOpenHelper {
 			
 			//Log.i("TAGGG", "JUST ABOUT TO PRINT SINGLE");
 			//System.out.println(result);
-
-			String name = cursor.getString(2);
-			String author = cursor.getString(3);
-			String desc = cursor.getString(4);
-			String cate = cursor.getString(5);
-			String ing = cursor.getString(6);
-			String inst = cursor.getString(7);
-			String recipeid = cursor.getString(8);
-			String userid = cursor.getString(9);
+			//String r_id = cursor.getString(0);
+			String name = cursor.getString(1);
+			String author = cursor.getString(2);
+			String desc = cursor.getString(3);
+			String cate = cursor.getString(4);
+			String ing = cursor.getString(5);
+			String inst = cursor.getString(6);
+			String recipeid = cursor.getString(7);
+			String userid = cursor.getString(8);
 			
 			output.add(recipeid);
 			output.add(name);
@@ -226,8 +231,33 @@ public class DataBaseHandle extends SQLiteOpenHelper {
 		db.close();
 		// return contact list
 		return output;
-
 	}
+	
+	/**
+	 * GetSingleNoReturn does not return anything.  Can be modified, if necessary, to
+	 * return an array or String of an recipe by it's id.
+	 * @param id
+	 */
+    public void getSingleNoReturn(int id) {
+        
+        // Select All Query
+        String selectQuery = "SELECT  * FROM " + RECIPE_TABLE + " where " + R_PRIMARY_KEY + "=" + id;
+       
+        db = getWritableDatabase();
+        Cursor cursor = db.rawQuery(selectQuery, null);
+ 
+        // looping through all rows and adding to list
+        if (cursor.moveToFirst()) {
+        	Log.i("TAGGG", "JUST ABOUT TO PRINT SINGLE");
+            	String result = cursor.getString(1);
+            	System.out.println(result);
+        }
+        db.close();
+        // return contact list
+        
+    }
+    
+
 
 	/**
 	 * getAllRecipes will return a cursor with all values in the database (in a
@@ -293,18 +323,19 @@ public class DataBaseHandle extends SQLiteOpenHelper {
 	}
 
 	/**
-	 * Main method used to insert a recipe.
-	 * 
+	 * Main method to insert a recipe (uses the field IN CORRECT ORDER)
 	 * @param rname
 	 * @param user
 	 * @param description
 	 * @param category
 	 * @param ingredients
 	 * @param instructions
-	 * @return none
+	 * @param recipeid
+	 * @param userid
+	 * @return
 	 */
 	public long insertRecipe(String rname, String user, String description,
-			String category, String ingredients, String instructions) {
+			String category, String ingredients, String instructions, String recipeid, String userid) {
 
 		ContentValues values = new ContentValues();
 		values.put(RECIPE_TITLE, rname);

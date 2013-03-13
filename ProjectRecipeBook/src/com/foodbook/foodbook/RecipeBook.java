@@ -375,6 +375,7 @@ public class RecipeBook implements Serializable {
 		}
 		*/
 		outputArray = dbController.single(recipeid);
+		System.out.println(outputArray);
 		return outputArray;
 	}
 
