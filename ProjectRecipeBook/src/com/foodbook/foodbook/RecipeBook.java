@@ -10,6 +10,8 @@ import java.math.BigInteger;
 import java.security.SecureRandom;
 import java.util.ArrayList;
 
+import com.foodbook.onlinemanager.DataBaseController;
+
 import android.content.Context;
 
 /**
@@ -40,6 +42,8 @@ public class RecipeBook implements Serializable {
 	private ArrayList<Recipe> downloads;
 	private String userid;
 	private String author;
+	
+	public static DataBaseController dbController;
 
 	public static final String RecipeBookFilename = "recipe.sav";
 
@@ -50,7 +54,9 @@ public class RecipeBook implements Serializable {
 	 * 
 	 * 
 	 */
-	public RecipeBook() {
+	public RecipeBook(Context context) {
+		
+		dbController = new DataBaseController(context);
 
 		this.mine = new ArrayList<Recipe>();
 		this.downloads = new ArrayList<Recipe>();
@@ -352,6 +358,8 @@ public class RecipeBook implements Serializable {
 
 	public ArrayList<String> getRecipeInfo(String recipeid) {
 		ArrayList<String> outputArray = new ArrayList<String>();
+		/*
+		 * do not erase this
 		for (Recipe recipe : this.getRecipeBook()) {
 			if (recipe.getRecipeid().equals(recipeid)) {
 				outputArray.add(recipeid);
@@ -365,7 +373,9 @@ public class RecipeBook implements Serializable {
 				return outputArray;
 			}
 		}
-		return null;
+		*/
+		outputArray = dbController.single(recipeid);
+		return outputArray;
 	}
 
 	/**

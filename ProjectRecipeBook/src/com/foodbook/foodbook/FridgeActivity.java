@@ -17,6 +17,7 @@ import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.Toast;
 
+import com.foodbook.onlinemanager.DataBaseController;
 import com.foodbook.onlinemanager.OnlineDataBase;
 import com.foodbook.onlinemanager.SearchResult;
 
@@ -58,7 +59,7 @@ public class FridgeActivity extends TitleBarOverride {
 	private String ingredient;
 	private Button addButton;
 	private Button showWhatICanMakeButton;
-
+	
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 
@@ -66,11 +67,11 @@ public class FridgeActivity extends TitleBarOverride {
 		getApplicationContext();
 		setContentView(R.layout.activity_main);
 		context = getApplicationContext();
-
+		
 		myFridge = new Fridge();
 		myFridge.loadFromFile(getApplicationContext());
 
-		myRecipeBook = new RecipeBook();
+		myRecipeBook = new RecipeBook(context);
 		boolean recipeLoadResultOK = myRecipeBook
 				.loadFromFile(getApplicationContext());
 		if (!recipeLoadResultOK) {
