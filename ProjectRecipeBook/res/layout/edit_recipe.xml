@@ -8,26 +8,27 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:paddingBottom="16dp" >
-
+    	
         <ImageButton
-            android:id="@+id/TakeAPhoto"
-            android:layout_width="84dp"
-            android:layout_height="84dp"
-            android:layout_margin="16dp"
-            android:src="@drawable/ic_launcher" />
+        android:id="@+id/TakeAPhoto"
+        android:layout_width="84dp"
+        android:layout_height="84dp"
+        android:layout_margin="16dp"
+        android:src="@drawable/ic_launcher" />
 
         <EditText
             android:id="@+id/editRecipeName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
-            android:layout_marginRight="16dp"
-            android:layout_toRightOf="@+id/editIcon"
+            android:layout_toRightOf="@+id/TakeAPhoto"
             android:ems="10"
             android:hint="@string/recipe_title" >
 
             <requestFocus />
         </EditText>
+
     </RelativeLayout>
 
     <ScrollView
