@@ -9,12 +9,12 @@
         android:layout_height="wrap_content"
         android:paddingBottom="16dp" >
 
-        <QuickContactBadge
-            android:id="@+id/editIcon"
+        <ImageButton
+            android:id="@+id/TakeAPhoto"
             android:layout_width="84dp"
             android:layout_height="84dp"
             android:layout_margin="16dp"
-            android:src="@color/fb_white" />
+            android:src="@drawable/ic_launcher" />
 
         <EditText
             android:id="@+id/editRecipeName"
