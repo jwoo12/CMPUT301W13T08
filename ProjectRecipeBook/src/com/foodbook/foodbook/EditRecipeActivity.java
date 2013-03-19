@@ -1,23 +1,15 @@
 package com.foodbook.foodbook;
 
-import java.io.File;
 import java.util.ArrayList;
 import java.util.Arrays;
 
-
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.drawable.Drawable;
-import android.net.Uri;
 import android.os.Bundle;
-import android.os.Environment;
-import android.provider.MediaStore;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ImageButton;
-import android.widget.TextView;
 import android.widget.Toast;
 /**
 * <p> This activity is used to change details of a selected recipe.
@@ -31,8 +23,6 @@ import android.widget.Toast;
 * 
 */
 public class EditRecipeActivity extends TitleBarOverride {
-	
-	Uri imageFileUri;
 	
 	protected String name;
 	protected String descriptions;
@@ -71,15 +61,6 @@ public class EditRecipeActivity extends TitleBarOverride {
 		ingredientsField = (EditText) findViewById(R.id.editRecipeIngredients);
 		instructionsField = (EditText) findViewById(R.id.editRecipeInst);
 		
-		//take picture
-		ImageButton picturebutton = (ImageButton) findViewById(R.id.TakeAPhoto);
-        OnClickListener listener = new OnClickListener() {
-            public void onClick(View v){
-                takeAPhotoClicked();
-            }
-        };
-        picturebutton.setOnClickListener(listener);
-        
 		// setup save button
 		Button saveButton = (Button) findViewById(R.id.editRecipeSaveButton);
 		saveButton.setOnClickListener(new OnClickListener() {
@@ -97,6 +78,7 @@ public class EditRecipeActivity extends TitleBarOverride {
 					return;
 				}
 				saveButtonClicked();
+				FridgeActivity.myRecipeBook.saveToFile(getApplicationContext());
 				finish();
 			}
 		});
@@ -201,38 +183,5 @@ public class EditRecipeActivity extends TitleBarOverride {
 	public void saveButtonClicked() {
 		FridgeActivity.myRecipeBook.editRecipe(name, descriptions, instructions, ingredientsArrayList, categoryArrayList, recipeid);
 	}
-	
-	private static final int CAPTURE_IMAGE_ACTIVITY_REQUEST_CODE = 100;
-	
-	public void takeAPhotoClicked() {
-        Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-        
-        String folder = Environment.getExternalStorageDirectory().getAbsolutePath() + "/tmp";
-        File folderF = new File(folder);
-        if (!folderF.exists()) {
-            folderF.mkdir();
-        }
-        //store image for app
-        String imageFilePath = folder + "/" + String.valueOf(System.currentTimeMillis()) + "jpg";
-        File imageFile = new File(imageFilePath);
-        imageFileUri = Uri.fromFile(imageFile);
-        
-        intent.putExtra(MediaStore.EXTRA_OUTPUT, imageFileUri);
-        startActivityForResult(intent, CAPTURE_IMAGE_ACTIVITY_REQUEST_CODE);
-    }
-	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        if (requestCode == CAPTURE_IMAGE_ACTIVITY_REQUEST_CODE) {
-           // TextView tv = (TextView) findViewById(R.id.status);
-            if (resultCode == RESULT_OK) {
-                //tv.setText("Photo OK!");
-                ImageButton button = (ImageButton) findViewById(R.id.TakeAPhoto);
-                button.setImageDrawable(Drawable.createFromPath(imageFileUri.getPath()));
-            } else if (resultCode == RESULT_CANCELED) {
-              //  tv.setText("Photo canceled");
-            } else {
-              //  tv.setText("Not sure what happened!" + resultCode);
-            }
-        }
-    }
 	
 }

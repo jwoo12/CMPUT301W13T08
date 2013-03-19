@@ -2,6 +2,7 @@ package com.foodbook.foodbook;
 
 import java.util.ArrayList;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -34,12 +35,16 @@ public class RecipeBookActivity extends TitleBarOverride {
 	private ArrayList<String> idMine;
 	private ArrayList<String> idDownloads;
 	
+	private Context context;
+	
 	private int currentTab;
 	
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.local_recipe_book);
+		
+		context = getApplicationContext();
 		
 		Button allButton = (Button) findViewById(R.id.recipeBookAllButton);
 		Button mineButton = (Button) findViewById(R.id.recipeBookMineButton);
@@ -151,28 +156,15 @@ public class RecipeBookActivity extends TitleBarOverride {
 	
 	
 	private void reloadRecipeBook() {
-		sourceAll = RecipeBook.convertRecipeBookToStringArray(FridgeActivity.myRecipeBook.getRecipeBook());
-		sourceMine = RecipeBook.convertRecipeBookToStringArray(FridgeActivity.myRecipeBook.getMine());
-		sourceDownloads = RecipeBook.convertRecipeBookToStringArray(FridgeActivity.myRecipeBook.getDownloads());
-		idAll = RecipeBook.getAllRecipeid(FridgeActivity.myRecipeBook.getRecipeBook());
-		idMine = RecipeBook.getAllRecipeid(FridgeActivity.myRecipeBook.getMine());
-		idDownloads = RecipeBook.getAllRecipeid(FridgeActivity.myRecipeBook.getDownloads());
+		sourceAll = RecipeBook.getNames(FridgeActivity.myRecipeBook.getRecipeBook());
+		sourceMine = RecipeBook.getNames(FridgeActivity.myRecipeBook.getMine());
+		sourceDownloads = RecipeBook.getNames(FridgeActivity.myRecipeBook.getDownloads());
+		idAll = RecipeBook.getRecipeid(FridgeActivity.myRecipeBook.getRecipeBook());
+		idMine = RecipeBook.getRecipeid(FridgeActivity.myRecipeBook.getMine());
+		idDownloads = RecipeBook.getRecipeid(FridgeActivity.myRecipeBook.getDownloads());
 	}
 	
-	/**
-	 * 
-	 * Part of a view within a RecipeBook's model. Helper to update view. Displays recipe on screen.
-	 * 
-	 * 
-	 * @param sourceList the recipe to be displayed
-	 * @param targetListView where the recipes will be displayed
-	 */
 	
-	
-	private void updateListView(ArrayList<String> sourceList, ListView targetListView) {
-		ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, sourceList);
-		targetListView.setAdapter(adapter);
-	}
 	
 	/**
 	 * Part of a view within a RecipeBook's model. Helper to update view.
@@ -186,13 +178,13 @@ public class RecipeBookActivity extends TitleBarOverride {
 		reloadRecipeBook();
 		switch (currentTab) {
 		case 1:
-			updateListView(sourceAll, listView);
+			UpdateListView.updateListView(context, sourceAll, listView);
 			break;
 		case 2:
-			updateListView(sourceMine, listView);
+			UpdateListView.updateListView(context, sourceMine, listView);
 			break;
 		case 3:
-			updateListView(sourceDownloads, listView);
+			UpdateListView.updateListView(context, sourceDownloads, listView);
 			break;
 		default:
 			break;

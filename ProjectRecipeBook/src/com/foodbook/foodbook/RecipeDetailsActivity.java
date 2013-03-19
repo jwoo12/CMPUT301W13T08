@@ -224,4 +224,10 @@ public class RecipeDetailsActivity extends TitleBarOverride {
 		}
 	}
 	
+	@Override
+	public void onPause() {
+		super.onPause();
+		FridgeActivity.myRecipeBook.saveToFile(getApplicationContext());
+	}
+	
 }

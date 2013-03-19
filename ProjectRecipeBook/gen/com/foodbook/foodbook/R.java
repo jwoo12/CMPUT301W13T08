@@ -30,10 +30,10 @@ public final class R {
     public static final class id {
         public static final int LinearLayout1=0x7f080006;
         public static final int LinearLayout2=0x7f08000d;
+        public static final int TakeAPhoto=0x7f080003;
         public static final int authorLayout=0x7f080018;
         public static final int categoryLayout=0x7f08001e;
         public static final int descLayout=0x7f08001b;
-        public static final int editIcon=0x7f080003;
         public static final int editRecipeCategory=0x7f080008;
         public static final int editRecipeDesc=0x7f080007;
         public static final int editRecipeIngredients=0x7f080009;

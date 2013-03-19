@@ -10,9 +10,8 @@ import java.math.BigInteger;
 import java.security.SecureRandom;
 import java.util.ArrayList;
 
-import com.foodbook.onlinemanager.DataBaseController;
-
 import android.content.Context;
+import android.util.Log;
 
 /**
  * <p>
@@ -42,8 +41,6 @@ public class RecipeBook implements Serializable {
 	private ArrayList<Recipe> downloads;
 	private String userid;
 	private String author;
-	
-	public static DataBaseController dbController;
 
 	public static final String RecipeBookFilename = "recipe.sav";
 
@@ -54,9 +51,7 @@ public class RecipeBook implements Serializable {
 	 * 
 	 * 
 	 */
-	public RecipeBook(Context context) {
-		
-		dbController = new DataBaseController(context);
+	public RecipeBook() {
 
 		this.mine = new ArrayList<Recipe>();
 		this.downloads = new ArrayList<Recipe>();
@@ -110,7 +105,7 @@ public class RecipeBook implements Serializable {
 	 * 
 	 */
 
-	public static ArrayList<String> convertRecipeBookToStringArray(
+	public static ArrayList<String> getNames(
 			ArrayList<Recipe> inputArray) {
 
 		ArrayList<String> outputArray = new ArrayList<String>();
@@ -132,7 +127,7 @@ public class RecipeBook implements Serializable {
 	 * @return a list of recipes
 	 */
 
-	public static ArrayList<String> getAllRecipeid(ArrayList<Recipe> inputArray) {
+	public static ArrayList<String> getRecipeid(ArrayList<Recipe> inputArray) {
 		ArrayList<String> outputArrayList = new ArrayList<String>();
 
 		for (Recipe recipe : inputArray) {
@@ -250,30 +245,19 @@ public class RecipeBook implements Serializable {
 	}
 
 	/**
-	 * This methods is used to modify existing recipes in the recipe book. Given
-	 * the details about the recipe and the recipe ID, this method will apply
-	 * changes.
 	 * 
-	 * @param recipename
-	 *            name of recipe
-	 * @param recipeDescriptions
-	 *            description of recipe
-	 * @param recipeinstructions
-	 *            recipe instructions
-	 * @param ingredients
-	 *            list of ingredients
-	 * @param category
-	 *            genre
+	 * This function formats ArrayList of String so that no entry has duplicate
+	 * whitespaces/newline charactesr/etc... Also, this function removes empty
+	 * entries.
+	 * 
+	 * 
+	 * @param input
+	 *            The ArrayList to be formatted
+	 * @return
 	 */
 
 	public static ArrayList<String> formatStringArrayListEntries(
 			ArrayList<String> input) {
-		/**
-		 * This function formats string-arraylist entries so that all entries
-		 * have no leading or trailing whitespaces, and makes sure that there is
-		 * no empty entry, etc...
-		 * 
-		 */
 
 		ArrayList<String> output = new ArrayList<String>();
 
@@ -314,6 +298,7 @@ public class RecipeBook implements Serializable {
 	public void editRecipe(String recipename, String recipeDescriptions,
 			String recipeinstructions, ArrayList<String> ingredients,
 			ArrayList<String> category, String recipeid) {
+		
 		ArrayList<Recipe> combinedList = this.getRecipeBook();
 		for (int i = 0; i < combinedList.size(); i++) {
 			if (combinedList.get(i).getRecipeid().equals(recipeid)) {
@@ -358,25 +343,25 @@ public class RecipeBook implements Serializable {
 
 	public ArrayList<String> getRecipeInfo(String recipeid) {
 		ArrayList<String> outputArray = new ArrayList<String>();
-		/*
-		 * do not erase this
+		Recipe found = searchById(recipeid);
+		outputArray.add(recipeid);
+		outputArray.add(found.getRecipename());
+		outputArray.add(found.getauthor());
+		outputArray.add(found.getRecipeDescriptions());
+		outputArray.add(found.getRecipeinstructions());
+		outputArray.add(found.getIngredientsString());
+		outputArray.add(found.getCategoryString());
+		outputArray.add(found.getUserid());
+		return outputArray;
+	}
+
+	public Recipe searchById(String recipeid) {
 		for (Recipe recipe : this.getRecipeBook()) {
 			if (recipe.getRecipeid().equals(recipeid)) {
-				outputArray.add(recipeid);
-				outputArray.add(recipe.getRecipename());
-				outputArray.add(recipe.getauthor());
-				outputArray.add(recipe.getRecipeDescriptions());
-				outputArray.add(recipe.getRecipeinstructions());
-				outputArray.add(recipe.getIngredientsString());
-				outputArray.add(recipe.getCategoryString());
-				outputArray.add(recipe.getUserid());
-				return outputArray;
+				return recipe;
 			}
 		}
-		*/
-		outputArray = dbController.single(recipeid);
-		System.out.println(outputArray);
-		return outputArray;
+		return null;
 	}
 
 	/**
@@ -387,18 +372,19 @@ public class RecipeBook implements Serializable {
 	 */
 
 	public void deleteById(String recipeid) {
-		ArrayList<Recipe> combinedList = this.getRecipeBook();
-		for (int i = 0; i < combinedList.size(); i++) {
-			if (combinedList.get(i).getRecipeid().equals(recipeid)) {
-				int offset = i - this.getMine().size();
-				if (offset < 0) {
-					this.mine.remove(i);
-				} else {
-					this.downloads.remove(offset);
-				}
-				return;
+
+		Recipe found = searchById(recipeid);
+		if (found != null) {
+			try {
+				this.downloads.remove(found);
+			} catch (IndexOutOfBoundsException e) {
+			}
+			try {
+				this.mine.remove(found);
+			} catch (IndexOutOfBoundsException e2) {
 			}
 		}
+
 	}
 
 	/**
@@ -517,8 +503,8 @@ public class RecipeBook implements Serializable {
 	public static ArrayList<ArrayList<String>> getNamesAndIDs(
 			ArrayList<Recipe> recipeArray) {
 		ArrayList<ArrayList<String>> output = new ArrayList<ArrayList<String>>();
-		output.add(convertRecipeBookToStringArray(recipeArray));
-		output.add(getAllRecipeid(recipeArray));
+		output.add(getNames(recipeArray));
+		output.add(getRecipeid(recipeArray));
 		return output;
 	}
 
@@ -527,10 +513,10 @@ public class RecipeBook implements Serializable {
 	 * Searches recipe book if it contains the given recipe ID
 	 * 
 	 * @param recipeidIn
-	 * @return true if found 
+	 * @return true if found
 	 * @return false if not found
 	 */
-	
+
 	public boolean containsRecipeOfID(String recipeidIn) {
 		for (Recipe eachRecipe : this.getRecipeBook()) {
 			if (eachRecipe.getRecipeid().equals(recipeidIn)) {

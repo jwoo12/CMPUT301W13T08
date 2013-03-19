@@ -17,7 +17,6 @@ import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.Toast;
 
-import com.foodbook.onlinemanager.DataBaseController;
 import com.foodbook.onlinemanager.OnlineDataBase;
 import com.foodbook.onlinemanager.SearchResult;
 
@@ -59,7 +58,7 @@ public class FridgeActivity extends TitleBarOverride {
 	private String ingredient;
 	private Button addButton;
 	private Button showWhatICanMakeButton;
-	
+
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 
@@ -67,11 +66,11 @@ public class FridgeActivity extends TitleBarOverride {
 		getApplicationContext();
 		setContentView(R.layout.activity_main);
 		context = getApplicationContext();
-		
+
 		myFridge = new Fridge();
 		myFridge.loadFromFile(getApplicationContext());
 
-		myRecipeBook = new RecipeBook(context);
+		myRecipeBook = new RecipeBook();
 		boolean recipeLoadResultOK = myRecipeBook
 				.loadFromFile(getApplicationContext());
 		if (!recipeLoadResultOK) {
@@ -80,7 +79,7 @@ public class FridgeActivity extends TitleBarOverride {
 
 		// setup List View
 		listView = (ListView) findViewById(R.id.fridgeList);
-		updateListView(myFridge, listView);
+		UpdateListView.updateListView(context, myFridge.getIngredients(), listView);
 		listView.setOnItemClickListener(new android.widget.AdapterView.OnItemClickListener() {
 
 			@Override
@@ -150,9 +149,12 @@ public class FridgeActivity extends TitleBarOverride {
 	private void showInputDialog(final boolean add, String defaultString,
 			final int position) {
 		AlertDialog.Builder alertdg = new AlertDialog.Builder(this);
-		alertdg.setTitle("Add Ingredient ");
 		final EditText addText = new EditText(this);
-		if (!add) {
+		if (add) {
+			alertdg.setTitle("Add Ingredient");
+		}
+		else {
+			alertdg.setTitle("Edit Ingredient");
 			addText.setText(defaultString);
 		}
 		LinearLayout layout = new LinearLayout(this);
@@ -169,7 +171,7 @@ public class FridgeActivity extends TitleBarOverride {
 						} else {
 							myFridge.editIngredient(position, ingredient);
 						}
-						updateListView(myFridge, listView);
+						UpdateListView.updateListView(context, myFridge.getIngredients(), listView);
 					}
 				});
 		alertdg.setNegativeButton("Cancel",
@@ -200,7 +202,7 @@ public class FridgeActivity extends TitleBarOverride {
 					@Override
 					public void onClick(DialogInterface dialog, int which) {
 						myFridge.removeIngredientByIndex(position);
-						updateListView(myFridge, listView);
+						UpdateListView.updateListView(context, myFridge.getIngredients(), listView);
 					}
 				});
 		alertdg.setNegativeButton("Edit",
@@ -227,26 +229,6 @@ public class FridgeActivity extends TitleBarOverride {
 
 		Toast toast = Toast.makeText(context, text, duration);
 		toast.show();
-	}
-
-	/**
-	 * 
-	 * A view in the MVC architecture. Handles displaying of ingredients to
-	 * screen
-	 * 
-	 * @see ArrayAdapter
-	 * 
-	 * @param myFridgeToBeDisplayed
-	 *            Fridge object being displayed
-	 * @param listView
-	 *            Space in which ingredients are listed
-	 */
-
-	private void updateListView(Fridge myFridgeToBeDisplayed, ListView listView) {
-		ArrayList<String> ingredients = myFridgeToBeDisplayed.getIngredients();
-		ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,
-				android.R.layout.simple_list_item_1, ingredients);
-		listView.setAdapter(adapter);
 	}
 
 	@Override
