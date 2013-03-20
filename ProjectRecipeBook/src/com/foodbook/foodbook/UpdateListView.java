@@ -31,7 +31,7 @@ public class UpdateListView extends Activity{
 	
 	
 	public static void updateListView(Context c, ArrayList<String> sourceList, ListView targetListView) {
-		ArrayAdapter<String> adapter = new ArrayAdapter<String>(c, android.R.layout.simple_list_item_1, sourceList);
+		ArrayAdapter<String> adapter = new ArrayAdapter<String>(c, R.layout.mytextview, sourceList);
 		targetListView.setAdapter(adapter);
 	}
 

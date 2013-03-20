@@ -11,6 +11,7 @@ public final class R {
     public static final class attr {
     }
     public static final class color {
+        public static final int black=0x7f060004;
         public static final int fb_blue1=0x7f060000;
         public static final int fb_blue2=0x7f060001;
         public static final int fb_greyblue=0x7f060002;
@@ -99,10 +100,11 @@ public final class R {
         public static final int bogo=0x7f030001;
         public static final int edit_recipe=0x7f030002;
         public static final int local_recipe_book=0x7f030003;
-        public static final int online_search=0x7f030004;
-        public static final int photo_manager=0x7f030005;
-        public static final int recipe_details=0x7f030006;
-        public static final int search_result=0x7f030007;
+        public static final int mytextview=0x7f030004;
+        public static final int online_search=0x7f030005;
+        public static final int photo_manager=0x7f030006;
+        public static final int recipe_details=0x7f030007;
+        public static final int search_result=0x7f030008;
     }
     public static final class menu {
         public static final int activity_main=0x7f070000;

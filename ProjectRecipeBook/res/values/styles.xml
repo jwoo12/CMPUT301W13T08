@@ -5,6 +5,7 @@
     <color name="fb_blue2">#8b9dc3</color>
     <color name="fb_greyblue">#f7f7f7</color>
     <color name="fb_white">#dfe3ee</color>
+    <color name="black">#000000</color>
 	
     <style name="fridgeTheme" parent="@android:style/Theme">
         <item name="android:windowBackground">@drawable/fridge</item>
@@ -15,7 +16,9 @@
     </style>
     
     <style name="Foodbook" parent="@style/AppTheme">
+         
         <item name="android:actionBarStyle">@style/MyTheme.ActionBarStyle</item>
+       
         
     </style>
 
@@ -29,4 +32,6 @@
         
     </style>
     
+   
+   
 </resources>
