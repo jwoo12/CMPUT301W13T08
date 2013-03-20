@@ -43,6 +43,19 @@ public class OnlineSearch extends TitleBarOverride {
 				String keyword = keywordField.getText().toString();
 				ArrayList<Recipe> onlineResults = OnlineDataBase.searchByKeyword(keyword);
 				
+				//				WebServiceClient wsc = new WebServiceClient();
+//				try {
+//					wsc.searchRecipes(keyword);
+//				} catch (ClientProtocolException e) {
+//					// TODO Auto-generated catch block
+//					e.printStackTrace();
+//				} catch (IOException e) {
+//					// TODO Auto-generated catch block
+//					e.printStackTrace();
+//				}
+//				
+			
+				
 			}
 		});
 	}
