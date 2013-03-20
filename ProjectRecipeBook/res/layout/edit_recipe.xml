@@ -9,12 +9,12 @@
         android:layout_height="wrap_content"
         android:paddingBottom="16dp" >
     	
-        <ImageButton
-        android:id="@+id/TakeAPhoto"
-        android:layout_width="84dp"
-        android:layout_height="84dp"
-        android:layout_margin="16dp"
-        android:src="@drawable/ic_launcher" />
+        <Button
+            android:id="@+id/editRecipePhotoManagerButton"
+            android:layout_width="84dp"
+            android:layout_height="84dp"
+            android:layout_margin="16dp"
+            android:text="@string/photo" />
 
         <EditText
             android:id="@+id/editRecipeName"
@@ -22,7 +22,7 @@
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
-            android:layout_toRightOf="@+id/TakeAPhoto"
+            android:layout_toRightOf="@id/editRecipePhotoManagerButton"
             android:ems="10"
             android:hint="@string/recipe_title" >
 

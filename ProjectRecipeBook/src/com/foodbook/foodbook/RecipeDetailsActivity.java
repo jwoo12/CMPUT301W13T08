@@ -58,6 +58,8 @@ public class RecipeDetailsActivity extends TitleBarOverride {
 	
 	private Button shareButton;
 	
+	private Button photoManagerButton;
+	
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -89,6 +91,7 @@ public class RecipeDetailsActivity extends TitleBarOverride {
 		categoryField = (TextView) findViewById(R.id.recipeDetails_category);
 
 		// bind buttons (and layouts containing buttons) to variables
+		photoManagerButton = (Button) findViewById(R.id.recipeDetails_photoButton);
 		editLayout = (RelativeLayout) findViewById(R.id.recipeDetails_editLayout);
 		editButton = (Button) findViewById(R.id.recipeDetails_editButton);
 		deleteLayout = (RelativeLayout) findViewById(R.id.recipeDetails_deleteLayout);
@@ -131,6 +134,16 @@ public class RecipeDetailsActivity extends TitleBarOverride {
 			@Override
 			public void onClick(View v) {
 				// TODO download
+			}
+		});
+		
+		photoManagerButton.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				Intent photoManagerIntent = new Intent();
+				photoManagerIntent.setClass(getApplicationContext(), PhotoManager.class);
+				startActivity(photoManagerIntent);
 			}
 		});
 		

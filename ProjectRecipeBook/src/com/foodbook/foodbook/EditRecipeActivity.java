@@ -5,6 +5,7 @@ import java.util.Arrays;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -24,6 +25,8 @@ import android.widget.Toast;
 */
 public class EditRecipeActivity extends TitleBarOverride {
 	
+	private final int BOGO_REQUEST_CODE = 1;
+	
 	protected String name;
 	protected String descriptions;
 	protected String category;
@@ -41,10 +44,15 @@ public class EditRecipeActivity extends TitleBarOverride {
 	protected ArrayList<String> categoryArrayList;
 	protected ArrayList<String> ingredientsArrayList;
 	
+	protected ArrayList<Bitmap> pictures;
+	
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.edit_recipe);
+		
+		//###################
+		pictures = new ArrayList<Bitmap>();
 		
 		// retrieve recipe object from intent
 		recipeid = getIntent().getStringExtra("recipeid");
@@ -80,6 +88,17 @@ public class EditRecipeActivity extends TitleBarOverride {
 				saveButtonClicked();
 				FridgeActivity.myRecipeBook.saveToFile(getApplicationContext());
 				finish();
+			}
+		});
+		
+		Button photoManagerButton = (Button) findViewById(R.id.editRecipePhotoManagerButton);
+		photoManagerButton.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				Intent photoManagerIntent = new Intent();
+				photoManagerIntent.setClass(getApplicationContext(), PhotoManager.class);
+				startActivityForResult(photoManagerIntent, BOGO_REQUEST_CODE);
 			}
 		});
 		

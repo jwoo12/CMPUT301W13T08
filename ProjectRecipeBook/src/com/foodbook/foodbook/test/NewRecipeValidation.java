@@ -62,7 +62,7 @@ public class NewRecipeValidation extends ActivityInstrumentationTestCase2 {
 	public void testNewRecipe() {
 		try{
 			int oldSize = testRecipeBook.getRecipeBook().size();
-			testRecipeBook.addRecipe(rName, rDesc, rInst, rIng, rCate);
+			testRecipeBook.addRecipe(rName, rDesc, rInst, rIng, rCate, null);
 			
 			int newSize = testRecipeBook.getRecipeBook().size();
 			assertTrue(oldSize + 1 == newSize);
@@ -83,7 +83,7 @@ public class NewRecipeValidation extends ActivityInstrumentationTestCase2 {
 			
 			// adding a new recipe
 			int oldSize = testRecipeBook.getRecipeBook().size();
-			testRecipeBook.addRecipe(rName, rDesc, rInst, rIng, rCate);
+			testRecipeBook.addRecipe(rName, rDesc, rInst, rIng, rCate, null);
 			int newSize = testRecipeBook.getRecipeBook().size();
 			assertTrue(oldSize + 1 == newSize);
 			assertTrue(testRecipeBook.getMine().get(newSize-1).getRecipename().equals(rName));

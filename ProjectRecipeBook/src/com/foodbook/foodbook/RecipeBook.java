@@ -11,7 +11,7 @@ import java.security.SecureRandom;
 import java.util.ArrayList;
 
 import android.content.Context;
-import android.util.Log;
+import android.graphics.Bitmap;
 
 /**
  * <p>
@@ -189,12 +189,12 @@ public class RecipeBook implements Serializable {
 
 	public String addRecipe(String recipename, String recipeDescriptions,
 			String recipeinstructions, ArrayList<String> ingredients,
-			ArrayList<String> category) {
+			ArrayList<String> category, ArrayList<Bitmap> bmpArray) {
 
 		Recipe newRecipe = new Recipe(recipename, recipeDescriptions,
 				recipeinstructions, formatStringArrayListEntries(ingredients),
 				formatStringArrayListEntries(category), this.userid,
-				this.author);
+				this.author, bmpArray);
 		this.mine.add(newRecipe);
 
 		return newRecipe.getRecipeid();

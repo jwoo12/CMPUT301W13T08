@@ -10,7 +10,6 @@ import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
@@ -222,6 +221,7 @@ public class FridgeActivity extends TitleBarOverride {
 	 * @see Toast
 	 * 
 	 */
+	
 	public void showInValidInputMessage() {
 		Context context = getApplicationContext();
 		CharSequence text = "Invalid Input";

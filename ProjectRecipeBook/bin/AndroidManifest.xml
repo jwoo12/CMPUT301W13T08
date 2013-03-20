@@ -82,6 +82,17 @@
             android:label="@string/title_bar_text"
             android:launchMode="singleInstance" >
         </activity>
+        <activity 
+            android:name="com.foodbook.foodbook.PhotoManager"
+            android:label="@string/photo_manager"
+            android:launchMode="singleInstance">
+        </activity>
+        <activity 
+            android:name="com.foodbook.foodbook.BogoActivity"
+            android:label="@string/bogo_gen"
+            android:launchMode="singleInstance">
+        </activity>
+        
     </application>
 
 </manifest>

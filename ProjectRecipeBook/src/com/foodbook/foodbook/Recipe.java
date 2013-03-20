@@ -4,6 +4,8 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
 
+import android.graphics.Bitmap;
+
 /**
  * A recipe is a set of instructions that a User can record or save to describe
  * how to prepare a food item.
@@ -44,6 +46,7 @@ public class Recipe implements Serializable {
 								// format: (userid) + (date in milisecond) +
 								// (first character of the food name)
 	private String userid; // userid is permanent.
+	private ArrayList<Bitmap> pictures;
 
 	// userid is perminant id, given to each user, this will be used to identify
 	// the owner of recipes.
@@ -241,7 +244,7 @@ public class Recipe implements Serializable {
 
 	public Recipe(String recipename, String recipeDescriptions,
 			String recipeInstructions, ArrayList<String> ingredients,
-			ArrayList<String> category, String userid, String author) {
+			ArrayList<String> category, String userid, String author, ArrayList<Bitmap> bmpArray) {
 		this.recipename = recipename;
 		this.recipeinstructions = recipeInstructions;
 		this.recipeDescriptions = recipeDescriptions;
@@ -251,6 +254,7 @@ public class Recipe implements Serializable {
 		this.recipeid = userid + String.valueOf((new Date()).getTime())
 				+ recipename.charAt(0);
 		this.userid = userid;
+		this.pictures = bmpArray;
 	}
 
 	/**

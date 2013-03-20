@@ -10,19 +10,19 @@
         android:layout_height="wrap_content"
         android:paddingBottom="16dp" >
 
-        <QuickContactBadge
-            android:id="@+id/quickContactBadge1"
+        <Button
+            android:id="@+id/recipeDetails_photoButton"
             android:layout_width="84dp"
             android:layout_height="84dp"
             android:layout_margin="16dp"
-            android:src="@color/fb_white" />
+            android:text="@string/photo" />
 
         <TextView
             android:id="@+id/recipeDetails_foodName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
-            android:layout_toRightOf="@+id/quickContactBadge1"
+            android:layout_toRightOf="@id/recipeDetails_photoButton"
             android:text="@string/food_name" />
 
     </RelativeLayout>
