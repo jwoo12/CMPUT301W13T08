@@ -1,6 +1,7 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <resources>
 
-    <string name="app_name">foodbook</string>
+    <string name="app_name">Foodbook</string>
     <string name="hello_world">Hello world!</string>
     <string name="menu_settings">Settings</string>
     <string name="title_activity_main">MainActivity</string>
@@ -26,7 +27,7 @@
     <string name="otherButtons">Other buttons here...</string>
     <string name="recipe_title">Recipe Title</string>
     <string name="manage_pic">Manage\nPicture</string>
-    <string name="emptyString"></string>
+    <string name="emptyString"/>
     <string name="separate_by_comma">Separate by comma</string>
     <string name="save">Save</string>
     <string name="new_recipe">New Recipe</string>

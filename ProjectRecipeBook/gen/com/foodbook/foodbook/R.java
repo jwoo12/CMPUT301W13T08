@@ -21,11 +21,12 @@ public final class R {
         public static final int collections_new_label=0x7f020001;
         public static final int collections_view_as_list=0x7f020002;
         public static final int content_edit=0x7f020003;
-        public static final int fridge=0x7f020004;
-        public static final int ic_action_search=0x7f020005;
-        public static final int ic_launcher=0x7f020006;
-        public static final int location_web_site=0x7f020007;
-        public static final int social_person=0x7f020008;
+        public static final int foodbook=0x7f020004;
+        public static final int fridge=0x7f020005;
+        public static final int ic_action_search=0x7f020006;
+        public static final int ic_launcher=0x7f020007;
+        public static final int location_web_site=0x7f020008;
+        public static final int social_person=0x7f020009;
     }
     public static final class id {
         public static final int Accept=0x7f080006;
@@ -159,6 +160,9 @@ public final class R {
     }
     public static final class style {
         public static final int AppTheme=0x7f050000;
+        public static final int Foodbook=0x7f050003;
+        public static final int MyTheme_ActionBar_TitleTextStyle=0x7f050005;
+        public static final int MyTheme_ActionBarStyle=0x7f050004;
         public static final int fridgeTheme=0x7f050001;
         public static final int searchTheme=0x7f050002;
     }
