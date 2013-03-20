@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<resources>
+<resources xmlns:android="http://schemas.android.com/apk/res/android">
 
     <style name="AppTheme" parent="android:Theme.Light" />
     <color name="fb_blue1">#3b5998</color>
@@ -13,6 +12,21 @@
     </style>
     <style name="searchTheme" parent="@android:style/Theme">
       
+    </style>
+    
+    <style name="Foodbook" parent="@style/AppTheme">
+        <item name="android:actionBarStyle">@style/MyTheme.ActionBarStyle</item>
+        
+    </style>
+
+    <style name="MyTheme.ActionBarStyle" parent="android:style/Widget.Holo.ActionBar">
+        <item name="android:titleTextStyle">@style/MyTheme.ActionBar.TitleTextStyle</item>
+         <item name="android:background">@color/fb_blue1</item>
+    </style>
+
+    <style name="MyTheme.ActionBar.TitleTextStyle" parent="android:style/TextAppearance.Holo.Widget.ActionBar.Title">
+        <item name="android:textColor">@color/fb_greyblue</item>
+        
     </style>
     
 </resources>
