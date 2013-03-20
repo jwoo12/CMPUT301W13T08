@@ -126,6 +126,23 @@ public class RecipeDetailsActivity extends TitleBarOverride {
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
 				
+				//	WebServiceClient wsb = new WebServiceClient();
+			//	ArrayList<String> ingredientsList = new ArrayList<String>(Arrays.asList(ingredients));
+			//	ArrayList<String> categoryList = new ArrayList<String>(Arrays.asList(category));
+				//Recipe publish = new Recipe(name, descriptions, instructions, ingredientsList, categoryList, userid, author);
+				
+//				try {
+//					wsb.insertRecipe(publish);
+//				} catch (IllegalStateException e) {
+//					// TODO Auto-generated catch block
+//					e.printStackTrace();
+//				} catch (IOException e) {
+//					// TODO Auto-generated catch block
+//					e.printStackTrace();
+//				}
+//				
+			
+				
 			}
 		});
 		
