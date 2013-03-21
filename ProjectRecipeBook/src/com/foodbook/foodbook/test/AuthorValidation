@@ -1,47 +1,53 @@
 package com.foodbook.foodbook.test;
 
-import static org.junit.Assert.*;
-
-import java.util.ArrayList;
-import android.test.ActivityInstrumentationTestCase2;
-import org.junit.Test;
-
 import com.foodbook.foodbook.FridgeActivity;
-import com.foodbook.foodbook.Recipe;
 import com.foodbook.foodbook.RecipeBook;
 
+import android.test.ActivityInstrumentationTestCase2;
 
-public class AuthorValidation
+/**
+ * <p>
+ * This class test the creation of auther 
+ * </p>
+ * 
+ * @author Jaeseo Park (jaeseo1), Jasmine Woo (jwoo), Nhu Bui (nbui), Robert
+ *         Janes (rjanes)
+ * 
+ */
+public class AuthorValidation extends ActivityInstrumentationTestCase2
 {
-  private String getrecipe;
-	private ArrayList<String> idAll;
-
 	private RecipeBook testRecipeBook;
-
-	String rName = "name";
-	String rDesc = "desc";
-	String rInst = "inst";
-	ArrayList<String> rIng = new ArrayList<String>();
-	ArrayList<String> rCate = new ArrayList<String>();
-	String rUserID = "123";
-	String rAuth = "auth";
-	
-	String editrName = "editname";
-	String editrDesc = "editdesc";
-	String editrInst = "editinst";
-	ArrayList<String> editrIng = new ArrayList<String>();
-	ArrayList<String> editrCate = new ArrayList<String>();
-
-
+	//String userid = new userid;
 	/**
-	 * method to Author
+	 * method to inherit from fridgeactivity
 	 */
-
-	@Test
-	public void testAuthor()
+	public AuthorValidation(String name)
 	{
 
-
+		super("com.foodbook.foodbook.test", FridgeActivity.class);
 	}
+
+	/**
+	 * method create a new setup/activity
+	 */
+	protected void setUp() throws Exception
+	{
+
+		super.setUp();
+		testRecipeBook = new RecipeBook();
+	}
+	
+	/**
+	 * method to test User/author
+	 */
+	public void testAuthor() {
+		try{
+
+			testRecipeBook.getAuthor();
+			
+			} catch (Exception e) {
+            fail("Exception occurred");
+        }
+    }
 
 }
