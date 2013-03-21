@@ -1,0 +1,47 @@
+package com.foodbook.foodbook.test;
+
+import static org.junit.Assert.*;
+
+import java.util.ArrayList;
+import android.test.ActivityInstrumentationTestCase2;
+import org.junit.Test;
+
+import com.foodbook.foodbook.FridgeActivity;
+import com.foodbook.foodbook.Recipe;
+import com.foodbook.foodbook.RecipeBook;
+
+
+public class AuthorValidation
+{
+  private String getrecipe;
+	private ArrayList<String> idAll;
+
+	private RecipeBook testRecipeBook;
+
+	String rName = "name";
+	String rDesc = "desc";
+	String rInst = "inst";
+	ArrayList<String> rIng = new ArrayList<String>();
+	ArrayList<String> rCate = new ArrayList<String>();
+	String rUserID = "123";
+	String rAuth = "auth";
+	
+	String editrName = "editname";
+	String editrDesc = "editdesc";
+	String editrInst = "editinst";
+	ArrayList<String> editrIng = new ArrayList<String>();
+	ArrayList<String> editrCate = new ArrayList<String>();
+
+
+	/**
+	 * method to Author
+	 */
+
+	@Test
+	public void testAuthor()
+	{
+
+
+	}
+
+}
