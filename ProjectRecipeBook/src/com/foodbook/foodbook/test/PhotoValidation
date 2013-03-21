@@ -1,0 +1,18 @@
+package com.foodbook.foodbook.test;
+
+import static org.junit.Assert.*;
+
+import org.junit.Test;
+
+
+public class PhotoValidation
+{
+
+  @Test
+	public void test()
+	{
+
+		fail("Not yet implemented");
+	}
+
+}
