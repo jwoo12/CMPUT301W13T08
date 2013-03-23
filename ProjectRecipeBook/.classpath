@@ -4,5 +4,18 @@
 	<classpathentry kind="src" path="gen"/>
 	<classpathentry exported="true" kind="con" path="com.android.ide.eclipse.adt.ANDROID_FRAMEWORK"/>
 	<classpathentry exported="true" kind="con" path="org.eclipse.jdt.junit.JUNIT_CONTAINER/4"/>
+	<classpathentry kind="lib" path="libs/gson-2.2.2-javadoc.jar"/>
+	<classpathentry kind="lib" path="libs/gson-2.2.2-sources.jar"/>
+	<classpathentry kind="lib" path="libs/gson-2.2.2.jar"/>
+	<classpathentry kind="lib" path="libs/httpclient-4.2.3.jar"/>
+	<classpathentry kind="lib" path="libs/httpclient-cache-4.2.3.jar"/>
+	<classpathentry kind="lib" path="libs/httpcore-4.2.2.jar"/>
+	<classpathentry kind="lib" path="libs/httpcore-4.2.3.jar"/>
+	<classpathentry kind="lib" path="libs/httpcore-ab-4.2.3.jar"/>
+	<classpathentry kind="lib" path="libs/httpcore-nio-4.2.3.jar"/>
+	<classpathentry kind="lib" path="libs/httpmime-4.2.3.jar"/>
+	<classpathentry kind="lib" path="libs/fluent-hc-4.2.3.jar"/>
+	<classpathentry kind="lib" path="libs/commons-codec-1.6.jar"/>
+	<classpathentry kind="lib" path="libs/commons-logging-1.1.1.jar"/>
 	<classpathentry kind="output" path="bin/classes"/>
 </classpath>
