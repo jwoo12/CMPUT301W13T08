@@ -102,11 +102,5 @@ public class IngredientValidation extends
 		}
 	}
 
-	 /**
-	 * method for testing the see what I can make button in fridgeActivity
-	 */
-	 public void testMakeResult() {
-		 // TODO
-	 }
 
 }

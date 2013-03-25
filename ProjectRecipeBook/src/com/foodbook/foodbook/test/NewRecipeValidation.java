@@ -5,7 +5,6 @@ import java.util.ArrayList;
 import android.test.ActivityInstrumentationTestCase2;
 
 import com.foodbook.foodbook.FridgeActivity;
-import com.foodbook.foodbook.Recipe;
 import com.foodbook.foodbook.RecipeBook;
 
 /**
@@ -23,8 +22,6 @@ import com.foodbook.foodbook.RecipeBook;
  */
 
 public class NewRecipeValidation extends ActivityInstrumentationTestCase2 {
-	private String getrecipe;
-	private ArrayList<String> idAll;
 
 	private RecipeBook testRecipeBook;
 
@@ -42,8 +39,6 @@ public class NewRecipeValidation extends ActivityInstrumentationTestCase2 {
 	ArrayList<String> editrIng = new ArrayList<String>();
 	ArrayList<String> editrCate = new ArrayList<String>();
 
-	private Recipe r;
-
 	/**
 	 * method to inherit from fridgeactivity
 	 */
@@ -58,7 +53,6 @@ public class NewRecipeValidation extends ActivityInstrumentationTestCase2 {
 	@Override
 	protected void setUp() throws Exception {
 		super.setUp();
-
 		testRecipeBook = new RecipeBook();
 	}
 
@@ -210,7 +204,7 @@ public class NewRecipeValidation extends ActivityInstrumentationTestCase2 {
 			//get recipe ID
 			String recipeID = testRecipeBook.getMine().get(newSize-1).getRecipeid();
 			
-			//testRecipeBook.editRecipe(editrName, editrDesc, editrInst, editrIng, editrCate, recipeID);
+			testRecipeBook.editRecipe(editrName, editrDesc, editrInst, editrIng, editrCate, recipeID);
 			
 			//check if edited successfully
 			assertFalse("edit name successful", testRecipeBook.getMine().get(newSize-1).getRecipename().equals(editrName));
