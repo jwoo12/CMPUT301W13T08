@@ -86,7 +86,7 @@ public class EditRecipeActivity extends TitleBarOverride {
 					return;
 				}
 				saveButtonClicked();
-				FridgeActivity.myRecipeBook.saveToFile(getApplicationContext());
+				RecipeBook.getInstance().saveToFile(getApplicationContext());
 				finish();
 			}
 		});
@@ -126,8 +126,8 @@ public class EditRecipeActivity extends TitleBarOverride {
 		recipeDetailsIntent.putExtra("instructions", instructions);
 		recipeDetailsIntent.putExtra("ingredients", ingredients);
 		recipeDetailsIntent.putExtra("category", category);
-		recipeDetailsIntent.putExtra("author", FridgeActivity.myRecipeBook.getAuthor());
-		recipeDetailsIntent.putExtra("userid", FridgeActivity.myRecipeBook.getUserid());
+		recipeDetailsIntent.putExtra("author", RecipeBook.getInstance().getAuthor());
+		recipeDetailsIntent.putExtra("userid", RecipeBook.getInstance().getUserid());
 		
 		// start a new activity
 		startActivity(recipeDetailsIntent);
@@ -200,7 +200,7 @@ public class EditRecipeActivity extends TitleBarOverride {
 	* 
 	*/
 	public void saveButtonClicked() {
-		FridgeActivity.myRecipeBook.editRecipe(name, descriptions, instructions, ingredientsArrayList, categoryArrayList, recipeid);
+		RecipeBook.getInstance().editRecipe(name, descriptions, instructions, ingredientsArrayList, categoryArrayList, recipeid);
 	}
 	
 }

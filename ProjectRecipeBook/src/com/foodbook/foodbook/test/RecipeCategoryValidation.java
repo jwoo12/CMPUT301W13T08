@@ -45,7 +45,7 @@ public class RecipeCategoryValidation extends ActivityInstrumentationTestCase2 {
 	@Override
 	protected void setUp() throws Exception {
 		super.setUp();
-		testRecipeBook = new RecipeBook();
+		testRecipeBook = RecipeBook.getInstance();
 	}
 
 	/**

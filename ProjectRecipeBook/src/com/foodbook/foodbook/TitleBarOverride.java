@@ -84,13 +84,12 @@ public class TitleBarOverride extends Activity {
 	}
 
 	/**
-	 * Prompt User for author name. Automatically executed on first run. The ability to change 
-	 * the name is availbe from the actions menu
+	 * Prompt User for author name. Automatically executed on first run. The
+	 * ability to change the name is availbe from the actions menu
 	 * 
 	 * 
 	 */
-	
-	
+
 	protected void askForNewName() {
 		AlertDialog.Builder alertdg = new AlertDialog.Builder(this);
 		alertdg.setTitle("New username");
@@ -103,8 +102,8 @@ public class TitleBarOverride extends Activity {
 					@Override
 					public void onClick(DialogInterface dialog, int which) {
 						String newName = nameField.getText().toString();
-						FridgeActivity.myRecipeBook.setAuthor(newName);
-						FridgeActivity.myRecipeBook.updateAuthorInAllRecipes();
+						RecipeBook.getInstance().setAuthor(newName);
+						RecipeBook.getInstance().updateAuthorInAllRecipes();
 					}
 				});
 		alertdg.setNegativeButton("Cancel",
@@ -115,6 +114,13 @@ public class TitleBarOverride extends Activity {
 					}
 				});
 		alertdg.show();
+	}
+
+	@Override
+	public void onPause() {
+		super.onPause();
+		Fridge.getInstance().saveToFile(getApplicationContext());
+		RecipeBook.getInstance().saveToFile(getApplicationContext());
 	}
 
 }

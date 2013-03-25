@@ -29,6 +29,7 @@ import android.content.Context;
 @SuppressWarnings("unchecked")
 public class Fridge {
 
+	private static final Fridge fridgeInstance = new Fridge();;
 	private ArrayList<String> ingredients;
 	private final String fridgeFilename = "fridge.sav";
 
@@ -41,9 +42,12 @@ public class Fridge {
 	 *            the application context
 	 */
 
-	public Fridge() {
+	private Fridge() {
 		this.ingredients = new ArrayList<String>();
-
+	}
+	
+	public static Fridge getInstance() {
+		return fridgeInstance;
 	}
 
 	/**

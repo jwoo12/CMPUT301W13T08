@@ -48,7 +48,7 @@ public class PhotoValidation extends
 	@Override
 	protected void setUp() throws Exception {
 		super.setUp();
-		testRecipeBook = new RecipeBook();
+		testRecipeBook = RecipeBook.getInstance();
 
 	}
 	 /**

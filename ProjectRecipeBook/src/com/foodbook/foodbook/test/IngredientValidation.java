@@ -26,6 +26,7 @@ public class IngredientValidation extends
 	/**
 	 * method for creating super for FridgeActivity
 	 */
+	@SuppressWarnings("deprecation")
 	public IngredientValidation() {
 		super("com.foodbook.foodbook.test", FridgeActivity.class);
 	}
@@ -36,7 +37,7 @@ public class IngredientValidation extends
 	@Override
 	protected void setUp() throws Exception {
 		super.setUp();
-		testFridge = new Fridge();
+		testFridge = Fridge.getInstance();
 
 	}
 

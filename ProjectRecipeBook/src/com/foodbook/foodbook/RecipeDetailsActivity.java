@@ -115,7 +115,7 @@ public class RecipeDetailsActivity extends TitleBarOverride {
 			
 			@Override
 			public void onClick(View v) {
-				FridgeActivity.myRecipeBook.deleteById(recipeid);
+				RecipeBook.getInstance().deleteById(recipeid);
 				finish();
 			}
 		});
@@ -178,7 +178,7 @@ public class RecipeDetailsActivity extends TitleBarOverride {
 				Intent emailIntent = new Intent(android.content.Intent.ACTION_SEND);
 				String[] recipients = new String[]{"my@email.com", "",};
 				emailIntent.putExtra(android.content.Intent.EXTRA_EMAIL, recipients);
-				emailIntent.putExtra(android.content.Intent.EXTRA_SUBJECT, FridgeActivity.myRecipeBook.getAuthor() + " shared " + name + " with you");
+				emailIntent.putExtra(android.content.Intent.EXTRA_SUBJECT, RecipeBook.getInstance().getAuthor() + " shared " + name + " with you");
 				emailIntent.putExtra(android.content.Intent.EXTRA_TEXT, formatRecipe);
 				emailIntent.setType("text/plain");
 				startActivity(Intent.createChooser(emailIntent, "Send mail..."));
@@ -240,7 +240,7 @@ public class RecipeDetailsActivity extends TitleBarOverride {
 	*/
 	
 	private void hideUnnecessaryButtons() {
-		if (!FridgeActivity.myRecipeBook.getUserid().equals(userid)) {
+		if (!RecipeBook.getInstance().getUserid().equals(userid)) {
 			editLayout.setVisibility(View.GONE);
 			deleteLayout.setVisibility(View.GONE);
 			publishLayout.setVisibility(View.GONE);
@@ -252,12 +252,6 @@ public class RecipeDetailsActivity extends TitleBarOverride {
 		else {
 			downloadLayout.setVisibility(View.GONE);
 		}
-	}
-	
-	@Override
-	public void onPause() {
-		super.onPause();
-		FridgeActivity.myRecipeBook.saveToFile(getApplicationContext());
 	}
 	
 }

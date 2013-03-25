@@ -19,6 +19,7 @@ import com.foodbook.foodbook.RecipeBook;
  * 
  */
 
+@SuppressWarnings("rawtypes")
 public class AuthorValidation extends ActivityInstrumentationTestCase2 {
 
 	private RecipeBook testRecipeBook;
@@ -30,7 +31,6 @@ public class AuthorValidation extends ActivityInstrumentationTestCase2 {
 	ArrayList<String> rCate = new ArrayList<String>();
 	String rUserID = "123";
 	String rAuth = "auth";
-
 
 	/**
 	 * method to inherit from fridgeactivity
@@ -46,7 +46,7 @@ public class AuthorValidation extends ActivityInstrumentationTestCase2 {
 	@Override
 	protected void setUp() throws Exception {
 		super.setUp();
-		testRecipeBook = new RecipeBook();
+		testRecipeBook = RecipeBook.getInstance();
 	}
 
 

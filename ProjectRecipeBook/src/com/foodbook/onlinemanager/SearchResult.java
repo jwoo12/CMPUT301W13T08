@@ -13,6 +13,7 @@ import android.widget.ListView;
 import com.foodbook.foodbook.FridgeActivity;
 import com.foodbook.foodbook.R;
 import com.foodbook.foodbook.Recipe;
+import com.foodbook.foodbook.RecipeBook;
 import com.foodbook.foodbook.RecipeBookActivity;
 import com.foodbook.foodbook.RecipeDetailsActivity;
 import com.foodbook.foodbook.TitleBarOverride;
@@ -71,7 +72,7 @@ public class SearchResult extends TitleBarOverride {
 				
 				String recipeid = combinedID.get(position);
 				
-				ArrayList<String> recipeInfo = FridgeActivity.myRecipeBook.getRecipeInfo(recipeid);
+				ArrayList<String> recipeInfo = RecipeBook.getInstance().getRecipeInfo(recipeid);
 				if (recipeInfo != null) {
 					Intent recipeDetailsIntent = new Intent();
 					recipeDetailsIntent.setClass(getApplicationContext(), RecipeDetailsActivity.class);

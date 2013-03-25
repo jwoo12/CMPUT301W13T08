@@ -48,9 +48,6 @@ import com.foodbook.onlinemanager.SearchResult;
 
 public class FridgeActivity extends TitleBarOverride {
 
-	public static RecipeBook myRecipeBook;
-
-	private Fridge myFridge;
 	private Context context;
 
 	private ListView listView;
@@ -66,10 +63,10 @@ public class FridgeActivity extends TitleBarOverride {
 		setContentView(R.layout.activity_main);
 		context = getApplicationContext();
 
-		myFridge = new Fridge();
+		myFridge = Fridge.getInstance();
 		myFridge.loadFromFile(getApplicationContext());
 
-		myRecipeBook = new RecipeBook();
+		myRecipeBook = RecipeBook.getInstance();
 		boolean recipeLoadResultOK = myRecipeBook
 				.loadFromFile(getApplicationContext());
 		if (!recipeLoadResultOK) {
@@ -78,7 +75,8 @@ public class FridgeActivity extends TitleBarOverride {
 
 		// setup List View
 		listView = (ListView) findViewById(R.id.fridgeList);
-		UpdateListView.updateListView(context, myFridge.getIngredients(), listView);
+		UpdateListView.updateListView(context, myFridge.getIngredients(),
+				listView);
 		listView.setOnItemClickListener(new android.widget.AdapterView.OnItemClickListener() {
 
 			@Override
@@ -102,25 +100,32 @@ public class FridgeActivity extends TitleBarOverride {
 		// setup 'Show what I can make' button
 		showWhatICanMakeButton = (Button) findViewById(R.id.fridgeSeeWhatICanMake);
 		showWhatICanMakeButton.setOnClickListener(new OnClickListener() {
-			
+
 			@Override
 			public void onClick(View v) {
-				
+
 				// local results of 'see what I can make' search
 				ArrayList<String> localResults, localID;
-				ArrayList<ArrayList<String>> localNamesAndIDs = RecipeBook.getNamesAndIDs(myRecipeBook.searchByIngredientsLocal(myFridge.getIngredients())); 
+				ArrayList<ArrayList<String>> localNamesAndIDs = RecipeBook
+						.getNamesAndIDs(myRecipeBook
+								.searchByIngredientsLocal(myFridge
+										.getIngredients()));
 				localResults = localNamesAndIDs.get(0);
 				localID = localNamesAndIDs.get(1);
-				
+
 				// online results of 'see what I can make' search
 				ArrayList<String> onlineResults, onlineID;
-				ArrayList<ArrayList<String>> onlineNamesAndIDs = RecipeBook.getNamesAndIDs(OnlineDataBase.searchByIngredientsOnline(myFridge.getIngredients()));
+				ArrayList<ArrayList<String>> onlineNamesAndIDs = RecipeBook
+						.getNamesAndIDs(OnlineDataBase
+								.searchByIngredientsOnline(myFridge
+										.getIngredients()));
 				onlineResults = onlineNamesAndIDs.get(0);
 				onlineID = onlineNamesAndIDs.get(1);
-				
+
 				// display results
 				Intent ingredientSeach = new Intent();
-				ingredientSeach.setClass(getApplicationContext(), SearchResult.class);
+				ingredientSeach.setClass(getApplicationContext(),
+						SearchResult.class);
 				ingredientSeach.putExtra("localResults", localResults);
 				ingredientSeach.putExtra("localID", localID);
 				ingredientSeach.putExtra("onlineResults", onlineResults);
@@ -151,8 +156,7 @@ public class FridgeActivity extends TitleBarOverride {
 		final EditText addText = new EditText(this);
 		if (add) {
 			alertdg.setTitle("Add Ingredient");
-		}
-		else {
+		} else {
 			alertdg.setTitle("Edit Ingredient");
 			addText.setText(defaultString);
 		}
@@ -170,7 +174,8 @@ public class FridgeActivity extends TitleBarOverride {
 						} else {
 							myFridge.editIngredient(position, ingredient);
 						}
-						UpdateListView.updateListView(context, myFridge.getIngredients(), listView);
+						UpdateListView.updateListView(context,
+								myFridge.getIngredients(), listView);
 					}
 				});
 		alertdg.setNegativeButton("Cancel",
@@ -201,7 +206,8 @@ public class FridgeActivity extends TitleBarOverride {
 					@Override
 					public void onClick(DialogInterface dialog, int which) {
 						myFridge.removeIngredientByIndex(position);
-						UpdateListView.updateListView(context, myFridge.getIngredients(), listView);
+						UpdateListView.updateListView(context,
+								myFridge.getIngredients(), listView);
 					}
 				});
 		alertdg.setNegativeButton("Edit",
@@ -221,7 +227,7 @@ public class FridgeActivity extends TitleBarOverride {
 	 * @see Toast
 	 * 
 	 */
-	
+
 	public void showInValidInputMessage() {
 		Context context = getApplicationContext();
 		CharSequence text = "Invalid Input";
@@ -229,13 +235,6 @@ public class FridgeActivity extends TitleBarOverride {
 
 		Toast toast = Toast.makeText(context, text, duration);
 		toast.show();
-	}
-
-	@Override
-	public void onPause() {
-		super.onPause();
-		myFridge.saveToFile(getApplicationContext());
-		myRecipeBook.saveToFile(getApplicationContext());
 	}
 
 }

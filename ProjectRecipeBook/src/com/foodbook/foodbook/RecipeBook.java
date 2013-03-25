@@ -5,7 +5,6 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
-import java.io.Serializable;
 import java.math.BigInteger;
 import java.security.SecureRandom;
 import java.util.ArrayList;
@@ -34,15 +33,15 @@ import android.graphics.Bitmap;
  * 
  */
 
-@SuppressWarnings("serial")
-public class RecipeBook implements Serializable {
+public class RecipeBook {
 
+	public static final String RecipeBookFilename = "recipe.sav";
+	public static final RecipeBook recipeBookInstance = new RecipeBook();
+	
 	private ArrayList<Recipe> mine;
 	private ArrayList<Recipe> downloads;
 	private String userid;
 	private String author;
-
-	public static final String RecipeBookFilename = "recipe.sav";
 
 	/**
 	 * This is a constructor method for RecipeBook. It creates new ArrayList of
@@ -51,7 +50,7 @@ public class RecipeBook implements Serializable {
 	 * 
 	 * 
 	 */
-	public RecipeBook() {
+	private RecipeBook() {
 
 		this.mine = new ArrayList<Recipe>();
 		this.downloads = new ArrayList<Recipe>();
@@ -59,7 +58,20 @@ public class RecipeBook implements Serializable {
 		this.author = "noname";
 
 	}
+	
 
+	/**
+	 * 
+	 * A method to get the instance of this class object.
+	 * Following singleton design pattern.
+	 * Allows global access.
+	 * 
+	 * @return RecipeBook instance
+	 */
+	public static RecipeBook getInstance() {
+		return recipeBookInstance;
+	}
+	
 	/**
 	 * 
 	 * "Getter" method to return user created recipes
@@ -312,7 +324,7 @@ public class RecipeBook implements Serializable {
 					this.mine.get(i).setCategory(
 							formatStringArrayListEntries(category));
 					this.mine.get(i).setauthor(
-							FridgeActivity.myRecipeBook.getAuthor());
+							RecipeBook.getInstance().getAuthor());
 				} else {
 					this.downloads.get(offset).setRecipename(recipename);
 					this.downloads.get(offset).setRecipeDescriptions(
@@ -324,7 +336,7 @@ public class RecipeBook implements Serializable {
 					this.downloads.get(offset).setCategory(
 							formatStringArrayListEntries(category));
 					this.downloads.get(offset).setauthor(
-							FridgeActivity.myRecipeBook.getAuthor());
+							RecipeBook.getInstance().getAuthor());
 				}
 				return;
 			}

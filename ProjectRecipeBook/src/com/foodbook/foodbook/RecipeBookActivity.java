@@ -94,7 +94,7 @@ public class RecipeBookActivity extends TitleBarOverride {
 					break;
 				}
 				
-				ArrayList<String> recipeInfo = FridgeActivity.myRecipeBook.getRecipeInfo(recipeid);
+				ArrayList<String> recipeInfo = RecipeBook.getInstance().getRecipeInfo(recipeid);
 				if (recipeInfo != null) {
 					Intent recipeDetailsIntent = new Intent();
 					recipeDetailsIntent.setClass(getApplicationContext(), RecipeDetailsActivity.class);
@@ -155,12 +155,12 @@ public class RecipeBookActivity extends TitleBarOverride {
 	
 	
 	private void reloadRecipeBook() {
-		sourceAll = RecipeBook.getNames(FridgeActivity.myRecipeBook.getRecipeBook());
-		sourceMine = RecipeBook.getNames(FridgeActivity.myRecipeBook.getMine());
-		sourceDownloads = RecipeBook.getNames(FridgeActivity.myRecipeBook.getDownloads());
-		idAll = RecipeBook.getRecipeid(FridgeActivity.myRecipeBook.getRecipeBook());
-		idMine = RecipeBook.getRecipeid(FridgeActivity.myRecipeBook.getMine());
-		idDownloads = RecipeBook.getRecipeid(FridgeActivity.myRecipeBook.getDownloads());
+		sourceAll = RecipeBook.getNames(RecipeBook.getInstance().getRecipeBook());
+		sourceMine = RecipeBook.getNames(RecipeBook.getInstance().getMine());
+		sourceDownloads = RecipeBook.getNames(RecipeBook.getInstance().getDownloads());
+		idAll = RecipeBook.getRecipeid(RecipeBook.getInstance().getRecipeBook());
+		idMine = RecipeBook.getRecipeid(RecipeBook.getInstance().getMine());
+		idDownloads = RecipeBook.getRecipeid(RecipeBook.getInstance().getDownloads());
 	}
 	
 	
