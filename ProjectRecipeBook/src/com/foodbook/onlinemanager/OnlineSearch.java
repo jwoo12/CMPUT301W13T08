@@ -1,8 +1,12 @@
 package com.foodbook.onlinemanager;
 
+import java.io.IOException;
 import java.util.ArrayList;
 
+import org.apache.http.client.ClientProtocolException;
+
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
@@ -38,28 +42,43 @@ public class OnlineSearch extends TitleBarOverride {
 		
 		searchButton.setOnClickListener(new OnClickListener() {
 			
-			@Override
 			public void onClick(View v) {
-				String keyword = keywordField.getText().toString();
-				ArrayList<Recipe> onlineResults = OnlineDataBase.searchByKeyword(keyword);
+				final String keyword = keywordField.getText().toString(); //had to change to final for try block
+				//ArrayList<Recipe> onlineResults = OnlineDataBase.searchByKeyword(keyword)*;
 				
-				//				WebServiceClient wsc = new WebServiceClient();
-//				try {
-//					wsc.searchRecipes(keyword);
-//				} catch (ClientProtocolException e) {
-//					// TODO Auto-generated catch block
-//					e.printStackTrace();
-//				} catch (IOException e) {
-//					// TODO Auto-generated catch block
-//					e.printStackTrace();
-//				}
-//				
+				
+//				AsyncTask<Void, Void, Void> task = new AsyncTask<Void, Void, Void> (){
+//					
+//					@Override
+//					protected Void doInBackground(Void... arg0) {
+//						
+//						Log.v("tests", "checkpoint doInBackground");
+//						
+//						//ArrayList<Recipe> searchResult = null;
+//						ArrayList<Recipe> onlineResults;
+//						WebServiceClient wsc = new WebServiceClient();
+//						try {
+//							Log.v("tests", "checkpoint before search");
+//							onlineResults = wsc.searchRecipes(keyword);
+//						} catch (ClientProtocolException e) {
+//							// TODO Auto-generated catch block
+//							e.printStackTrace();
+//						} catch (IOException e) {
+//							// TODO Auto-generated catch block
+//							e.printStackTrace();
+//						}
+//						return null;
+//						
+//					}
+//						
+//				}.execute();
+				
+
 			
 				
 			}
 		});
 	}
-	
 	@Override
 	public void onResume() {
 		super.onResume();

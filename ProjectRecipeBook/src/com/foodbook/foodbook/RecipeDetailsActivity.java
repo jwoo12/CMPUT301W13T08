@@ -1,12 +1,23 @@
 package com.foodbook.foodbook;
 
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Arrays;
+
+import com.foodbook.onlinemanager.WebServiceClient;
+
+import android.content.Context;
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.os.Bundle;
+import android.util.Log;
+import android.view.Gravity;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 /**
  * 
@@ -25,6 +36,8 @@ import android.widget.TextView;
 public class RecipeDetailsActivity extends TitleBarOverride {
 	
 	private Intent in;
+	
+	
 	
 	private String recipeid;
 	private String name;
@@ -126,25 +139,67 @@ public class RecipeDetailsActivity extends TitleBarOverride {
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
 				
-				//	WebServiceClient wsb = new WebServiceClient();
-			//	ArrayList<String> ingredientsList = new ArrayList<String>(Arrays.asList(ingredients));
-			//	ArrayList<String> categoryList = new ArrayList<String>(Arrays.asList(category));
-				//Recipe publish = new Recipe(name, descriptions, instructions, ingredientsList, categoryList, userid, author);
 				
-//				try {
-//					wsb.insertRecipe(publish);
-//				} catch (IllegalStateException e) {
-//					// TODO Auto-generated catch block
-//					e.printStackTrace();
-//				} catch (IOException e) {
-//					// TODO Auto-generated catch block
-//					e.printStackTrace();
-//				}
-//				
-			
+				
+				
+				
+				
+				ArrayList<String> ingredientsList = new ArrayList<String>(Arrays.asList(ingredients));
+				ArrayList<String> categoryList = new ArrayList<String>(Arrays.asList(category));
+				final Recipe publish = new Recipe(name, descriptions, instructions, ingredientsList, categoryList, userid, author, null);
+				
+				ArrayList<String> testIng = new ArrayList<String> ();
+				
+				testIng.add("ingredient");
+				
+				ArrayList<String> testCateg = new ArrayList<String> ();
+				testCateg.add("category");
+				
+				
+				final Recipe test = new Recipe("name", "description", "instructions", testIng, testCateg, "userID", "author", null );
+				
+				AsyncTask<Void, Void, Void> task = new AsyncTask<Void, Void, Void> (){
+				
+					@Override
+					protected Void doInBackground(Void... arg0) {
+					
+					
+						try {
+							WebServiceClient wsb = new WebServiceClient();
+							Log.v("tests", "checkpoint " + "AsyncTask begin");
+							wsb.insertRecipe(test);
+						} catch (IllegalStateException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						} catch (IOException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						}
+
+						return null;
+					}
+				
+				}.execute();
+				
+				// TODO add conditionals
+				
+				Context context = getApplicationContext();
+				CharSequence text = "Recipe published!";
+				int duration = Toast.LENGTH_SHORT;
+
+				Toast toast = Toast.makeText(context, text, duration);
+				toast.setGravity(Gravity.TOP|Gravity.LEFT, 300, 100);
+				toast.show();
 				
 			}
+			
+			
+			
+			
+				
+			
 		});
+		
 		
 		downloadButton.setOnClickListener(new OnClickListener() {
 			
