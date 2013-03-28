@@ -140,7 +140,7 @@ public class RecipeDetailsActivity extends TitleBarOverride {
 				// TODO Auto-generated method stub
 				
 				
-				
+				final WebServiceClient wsb = new WebServiceClient();
 				
 				
 				
@@ -165,9 +165,9 @@ public class RecipeDetailsActivity extends TitleBarOverride {
 					
 					
 						try {
-							WebServiceClient wsb = new WebServiceClient();
+							//WebServiceClient wsb = new WebServiceClient();
 							Log.v("tests", "checkpoint " + "AsyncTask begin");
-							wsb.insertRecipe(test);
+							wsb.insertRecipe(publish);
 						} catch (IllegalStateException e) {
 							// TODO Auto-generated catch block
 							e.printStackTrace();

@@ -1,6 +1,12 @@
 package com.foodbook.onlinemanager;
 
+import java.io.IOException;
 import java.util.ArrayList;
+
+import org.apache.http.client.ClientProtocolException;
+
+import android.os.AsyncTask;
+import android.util.Log;
 
 import com.foodbook.foodbook.Recipe;
 
@@ -18,6 +24,8 @@ import com.foodbook.foodbook.Recipe;
 
 public class OnlineDataBase {
 
+	
+	
 	/**
 	 * Given the keyword, returns a list of recipes that match
 	 * 
@@ -40,6 +48,42 @@ public class OnlineDataBase {
 	public static ArrayList<Recipe> searchByIngredientsOnline(
 			ArrayList<String> ingredients) {
 		ArrayList<Recipe> ouput = new ArrayList<Recipe>();
+		
+		
+		//TODO call wsc to return an array of recipes then add to output array
+		//need to parse ingredients list into one string
+		
+		
+		
+		
+		
+		AsyncTask<Void, Void, Void> task = new AsyncTask<Void, Void, Void> (){
+			
+			@Override
+			protected Void doInBackground(Void... arg0) {
+				
+				Log.v("tests", "checkpoint doInBackground");
+				
+				//ArrayList<Recipe> searchResult = null;
+		
+				WebServiceClient wsc = new WebServiceClient();
+//				try {
+//					ArrayList<Recipe> onlineResults = new ArrayList<Recipe>();
+//					Log.v("tests", "checkpoint before search");
+//					onlineResults = wsc.searchRecipes(keyword);
+//				} catch (ClientProtocolException e) {
+//					// TODO Auto-generated catch block
+//					e.printStackTrace();
+//				} catch (IOException e) {
+//					// TODO Auto-generated catch block
+//					e.printStackTrace();
+//				}
+				return null;
+				
+			}
+				
+		}.execute();
+		
 		return ouput;
 	}
 

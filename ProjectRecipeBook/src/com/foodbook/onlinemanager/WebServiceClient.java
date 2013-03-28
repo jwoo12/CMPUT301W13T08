@@ -4,9 +4,12 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.UnsupportedEncodingException;
 import java.lang.reflect.Type;
+import java.util.ArrayList;
 
 
 import android.util.Log;
+
+
 
 import com.foodbook.foodbook.*;
 
@@ -42,12 +45,17 @@ public class WebServiceClient {
 	
 	private String URL = "http://cmput301.softwareprocess.es:8080/CMPUT301W13T08/testing/";
 	
-	private String test_URL = "http://cmput301.softwareprocess.es:8080/lab524/testing/";
+	private String test_URL = "http://cmput301.softwareprocess.es:8080/testing/lab97/";
+	
+						
 	
 	
 	
 	
 	public void insertRecipe(Recipe recipe) throws IllegalStateException, IOException{
+		
+		Log.v("tests", "checkpoint insertRecipe");
+		
 		HttpPost httpPost = new HttpPost(test_URL +recipe.getRecipeid());
 		StringEntity stringentity = null;
 		try {
@@ -61,6 +69,9 @@ public class WebServiceClient {
 		httpPost.setEntity(stringentity);
 		HttpResponse response = null;
 		try {
+			
+			Log.v("tests", "checkpoint trying response");
+			
 			response = httpclient.execute(httpPost);
 		} catch (ClientProtocolException e) {
 			// TODO Auto-generated catch block
@@ -131,25 +142,54 @@ public class WebServiceClient {
 		}
 	}
 
-	public void searchRecipes(String str) throws ClientProtocolException, IOException {
-		HttpGet searchRequest = new HttpGet(test_URL + "_search?pretty=1&q=" +
-				java.net.URLEncoder.encode(str,"UTF-8"));
+	public ArrayList<Recipe> searchRecipes(String str) throws ClientProtocolException, IOException {
+		
+		
+		Log.v("tests", "keyword " + str);
+		
+		ArrayList<Recipe> results = new ArrayList<Recipe> ();
+		
+		HttpPost searchRequest = new HttpPost(test_URL + "_search?pretty=1");
+		String query = 	"{\"query\" : {\"query_string\" : {\"default_field\" : \"ingredients\",\"query\" : \"" + str + "\"}}}";
+		
+		// TODO do 2 queries: one for title, and one for category. Then return combined list. 
+		
+		StringEntity stringentity = new StringEntity(query);
+
 		searchRequest.setHeader("Accept","application/json");
+		searchRequest.setEntity(stringentity);
+
 		HttpResponse response = httpclient.execute(searchRequest);
 		String status = response.getStatusLine().toString();
-		System.out.println(status);
+		//System.out.println(status);
 
+		Log.v("tests", "search status " +status);
+		
 		String json = getEntityContent(response);
+		
+		//Log.v("tests", "json string after response " + json);
 
 		Type elasticSearchSearchResponseType = new TypeToken<ElasticSearchSearchResponse<Recipe>>(){}.getType();
 		ElasticSearchSearchResponse<Recipe> esResponse = gson.fromJson(json, elasticSearchSearchResponseType);
-		System.err.println(esResponse);
+		//System.err.println(esResponse);
+		
+		
+		
+		
+		
+		Log.v("tests", "search esResponse " + esResponse);
+		
 		for (ElasticSearchResponse<Recipe> r : esResponse.getHits()) {
 			Recipe recipe = r.getSource();
-			System.err.println(recipe);
+			Log.v("tests", "recipe found " + recipe.getRecipename());
+			results.add(recipe);
+			
+			
+			
+			//System.err.println(recipe);
 		}
 		
-		
+		return results;
 		//TODO Release Connection not working
 		
 		//searchRequest.releaseConnection();
@@ -212,13 +252,22 @@ public class WebServiceClient {
 		BufferedReader br = new BufferedReader(
 				new InputStreamReader((response.getEntity().getContent())));
 		String output;
-		System.err.println("Output from Server -> ");
+		//System.err.println("Output from Server -> ");
+		
+		Log.v("tests", "Output from Server -> ");
+		
 		String json = "";
 		while ((output = br.readLine()) != null) {
-			System.err.println(output);
+			//System.err.println(output);
+			
+			Log.v("tests", "output" + output);
+			
 			json += output;
 		}
-		System.err.println("JSON:"+json);
+		//System.err.println("JSON:"+json);
+		
+		Log.v("tests", "JSON: " + json);
+		
 		return json;
 	}
 	

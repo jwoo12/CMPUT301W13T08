@@ -105,7 +105,7 @@ public class SearchResult extends TitleBarOverride {
 	 */
 	
 	private void updateListView(ArrayList<String> sourceList, ListView targetListView) {
-		ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, sourceList);
+		ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, R.layout.mytextview, sourceList);
 		targetListView.setAdapter(adapter);
 	}
 	
