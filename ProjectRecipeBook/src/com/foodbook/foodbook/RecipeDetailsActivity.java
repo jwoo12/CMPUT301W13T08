@@ -1,44 +1,34 @@
 package com.foodbook.foodbook;
 
-import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Arrays;
-
-import com.foodbook.onlinemanager.WebServiceClient;
 
 import android.content.Context;
 import android.content.Intent;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.Gravity;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 /**
  * 
- * Displays a recipe and its features on screen. 
+ * Displays a recipe and its features on screen.
  * 
- * Each recipe has the following features: share, publish, download, edit, and delete. Features are only
- * displayed when relevant. 
+ * Each recipe has the following features: share, publish, download, edit, and delete. Features are only displayed when relevant.
  * 
  * @see Recipe
  * 
  * @author Jaeseo Park (jaeseo1), Jasmine Woo (jwoo), Nhu Bui (nbui), Robert Janes (rjanes)
- *
+ * 
  */
 
-
 public class RecipeDetailsActivity extends TitleBarOverride {
-	
+
+	private Context context;
 	private Intent in;
-	
-	
-	
+
 	private String recipeid;
 	private String name;
 	private String author;
@@ -47,41 +37,43 @@ public class RecipeDetailsActivity extends TitleBarOverride {
 	private String ingredients;
 	private String category;
 	private String userid;
-	
+
 	private boolean onlineRecipe;
-	
+
 	private TextView nameField;
 	private TextView authorField;
 	private TextView descriptionsField;
 	private TextView instructionsField;
 	private TextView ingredientsField;
 	private TextView categoryField;
-	
+
 	private RelativeLayout editLayout;
 	private Button editButton;
-	
+
 	private RelativeLayout deleteLayout;
 	private Button deleteButton;
-	
+
 	private RelativeLayout publishLayout;
 	private Button publishButton;
-	
+
 	private RelativeLayout downloadLayout;
 	private Button downloadButton;
-	
+
 	private Button shareButton;
-	
+
 	private Button photoManagerButton;
-	
+
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.recipe_details);
-		
+
 		TextView categoryLabel = (TextView) findViewById(R.id.recipeDetails_categoryLabel);
 		categoryLabel.setText("Category");
 		TextView ingredientsLabel = (TextView) findViewById(R.id.recipeDetails_ingredientsLabel);
 		ingredientsLabel.setText("Ingredients");
+
+		context = getApplicationContext();
 
 		// read intent
 		in = getIntent();
@@ -94,7 +86,7 @@ public class RecipeDetailsActivity extends TitleBarOverride {
 		category = in.getStringExtra("category").replace(", ", "\n").replace(",", "\n");
 		userid = in.getStringExtra("userid");
 		onlineRecipe = in.getBooleanExtra("onlineRecipe", false);
-		
+
 		// bind views to variables
 		nameField = (TextView) findViewById(R.id.recipeDetails_foodName);
 		authorField = (TextView) findViewById(R.id.recipeDetails_author);
@@ -114,144 +106,108 @@ public class RecipeDetailsActivity extends TitleBarOverride {
 		downloadLayout = (RelativeLayout) findViewById(R.id.recipeDetails_downloadLayout);
 		downloadButton = (Button) findViewById(R.id.recipeDetails_downloadButton);
 		shareButton = (Button) findViewById(R.id.recipeDetails_shareButton);
-		
+
 		// set button listeners
 		editButton.setOnClickListener(new OnClickListener() {
-			
+
 			@Override
 			public void onClick(View v) {
 				editRecipe();
 			}
 		});
-		
+
 		deleteButton.setOnClickListener(new OnClickListener() {
-			
+
 			@Override
 			public void onClick(View v) {
 				RecipeBook.getInstance().deleteById(recipeid);
 				finish();
 			}
 		});
-		
+
 		publishButton.setOnClickListener(new OnClickListener() {
-			
+
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
-				
-				
-				final WebServiceClient wsb = new WebServiceClient();
-				
-				
-				
-				ArrayList<String> ingredientsList = new ArrayList<String>(Arrays.asList(ingredients));
-				ArrayList<String> categoryList = new ArrayList<String>(Arrays.asList(category));
-				final Recipe publish = new Recipe(name, descriptions, instructions, ingredientsList, categoryList, userid, author, null);
-				
-				ArrayList<String> testIng = new ArrayList<String> ();
-				
-				testIng.add("ingredient");
-				
-				ArrayList<String> testCateg = new ArrayList<String> ();
-				testCateg.add("category");
-				
-				
-				final Recipe test = new Recipe("name", "description", "instructions", testIng, testCateg, "userID", "author", null );
-				
-				AsyncTask<Void, Void, Void> task = new AsyncTask<Void, Void, Void> (){
-				
-					@Override
-					protected Void doInBackground(Void... arg0) {
-					
-					
-						try {
-							//WebServiceClient wsb = new WebServiceClient();
-							Log.v("tests", "checkpoint " + "AsyncTask begin");
-							wsb.insertRecipe(publish);
-						} catch (IllegalStateException e) {
-							// TODO Auto-generated catch block
-							e.printStackTrace();
-						} catch (IOException e) {
-							// TODO Auto-generated catch block
-							e.printStackTrace();
-						}
 
-						return null;
-					}
-				
-				}.execute();
-				
-				// TODO add conditionals
-				
-				Context context = getApplicationContext();
-				CharSequence text = "Recipe published!";
-				int duration = Toast.LENGTH_SHORT;
+				// WebServiceClient wsb = new WebServiceClient();
+				// ArrayList<String> ingredientsList = new ArrayList<String>(Arrays.asList(ingredients));
+				// ArrayList<String> categoryList = new ArrayList<String>(Arrays.asList(category));
+				// Recipe publish = new Recipe(name, descriptions, instructions, ingredientsList, categoryList, userid, author);
 
-				Toast toast = Toast.makeText(context, text, duration);
-				toast.setGravity(Gravity.TOP|Gravity.LEFT, 300, 100);
-				toast.show();
-				
+				// try {
+				// wsb.insertRecipe(publish);
+				// } catch (IllegalStateException e) {
+				// // TODO Auto-generated catch block
+				// e.printStackTrace();
+				// } catch (IOException e) {
+				// // TODO Auto-generated catch block
+				// e.printStackTrace();
+				// }
+				//
+
 			}
-			
-			
-			
-			
-				
-			
 		});
-		
-		
+
 		downloadButton.setOnClickListener(new OnClickListener() {
-			
+
 			@Override
 			public void onClick(View v) {
 				// TODO download
 			}
 		});
-		
+
 		photoManagerButton.setOnClickListener(new OnClickListener() {
-			
+
 			@Override
 			public void onClick(View v) {
+
+				// Pictures are separated from other attributes of recipe because the size is relatively large, and it slows down the application.
+
 				Intent photoManagerIntent = new Intent();
-				photoManagerIntent.setClass(getApplicationContext(), PhotoManager.class);
+				photoManagerIntent.setClass(context, PhotoManagerView.class);
+				if (RecipeBook.getInstance().getUserid().equals(userid)) {
+					Log.v("mylog", "owned by user");
+					photoManagerIntent.setClass(context, PhotoManager.class);
+				} 
+				ArrayList<String> pics = RecipeBook.getInstance().getPicturesById(recipeid);
+				if (pics.size() != 0) {
+					photoManagerIntent.putExtra("pics", pics);
+				}
 				startActivity(photoManagerIntent);
 			}
 		});
-		
+
 		shareButton.setOnClickListener(new OnClickListener() {
-			
+
 			@Override
 			public void onClick(View v) {
-				
-				String formatRecipe = "Recipe: " + name + "\n\n" + "Ingredients: " + "\n" 
-								+ ingredients + "\n\n" + "Instructions: " + "\n" + instructions 
-								+ "\n\n" + "Description: " + "\n" + descriptions + "\n" 
-								+ "Category: " + category + "\n\n" +
-								"Author: " + author + "\n";
-				
+
+				String formatRecipe = "Recipe: " + name + "\n\n" + "Ingredients: " + "\n" + ingredients + "\n\n" + "Instructions: " + "\n" + instructions + "\n\n" + "Description: " + "\n" + descriptions + "\n" + "Category: " + category + "\n\n" + "Author: " + author + "\n";
+
 				Intent emailIntent = new Intent(android.content.Intent.ACTION_SEND);
-				String[] recipients = new String[]{"my@email.com", "",};
+				String[] recipients = new String[] { "my@email.com", "", };
 				emailIntent.putExtra(android.content.Intent.EXTRA_EMAIL, recipients);
 				emailIntent.putExtra(android.content.Intent.EXTRA_SUBJECT, RecipeBook.getInstance().getAuthor() + " shared " + name + " with you");
 				emailIntent.putExtra(android.content.Intent.EXTRA_TEXT, formatRecipe);
 				emailIntent.setType("text/plain");
 				startActivity(Intent.createChooser(emailIntent, "Send mail..."));
-				
+
 			}
 		});
-        
+
 		// update the textviews
 		hideUnnecessaryButtons();
 		updateTextViews();
 	}
-	
+
 	/**
 	 * Used to create a new intent directing to the edit recipe activity
 	 * 
 	 * 
 	 */
-	
+
 	public void editRecipe() {
 		Intent editIntent = new Intent();
 		editIntent.setClass(getApplicationContext(), EditRecipeActivity.class);
@@ -263,20 +219,20 @@ public class RecipeDetailsActivity extends TitleBarOverride {
 		editIntent.putExtra("instructions", instructions);
 		startActivity(editIntent);
 	}
-	
+
 	@Override
 	public void onNewIntent(Intent newIntent) {
 		super.onNewIntent(newIntent);
 		setIntent(newIntent);
 	}
-	
+
 	/**
 	 * 
 	 * Displays a recipe's details on screen
 	 * 
 	 * @author Jaeseo Park (jaeseo1), Jasmine Woo (jwoo), Nhu Bui (nbui), Robert Janes (rjanes)
 	 */
-	
+
 	public void updateTextViews() {
 		nameField.setText(name);
 		authorField.setText(author);
@@ -285,15 +241,14 @@ public class RecipeDetailsActivity extends TitleBarOverride {
 		ingredientsField.setText(ingredients);
 		categoryField.setText(category);
 	}
-	
+
 	/**
-	* This methods hides unnecessary buttons. For instance, removes "downloads" buttons for local (cached) recipes,
-	* or removes "edit" button for recipes that the owner (author) is not the user himself/herself.
-	* 
-	* 
-	* @author Jaeseo Park (jaeseo1), Jasmine Woo (jwoo), Nhu Bui (nbui), Robert Janes (rjanes)
-	*/
-	
+	 * This methods hides unnecessary buttons. For instance, removes "downloads" buttons for local (cached) recipes, or removes "edit" button for recipes that the owner (author) is not the user himself/herself.
+	 * 
+	 * 
+	 * @author Jaeseo Park (jaeseo1), Jasmine Woo (jwoo), Nhu Bui (nbui), Robert Janes (rjanes)
+	 */
+
 	private void hideUnnecessaryButtons() {
 		if (!RecipeBook.getInstance().getUserid().equals(userid)) {
 			editLayout.setVisibility(View.GONE);
@@ -303,10 +258,9 @@ public class RecipeDetailsActivity extends TitleBarOverride {
 		if (onlineRecipe) {
 			publishLayout.setVisibility(View.GONE);
 			editLayout.setVisibility(View.GONE);
-		}
-		else {
+		} else {
 			downloadLayout.setVisibility(View.GONE);
 		}
 	}
-	
+
 }

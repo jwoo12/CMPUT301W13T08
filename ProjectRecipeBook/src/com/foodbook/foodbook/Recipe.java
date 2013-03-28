@@ -4,11 +4,8 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
 
-import android.graphics.Bitmap;
-
 /**
- * A recipe is a set of instructions that a User can record or save to describe
- * how to prepare a food item.
+ * A recipe is a set of instructions that a User can record or save to describe how to prepare a food item.
  * 
  * <p>
  * Recipes contain:
@@ -24,8 +21,7 @@ import android.graphics.Bitmap;
  * 
  * </ul>
  * 
- * @author Jaeseo Park (jaeseo1), Jasmine Woo (jwoo), Nhu Bui (nbui), Robert
- *         Janes (rjanes)
+ * @author Jaeseo Park (jaeseo1), Jasmine Woo (jwoo), Nhu Bui (nbui), Robert Janes (rjanes)
  * 
  */
 
@@ -46,7 +42,7 @@ public class Recipe implements Serializable {
 								// format: (userid) + (date in milisecond) +
 								// (first character of the food name)
 	private String userid; // userid is permanent.
-	private ArrayList<Bitmap> pictures;
+	private ArrayList<String> pictures;
 
 	// userid is perminant id, given to each user, this will be used to identify
 	// the owner of recipes.
@@ -242,25 +238,28 @@ public class Recipe implements Serializable {
 	 *            name of user
 	 */
 
-	public Recipe(String recipename, String recipeDescriptions,
-			String recipeInstructions, ArrayList<String> ingredients,
-			ArrayList<String> category, String userid, String author, ArrayList<Bitmap> bmpArray) {
+	public Recipe(String recipename, String recipeDescriptions, String recipeInstructions, ArrayList<String> ingredients, ArrayList<String> category, String userid, String author, ArrayList<String> pics) {
 		this.recipename = recipename;
 		this.recipeinstructions = recipeInstructions;
 		this.recipeDescriptions = recipeDescriptions;
 		this.author = author;
 		this.ingredients = ingredients;
 		this.category = category;
-		this.recipeid = userid + String.valueOf((new Date()).getTime())
-				+ recipename.charAt(0);
+		this.recipeid = userid + String.valueOf((new Date()).getTime()) + recipename.charAt(0);
 		this.userid = userid;
-		this.pictures = bmpArray;
+		this.pictures = pics;
+	}
+
+	public ArrayList<String> getPictures() {
+		return pictures;
+	}
+
+	public void setPictures(ArrayList<String> pictures) {
+		this.pictures = pictures;
 	}
 
 	/**
-	 * This method will return list of ingredients as a string, in the following
-	 * format: ingr_0\ningr_1\ningr_2 ... ingr_n If there is no ingredients
-	 * added yet, then empty string is returned.
+	 * This method will return list of ingredients as a string, in the following format: ingr_0\ningr_1\ningr_2 ... ingr_n If there is no ingredients added yet, then empty string is returned.
 	 */
 
 	public String getIngredientsString() {
@@ -279,9 +278,7 @@ public class Recipe implements Serializable {
 	}
 
 	/**
-	 * This method will return list of categories as a string, in the following
-	 * format: categ_0\ncateg_1\ncateg_2 ... categ_n If there is no categories
-	 * added yet, then empty string is returned.
+	 * This method will return list of categories as a string, in the following format: categ_0\ncateg_1\ncateg_2 ... categ_n If there is no categories added yet, then empty string is returned.
 	 */
 
 	public String getCategoryString() {

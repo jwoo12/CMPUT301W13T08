@@ -41,8 +41,7 @@ import com.foodbook.onlinemanager.SearchResult;
  * 
  * @see Fridge
  * 
- * @author Jaeseo Park (jaeseo1), Jasmine Woo (jwoo), Nhu Bui (nbui), Robert
- *         Janes (rjanes)
+ * @author Jaeseo Park (jaeseo1), Jasmine Woo (jwoo), Nhu Bui (nbui), Robert Janes (rjanes)
  * 
  */
 
@@ -67,21 +66,18 @@ public class FridgeActivity extends TitleBarOverride {
 		myFridge.loadFromFile(getApplicationContext());
 
 		myRecipeBook = RecipeBook.getInstance();
-		boolean recipeLoadResultOK = myRecipeBook
-				.loadFromFile(getApplicationContext());
+		boolean recipeLoadResultOK = myRecipeBook.loadFromFile(getApplicationContext());
 		if (!recipeLoadResultOK) {
 			askForNewName();
 		}
 
 		// setup List View
 		listView = (ListView) findViewById(R.id.fridgeList);
-		UpdateListView.updateListView(context, myFridge.getIngredients(),
-				listView);
+		UpdateListView.updateListView(context, myFridge.getIngredients(), listView);
 		listView.setOnItemClickListener(new android.widget.AdapterView.OnItemClickListener() {
 
 			@Override
-			public void onItemClick(AdapterView<?> parent, View view,
-					int position, long id) {
+			public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 				showOptionDialog(position);
 			}
 
@@ -106,26 +102,19 @@ public class FridgeActivity extends TitleBarOverride {
 
 				// local results of 'see what I can make' search
 				ArrayList<String> localResults, localID;
-				ArrayList<ArrayList<String>> localNamesAndIDs = RecipeBook
-						.getNamesAndIDs(myRecipeBook
-								.searchByIngredientsLocal(myFridge
-										.getIngredients()));
+				ArrayList<ArrayList<String>> localNamesAndIDs = RecipeBook.getNamesAndIDs(myRecipeBook.searchByIngredientsLocal(myFridge.getIngredients()));
 				localResults = localNamesAndIDs.get(0);
 				localID = localNamesAndIDs.get(1);
 
 				// online results of 'see what I can make' search
 				ArrayList<String> onlineResults, onlineID;
-				ArrayList<ArrayList<String>> onlineNamesAndIDs = RecipeBook
-						.getNamesAndIDs(OnlineDataBase
-								.searchByIngredientsOnline(myFridge
-										.getIngredients()));
+				ArrayList<ArrayList<String>> onlineNamesAndIDs = RecipeBook.getNamesAndIDs(OnlineDataBase.searchByIngredientsOnline(myFridge.getIngredients()));
 				onlineResults = onlineNamesAndIDs.get(0);
 				onlineID = onlineNamesAndIDs.get(1);
 
 				// display results
 				Intent ingredientSeach = new Intent();
-				ingredientSeach.setClass(getApplicationContext(),
-						SearchResult.class);
+				ingredientSeach.setClass(getApplicationContext(), SearchResult.class);
 				ingredientSeach.putExtra("localResults", localResults);
 				ingredientSeach.putExtra("localID", localID);
 				ingredientSeach.putExtra("onlineResults", onlineResults);
@@ -145,15 +134,16 @@ public class FridgeActivity extends TitleBarOverride {
 	 * @param add
 	 *            User wants to add an ingredient
 	 * @param defaultString
-	 *            if the user does not add text to an ingredient a blank string
-	 *            is assigned
+	 *            if the user does not add text to an ingredient a blank string is assigned
 	 * @param position
 	 *            element at which the ingredient is added
 	 */
-	private void showInputDialog(final boolean add, String defaultString,
-			final int position) {
+	private void showInputDialog(final boolean add, String defaultString, final int position) {
+
 		AlertDialog.Builder alertdg = new AlertDialog.Builder(this);
+
 		final EditText addText = new EditText(this);
+		addText.setSingleLine(true);
 		if (add) {
 			alertdg.setTitle("Add Ingredient");
 		} else {
@@ -163,35 +153,31 @@ public class FridgeActivity extends TitleBarOverride {
 		LinearLayout layout = new LinearLayout(this);
 		layout.addView(addText);
 		alertdg.setView(layout);
-		alertdg.setPositiveButton("Save",
-				new DialogInterface.OnClickListener() {
-					@Override
-					public void onClick(DialogInterface dialog, int which) {
-						ingredient = addText.getText().toString();
-						// TODO: empty string check
-						if (add) {
-							myFridge.addIngredient(ingredient);
-						} else {
-							myFridge.editIngredient(position, ingredient);
-						}
-						UpdateListView.updateListView(context,
-								myFridge.getIngredients(), listView);
-					}
-				});
-		alertdg.setNegativeButton("Cancel",
-				new DialogInterface.OnClickListener() {
-					@Override
-					public void onClick(DialogInterface dialog, int which) {
-						// do nothing for "cancel"
-					}
-				});
+		alertdg.setPositiveButton("Save", new DialogInterface.OnClickListener() {
+			@Override
+			public void onClick(DialogInterface dialog, int which) {
+				ingredient = addText.getText().toString();
+				// TODO: empty string check
+				if (add) {
+					myFridge.addIngredient(ingredient);
+				} else {
+					myFridge.editIngredient(position, ingredient);
+				}
+				UpdateListView.updateListView(context, myFridge.getIngredients(), listView);
+			}
+		});
+		alertdg.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+			@Override
+			public void onClick(DialogInterface dialog, int which) {
+				// do nothing for "cancel"
+			}
+		});
 		alertdg.show();
 	}
 
 	/**
 	 * 
-	 * Alert dialog created to show the options of an ingredient. The user is
-	 * able to "Edit" or "Delete" an ingredient
+	 * Alert dialog created to show the options of an ingredient. The user is able to "Edit" or "Delete" an ingredient
 	 * 
 	 * @see AlertDialog
 	 * @param position
@@ -201,28 +187,24 @@ public class FridgeActivity extends TitleBarOverride {
 		AlertDialog.Builder alertdg = new AlertDialog.Builder(this);
 		final String titleOfDialog = myFridge.getIngredientAtIndex(position);
 		alertdg.setTitle(titleOfDialog);
-		alertdg.setPositiveButton("Delete",
-				new DialogInterface.OnClickListener() {
-					@Override
-					public void onClick(DialogInterface dialog, int which) {
-						myFridge.removeIngredientByIndex(position);
-						UpdateListView.updateListView(context,
-								myFridge.getIngredients(), listView);
-					}
-				});
-		alertdg.setNegativeButton("Edit",
-				new DialogInterface.OnClickListener() {
-					@Override
-					public void onClick(DialogInterface dialog, int which) {
-						showInputDialog(false, titleOfDialog, position);
-					}
-				});
+		alertdg.setPositiveButton("Delete", new DialogInterface.OnClickListener() {
+			@Override
+			public void onClick(DialogInterface dialog, int which) {
+				myFridge.removeIngredientByIndex(position);
+				UpdateListView.updateListView(context, myFridge.getIngredients(), listView);
+			}
+		});
+		alertdg.setNegativeButton("Edit", new DialogInterface.OnClickListener() {
+			@Override
+			public void onClick(DialogInterface dialog, int which) {
+				showInputDialog(false, titleOfDialog, position);
+			}
+		});
 		alertdg.show();
 	}
 
 	/**
-	 * A toast to handle the event of an invalid input. If a User enters no
-	 * text, the toast is displayed.
+	 * A toast to handle the event of an invalid input. If a User enters no text, the toast is displayed.
 	 * 
 	 * @see Toast
 	 * 

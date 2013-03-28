@@ -5,37 +5,15 @@
     android:layout_height="fill_parent"
     android:orientation="vertical" >
 
-    <LinearLayout
-        android:id="@+id/LinearLayout2"
+    <Button
+        android:id="@+id/photoManager_addButton"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" >
+        android:layout_height="wrap_content"
+        android:text="@string/add" />
 
-        <Button
-            android:id="@+id/photoManager_prevButton"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight=".33"
-            android:text="@string/Previous" />
-
-        <Button
-            android:id="@+id/photoManager_addButton"
-            android:layout_weight=".33"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/add" />
-
-        <Button
-            android:id="@+id/photoManager_nextButton"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight=".33"
-            android:text="@string/next" />
-    </LinearLayout>
-
-    <ImageButton
-        android:id="@+id/photoManager_imageBtn"
+    <Gallery
+        android:id="@+id/photomanager_gallery"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:src="@drawable/ic_launcher" />
+        android:layout_height="match_parent" />
 
 </LinearLayout>

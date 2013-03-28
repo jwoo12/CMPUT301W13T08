@@ -15,14 +15,10 @@ import android.content.Context;
  * </p>
  * 
  * <p>
- * The User is able to record/edit/view/modify ingredients listed within the
- * "Fridge".
+ * The User is able to record/edit/view/modify ingredients listed within the "Fridge".
  * </p>
  * 
- * 
- * 
- * @author Jaeseo Park (jaeseo1), Jasmine Woo (jwoo), Nhu Bui (nbui), Robert
- *         Janes (rjanes)
+ * @author Jaeseo Park (jaeseo1), Jasmine Woo (jwoo), Nhu Bui (nbui), Robert Janes (rjanes)
  * 
  */
 
@@ -45,7 +41,7 @@ public class Fridge {
 	private Fridge() {
 		this.ingredients = new ArrayList<String>();
 	}
-	
+
 	public static Fridge getInstance() {
 		return fridgeInstance;
 	}
@@ -75,18 +71,20 @@ public class Fridge {
 	public void editIngredient(int ingredientIndex, String newName) {
 		this.ingredients.set(ingredientIndex, newName);
 	}
-	
+
 	/**
 	 * 
 	 * change an ingredient by name instead of ID
 	 * 
-	 * @param oldName name to be changed
-	 * @param newName new name to be assigned
+	 * @param oldName
+	 *            name to be changed
+	 * @param newName
+	 *            new name to be assigned
 	 */
-	
-	public void editIngredientByName (String oldName, String newName) {
+
+	public void editIngredientByName(String oldName, String newName) {
 		ArrayList<String> tmp = this.getIngredients();
-		for (int i=0; i < tmp.size(); i++) {
+		for (int i = 0; i < tmp.size(); i++) {
 			if (tmp.get(i).equals(oldName)) {
 				this.editIngredient(i, newName);
 				return;
@@ -105,18 +103,17 @@ public class Fridge {
 	public void removeIngredientByIndex(int ingrdIndex) {
 		this.ingredients.remove(ingrdIndex);
 	}
-	
+
 	/**
 	 * 
 	 * Remove an ingredient from the Fridge list by name instead of ID
 	 * 
 	 * @param targetName
 	 */
-	
-	
-	public void removeIngredientByName (String targetName) {
+
+	public void removeIngredientByName(String targetName) {
 		ArrayList<String> tmp = this.getIngredients();
-		for (int i=0; i < tmp.size(); i++) {
+		for (int i = 0; i < tmp.size(); i++) {
 			if (tmp.get(i).equals(targetName)) {
 				this.removeIngredientByIndex(i);
 				return;
@@ -133,8 +130,7 @@ public class Fridge {
 	public void loadFromFile(Context context) {
 
 		try {
-			ObjectInputStream in = new ObjectInputStream(
-					context.openFileInput(fridgeFilename));
+			ObjectInputStream in = new ObjectInputStream(context.openFileInput(fridgeFilename));
 			ArrayList<String> myFridge = (ArrayList<String>) in.readObject();
 			this.setIngredients(myFridge);
 		} catch (EOFException eof) {
@@ -143,7 +139,7 @@ public class Fridge {
 		} catch (ClassNotFoundException e) {
 			e.printStackTrace();
 		}
-		
+
 	}
 
 	/**
@@ -156,17 +152,17 @@ public class Fridge {
 
 	public void saveToFile(Context context) {
 
-        try {
-            @SuppressWarnings("static-access")
-            ObjectOutputStream out = new ObjectOutputStream(context.openFileOutput(fridgeFilename, context.MODE_PRIVATE));
-            out.writeObject(this.ingredients);
-            out.close();
-        } catch (FileNotFoundException e) { 
-            e.printStackTrace(); 
-        } catch (IOException e) { 
-            e.printStackTrace(); 
-        }  
-        
+		try {
+			@SuppressWarnings("static-access")
+			ObjectOutputStream out = new ObjectOutputStream(context.openFileOutput(fridgeFilename, context.MODE_PRIVATE));
+			out.writeObject(this.ingredients);
+			out.close();
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+
 	}
 
 	/**
@@ -209,7 +205,7 @@ public class Fridge {
 	 * Remove all items from the fridge list
 	 * 
 	 */
-	
+
 	public void clearFridge() {
 		this.ingredients.clear();
 	}

@@ -15,6 +15,7 @@
         android:name="android.test.InstrumentationTestRunner"
         android:targetPackage="com.foodbook.foodbook"
        />
+   <uses-permission android:name="android.permission.INTERNET"/>
    
 
  

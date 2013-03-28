@@ -10,7 +10,6 @@ import java.security.SecureRandom;
 import java.util.ArrayList;
 
 import android.content.Context;
-import android.graphics.Bitmap;
 
 /**
  * <p>
@@ -18,15 +17,13 @@ import android.graphics.Bitmap;
  * </p>
  * 
  * <p>
- * This class is the centre of the Model. It has the collection of local (and
- * downloaded) recipes, and class methods associated with it.
+ * This class is the centre of the Model. It has the collection of local (and downloaded) recipes, and class methods associated with it.
  * </p>
  * 
  * 
  * @see Recipe
  * 
- * @author Jaeseo Park (jaeseo1), Jasmine Woo (jwoo), Nhu Bui (nbui), Robert
- *         Janes (rjanes)
+ * @author Jaeseo Park (jaeseo1), Jasmine Woo (jwoo), Nhu Bui (nbui), Robert Janes (rjanes)
  * 
  * 
  * 
@@ -37,19 +34,16 @@ public class RecipeBook {
 
 	public static final String RecipeBookFilename = "recipe.sav";
 	public static final RecipeBook recipeBookInstance = new RecipeBook();
-	
+
 	private ArrayList<Recipe> mine;
 	private ArrayList<Recipe> downloads;
 	private String userid;
 	private String author;
 
 	/**
-	 * This is a constructor method for RecipeBook. It creates new ArrayList of
-	 * Recipe.
-	 * 
-	 * 
-	 * 
+	 * This is a constructor method for RecipeBook. It creates new ArrayList of Recipe.
 	 */
+	
 	private RecipeBook() {
 
 		this.mine = new ArrayList<Recipe>();
@@ -58,20 +52,16 @@ public class RecipeBook {
 		this.author = "noname";
 
 	}
-	
 
 	/**
-	 * 
-	 * A method to get the instance of this class object.
-	 * Following singleton design pattern.
-	 * Allows global access.
+	 * A method to get the instance of this class object. Following singleton design pattern. Allows global access.
 	 * 
 	 * @return RecipeBook instance
 	 */
 	public static RecipeBook getInstance() {
 		return recipeBookInstance;
 	}
-	
+
 	/**
 	 * 
 	 * "Getter" method to return user created recipes
@@ -117,8 +107,7 @@ public class RecipeBook {
 	 * 
 	 */
 
-	public static ArrayList<String> getNames(
-			ArrayList<Recipe> inputArray) {
+	public static ArrayList<String> getNames(ArrayList<Recipe> inputArray) {
 
 		ArrayList<String> outputArray = new ArrayList<String>();
 
@@ -162,9 +151,7 @@ public class RecipeBook {
 	}
 
 	/**
-	 * This is a getter for the entire RecipeBook. Since there are two recipe
-	 * books ("mine" and "downloaded"), this method will simply combine them and
-	 * return the resulting array.
+	 * This is a getter for the entire RecipeBook. Since there are two recipe books ("mine" and "downloaded"), this method will simply combine them and return the resulting array.
 	 * 
 	 * 
 	 * @return List of downloaded and local Recipes
@@ -183,8 +170,7 @@ public class RecipeBook {
 	}
 
 	/**
-	 * This function receives details of a recipe, and creates/adds a new recipe
-	 * to the local RecipeBook.
+	 * This function receives details of a recipe, and creates/adds a new recipe to the local RecipeBook.
 	 * 
 	 * @param recipename
 	 *            name of recipe
@@ -199,14 +185,9 @@ public class RecipeBook {
 	 * 
 	 */
 
-	public String addRecipe(String recipename, String recipeDescriptions,
-			String recipeinstructions, ArrayList<String> ingredients,
-			ArrayList<String> category, ArrayList<Bitmap> bmpArray) {
+	public String addRecipe(String recipename, String recipeDescriptions, String recipeinstructions, ArrayList<String> ingredients, ArrayList<String> category, ArrayList<String> pics) {
 
-		Recipe newRecipe = new Recipe(recipename, recipeDescriptions,
-				recipeinstructions, formatStringArrayListEntries(ingredients),
-				formatStringArrayListEntries(category), this.userid,
-				this.author, bmpArray);
+		Recipe newRecipe = new Recipe(recipename, recipeDescriptions, recipeinstructions, StringOperations.formatArray(ingredients), StringOperations.formatArray(category), this.userid, this.author, pics);
 		this.mine.add(newRecipe);
 
 		return newRecipe.getRecipeid();
@@ -258,40 +239,6 @@ public class RecipeBook {
 
 	/**
 	 * 
-	 * This function formats ArrayList of String so that no entry has duplicate
-	 * whitespaces/newline charactesr/etc... Also, this function removes empty
-	 * entries.
-	 * 
-	 * 
-	 * @param input
-	 *            The ArrayList to be formatted
-	 * @return
-	 */
-
-	public static ArrayList<String> formatStringArrayListEntries(
-			ArrayList<String> input) {
-
-		ArrayList<String> output = new ArrayList<String>();
-
-		for (String inputEntry : input) {
-			String outputEntry = inputEntry;
-			outputEntry = outputEntry.replace("\n", "");
-			while (outputEntry.contains("  ")) {
-				outputEntry = outputEntry.replace("  ", " ");
-			}
-			outputEntry = outputEntry.trim();
-
-			if (!outputEntry.equals("")) {
-				output.add(outputEntry);
-			}
-		}
-
-		return output;
-
-	}
-
-	/**
-	 * 
 	 * Change details of a recipe by finding the ID then update to new values
 	 * 
 	 * @param recipename
@@ -307,10 +254,8 @@ public class RecipeBook {
 	 * @param recipeid
 	 */
 
-	public void editRecipe(String recipename, String recipeDescriptions,
-			String recipeinstructions, ArrayList<String> ingredients,
-			ArrayList<String> category, String recipeid) {
-		
+	public void editRecipe(String recipename, String recipeDescriptions, String recipeinstructions, ArrayList<String> ingredients, ArrayList<String> category, String recipeid) {
+
 		ArrayList<Recipe> combinedList = this.getRecipeBook();
 		for (int i = 0; i < combinedList.size(); i++) {
 			if (combinedList.get(i).getRecipeid().equals(recipeid)) {
@@ -319,24 +264,16 @@ public class RecipeBook {
 					this.mine.get(i).setRecipename(recipename);
 					this.mine.get(i).setRecipeDescriptions(recipeDescriptions);
 					this.mine.get(i).setRecipeinstructions(recipeinstructions);
-					this.mine.get(i).setIngredients(
-							formatStringArrayListEntries(ingredients));
-					this.mine.get(i).setCategory(
-							formatStringArrayListEntries(category));
-					this.mine.get(i).setauthor(
-							RecipeBook.getInstance().getAuthor());
+					this.mine.get(i).setIngredients(StringOperations.formatArray(ingredients));
+					this.mine.get(i).setCategory(StringOperations.formatArray(category));
+					this.mine.get(i).setauthor(RecipeBook.getInstance().getAuthor());
 				} else {
 					this.downloads.get(offset).setRecipename(recipename);
-					this.downloads.get(offset).setRecipeDescriptions(
-							recipeDescriptions);
-					this.downloads.get(offset).setRecipeinstructions(
-							recipeinstructions);
-					this.downloads.get(offset).setIngredients(
-							formatStringArrayListEntries(ingredients));
-					this.downloads.get(offset).setCategory(
-							formatStringArrayListEntries(category));
-					this.downloads.get(offset).setauthor(
-							RecipeBook.getInstance().getAuthor());
+					this.downloads.get(offset).setRecipeDescriptions(recipeDescriptions);
+					this.downloads.get(offset).setRecipeinstructions(recipeinstructions);
+					this.downloads.get(offset).setIngredients(StringOperations.formatArray(ingredients));
+					this.downloads.get(offset).setCategory(StringOperations.formatArray(category));
+					this.downloads.get(offset).setauthor(RecipeBook.getInstance().getAuthor());
 				}
 				return;
 			}
@@ -365,6 +302,14 @@ public class RecipeBook {
 		outputArray.add(found.getCategoryString());
 		outputArray.add(found.getUserid());
 		return outputArray;
+	}
+	
+	public ArrayList<String> getPicturesById(String recipeid) {
+		Recipe found = searchById(recipeid);
+		if (found != null) {
+			return found.getPictures();
+		}
+		return new ArrayList<String>();
 	}
 
 	public Recipe searchById(String recipeid) {
@@ -415,9 +360,7 @@ public class RecipeBook {
 
 		try {
 			context.deleteFile(RecipeBookFilename);
-			ObjectOutputStream out = new ObjectOutputStream(
-					context.openFileOutput(RecipeBookFilename,
-							Context.MODE_APPEND));
+			ObjectOutputStream out = new ObjectOutputStream(context.openFileOutput(RecipeBookFilename, Context.MODE_APPEND));
 			out.writeObject(this.getMine());
 			out.writeObject(this.getDownloads());
 			out.writeObject(this.getUserid());
@@ -446,8 +389,7 @@ public class RecipeBook {
 	@SuppressWarnings("unchecked")
 	public boolean loadFromFile(Context context) {
 		try {
-			ObjectInputStream in = new ObjectInputStream(
-					context.openFileInput(RecipeBookFilename));
+			ObjectInputStream in = new ObjectInputStream(context.openFileInput(RecipeBookFilename));
 			ArrayList<Recipe> mineIn = (ArrayList<Recipe>) in.readObject();
 			ArrayList<Recipe> downloadsIn = (ArrayList<Recipe>) in.readObject();
 			String useridIn = (String) in.readObject();
@@ -470,8 +412,7 @@ public class RecipeBook {
 	}
 
 	/**
-	 * Upon change of author (username), this method will go through each recipe
-	 * in "mine" array, and will update "author" field.
+	 * Upon change of author (username), this method will go through each recipe in "mine" array, and will update "author" field.
 	 */
 
 	public void updateAuthorInAllRecipes() {
@@ -482,12 +423,10 @@ public class RecipeBook {
 	}
 
 	/**
-	 * This function searches local database for foods that user can make with
-	 * ingredients that are currently in their fridge.
+	 * This function searches local database for foods that user can make with ingredients that are currently in their fridge.
 	 * 
 	 */
-	public ArrayList<Recipe> searchByIngredientsLocal(
-			ArrayList<String> whatsInMyFridge) {
+	public ArrayList<Recipe> searchByIngredientsLocal(ArrayList<String> whatsInMyFridge) {
 
 		ArrayList<Recipe> output = new ArrayList<Recipe>();
 		boolean skip;
@@ -512,8 +451,7 @@ public class RecipeBook {
 	 * @return
 	 */
 
-	public static ArrayList<ArrayList<String>> getNamesAndIDs(
-			ArrayList<Recipe> recipeArray) {
+	public static ArrayList<ArrayList<String>> getNamesAndIDs(ArrayList<Recipe> recipeArray) {
 		ArrayList<ArrayList<String>> output = new ArrayList<ArrayList<String>>();
 		output.add(getNames(recipeArray));
 		output.add(getRecipeid(recipeArray));

@@ -19,14 +19,10 @@ import com.foodbook.onlinemanager.OnlineSearch;
  * </p>
  * 
  * <p>
- * This button can be used to navigate through different activities within the
- * app. Since this class extends Activity, all activities that need to have the
- * button will extend this one, so that they will all have button and behave as
- * activities.
+ * This button can be used to navigate through different activities within the app. Since this class extends Activity, all activities that need to have the button will extend this one, so that they will all have button and behave as activities.
  * </p>
  * 
- * @author Jaeseo Park (jaeseo1), Jasmine Woo (jwoo), Nhu Bui (nbui), Robert
- *         Janes (rjanes)
+ * @author Jaeseo Park (jaeseo1), Jasmine Woo (jwoo), Nhu Bui (nbui), Robert Janes (rjanes)
  * 
  */
 public class TitleBarOverride extends Activity {
@@ -53,20 +49,17 @@ public class TitleBarOverride extends Activity {
 		switch (item.getItemId()) {
 		case R.id.menu_myRecipe:
 			Intent myRecipeBook = new Intent();
-			myRecipeBook.setClass(getApplicationContext(),
-					RecipeBookActivity.class);
+			myRecipeBook.setClass(getApplicationContext(), RecipeBookActivity.class);
 			startActivity(myRecipeBook);
 			break;
 		case R.id.menu_makeRecipe:
 			Intent makeRecipe = new Intent();
-			makeRecipe.setClass(getApplicationContext(),
-					MakeRecipeActivity.class);
+			makeRecipe.setClass(getApplicationContext(), MakeRecipeActivity.class);
 			startActivity(makeRecipe);
 			break;
 		case R.id.menu_postRecipe:
 			Intent postRecipe = new Intent();
-			postRecipe.setClass(getApplicationContext(),
-					RecipeBookActivity.class);
+			postRecipe.setClass(getApplicationContext(), RecipeBookActivity.class);
 			postRecipe.putExtra("currentTab", 2);
 			startActivity(postRecipe);
 			break;
@@ -84,8 +77,7 @@ public class TitleBarOverride extends Activity {
 	}
 
 	/**
-	 * Prompt User for author name. Automatically executed on first run. The
-	 * ability to change the name is availbe from the actions menu
+	 * Prompt User for author name. Automatically executed on first run. The ability to change the name is availbe from the actions menu
 	 * 
 	 * 
 	 */
@@ -94,25 +86,24 @@ public class TitleBarOverride extends Activity {
 		AlertDialog.Builder alertdg = new AlertDialog.Builder(this);
 		alertdg.setTitle("New username");
 		final EditText nameField = new EditText(this);
+		nameField.setSingleLine(true);
 		LinearLayout layout = new LinearLayout(this);
 		layout.addView(nameField);
 		alertdg.setView(layout);
-		alertdg.setPositiveButton("Save",
-				new DialogInterface.OnClickListener() {
-					@Override
-					public void onClick(DialogInterface dialog, int which) {
-						String newName = nameField.getText().toString();
-						RecipeBook.getInstance().setAuthor(newName);
-						RecipeBook.getInstance().updateAuthorInAllRecipes();
-					}
-				});
-		alertdg.setNegativeButton("Cancel",
-				new DialogInterface.OnClickListener() {
-					@Override
-					public void onClick(DialogInterface dialog, int which) {
-						// do nothing for "cancel"
-					}
-				});
+		alertdg.setPositiveButton("Save", new DialogInterface.OnClickListener() {
+			@Override
+			public void onClick(DialogInterface dialog, int which) {
+				String newName = nameField.getText().toString();
+				RecipeBook.getInstance().setAuthor(newName);
+				RecipeBook.getInstance().updateAuthorInAllRecipes();
+			}
+		});
+		alertdg.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+			@Override
+			public void onClick(DialogInterface dialog, int which) {
+				// do nothing for "cancel"
+			}
+		});
 		alertdg.show();
 	}
 

@@ -7,28 +7,23 @@
     <uses-sdk
         android:minSdkVersion="11"
         android:targetSdkVersion="15" />
-        
-    <uses-permission android:name="android.permission.CAMERA"/>
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
-    
-   <instrumentation
-        android:name="android.test.InstrumentationTestRunner"
-        android:targetPackage="com.foodbook.foodbook"
-       />
-   <uses-permission android:name="android.permission.INTERNET"/>
-   
 
- 
- 
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+
+    <instrumentation
+        android:name="android.test.InstrumentationTestRunner"
+        android:targetPackage="com.foodbook.foodbook" />
+
     <application
         android:icon="@drawable/foodbook"
         android:label="@string/app_name"
         android:theme="@style/Foodbook" >
         <uses-library android:name="android.test.runner" />
+
         <activity
             android:name="com.foodbook.foodbook.FridgeActivity"
             android:label="@string/myFridgeTitleBar" >
-            <intent-filter android:label="@string/app_name">
+            <intent-filter android:label="@string/app_name" >
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
@@ -83,17 +78,18 @@
             android:label="@string/title_bar_text"
             android:launchMode="singleInstance" >
         </activity>
-        <activity 
+        <activity
             android:name="com.foodbook.foodbook.PhotoManager"
-            android:label="@string/photo_manager"
-            android:launchMode="singleInstance">
+            android:label="@string/photo_manager" >
+            <intent-filter>
+            </intent-filter>
         </activity>
-        <activity 
-            android:name="com.foodbook.foodbook.BogoActivity"
-            android:label="@string/bogo_gen"
-            android:launchMode="singleInstance">
+        <activity
+            android:name="com.foodbook.foodbook.PhotoManagerView"
+            android:label="@string/photo_manager" >
+            <intent-filter>
+            </intent-filter>
         </activity>
-        
     </application>
 
 </manifest>
