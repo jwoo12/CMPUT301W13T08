@@ -35,6 +35,8 @@ public class EditRecipeActivity extends TitleBarOverride {
 	protected String recipeid;
 	protected String author;
 	protected ArrayList<String> pics;
+	
+	protected boolean photoManagerOpened = false;
 
 	protected EditText recipeNameField;
 	protected EditText descriptionField;
@@ -97,16 +99,27 @@ public class EditRecipeActivity extends TitleBarOverride {
 
 			@Override
 			public void onClick(View v) {
-				Intent photoManagerIntent = new Intent();
-				photoManagerIntent.setClass(getApplicationContext(), PhotoManager.class);
-				startActivity(photoManagerIntent);
+				openPhotoManager();
 			}
+
 		});
 
 		// update text fields
 		updateTextFields();
 	}
 
+	protected void openPhotoManager() {
+		Intent photoManagerIntent = new Intent();
+		photoManagerIntent.setClass(getApplicationContext(), PhotoManager.class);
+		if (recipeid != null && !photoManagerOpened) {
+			photoManagerIntent.putExtra("pics", RecipeBook.getInstance().getPicturesById(recipeid));
+		}
+		else if (photoManagerOpened) {
+			photoManagerIntent.putExtra("pics", pics);
+		}
+		startActivity(photoManagerIntent);
+	}
+	
 	/**
 	 * make an intent for RecipeDetailsActivity. info about the recipe will be displayed in RecipeDetailsActivity.
 	 * 
@@ -126,7 +139,6 @@ public class EditRecipeActivity extends TitleBarOverride {
 		recipeDetailsIntent.putExtra("category", category);
 		recipeDetailsIntent.putExtra("author", RecipeBook.getInstance().getAuthor());
 		recipeDetailsIntent.putExtra("userid", RecipeBook.getInstance().getUserid());
-		recipeDetailsIntent.putExtra("pics", pics);
 
 		// start a new activity
 		startActivity(recipeDetailsIntent);
@@ -197,7 +209,7 @@ public class EditRecipeActivity extends TitleBarOverride {
 	 */
 
 	public void saveButtonClicked() {
-		RecipeBook.getInstance().editRecipe(name, descriptions, instructions, ingredientsArrayList, categoryArrayList, recipeid);
+		RecipeBook.getInstance().editRecipe(name, descriptions, instructions, ingredientsArrayList, categoryArrayList, recipeid, pics);
 	}
 
 	@Override
@@ -208,6 +220,7 @@ public class EditRecipeActivity extends TitleBarOverride {
 		if (pictures != null) {
 			Log.v("mylog", "size: " + pictures.size());
 			pics = pictures;
+			photoManagerOpened = true;
 			container.reset();
 		}
 	}

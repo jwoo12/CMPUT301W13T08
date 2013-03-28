@@ -262,5 +262,17 @@ public class RecipeDetailsActivity extends TitleBarOverride {
 			downloadLayout.setVisibility(View.GONE);
 		}
 	}
+	
+	@Override
+	public void onResume() {
+		super.onResume();
+		PictureContainer container = PictureContainer.getInstance();
+		ArrayList<String> pictures = container.getPics();
+		if (pictures != null) {
+			Log.v("mylog", "size: " + pictures.size());
+			RecipeBook.getInstance().updatePic(recipeid, pictures);
+			container.reset();
+		}
+	}
 
 }

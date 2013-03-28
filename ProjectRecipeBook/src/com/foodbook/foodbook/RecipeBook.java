@@ -58,6 +58,7 @@ public class RecipeBook {
 	 * 
 	 * @return RecipeBook instance
 	 */
+	
 	public static RecipeBook getInstance() {
 		return recipeBookInstance;
 	}
@@ -254,7 +255,7 @@ public class RecipeBook {
 	 * @param recipeid
 	 */
 
-	public void editRecipe(String recipename, String recipeDescriptions, String recipeinstructions, ArrayList<String> ingredients, ArrayList<String> category, String recipeid) {
+	public void editRecipe(String recipename, String recipeDescriptions, String recipeinstructions, ArrayList<String> ingredients, ArrayList<String> category, String recipeid, ArrayList<String> pics) {
 
 		ArrayList<Recipe> combinedList = this.getRecipeBook();
 		for (int i = 0; i < combinedList.size(); i++) {
@@ -267,6 +268,7 @@ public class RecipeBook {
 					this.mine.get(i).setIngredients(StringOperations.formatArray(ingredients));
 					this.mine.get(i).setCategory(StringOperations.formatArray(category));
 					this.mine.get(i).setauthor(RecipeBook.getInstance().getAuthor());
+					this.mine.get(i).setPictures(pics);
 				} else {
 					this.downloads.get(offset).setRecipename(recipename);
 					this.downloads.get(offset).setRecipeDescriptions(recipeDescriptions);
@@ -274,6 +276,7 @@ public class RecipeBook {
 					this.downloads.get(offset).setIngredients(StringOperations.formatArray(ingredients));
 					this.downloads.get(offset).setCategory(StringOperations.formatArray(category));
 					this.downloads.get(offset).setauthor(RecipeBook.getInstance().getAuthor());
+					this.downloads.get(offset).setPictures(pics);
 				}
 				return;
 			}
@@ -474,5 +477,10 @@ public class RecipeBook {
 			}
 		}
 		return false;
+	}
+	
+	public void updatePic(String recipeid, ArrayList<String> newpic) {
+		Recipe found = this.searchById(recipeid);
+		found.setPictures(newpic);
 	}
 }

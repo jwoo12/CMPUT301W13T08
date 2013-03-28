@@ -9,7 +9,7 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.util.Base64;
 
-//http://mobile.cs.fsu.edu/converting-images-to-json-objects/  THIS is the site from which this code is derived from.
+// http://mobile.cs.fsu.edu/converting-images-to-json-objects/  THIS is the site from which this code is derived from.
 
 /**
  * 
@@ -17,6 +17,7 @@ import android.util.Base64;
  * 
  * @author Jaeseo Park (jaeseo1), Jasmine Woo (jwoo), Nhu Bui (nbui), Robert Janes (rjanes)
  */
+
 public class ImageConverter {
 
 	// THIS IS THE METHOD WE WILL CALL<<<<<<<

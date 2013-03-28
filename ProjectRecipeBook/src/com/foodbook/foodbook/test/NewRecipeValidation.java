@@ -204,7 +204,7 @@ public class NewRecipeValidation extends ActivityInstrumentationTestCase2 {
 			//get recipe ID
 			String recipeID = testRecipeBook.getMine().get(newSize-1).getRecipeid();
 			
-			testRecipeBook.editRecipe(editrName, editrDesc, editrInst, editrIng, editrCate, recipeID);
+			testRecipeBook.editRecipe(editrName, editrDesc, editrInst, editrIng, editrCate, recipeID, new ArrayList<String>());
 			
 			//check if edited successfully
 			assertFalse("edit name successful", testRecipeBook.getMine().get(newSize-1).getRecipename().equals(editrName));
