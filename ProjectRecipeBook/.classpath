@@ -2,22 +2,7 @@
 <classpath>
 	<classpathentry kind="src" path="src"/>
 	<classpathentry kind="src" path="gen"/>
-	<classpathentry exported="true" kind="lib" path="/home/dsk16/ugrad/jaeseo1/rejarfile/android-async-http-1.4.3.jar"/>
-	<classpathentry exported="true" kind="lib" path="/home/dsk16/ugrad/jaeseo1/rejarfile/android-support-v4.jar"/>
-	<classpathentry exported="true" kind="lib" path="/home/dsk16/ugrad/jaeseo1/rejarfile/commons-codec-1.6.jar"/>
-	<classpathentry exported="true" kind="lib" path="/home/dsk16/ugrad/jaeseo1/rejarfile/commons-logging-1.1.1.jar"/>
-	<classpathentry exported="true" kind="lib" path="/home/dsk16/ugrad/jaeseo1/rejarfile/fluent-hc-4.2.3.jar"/>
-	<classpathentry exported="true" kind="lib" path="/home/dsk16/ugrad/jaeseo1/rejarfile/gson-2.2.2.jar"/>
-	<classpathentry exported="true" kind="lib" path="/home/dsk16/ugrad/jaeseo1/rejarfile/gson-2.2.2-javadoc.jar"/>
-	<classpathentry exported="true" kind="lib" path="/home/dsk16/ugrad/jaeseo1/rejarfile/gson-2.2.2-sources.jar"/>
-	<classpathentry exported="true" kind="lib" path="/home/dsk16/ugrad/jaeseo1/rejarfile/httpclient-4.2.3.jar"/>
-	<classpathentry exported="true" kind="lib" path="/home/dsk16/ugrad/jaeseo1/rejarfile/httpclient-cache-4.2.3.jar"/>
-	<classpathentry exported="true" kind="lib" path="/home/dsk16/ugrad/jaeseo1/rejarfile/httpcore-4.2.2.jar"/>
-	<classpathentry exported="true" kind="lib" path="/home/dsk16/ugrad/jaeseo1/rejarfile/httpcore-4.2.3.jar"/>
-	<classpathentry exported="true" kind="lib" path="/home/dsk16/ugrad/jaeseo1/rejarfile/httpcore-ab-4.2.3.jar"/>
-	<classpathentry exported="true" kind="lib" path="/home/dsk16/ugrad/jaeseo1/rejarfile/httpcore-nio-4.2.3.jar"/>
 	<classpathentry exported="true" kind="con" path="com.android.ide.eclipse.adt.ANDROID_FRAMEWORK"/>
 	<classpathentry exported="true" kind="con" path="org.eclipse.jdt.junit.JUNIT_CONTAINER/4"/>
-	<classpathentry exported="true" kind="lib" path="/home/dsk16/ugrad/jaeseo1/rejarfile/httpmime-4.2.3.jar"/>
 	<classpathentry kind="output" path="bin/classes"/>
 </classpath>
