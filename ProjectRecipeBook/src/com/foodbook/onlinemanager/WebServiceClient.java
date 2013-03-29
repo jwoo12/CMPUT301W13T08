@@ -1,4 +1,5 @@
 package com.foodbook.onlinemanager;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -6,57 +7,41 @@ import java.io.UnsupportedEncodingException;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
 
-
-import android.util.Log;
-
-
-
-import com.foodbook.foodbook.*;
-
-import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
-
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
 import org.apache.http.client.ClientProtocolException;
 import org.apache.http.client.HttpClient;
-import org.apache.http.client.entity.UrlEncodedFormEntity;
-import org.apache.http.client.fluent.Content;
 import org.apache.http.client.methods.HttpDelete;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.DefaultHttpClient;
-import org.apache.http.util.EntityUtils;
+
+import android.util.Log;
+
+import com.foodbook.foodbook.Recipe;
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 
 public class WebServiceClient {
 
-	
 	// Http Connector
 	private HttpClient httpclient = new DefaultHttpClient();
 
 	// JSON Utilities
 	private Gson gson = new Gson();
-	
-	// ERROR :  java.lang.NoClassDefFoundError: com.google.gson.Gson
 
-	
-	
-	
+	// ERROR : java.lang.NoClassDefFoundError: com.google.gson.Gson
+
 	private String URL = "http://cmput301.softwareprocess.es:8080/CMPUT301W13T08/testing/";
-	
+
 	private String test_URL = "http://cmput301.softwareprocess.es:8080/testing/lab97/";
-	
-						
-	
-	
-	
-	
-	public void insertRecipe(Recipe recipe) throws IllegalStateException, IOException{
-		
+
+	public void insertRecipe(Recipe recipe) throws IllegalStateException, IOException {
+
 		Log.v("tests", "checkpoint insertRecipe");
-		
-		HttpPost httpPost = new HttpPost(test_URL +recipe.getRecipeid());
+
+		HttpPost httpPost = new HttpPost(test_URL + recipe.getRecipeid());
 		StringEntity stringentity = null;
 		try {
 			stringentity = new StringEntity(gson.toJson(recipe));
@@ -64,14 +49,14 @@ public class WebServiceClient {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		httpPost.setHeader("Accept","application/json");
+		httpPost.setHeader("Accept", "application/json");
 
 		httpPost.setEntity(stringentity);
 		HttpResponse response = null;
 		try {
-			
+
 			Log.v("tests", "checkpoint trying response");
-			
+
 			response = httpclient.execute(httpPost);
 		} catch (ClientProtocolException e) {
 			// TODO Auto-generated catch block
@@ -82,17 +67,17 @@ public class WebServiceClient {
 		}
 
 		String status = response.getStatusLine().toString();
-		//System.out.println(status);
-		
+		// System.out.println(status);
+
 		Log.v("tests", "status " + status);
-		
+
 		HttpEntity entity = response.getEntity();
 		BufferedReader br = new BufferedReader(new InputStreamReader(entity.getContent()));
 		String output;
-		//System.err.println("Output from Server -> ");
+		// System.err.println("Output from Server -> ");
 		while ((output = br.readLine()) != null) {
-			//System.err.println(output);
-			
+			// System.err.println(output);
+
 			Log.v("tests", "Output from Server -> " + output);
 		}
 
@@ -102,17 +87,17 @@ public class WebServiceClient {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-	
-		//TODO Release connection not working
-		
-		 //httpPost.releaseConnection();
+
+		// TODO Release connection not working
+
+		// httpPost.releaseConnection();
 	}
 
-	public void getRecipe(){
-		try{
-			HttpGet getRequest = new HttpGet(test_URL + "?pretty=1");//S4bRPFsuSwKUDSJImbCE2g?pretty=1
+	public void getRecipe() {
+		try {
+			HttpGet getRequest = new HttpGet(test_URL + "?pretty=1");// S4bRPFsuSwKUDSJImbCE2g?pretty=1
 
-			getRequest.addHeader("Accept","application/json");
+			getRequest.addHeader("Accept", "application/json");
 
 			HttpResponse response = httpclient.execute(getRequest);
 
@@ -122,15 +107,16 @@ public class WebServiceClient {
 			String json = getEntityContent(response);
 
 			// We have to tell GSON what type we expect
-			Type elasticSearchResponseType = new TypeToken<ElasticSearchResponse<Recipe>>(){}.getType();
+			Type elasticSearchResponseType = new TypeToken<ElasticSearchResponse<Recipe>>() {
+			}.getType();
 			// Now we expect to get a Recipe response
 			ElasticSearchResponse<Recipe> esResponse = gson.fromJson(json, elasticSearchResponseType);
 			// We get the recipe from it!
 			Recipe recipe = esResponse.getSource();
 			System.out.println(recipe.toString());
-			
-			//TODO Release connection not working
-			//getRequest.releaseConnection();
+
+			// TODO Release connection not working
+			// getRequest.releaseConnection();
 
 		} catch (ClientProtocolException e) {
 
@@ -143,69 +129,61 @@ public class WebServiceClient {
 	}
 
 	public ArrayList<Recipe> searchRecipes(String str) throws ClientProtocolException, IOException {
-		
-		
+
 		Log.v("tests", "keyword " + str);
-		
-		ArrayList<Recipe> results = new ArrayList<Recipe> ();
-		
+
+		ArrayList<Recipe> results = new ArrayList<Recipe>();
+
 		HttpPost searchRequest = new HttpPost(test_URL + "_search?pretty=1");
-		String query = 	"{\"query\" : {\"query_string\" : {\"default_field\" : \"ingredients\",\"query\" : \"" + str + "\"}}}";
-		
-		// TODO do 2 queries: one for title, and one for category. Then return combined list. 
-		
+		String query = "{\"query\" : {\"query_string\" : {\"default_field\" : \"ingredients\",\"query\" : \"" + str + "\"}}}";
+
+		// do 2 queries: one for title and one for category then combine array
+
 		StringEntity stringentity = new StringEntity(query);
 
-		searchRequest.setHeader("Accept","application/json");
+		searchRequest.setHeader("Accept", "application/json");
 		searchRequest.setEntity(stringentity);
 
 		HttpResponse response = httpclient.execute(searchRequest);
 		String status = response.getStatusLine().toString();
-		//System.out.println(status);
+		// System.out.println(status);
 
-		Log.v("tests", "search status " +status);
-		
+		Log.v("tests", "search status " + status);
+
 		String json = getEntityContent(response);
-		
-		//Log.v("tests", "json string after response " + json);
 
-		Type elasticSearchSearchResponseType = new TypeToken<ElasticSearchSearchResponse<Recipe>>(){}.getType();
+		// Log.v("tests", "json string after response " + json);
+
+		Type elasticSearchSearchResponseType = new TypeToken<ElasticSearchSearchResponse<Recipe>>() {
+		}.getType();
 		ElasticSearchSearchResponse<Recipe> esResponse = gson.fromJson(json, elasticSearchSearchResponseType);
-		//System.err.println(esResponse);
-		
-		
-		
-		
-		
+		// System.err.println(esResponse);
+
 		Log.v("tests", "search esResponse " + esResponse);
-		
+
 		for (ElasticSearchResponse<Recipe> r : esResponse.getHits()) {
 			Recipe recipe = r.getSource();
 			Log.v("tests", "recipe found " + recipe.getRecipename());
 			results.add(recipe);
-			
-			
-			
-			//System.err.println(recipe);
-		}
-		
-		return results;
-		//TODO Release Connection not working
-		
-		//searchRequest.releaseConnection();
-	}	
 
-	
+			// System.err.println(recipe);
+		}
+
+		return results;
+		// TODO Release Connection not working
+
+		// searchRequest.releaseConnection();
+	}
 
 	/**
 	 * update a field in a recipe
 	 */
 	public void updateRecipes(String str) throws ClientProtocolException, IOException {
 		HttpPost updateRequest = new HttpPost("http://cmput301.softwareprocess.es:8080/testing/lab02/1/_update");
-		String query = 	"{\"script\" : \"ctx._source." + str + "}";
+		String query = "{\"script\" : \"ctx._source." + str + "}";
 		StringEntity stringentity = new StringEntity(query);
 
-		updateRequest.setHeader("Accept","application/json");
+		updateRequest.setHeader("Accept", "application/json");
 		updateRequest.setEntity(stringentity);
 
 		HttpResponse response = httpclient.execute(updateRequest);
@@ -213,18 +191,18 @@ public class WebServiceClient {
 		System.out.println(status);
 
 		String json = getEntityContent(response);
-		
-		//TODO Release Connection
-		
-		//updateRequest.releaseConnection();
-	}	
+
+		// TODO Release Connection
+
+		// updateRequest.releaseConnection();
+	}
 
 	/**
 	 * delete an entry specified by the id
 	 */
 	public void deleteRecipe() throws IOException {
 		HttpDelete httpDelete = new HttpDelete("http://cmput301.softwareprocess.es:8080/testing/lab02/1");
-		httpDelete.addHeader("Accept","application/json");
+		httpDelete.addHeader("Accept", "application/json");
 
 		HttpResponse response = httpclient.execute(httpDelete);
 
@@ -238,37 +216,34 @@ public class WebServiceClient {
 		while ((output = br.readLine()) != null) {
 			System.err.println(output);
 		}
-		
-		
-		//EntityUtils.consume(entity);
+
+		// EntityUtils.consume(entity);
 		entity.consumeContent();
 
-		
-		//TODO Release Connection
-		//httpDelete.releaseConnection();
+		// TODO Release Connection
+		// httpDelete.releaseConnection();
 	}
-	
+
 	String getEntityContent(HttpResponse response) throws IOException {
-		BufferedReader br = new BufferedReader(
-				new InputStreamReader((response.getEntity().getContent())));
+		BufferedReader br = new BufferedReader(new InputStreamReader((response.getEntity().getContent())));
 		String output;
-		//System.err.println("Output from Server -> ");
-		
+		// System.err.println("Output from Server -> ");
+
 		Log.v("tests", "Output from Server -> ");
-		
+
 		String json = "";
 		while ((output = br.readLine()) != null) {
-			//System.err.println(output);
-			
+			// System.err.println(output);
+
 			Log.v("tests", "output" + output);
-			
+
 			json += output;
 		}
-		//System.err.println("JSON:"+json);
-		
+		// System.err.println("JSON:"+json);
+
 		Log.v("tests", "JSON: " + json);
-		
+
 		return json;
 	}
-	
+
 }

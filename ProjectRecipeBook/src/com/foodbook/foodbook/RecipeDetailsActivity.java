@@ -1,16 +1,23 @@
 package com.foodbook.foodbook;
 
+import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 
 import android.content.Context;
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import com.foodbook.onlinemanager.WebServiceClient;
 
 /**
  * 
@@ -131,23 +138,53 @@ public class RecipeDetailsActivity extends TitleBarOverride {
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
 
-				// WebServiceClient wsb = new WebServiceClient();
-				// ArrayList<String> ingredientsList = new ArrayList<String>(Arrays.asList(ingredients));
-				// ArrayList<String> categoryList = new ArrayList<String>(Arrays.asList(category));
-				// Recipe publish = new Recipe(name, descriptions, instructions, ingredientsList, categoryList, userid, author);
+				final WebServiceClient wsb = new WebServiceClient();
 
-				// try {
-				// wsb.insertRecipe(publish);
-				// } catch (IllegalStateException e) {
-				// // TODO Auto-generated catch block
-				// e.printStackTrace();
-				// } catch (IOException e) {
-				// // TODO Auto-generated catch block
-				// e.printStackTrace();
-				// }
-				//
+				ArrayList<String> ingredientsList = new ArrayList<String>(Arrays.asList(ingredients));
+				ArrayList<String> categoryList = new ArrayList<String>(Arrays.asList(category));
+				final Recipe publish = new Recipe(name, descriptions, instructions, ingredientsList, categoryList, userid, author, null);
+
+				ArrayList<String> testIng = new ArrayList<String>();
+
+				testIng.add("ingredient");
+
+				ArrayList<String> testCateg = new ArrayList<String>();
+				testCateg.add("category");
+
+				AsyncTask<Void, Void, Void> task = new AsyncTask<Void, Void, Void>() {
+
+					@Override
+					protected Void doInBackground(Void... arg0) {
+
+						try {
+							// WebServiceClient wsb = new WebServiceClient();
+							Log.v("tests", "checkpoint " + "AsyncTask begin");
+							wsb.insertRecipe(publish);
+						} catch (IllegalStateException e) {
+							e.printStackTrace();
+						} catch (IOException e) {
+							e.printStackTrace();
+						}
+
+						return null;
+					}
+
+				};
+
+				task.execute();
+
+				// TODO add conditionals
+
+				Context context = getApplicationContext();
+				CharSequence text = "Recipe published!";
+				int duration = Toast.LENGTH_SHORT;
+
+				Toast toast = Toast.makeText(context, text, duration);
+				toast.setGravity(Gravity.TOP | Gravity.LEFT, 300, 100);
+				toast.show();
 
 			}
+
 		});
 
 		downloadButton.setOnClickListener(new OnClickListener() {
@@ -166,11 +203,19 @@ public class RecipeDetailsActivity extends TitleBarOverride {
 				// Pictures are separated from other attributes of recipe because the size is relatively large, and it slows down the application.
 
 				Intent photoManagerIntent = new Intent();
-				photoManagerIntent.setClass(context, PhotoManagerView.class);
-				if (RecipeBook.getInstance().getUserid().equals(userid)) {
-					Log.v("mylog", "owned by user");
-					photoManagerIntent.setClass(context, PhotoManager.class);
-				} 
+				if (onlineRecipe) {
+					// if the recipe is online recipe, view only
+					photoManagerIntent.setClass(context, PhotoManagerViewOnly.class);
+				} else {
+					// if recipe is offline, check author.
+					if (RecipeBook.getInstance().getUserid().equals(userid)) {
+						// if recipe is written by this user, full acess. (view/add/delete)
+						photoManagerIntent.setClass(context, PhotoManager.class);
+					} else {
+						// if recipe is written by someone else, only add/view.
+						photoManagerIntent.setClass(context, PhotoManagerAddOnly.class);
+					}
+				}
 				ArrayList<String> pics = RecipeBook.getInstance().getPicturesById(recipeid);
 				if (pics.size() != 0) {
 					photoManagerIntent.putExtra("pics", pics);
@@ -262,7 +307,7 @@ public class RecipeDetailsActivity extends TitleBarOverride {
 			downloadLayout.setVisibility(View.GONE);
 		}
 	}
-	
+
 	@Override
 	public void onResume() {
 		super.onResume();
