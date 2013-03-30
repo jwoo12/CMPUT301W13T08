@@ -108,7 +108,7 @@ public class FridgeActivity extends TitleBarOverride {
 
 				// online results of 'see what I can make' search
 				ArrayList<String> onlineResults, onlineID;
-				ArrayList<ArrayList<String>> onlineNamesAndIDs = RecipeBook.getNamesAndIDs(OnlineDataBase.searchByIngredientsOnline(myFridge.getIngredients()));
+				ArrayList<ArrayList<String>> onlineNamesAndIDs = RecipeBook.getNamesAndIDs(OnlineDataBase.searchOnlineByIngredients(myFridge.getIngredients()));
 				onlineResults = onlineNamesAndIDs.get(0);
 				onlineID = onlineNamesAndIDs.get(1);
 
@@ -117,8 +117,10 @@ public class FridgeActivity extends TitleBarOverride {
 				ingredientSeach.setClass(getApplicationContext(), SearchResult.class);
 				ingredientSeach.putExtra("localResults", localResults);
 				ingredientSeach.putExtra("localID", localID);
-				ingredientSeach.putExtra("onlineResults", onlineResults);
-				ingredientSeach.putExtra("onlineID", onlineID);
+//				ingredientSeach.putExtra("onlineResults", onlineResults);
+//				ingredientSeach.putExtra("onlineID", onlineID);
+				ingredientSeach.putExtra("onlineResults", new ArrayList<String>());
+				ingredientSeach.putExtra("onlineID", new ArrayList<String>());
 				startActivity(ingredientSeach);
 			}
 		});

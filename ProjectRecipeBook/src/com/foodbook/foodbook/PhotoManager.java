@@ -23,7 +23,7 @@ import android.widget.Gallery;
 
 public class PhotoManager extends Activity {
 
-	protected ArrayList<String> pics = new ArrayList<String>();
+	protected ArrayList<String> pictures = new ArrayList<String>();
 
 	protected GalleryBaseAdapter myGalleryBaseAdapter;
 	protected Gallery myPhotoGallery;
@@ -38,10 +38,8 @@ public class PhotoManager extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.photo_manager);
 		if (getIntent().getExtras() != null) {
-			if ((getIntent().getStringArrayListExtra("pics")).size() != 0) {
-				Log.v("mylog", "intent contains something");
-				pics = getIntent().getStringArrayListExtra("pics");
-			}
+			Log.v("mylog", "intent contains something");
+			pictures = getIntent().getStringArrayListExtra("pictures");
 		}
 		
 		setupGallery(getApplicationContext());
@@ -83,7 +81,7 @@ public class PhotoManager extends Activity {
 	}
 
 	protected void deletePic(int position, Context applicationContext) {
-		pics.remove(position);
+		pictures.remove(position);
 
 		try {
 			emptyFolder();
@@ -141,7 +139,7 @@ public class PhotoManager extends Activity {
 
 	protected void readPictures(Context con) throws IOException {
 
-		for (String pic : pics) {
+		for (String pic : pictures) {
 			Bitmap bmp = ImageConverter.getBitmapFromString(pic);
 			String imageFilePath = picFolderPath + "/" + String.valueOf(System.currentTimeMillis()) + "jpg";
 			File imageFile = new File(imageFilePath);
@@ -159,7 +157,7 @@ public class PhotoManager extends Activity {
 
 		Bitmap newBMP = BogoPicGen.generateBitmap(PICTURE_SIZE, PICTURE_SIZE);
 		String newBMPString = ImageConverter.getJsonString(newBMP);
-		pics.add(newBMPString);
+		pictures.add(newBMPString);
 
 		String imageFilePath = picFolderPath + "/" + String.valueOf(System.currentTimeMillis()) + "jpg";
 		File imageFile = new File(imageFilePath);
@@ -172,9 +170,9 @@ public class PhotoManager extends Activity {
 	@Override
 	public void onPause() {
 		super.onPause();
-		if (pics.size() != 0) {
+		if (pictures.size() != 0) {
 			PictureContainer container = PictureContainer.getInstance();
-			container.setPics(pics);
+			container.setPics(pictures);
 		}
 	}
 }

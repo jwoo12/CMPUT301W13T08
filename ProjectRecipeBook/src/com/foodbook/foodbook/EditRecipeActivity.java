@@ -2,9 +2,7 @@ package com.foodbook.foodbook;
 
 import java.util.ArrayList;
 
-import android.content.Context;
 import android.content.Intent;
-import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -28,51 +26,33 @@ import android.widget.Toast;
 public class EditRecipeActivity extends TitleBarOverride {
 
 	protected String name;
-	protected String descriptions;
+	protected String desc;
 	protected String category;
 	protected String ingredients;
-	protected String instructions;
+	protected String inst;
 	protected String recipeid;
 	protected String author;
-	protected ArrayList<String> pics;
+	protected ArrayList<String> pictures;
 	
 	protected boolean photoManagerOpened = false;
 
-	protected EditText recipeNameField;
-	protected EditText descriptionField;
-	protected EditText categoryField;
-	protected EditText ingredientsField;
-	protected EditText instructionsField;
-
 	protected ArrayList<String> categoryArrayList;
 	protected ArrayList<String> ingredientsArrayList;
-
-	protected ArrayList<Bitmap> pictures;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.edit_recipe);
 
-		pictures = new ArrayList<Bitmap>();
+		readIntent();
+		initializeTextFields();
+		updateTextFields();
+		activateSaveButton();
+		activatePhotoManagerButton();
+		
+	}
 
-		// retrieve recipe object from intent
-		recipeid = getIntent().getStringExtra("recipeid");
-		name = getIntent().getStringExtra("name");
-		descriptions = getIntent().getStringExtra("descriptions");
-		category = getIntent().getStringExtra("category");
-		ingredients = getIntent().getStringExtra("ingredients");
-		instructions = getIntent().getStringExtra("instructions");
-		pics = getIntent().getStringArrayListExtra("pics");
-
-		// setup textfields
-		recipeNameField = (EditText) findViewById(R.id.editRecipeName);
-		descriptionField = (EditText) findViewById(R.id.editRecipeDesc);
-		categoryField = (EditText) findViewById(R.id.editRecipeCategory);
-		ingredientsField = (EditText) findViewById(R.id.editRecipeIngredients);
-		instructionsField = (EditText) findViewById(R.id.editRecipeInst);
-
-		// setup save button
+	protected void activateSaveButton() {
 		Button saveButton = (Button) findViewById(R.id.editRecipeSaveButton);
 		saveButton.setOnClickListener(new OnClickListener() {
 
@@ -80,20 +60,19 @@ public class EditRecipeActivity extends TitleBarOverride {
 			public void onClick(View v) {
 				readTextfields();
 				if (!requiredInfoCheckOK()) {
-					// tell user that recipe is missing some important info
-					Context context = getApplicationContext();
-					CharSequence text = "Incompleted recipe";
-					int duration = Toast.LENGTH_SHORT;
-					Toast toast = Toast.makeText(context, text, duration);
-					toast.show();
+					// tell user that recipe is incomplete
+					Toast.makeText(getApplicationContext(), "Incomplete recipe", Toast.LENGTH_SHORT).show();
 					return;
 				}
-				saveButtonClicked();
+				sendRecipeInfoToRecipeBook();
 				RecipeBook.getInstance().saveToFile(getApplicationContext());
+				openRecipeDetail();
 				finish();
 			}
 		});
+	}
 
+	protected void activatePhotoManagerButton() {
 		Button photoManagerButton = (Button) findViewById(R.id.editRecipePhotoManagerButton);
 		photoManagerButton.setOnClickListener(new OnClickListener() {
 
@@ -103,9 +82,20 @@ public class EditRecipeActivity extends TitleBarOverride {
 			}
 
 		});
+	}
 
-		// update text fields
-		updateTextFields();
+	protected void initializeTextFields() {
+
+	}
+
+	protected void readIntent() {
+		recipeid = getIntent().getStringExtra("recipeid");
+		name = getIntent().getStringExtra("name");
+		desc = getIntent().getStringExtra("desc");
+		category = StringOperations.intoOneString(getIntent().getStringArrayListExtra("category"), ", ");
+		ingredients = StringOperations.intoOneString(getIntent().getStringArrayListExtra("ingredients"), ", ");
+		inst = getIntent().getStringExtra("inst");
+		pictures = getIntent().getStringArrayListExtra("pictures");
 	}
 
 	protected void openPhotoManager() {
@@ -115,45 +105,20 @@ public class EditRecipeActivity extends TitleBarOverride {
 			photoManagerIntent.putExtra("pics", RecipeBook.getInstance().getPicturesById(recipeid));
 		}
 		else if (photoManagerOpened) {
-			photoManagerIntent.putExtra("pics", pics);
+			photoManagerIntent.putExtra("pics", pictures);
 		}
 		startActivity(photoManagerIntent);
 	}
 	
-	/**
-	 * make an intent for RecipeDetailsActivity. info about the recipe will be displayed in RecipeDetailsActivity.
-	 * 
-	 * 
-	 * 
-	 */
-
-	protected void makeNewIntent() {
-
-		Intent recipeDetailsIntent = new Intent();
-		recipeDetailsIntent.setClass(getApplicationContext(), RecipeDetailsActivity.class);
-		recipeDetailsIntent.putExtra("recipeid", recipeid);
-		recipeDetailsIntent.putExtra("name", name);
-		recipeDetailsIntent.putExtra("descriptions", descriptions);
-		recipeDetailsIntent.putExtra("instructions", instructions);
-		recipeDetailsIntent.putExtra("ingredients", ingredients);
-		recipeDetailsIntent.putExtra("category", category);
-		recipeDetailsIntent.putExtra("author", RecipeBook.getInstance().getAuthor());
-		recipeDetailsIntent.putExtra("userid", RecipeBook.getInstance().getUserid());
-
-		// start a new activity
-		startActivity(recipeDetailsIntent);
-
-	}
-
 	/**
 	 * This function is used to check whether or not required fields are empty. If a recipe is missing important information (ex. name), then this function will return false.
 	 * 
 	 * 
 	 * @return false if any required fields are empty
 	 */
-	private boolean requiredInfoCheckOK() {
+	protected boolean requiredInfoCheckOK() {
 
-		if (name.equals("") || descriptions.equals("") || ingredients.equals("") || instructions.equals("")) {
+		if (name.equals("") || desc.equals("") || ingredients.equals("") || inst.equals("")) {
 			return false;
 		}
 
@@ -166,18 +131,20 @@ public class EditRecipeActivity extends TitleBarOverride {
 	 * 
 	 * 
 	 */
-	private void updateTextFields() {
-
-		if (recipeid == null) {
-			// recipeid == null means it's a new recipe
-			return;
-		}
-
+	protected void updateTextFields() {
+		
+		EditText recipeNameField = (EditText) findViewById(R.id.editRecipeName);
+		EditText descField = (EditText) findViewById(R.id.editRecipeDesc);
+		EditText categoryField = (EditText) findViewById(R.id.editRecipeCategory);
+		EditText ingredientsField = (EditText) findViewById(R.id.editRecipeIngredients);
+		EditText instField = (EditText) findViewById(R.id.editRecipeInst);
+		
 		recipeNameField.setText(name);
-		descriptionField.setText(descriptions);
+		descField.setText(desc);
 		categoryField.setText(category);
 		ingredientsField.setText(ingredients);
-		instructionsField.setText(instructions);
+		instField.setText(inst);
+		
 	}
 
 	/**
@@ -188,16 +155,22 @@ public class EditRecipeActivity extends TitleBarOverride {
 	 */
 	protected void readTextfields() {
 
+		EditText recipeNameField = (EditText) findViewById(R.id.editRecipeName);
+		EditText descField = (EditText) findViewById(R.id.editRecipeDesc);
+		EditText categoryField = (EditText) findViewById(R.id.editRecipeCategory);
+		EditText ingredientsField = (EditText) findViewById(R.id.editRecipeIngredients);
+		EditText instField = (EditText) findViewById(R.id.editRecipeInst);
+		
 		// these are regular strings
 		name = recipeNameField.getText().toString();
-		descriptions = descriptionField.getText().toString();
-		instructions = instructionsField.getText().toString();
+		desc = descField.getText().toString();
+		inst = instField.getText().toString();
 
-		// these are meant to be array of strings.
+		// these are arraylists
 		category = categoryField.getText().toString();
-		categoryArrayList = StringOperations.SplitToArrayList(category, ",");
+		categoryArrayList = StringOperations.formatArray(StringOperations.SplitToArrayList(category, ","));
 		ingredients = ingredientsField.getText().toString();
-		ingredientsArrayList = StringOperations.SplitToArrayList(ingredients, ",");
+		ingredientsArrayList = StringOperations.formatArray(StringOperations.SplitToArrayList(ingredients, ","));
 
 	}
 
@@ -208,20 +181,34 @@ public class EditRecipeActivity extends TitleBarOverride {
 	 * 
 	 */
 
-	public void saveButtonClicked() {
-		RecipeBook.getInstance().editRecipe(name, descriptions, instructions, ingredientsArrayList, categoryArrayList, recipeid, pics);
+	public void sendRecipeInfoToRecipeBook() {
+		RecipeBook.getInstance().editRecipe(name, desc, inst, ingredientsArrayList, categoryArrayList, recipeid, pictures);
 	}
 
 	@Override
 	public void onResume() {
 		super.onResume();
 		PictureContainer container = PictureContainer.getInstance();
-		ArrayList<String> pictures = container.getPics();
-		if (pictures != null) {
-			Log.v("mylog", "size: " + pictures.size());
-			pics = pictures;
+		ArrayList<String> newPictures = container.getPics();
+		if (newPictures != null) {
+			Log.v("mylog", "size: " + newPictures.size());
+			pictures = newPictures;
 			photoManagerOpened = true;
 			container.reset();
 		}
+	}
+	
+	/**
+	 * makes an intent for RecipeDetailsActivity. info about the recipe will be displayed in RecipeDetailsActivity.
+	 * 
+	 * 
+	 */
+
+	protected void openRecipeDetail() {
+
+		Intent recipeDetailsIntent = RecipeBook.getInstance().makeRecipeIntentFromRecipeID(recipeid);
+		recipeDetailsIntent.setClass(getApplicationContext(), RecipeDetailsActivity.class);
+		startActivity(recipeDetailsIntent);
+
 	}
 }

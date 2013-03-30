@@ -6,10 +6,8 @@ import java.util.ArrayList;
 import org.apache.http.client.ClientProtocolException;
 
 import android.app.Activity;
-import android.content.Context;
 import android.os.AsyncTask;
 import android.util.Log;
-import android.widget.Toast;
 
 import com.foodbook.foodbook.Recipe;
 
@@ -25,8 +23,7 @@ import com.foodbook.foodbook.Recipe;
 
 public class OnlineDataBase extends Activity {
 
-	static String keyword = "";
-	static ArrayList<Recipe> onlineResults = new ArrayList<Recipe>();
+	private static String keyword = "";
 
 	/**
 	 * Given the keyword, returns a list of recipes that match
@@ -48,13 +45,13 @@ public class OnlineDataBase extends Activity {
 	 * @return
 	 */
 
-	public static ArrayList<Recipe> searchByIngredientsOnline(ArrayList<String> ingredients) {
+	public static ArrayList<Recipe> searchOnlineByIngredients(ArrayList<String> ingredients) {
 
 		if (ingredients.size() == 0) {
 			return new ArrayList<Recipe>();
 		}
 
-		keyword += ingredients.get(0);
+		keyword = ingredients.get(0);
 
 		for (int i = 1; i < ingredients.size(); i++) {
 
@@ -62,9 +59,6 @@ public class OnlineDataBase extends Activity {
 		}
 
 		final ArrayList<Recipe> searchResult = new ArrayList<Recipe>();
-		keyword = keyword.substring(0, keyword.length() - 4);
-
-		Log.v("tests", "keyword ingredient search     " + keyword);
 
 		AsyncTask<Void, Void, Void> task = new AsyncTask<Void, Void, Void>() {
 
@@ -75,7 +69,7 @@ public class OnlineDataBase extends Activity {
 				try {
 
 					Log.v("tests", "checkpoint before search");
-					onlineResults = wsc.searchRecipes(keyword);
+					ArrayList<Recipe> onlineResults = wsc.searchRecipes(keyword);
 					Log.v("tests", "test size " + onlineResults.size());
 					searchResult.addAll(onlineResults);
 				} catch (ClientProtocolException e) {
@@ -83,13 +77,10 @@ public class OnlineDataBase extends Activity {
 				} catch (IOException e) {
 					e.printStackTrace();
 				}
-
 				return null;
-
 			}
-
 		};
-		
+
 		task.execute();
 
 		Log.v("tests", "test searchresults size " + searchResult.size());
@@ -98,6 +89,7 @@ public class OnlineDataBase extends Activity {
 
 		}
 
+		keyword = "";
 		return searchResult;
 	}
 

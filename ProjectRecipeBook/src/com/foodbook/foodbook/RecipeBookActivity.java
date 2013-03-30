@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.AdapterView;
@@ -99,43 +100,18 @@ public class RecipeBookActivity extends TitleBarOverride {
 					break;
 				}
 
-				ArrayList<String> recipeInfo = RecipeBook.getInstance().getRecipeInfo(recipeid);
-				if (recipeInfo != null) {
-					Intent recipeDetailsIntent = new Intent();
-					recipeDetailsIntent.setClass(getApplicationContext(), RecipeDetailsActivity.class);
-					recipeDetailsIntent = putExtraFromRecipeInfo(recipeDetailsIntent, recipeInfo);
-					startActivity(recipeDetailsIntent);
-				}
+				
+				Log.v("", "position/id: " + position + " / " + recipeid);
+				
+				Intent recipeDetailsIntent = RecipeBook.getInstance().makeRecipeIntentFromRecipeID(recipeid);
+				recipeDetailsIntent.setClass(getApplicationContext(), RecipeDetailsActivity.class);
+				startActivity(recipeDetailsIntent);
+				
 			}
 
 		});
 	}
 
-	/**
-	 * 
-	 * Takes an intent and a recipe's info, and it puts the info into intent then returns new intent
-	 * 
-	 * 
-	 * @param recipeDetailsIntent
-	 *            intent to be updated
-	 * @param recipeInfo
-	 *            list containing information
-	 * @return new intent with updated info
-	 */
-
-	public static Intent putExtraFromRecipeInfo(Intent recipeDetailsIntent, ArrayList<String> recipeInfo) {
-
-		recipeDetailsIntent.putExtra("recipeid", recipeInfo.get(0));
-		recipeDetailsIntent.putExtra("name", recipeInfo.get(1));
-		recipeDetailsIntent.putExtra("author", recipeInfo.get(2));
-		recipeDetailsIntent.putExtra("descriptions", recipeInfo.get(3));
-		recipeDetailsIntent.putExtra("instructions", recipeInfo.get(4));
-		recipeDetailsIntent.putExtra("ingredients", recipeInfo.get(5));
-		recipeDetailsIntent.putExtra("category", recipeInfo.get(6));
-		recipeDetailsIntent.putExtra("userid", recipeInfo.get(7));
-
-		return recipeDetailsIntent;
-	}
 
 	@Override
 	public void onResume() {

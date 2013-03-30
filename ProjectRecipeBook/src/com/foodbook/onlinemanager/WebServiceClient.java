@@ -84,7 +84,6 @@ public class WebServiceClient {
 		try {
 			entity.consumeContent();
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 
@@ -163,7 +162,7 @@ public class WebServiceClient {
 
 		for (ElasticSearchResponse<Recipe> r : esResponse.getHits()) {
 			Recipe recipe = r.getSource();
-			Log.v("tests", "recipe found " + recipe.getRecipename());
+			Log.v("tests", "recipe found " + recipe.getName());
 			results.add(recipe);
 
 			// System.err.println(recipe);

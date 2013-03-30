@@ -82,7 +82,7 @@ public class NewRecipeValidation extends ActivityInstrumentationTestCase2 {
 			int newSize = testRecipeBook.getRecipeBook().size();
 			assertTrue(oldSize + 1 == newSize);
 			
-			assertTrue(testRecipeBook.getMine().get(newSize-1).getRecipename().equals(rName));
+			assertTrue(testRecipeBook.getMine().get(newSize-1).getName().equals(rName));
 			
 			} catch (Exception e) {
             fail("Exception occurred");
@@ -99,7 +99,7 @@ public class NewRecipeValidation extends ActivityInstrumentationTestCase2 {
 			int newSize = testRecipeBook.getRecipeBook().size();
 			assertTrue(oldSize + 1 == newSize);
 			
-			assertTrue(testRecipeBook.getMine().get(newSize-1).getRecipeDescriptions().equals(rDesc));
+			assertTrue(testRecipeBook.getMine().get(newSize-1).getDesc().equals(rDesc));
 			
 			} catch (Exception e) {
             fail("Exception occurred");
@@ -116,7 +116,7 @@ public class NewRecipeValidation extends ActivityInstrumentationTestCase2 {
 			int newSize = testRecipeBook.getRecipeBook().size();
 			assertTrue(oldSize + 1 == newSize);
 			
-			assertTrue(testRecipeBook.getMine().get(newSize-1).getRecipeinstructions().equals(rInst));
+			assertTrue(testRecipeBook.getMine().get(newSize-1).getInst().equals(rInst));
 			
 			} catch (Exception e) {
             fail("Exception occurred");
@@ -175,7 +175,7 @@ public class NewRecipeValidation extends ActivityInstrumentationTestCase2 {
 			testRecipeBook.addRecipe(rName, rDesc, rInst, rIng, rCate, null);
 			int newSize = testRecipeBook.getRecipeBook().size();
 			assertTrue(oldSize + 1 == newSize);
-			assertTrue(testRecipeBook.getMine().get(newSize-1).getRecipename().equals(rName));
+			assertTrue(testRecipeBook.getMine().get(newSize-1).getName().equals(rName));
 			
 			// deleting the recipe
 			String recipeID = testRecipeBook.getMine().get(newSize-1).getRecipeid();
@@ -199,7 +199,7 @@ public class NewRecipeValidation extends ActivityInstrumentationTestCase2 {
 			testRecipeBook.addRecipe(rName, rDesc, rInst, rIng, rCate, null);		
 			int newSize = testRecipeBook.getRecipeBook().size();
 			assertTrue(oldSize + 1 == newSize);	
-			assertTrue(testRecipeBook.getMine().get(newSize-1).getRecipename().equals(rName));
+			assertTrue(testRecipeBook.getMine().get(newSize-1).getName().equals(rName));
 			
 			//get recipe ID
 			String recipeID = testRecipeBook.getMine().get(newSize-1).getRecipeid();
@@ -207,10 +207,10 @@ public class NewRecipeValidation extends ActivityInstrumentationTestCase2 {
 			testRecipeBook.editRecipe(editrName, editrDesc, editrInst, editrIng, editrCate, recipeID, new ArrayList<String>());
 			
 			//check if edited successfully
-			assertFalse("edit name successful", testRecipeBook.getMine().get(newSize-1).getRecipename().equals(editrName));
-			assertTrue("edit description successful", testRecipeBook.getMine().get(newSize-1).getRecipeDescriptions().equals(editrDesc));
-			assertTrue("edit Instruction successful", testRecipeBook.getMine().get(newSize-1).getRecipeDescriptions().equals(editrInst));
-			assertTrue("edit Ingredient successful", testRecipeBook.getMine().get(newSize-1).getRecipeDescriptions().equals(editrIng));
+			assertFalse("edit name successful", testRecipeBook.getMine().get(newSize-1).getName().equals(editrName));
+			assertTrue("edit description successful", testRecipeBook.getMine().get(newSize-1).getDesc().equals(editrDesc));
+			assertTrue("edit Instruction successful", testRecipeBook.getMine().get(newSize-1).getDesc().equals(editrInst));
+			assertTrue("edit Ingredient successful", testRecipeBook.getMine().get(newSize-1).getDesc().equals(editrIng));
 
 			
 			} catch (Exception e) {

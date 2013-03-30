@@ -10,6 +10,7 @@ import java.security.SecureRandom;
 import java.util.ArrayList;
 
 import android.content.Context;
+import android.content.Intent;
 
 /**
  * <p>
@@ -35,16 +36,16 @@ public class RecipeBook {
 	public static final String RecipeBookFilename = "recipe.sav";
 	public static final RecipeBook recipeBookInstance = new RecipeBook();
 
-	private ArrayList<Recipe> mine;
-	private ArrayList<Recipe> downloads;
-	private String userid;
-	private String author;
+	protected ArrayList<Recipe> mine;
+	protected ArrayList<Recipe> downloads;
+	protected String userid;
+	protected String author;
 
 	/**
 	 * This is a constructor method for RecipeBook. It creates new ArrayList of Recipe.
 	 */
 	
-	private RecipeBook() {
+	protected RecipeBook() {
 
 		this.mine = new ArrayList<Recipe>();
 		this.downloads = new ArrayList<Recipe>();
@@ -113,7 +114,7 @@ public class RecipeBook {
 		ArrayList<String> outputArray = new ArrayList<String>();
 
 		for (Recipe recipe : inputArray) {
-			outputArray.add(recipe.getRecipename());
+			outputArray.add(recipe.getName());
 		}
 
 		return outputArray;
@@ -188,7 +189,7 @@ public class RecipeBook {
 
 	public String addRecipe(String recipename, String recipeDescriptions, String recipeinstructions, ArrayList<String> ingredients, ArrayList<String> category, ArrayList<String> pics) {
 
-		Recipe newRecipe = new Recipe(recipename, recipeDescriptions, recipeinstructions, StringOperations.formatArray(ingredients), StringOperations.formatArray(category), this.userid, this.author, pics);
+		Recipe newRecipe = new Recipe(recipename, recipeDescriptions, recipeinstructions, ingredients, category, this.userid, this.author, pics);
 		this.mine.add(newRecipe);
 
 		return newRecipe.getRecipeid();
@@ -244,39 +245,39 @@ public class RecipeBook {
 	 * 
 	 * @param recipename
 	 *            name to be changed
-	 * @param recipeDescriptions
+	 * @param newDesc
 	 *            description to be changed
-	 * @param recipeinstructions
+	 * @param newInst
 	 *            instructions to be changed
-	 * @param ingredients
+	 * @param newIngredients
 	 *            ingredients to be changed
-	 * @param category
+	 * @param newCategory
 	 *            category to be changed
 	 * @param recipeid
 	 */
 
-	public void editRecipe(String recipename, String recipeDescriptions, String recipeinstructions, ArrayList<String> ingredients, ArrayList<String> category, String recipeid, ArrayList<String> pics) {
+	public void editRecipe(String recipename, String newDesc, String newInst, ArrayList<String> newIngredients, ArrayList<String> newCategory, String recipeid, ArrayList<String> newPictures) {
 
 		ArrayList<Recipe> combinedList = this.getRecipeBook();
 		for (int i = 0; i < combinedList.size(); i++) {
 			if (combinedList.get(i).getRecipeid().equals(recipeid)) {
 				int offset = i - this.getMine().size();
 				if (offset < 0) {
-					this.mine.get(i).setRecipename(recipename);
-					this.mine.get(i).setRecipeDescriptions(recipeDescriptions);
-					this.mine.get(i).setRecipeinstructions(recipeinstructions);
-					this.mine.get(i).setIngredients(StringOperations.formatArray(ingredients));
-					this.mine.get(i).setCategory(StringOperations.formatArray(category));
-					this.mine.get(i).setauthor(RecipeBook.getInstance().getAuthor());
-					this.mine.get(i).setPictures(pics);
+					this.mine.get(i).setName(recipename);
+					this.mine.get(i).setDesc(newDesc);
+					this.mine.get(i).setInst(newInst);
+					this.mine.get(i).setIngredients(newIngredients);
+					this.mine.get(i).setCategory(newCategory);
+					this.mine.get(i).setAuthor(RecipeBook.getInstance().getAuthor());
+					this.mine.get(i).setPictures(newPictures);
 				} else {
-					this.downloads.get(offset).setRecipename(recipename);
-					this.downloads.get(offset).setRecipeDescriptions(recipeDescriptions);
-					this.downloads.get(offset).setRecipeinstructions(recipeinstructions);
-					this.downloads.get(offset).setIngredients(StringOperations.formatArray(ingredients));
-					this.downloads.get(offset).setCategory(StringOperations.formatArray(category));
-					this.downloads.get(offset).setauthor(RecipeBook.getInstance().getAuthor());
-					this.downloads.get(offset).setPictures(pics);
+					this.downloads.get(offset).setName(recipename);
+					this.downloads.get(offset).setDesc(newDesc);
+					this.downloads.get(offset).setInst(newInst);
+					this.downloads.get(offset).setIngredients(newIngredients);
+					this.downloads.get(offset).setCategory(newCategory);
+					this.downloads.get(offset).setAuthor(RecipeBook.getInstance().getAuthor());
+					this.downloads.get(offset).setPictures(newPictures);
 				}
 				return;
 			}
@@ -297,10 +298,10 @@ public class RecipeBook {
 		ArrayList<String> outputArray = new ArrayList<String>();
 		Recipe found = searchById(recipeid);
 		outputArray.add(recipeid);
-		outputArray.add(found.getRecipename());
+		outputArray.add(found.getName());
 		outputArray.add(found.getauthor());
-		outputArray.add(found.getRecipeDescriptions());
-		outputArray.add(found.getRecipeinstructions());
+		outputArray.add(found.getDesc());
+		outputArray.add(found.getInst());
 		outputArray.add(found.getIngredientsString());
 		outputArray.add(found.getCategoryString());
 		outputArray.add(found.getUserid());
@@ -354,7 +355,7 @@ public class RecipeBook {
 	 * @return String representing a new ID
 	 */
 
-	private String generateNewUserid() {
+	protected String generateNewUserid() {
 		SecureRandom randomKey = new SecureRandom();
 		return (new BigInteger(130, randomKey).toString(32));
 	}
@@ -421,7 +422,7 @@ public class RecipeBook {
 	public void updateAuthorInAllRecipes() {
 
 		for (Recipe eachRecipe : this.mine) {
-			eachRecipe.setauthor(this.getAuthor());
+			eachRecipe.setAuthor(this.getAuthor());
 		}
 	}
 
@@ -483,4 +484,34 @@ public class RecipeBook {
 		Recipe found = this.searchById(recipeid);
 		found.setPictures(newpic);
 	}
+	
+	public static Intent makeRecipeIntent(Recipe sourceRecipe) {
+		Intent intentOut = new Intent();
+		intentOut.putExtra("name", sourceRecipe.getName());
+		intentOut.putExtra("author", sourceRecipe.getauthor());
+		intentOut.putExtra("inst", sourceRecipe.getInst());
+		intentOut.putExtra("desc", sourceRecipe.getDesc());
+		intentOut.putStringArrayListExtra("category", sourceRecipe.getCategory());
+		intentOut.putStringArrayListExtra("ingredients", sourceRecipe.getIngredients());
+		intentOut.putExtra("recipeid", sourceRecipe.getRecipeid());
+		intentOut.putExtra("userid", sourceRecipe.getUserid());
+		
+		/*
+		 * This method is missing "pictures" attribute, because pictures slow application down.
+		 * Request pictures only when needed.
+		 */
+		
+		return intentOut;
+	}
+	
+	protected Intent makeRecipeIntentFromRecipeID(String recipeid) {
+		Recipe found = searchById(recipeid);
+		if (found != null) {
+			return makeRecipeIntent(found);
+		}
+		else {
+			return null;
+		}
+	}
+	
 }

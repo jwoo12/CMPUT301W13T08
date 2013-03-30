@@ -11,6 +11,23 @@ public class StringOperations {
 		return outputArrayList;
 	}
 	
+
+	
+	public static String intoOneString(ArrayList<String> input, String separator) {
+		
+		if (input.size() == 0) {
+			return "";
+		}
+		
+		String outputString = input.get(0);
+		
+		for (int i = 1; i < input.size(); i++) {
+			outputString += separator + input.get(i);
+		}
+		
+		return outputString;
+	}
+	
 	/**
 	 * 
 	 * This function formats ArrayList of String so that no entry has duplicate whitespaces/newline charactesr/etc...
@@ -29,18 +46,23 @@ public class StringOperations {
 		for (String inputEntry : input) {
 			String outputEntry = inputEntry;
 			outputEntry = outputEntry.replace("\n", "");
-			while (outputEntry.contains("  ")) {
-				outputEntry = outputEntry.replace("  ", " ");
-			}
+			outputEntry = replaceLoop(outputEntry, "  ", " ");
 			outputEntry = outputEntry.trim();
 
-			if (!outputEntry.equals("")) {
+			if (!outputEntry.isEmpty() && !outputEntry.equals(" ")) {
 				output.add(outputEntry);
 			}
 		}
 
 		return output;
 
+	}
+	
+	public static String replaceLoop(String input, String oldStr, String newStr) {
+		while (input.contains(oldStr)) {
+			input = input.replace(oldStr, newStr);
+		}
+		return input;
 	}
 
 }

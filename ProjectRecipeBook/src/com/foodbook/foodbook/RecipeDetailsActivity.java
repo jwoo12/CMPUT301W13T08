@@ -1,23 +1,17 @@
 package com.foodbook.foodbook;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 
 import android.content.Context;
 import android.content.Intent;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.Gravity;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-import android.widget.Toast;
-
-import com.foodbook.onlinemanager.WebServiceClient;
 
 /**
  * 
@@ -34,74 +28,47 @@ import com.foodbook.onlinemanager.WebServiceClient;
 public class RecipeDetailsActivity extends TitleBarOverride {
 
 	private Context context;
-	private Intent in;
-
-	private String recipeid;
-	private String name;
-	private String author;
-	private String descriptions;
-	private String instructions;
-	private String ingredients;
-	private String category;
-	private String userid;
 
 	private boolean onlineRecipe;
 
 	private TextView nameField;
 	private TextView authorField;
-	private TextView descriptionsField;
-	private TextView instructionsField;
+	private TextView descField;
+	private TextView instField;
 	private TextView ingredientsField;
 	private TextView categoryField;
 
 	private RelativeLayout editLayout;
 	private Button editButton;
-
 	private RelativeLayout deleteLayout;
 	private Button deleteButton;
-
 	private RelativeLayout publishLayout;
 	private Button publishButton;
-
 	private RelativeLayout downloadLayout;
 	private Button downloadButton;
-
 	private Button shareButton;
-
 	private Button photoManagerButton;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
+
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.recipe_details);
-
-		TextView categoryLabel = (TextView) findViewById(R.id.recipeDetails_categoryLabel);
-		categoryLabel.setText("Category");
-		TextView ingredientsLabel = (TextView) findViewById(R.id.recipeDetails_ingredientsLabel);
-		ingredientsLabel.setText("Ingredients");
-
 		context = getApplicationContext();
 
-		// read intent
-		in = getIntent();
-		recipeid = in.getStringExtra("recipeid");
-		name = in.getStringExtra("name");
-		author = in.getStringExtra("author");
-		descriptions = in.getStringExtra("descriptions");
-		instructions = in.getStringExtra("instructions");
-		ingredients = in.getStringExtra("ingredients").replace(", ", "\n").replace(",", "\n");
-		category = in.getStringExtra("category").replace(", ", "\n").replace(",", "\n");
-		userid = in.getStringExtra("userid");
-		onlineRecipe = in.getBooleanExtra("onlineRecipe", false);
+		Log.v("", "setting up fields");
+		setupTextFields();
+		Log.v("", "setting up buttons");
+		setupButtons();
+		Log.v("", "hiding buttons");
+		hideUnnecessaryButtons();
+		Log.v("", "updating textview");
+		updateTextViews();
+		Log.v("", "recipe details oncreate done");
 
-		// bind views to variables
-		nameField = (TextView) findViewById(R.id.recipeDetails_foodName);
-		authorField = (TextView) findViewById(R.id.recipeDetails_author);
-		descriptionsField = (TextView) findViewById(R.id.recipeDetails_desc);
-		instructionsField = (TextView) findViewById(R.id.recipeDetails_instructions);
-		ingredientsField = (TextView) findViewById(R.id.recipeDetails_ingredients);
-		categoryField = (TextView) findViewById(R.id.recipeDetails_category);
+	}
 
+	protected void setupButtons() {
 		// bind buttons (and layouts containing buttons) to variables
 		photoManagerButton = (Button) findViewById(R.id.recipeDetails_photoButton);
 		editLayout = (RelativeLayout) findViewById(R.id.recipeDetails_editLayout);
@@ -127,7 +94,7 @@ public class RecipeDetailsActivity extends TitleBarOverride {
 
 			@Override
 			public void onClick(View v) {
-				RecipeBook.getInstance().deleteById(recipeid);
+				RecipeBook.getInstance().deleteById(getIntent().getStringExtra("recipeid"));
 				finish();
 			}
 		});
@@ -138,51 +105,36 @@ public class RecipeDetailsActivity extends TitleBarOverride {
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
 
-				final WebServiceClient wsb = new WebServiceClient();
-
-				ArrayList<String> ingredientsList = new ArrayList<String>(Arrays.asList(ingredients));
-				ArrayList<String> categoryList = new ArrayList<String>(Arrays.asList(category));
-				final Recipe publish = new Recipe(name, descriptions, instructions, ingredientsList, categoryList, userid, author, null);
-
-				ArrayList<String> testIng = new ArrayList<String>();
-
-				testIng.add("ingredient");
-
-				ArrayList<String> testCateg = new ArrayList<String>();
-				testCateg.add("category");
-
-				AsyncTask<Void, Void, Void> task = new AsyncTask<Void, Void, Void>() {
-
-					@Override
-					protected Void doInBackground(Void... arg0) {
-
-						try {
-							// WebServiceClient wsb = new WebServiceClient();
-							Log.v("tests", "checkpoint " + "AsyncTask begin");
-							wsb.insertRecipe(publish);
-						} catch (IllegalStateException e) {
-							e.printStackTrace();
-						} catch (IOException e) {
-							e.printStackTrace();
-						}
-
-						return null;
-					}
-
-				};
-
-				task.execute();
-
-				// TODO add conditionals
-
-				Context context = getApplicationContext();
-				CharSequence text = "Recipe published!";
-				int duration = Toast.LENGTH_SHORT;
-
-				Toast toast = Toast.makeText(context, text, duration);
-				toast.setGravity(Gravity.TOP | Gravity.LEFT, 300, 100);
-				toast.show();
-
+				/*
+				 * 
+				 * final WebServiceClient wsb = new WebServiceClient();
+				 * 
+				 * ArrayList<String> ingredientsList = new ArrayList<String>(Arrays.asList()); ArrayList<String> categoryList = new ArrayList<String>(Arrays.asList(category)); final Recipe publish = new Recipe(name, desc, inst, ingredientsList, categoryList, userid, author, null);
+				 * 
+				 * ArrayList<String> testIng = new ArrayList<String>();
+				 * 
+				 * testIng.add("ingredient");
+				 * 
+				 * ArrayList<String> testCateg = new ArrayList<String>(); testCateg.add("category");
+				 * 
+				 * AsyncTask<Void, Void, Void> task = new AsyncTask<Void, Void, Void>() {
+				 * 
+				 * @Override protected Void doInBackground(Void... arg0) {
+				 * 
+				 * try { // WebServiceClient wsb = new WebServiceClient(); Log.v("tests", "checkpoint " + "AsyncTask begin"); wsb.insertRecipe(publish); } catch (IllegalStateException e) { e.printStackTrace(); } catch (IOException e) { e.printStackTrace(); }
+				 * 
+				 * return null; }
+				 * 
+				 * };
+				 * 
+				 * task.execute();
+				 * 
+				 * // TODO add conditionals
+				 * 
+				 * Context context = getApplicationContext(); CharSequence text = "Recipe published!"; int duration = Toast.LENGTH_SHORT;
+				 * 
+				 * Toast toast = Toast.makeText(context, text, duration); toast.setGravity(Gravity.TOP | Gravity.LEFT, 300, 100); toast.show();
+				 */
 			}
 
 		});
@@ -208,7 +160,7 @@ public class RecipeDetailsActivity extends TitleBarOverride {
 					photoManagerIntent.setClass(context, PhotoManagerViewOnly.class);
 				} else {
 					// if recipe is offline, check author.
-					if (RecipeBook.getInstance().getUserid().equals(userid)) {
+					if (RecipeBook.getInstance().getUserid().equals(RecipeBook.getInstance().getUserid())) {
 						// if recipe is written by this user, full acess. (view/add/delete)
 						photoManagerIntent.setClass(context, PhotoManager.class);
 					} else {
@@ -216,10 +168,17 @@ public class RecipeDetailsActivity extends TitleBarOverride {
 						photoManagerIntent.setClass(context, PhotoManagerAddOnly.class);
 					}
 				}
-				ArrayList<String> pics = RecipeBook.getInstance().getPicturesById(recipeid);
-				if (pics.size() != 0) {
-					photoManagerIntent.putExtra("pics", pics);
+
+				ArrayList<String> pics = RecipeBook.getInstance().getPicturesById(getIntent().getStringExtra("recipeid"));
+
+				if (pics != null) {
+					// pics is not null.. now check the size.
+					if (pics.size() != 0) {
+						// size isn't 0... now put it into the intent.
+						photoManagerIntent.putStringArrayListExtra("pictures", pics);
+					}
 				}
+
 				startActivity(photoManagerIntent);
 			}
 		});
@@ -229,7 +188,15 @@ public class RecipeDetailsActivity extends TitleBarOverride {
 			@Override
 			public void onClick(View v) {
 
-				String formatRecipe = "Recipe: " + name + "\n\n" + "Ingredients: " + "\n" + ingredients + "\n\n" + "Instructions: " + "\n" + instructions + "\n\n" + "Description: " + "\n" + descriptions + "\n" + "Category: " + category + "\n\n" + "Author: " + author + "\n";
+				String name = getIntent().getStringExtra("name");
+				ArrayList<String> ingredientsArrayList = getIntent().getStringArrayListExtra("ingredients");
+				String ingredients = StringOperations.intoOneString(ingredientsArrayList, ", ");
+				String inst = getIntent().getStringExtra("inst");
+				String desc = getIntent().getStringExtra("desc");
+				ArrayList<String> categoryArrayList = getIntent().getStringArrayListExtra("category");
+				String category = StringOperations.intoOneString(categoryArrayList, ", ");
+				String author = getIntent().getStringExtra("author");
+				String formatRecipe = "Recipe: " + name + "\n\n" + "Ingredients: " + "\n" + ingredients + "\n\n" + "Instructions: " + "\n" + inst + "\n\n" + "Description: " + "\n" + desc + "\n\n" + "Category: " + category + "\n\n" + "Author: " + author + "\n";
 
 				Intent emailIntent = new Intent(android.content.Intent.ACTION_SEND);
 				String[] recipients = new String[] { "my@email.com", "", };
@@ -241,10 +208,15 @@ public class RecipeDetailsActivity extends TitleBarOverride {
 
 			}
 		});
+	}
 
-		// update the textviews
-		hideUnnecessaryButtons();
-		updateTextViews();
+	protected void setupTextFields() {
+		nameField = (TextView) findViewById(R.id.recipeDetails_foodName);
+		authorField = (TextView) findViewById(R.id.recipeDetails_author);
+		descField = (TextView) findViewById(R.id.recipeDetails_desc);
+		instField = (TextView) findViewById(R.id.recipeDetails_instructions);
+		ingredientsField = (TextView) findViewById(R.id.recipeDetails_ingredients);
+		categoryField = (TextView) findViewById(R.id.recipeDetails_category);
 	}
 
 	/**
@@ -254,21 +226,19 @@ public class RecipeDetailsActivity extends TitleBarOverride {
 	 */
 
 	public void editRecipe() {
-		Intent editIntent = new Intent();
-		editIntent.setClass(getApplicationContext(), EditRecipeActivity.class);
-		editIntent.putExtra("recipeid", recipeid);
-		editIntent.putExtra("name", name);
-		editIntent.putExtra("descriptions", descriptions);
-		editIntent.putExtra("category", category.replace("\n", ", "));
-		editIntent.putExtra("ingredients", ingredients.replace("\n", ", "));
-		editIntent.putExtra("instructions", instructions);
-		startActivity(editIntent);
+		String recipeid = getIntent().getStringExtra("recipeid");
+		Intent editActivityIntent = RecipeBook.getInstance().makeRecipeIntentFromRecipeID(recipeid);
+		editActivityIntent.putExtra("pictures", RecipeBook.getInstance().getPicturesById(recipeid));
+		editActivityIntent.setClass(getApplicationContext(), EditRecipeActivity.class);
+		startActivity(editActivityIntent);
 	}
 
 	@Override
 	public void onNewIntent(Intent newIntent) {
 		super.onNewIntent(newIntent);
 		setIntent(newIntent);
+		hideUnnecessaryButtons();
+		updateTextViews();
 	}
 
 	/**
@@ -279,12 +249,15 @@ public class RecipeDetailsActivity extends TitleBarOverride {
 	 */
 
 	public void updateTextViews() {
-		nameField.setText(name);
-		authorField.setText(author);
-		descriptionsField.setText(descriptions);
-		instructionsField.setText(instructions);
-		ingredientsField.setText(ingredients);
-		categoryField.setText(category);
+		Intent in = getIntent();
+		nameField.setText(in.getStringExtra("name"));
+		authorField.setText(in.getStringExtra("author"));
+		descField.setText(in.getStringExtra("desc"));
+		instField.setText(in.getStringExtra("inst"));
+		ArrayList<String> ingredientsList = in.getStringArrayListExtra("ingredients");
+		ingredientsField.setText(StringOperations.intoOneString(ingredientsList, "\n"));
+		ArrayList<String> categoryList = in.getStringArrayListExtra("category");
+		categoryField.setText(StringOperations.intoOneString(categoryList, "\n"));
 	}
 
 	/**
@@ -295,12 +268,12 @@ public class RecipeDetailsActivity extends TitleBarOverride {
 	 */
 
 	private void hideUnnecessaryButtons() {
-		if (!RecipeBook.getInstance().getUserid().equals(userid)) {
+		if (!RecipeBook.getInstance().getUserid().equals(RecipeBook.getInstance().getUserid())) {
 			editLayout.setVisibility(View.GONE);
 			deleteLayout.setVisibility(View.GONE);
 			publishLayout.setVisibility(View.GONE);
 		}
-		if (onlineRecipe) {
+		if (getIntent().getBooleanExtra("onlineRecipe", false)) {
 			publishLayout.setVisibility(View.GONE);
 			editLayout.setVisibility(View.GONE);
 		} else {
@@ -315,7 +288,7 @@ public class RecipeDetailsActivity extends TitleBarOverride {
 		ArrayList<String> pictures = container.getPics();
 		if (pictures != null) {
 			Log.v("mylog", "size: " + pictures.size());
-			RecipeBook.getInstance().updatePic(recipeid, pictures);
+			RecipeBook.getInstance().updatePic(getIntent().getStringExtra("recipeid"), pictures);
 			container.reset();
 		}
 	}

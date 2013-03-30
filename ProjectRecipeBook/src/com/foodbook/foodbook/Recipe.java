@@ -30,17 +30,13 @@ public class Recipe implements Serializable {
 
 	private static final String NULL = null;
 
-	private String recipename;
-	private String recipeinstructions;
-	private String recipeDescriptions;
+	private String name;
+	private String inst;
+	private String desc;
 	private String author; // author will be changable at any time.
 	private ArrayList<String> ingredients;
-	private ArrayList<String> category; // there can be multiple categories
-										// (somewhat similar to the idea of
-										// "tagging")
-	private String recipeid; // recipeid is permanent, and will be in this
-								// format: (userid) + (date in milisecond) +
-								// (first character of the food name)
+	private ArrayList<String> category; // there can be multiple categories (somewhat similar to the idea of "tagging")
+	private String recipeid; // recipeid is permanent, and will be in this format: (userid) + (date in milisecond) + (first character of the food name)
 	private String userid; // userid is permanent.
 	private ArrayList<String> pictures;
 
@@ -53,8 +49,8 @@ public class Recipe implements Serializable {
 	 * return recipeDescriptions a description of the recipe
 	 */
 
-	public String getRecipeDescriptions() {
-		return recipeDescriptions;
+	public String getDesc() {
+		return desc;
 	}
 
 	/**
@@ -64,8 +60,8 @@ public class Recipe implements Serializable {
 	 *            a description of the recipe
 	 */
 
-	public void setRecipeDescriptions(String recipeDescriptions) {
-		this.recipeDescriptions = recipeDescriptions;
+	public void setDesc(String recipeDescriptions) {
+		this.desc = recipeDescriptions;
 	}
 
 	/**
@@ -74,8 +70,8 @@ public class Recipe implements Serializable {
 	 * @return recipename the name of the recipe
 	 */
 
-	public String getRecipename() {
-		return recipename;
+	public String getName() {
+		return name;
 	}
 
 	/**
@@ -85,8 +81,8 @@ public class Recipe implements Serializable {
 	 *            the name of the recipe
 	 */
 
-	public void setRecipename(String recipename) {
-		this.recipename = recipename;
+	public void setName(String recipename) {
+		this.name = recipename;
 	}
 
 	/**
@@ -95,8 +91,8 @@ public class Recipe implements Serializable {
 	 * @return recipeinstructions instructions of the recipe
 	 */
 
-	public String getRecipeinstructions() {
-		return recipeinstructions;
+	public String getInst() {
+		return inst;
 	}
 
 	/**
@@ -107,8 +103,8 @@ public class Recipe implements Serializable {
 	 *            instructions of the recipe
 	 */
 
-	public void setRecipeinstructions(String recipeinstructions) {
-		this.recipeinstructions = recipeinstructions;
+	public void setInst(String recipeinstructions) {
+		this.inst = recipeinstructions;
 	}
 
 	/**
@@ -131,7 +127,7 @@ public class Recipe implements Serializable {
 	 *            author's author of the recipe
 	 */
 
-	public void setauthor(String author) {
+	public void setAuthor(String author) {
 		this.author = author;
 	}
 
@@ -239,9 +235,9 @@ public class Recipe implements Serializable {
 	 */
 
 	public Recipe(String recipename, String recipeDescriptions, String recipeInstructions, ArrayList<String> ingredients, ArrayList<String> category, String userid, String author, ArrayList<String> pics) {
-		this.recipename = recipename;
-		this.recipeinstructions = recipeInstructions;
-		this.recipeDescriptions = recipeDescriptions;
+		this.name = recipename;
+		this.inst = recipeInstructions;
+		this.desc = recipeDescriptions;
 		this.author = author;
 		this.ingredients = ingredients;
 		this.category = category;
@@ -266,15 +262,9 @@ public class Recipe implements Serializable {
 
 		if (this.ingredients.size() == 0) {
 			return "";
+		} else {
+			return StringOperations.intoOneString(ingredients, ", ");
 		}
-
-		String listOfIngr = this.ingredients.get(0);
-		int i;
-		for (i = 1; i < this.ingredients.size(); i++) {
-			listOfIngr += ", " + this.ingredients.get(i);
-		}
-
-		return listOfIngr;
 	}
 
 	/**
@@ -285,15 +275,9 @@ public class Recipe implements Serializable {
 
 		if (this.category.size() == 0) {
 			return "";
+		} else {
+			return StringOperations.intoOneString(category, ", ");
 		}
-
-		String listOfCateg = this.category.get(0);
-		int i;
-		for (i = 1; i < this.category.size(); i++) {
-			listOfCateg += ", " + this.category.get(i);
-		}
-
-		return listOfCateg;
 
 	}
 }
