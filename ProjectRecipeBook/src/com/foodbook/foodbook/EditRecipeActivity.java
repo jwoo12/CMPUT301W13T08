@@ -9,6 +9,7 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 /**
@@ -45,7 +46,6 @@ public class EditRecipeActivity extends TitleBarOverride {
 		setContentView(R.layout.edit_recipe);
 
 		readIntent();
-		initializeTextFields();
 		updateTextFields();
 		activateSaveButton();
 		activatePhotoManagerButton();
@@ -84,10 +84,6 @@ public class EditRecipeActivity extends TitleBarOverride {
 		});
 	}
 
-	protected void initializeTextFields() {
-
-	}
-
 	protected void readIntent() {
 		recipeid = getIntent().getStringExtra("recipeid");
 		name = getIntent().getStringExtra("name");
@@ -95,17 +91,17 @@ public class EditRecipeActivity extends TitleBarOverride {
 		category = StringOperations.intoOneString(getIntent().getStringArrayListExtra("category"), ", ");
 		ingredients = StringOperations.intoOneString(getIntent().getStringArrayListExtra("ingredients"), ", ");
 		inst = getIntent().getStringExtra("inst");
-		pictures = getIntent().getStringArrayListExtra("pictures");
+		pictures = RecipeBook.getInstance().getPicturesById(recipeid);
 	}
 
 	protected void openPhotoManager() {
 		Intent photoManagerIntent = new Intent();
 		photoManagerIntent.setClass(getApplicationContext(), PhotoManager.class);
 		if (recipeid != null && !photoManagerOpened) {
-			photoManagerIntent.putExtra("pics", RecipeBook.getInstance().getPicturesById(recipeid));
+			photoManagerIntent.putExtra("pictures", RecipeBook.getInstance().getPicturesById(recipeid));
 		}
 		else if (photoManagerOpened) {
-			photoManagerIntent.putExtra("pics", pictures);
+			photoManagerIntent.putExtra("pictures", pictures);
 		}
 		startActivity(photoManagerIntent);
 	}
@@ -132,6 +128,7 @@ public class EditRecipeActivity extends TitleBarOverride {
 	 * 
 	 */
 	protected void updateTextFields() {
+		
 		
 		EditText recipeNameField = (EditText) findViewById(R.id.editRecipeName);
 		EditText descField = (EditText) findViewById(R.id.editRecipeDesc);

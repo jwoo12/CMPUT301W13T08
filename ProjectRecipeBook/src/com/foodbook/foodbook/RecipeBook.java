@@ -9,8 +9,14 @@ import java.math.BigInteger;
 import java.security.SecureRandom;
 import java.util.ArrayList;
 
+import com.foodbook.onlinemanager.WebServiceClient;
+
 import android.content.Context;
 import android.content.Intent;
+import android.os.AsyncTask;
+import android.util.Log;
+import android.view.Gravity;
+import android.widget.Toast;
 
 /**
  * <p>
@@ -513,5 +519,34 @@ public class RecipeBook {
 			return null;
 		}
 	}
-	
+
+	protected void publishRecipeById(String recipeid) {
+		
+		final Recipe targetRecipe = searchById(recipeid);
+		
+		final WebServiceClient wsb = new WebServiceClient();
+
+		AsyncTask<Void, Void, Void> task = new AsyncTask<Void, Void, Void>() {
+
+			@Override
+			protected Void doInBackground(Void... arg0) {
+
+				try {
+					// WebServiceClient wsb = new WebServiceClient();
+					Log.v("tests", "checkpoint " + "AsyncTask begin");
+					wsb.insertRecipe(targetRecipe);
+				} catch (IllegalStateException e) {
+					e.printStackTrace();
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+
+				return null;
+			}
+
+		};
+
+		task.execute();
+		
+	}
 }

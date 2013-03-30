@@ -29,7 +29,7 @@ public class PhotoManager extends Activity {
 	protected Gallery myPhotoGallery;
 
 	protected String picFolderPath;
-	
+
 	protected final int PICTURE_SIZE = 200;
 
 	@Override
@@ -41,7 +41,7 @@ public class PhotoManager extends Activity {
 			Log.v("mylog", "intent contains something");
 			pictures = getIntent().getStringArrayListExtra("pictures");
 		}
-		
+
 		setupGallery(getApplicationContext());
 
 		try {
