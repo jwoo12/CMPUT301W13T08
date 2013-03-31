@@ -42,7 +42,7 @@ public class Recipe implements Serializable {
 	private String userid; // userid is permanent.
 	private ArrayList<String> pictures;
 	
-	private ArrayList<String> tags = new ArrayList<String> ();
+	private ArrayList<String> tags = new ArrayList<String>();
 
 	// userid is perminant id, given to each user, this will be used to identify
 	// the owner of recipes.
@@ -288,10 +288,8 @@ public class Recipe implements Serializable {
 	public void generateTags() {
 		this.tags.clear();
 		
-		
 		ArrayList<String> sourcesOfTags = new ArrayList<String>();
 		sourcesOfTags.add(this.getName());
-		
 		sourcesOfTags.addAll(this.category);
 		sourcesOfTags.addAll(this.getIngredients());
 		

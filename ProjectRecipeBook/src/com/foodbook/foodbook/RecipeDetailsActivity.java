@@ -93,7 +93,7 @@ public class RecipeDetailsActivity extends TitleBarOverride {
 
 				RecipeBook.getInstance().publishRecipeById(getIntent().getStringExtra("recipeid"));
 
-				Toast.makeText(getApplicationContext(), "Recipe published!", Toast.LENGTH_LONG).show();
+				Toast.makeText(getApplicationContext(), "Recipe published!", Toast.LENGTH_SHORT).show();
 
 			}
 
@@ -104,6 +104,7 @@ public class RecipeDetailsActivity extends TitleBarOverride {
 			@Override
 			public void onClick(View v) {
 				ResultsBook.getInstance().download(getIntent().getStringExtra("recipeid"));
+				Toast.makeText(getApplicationContext(), "Recipe downloaded!", Toast.LENGTH_SHORT).show();
 			}
 		});
 
@@ -120,7 +121,7 @@ public class RecipeDetailsActivity extends TitleBarOverride {
 					photoManagerIntent.setClass(context, PhotoManagerViewOnly.class);
 				} else {
 					// if recipe is offline, check author.
-					if (RecipeBook.getInstance().getUserid().equals(RecipeBook.getInstance().getUserid())) {
+					if (RecipeBook.getInstance().getUserid().equals(getIntent().getStringExtra("userid"))) {
 						// if recipe is written by this user, full acess. (view/add/delete)
 						photoManagerIntent.setClass(context, PhotoManager.class);
 					} else {
@@ -242,14 +243,19 @@ public class RecipeDetailsActivity extends TitleBarOverride {
 		RelativeLayout publishLayout = (RelativeLayout) findViewById(R.id.recipeDetails_publishLayout);
 		RelativeLayout downloadLayout = (RelativeLayout) findViewById(R.id.recipeDetails_downloadLayout);
 
-		if (!RecipeBook.getInstance().getUserid().equals(RecipeBook.getInstance().getUserid())) {
+		String useridOfThisRecipe = getIntent().getStringExtra("userid");
+		
+		if (!RecipeBook.getInstance().getUserid().equals(useridOfThisRecipe)) {
 			editLayout.setVisibility(View.GONE);
-			deleteLayout.setVisibility(View.GONE);
 			publishLayout.setVisibility(View.GONE);
 		}
 		if (onlineRecipe) {
 			publishLayout.setVisibility(View.GONE);
 			editLayout.setVisibility(View.GONE);
+			if (!RecipeBook.getInstance().getUserid().equals(useridOfThisRecipe)) {
+				// online recipe, and not yours, delete button invisible.
+				deleteLayout.setVisibility(View.GONE);
+			}
 		} else {
 			downloadLayout.setVisibility(View.GONE);
 		}

@@ -46,8 +46,19 @@ public class ResultsBook {
 	}
 
 	public void download(String targetRecipeId) {
+		
+		if (RecipeBook.getInstance().containsRecipeOfID(targetRecipeId)) {
+			// delete the duplicate if there is one.
+			RecipeBook.getInstance().deleteById(targetRecipeId);
+		}
+		
 		Recipe found = this.searchById(targetRecipeId);
-		RecipeBook.getInstance().downloads.add(found);
+		
+		if (RecipeBook.getInstance().getUserid().equals(found.getUserid())) {
+			RecipeBook.getInstance().mine.add(found);
+		} else {
+			RecipeBook.getInstance().downloads.add(found);			
+		}
 	}
 
 	public void setSearchResults(ArrayList<Recipe> newResults) {

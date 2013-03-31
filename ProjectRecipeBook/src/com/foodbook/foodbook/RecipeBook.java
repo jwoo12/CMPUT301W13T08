@@ -262,6 +262,8 @@ public class RecipeBook {
 
 	public void editRecipe(String recipename, String newDesc, String newInst, ArrayList<String> newIngredients, ArrayList<String> newCategory, String recipeid, ArrayList<String> newPictures) {
 
+		// TODO this should be re-written with intent
+
 		ArrayList<Recipe> combinedList = this.getRecipeBook();
 		for (int i = 0; i < combinedList.size(); i++) {
 			if (combinedList.get(i).getRecipeid().equals(recipeid)) {
@@ -286,30 +288,6 @@ public class RecipeBook {
 				return;
 			}
 		}
-	}
-
-	/**
-	 * 
-	 * Converts a recipe to an ArrayList of Strings
-	 * 
-	 * 
-	 * @param recipeid
-	 *            the id of a recipe to be printed
-	 * @return an Arraylist of strings representing a recipe
-	 */
-
-	public ArrayList<String> getRecipeInfo(String recipeid) {
-		ArrayList<String> outputArray = new ArrayList<String>();
-		Recipe found = searchById(recipeid);
-		outputArray.add(recipeid);
-		outputArray.add(found.getName());
-		outputArray.add(found.getauthor());
-		outputArray.add(found.getDesc());
-		outputArray.add(found.getInst());
-		outputArray.add(found.getIngredientsString());
-		outputArray.add(found.getCategoryString());
-		outputArray.add(found.getUserid());
-		return outputArray;
 	}
 
 	public ArrayList<String> getPicturesById(String recipeid) {
@@ -339,17 +317,23 @@ public class RecipeBook {
 	public void deleteById(String recipeid) {
 
 		Recipe found = searchById(recipeid);
-		if (found != null) {
-			try {
-				this.downloads.remove(found);
-			} catch (IndexOutOfBoundsException e) {
-			}
-			try {
-				this.mine.remove(found);
-			} catch (IndexOutOfBoundsException e2) {
+		if (containsRecipeid(mine, recipeid)) {
+			this.mine.remove(found);
+		} else {
+			this.downloads.remove(found);
+		}
+
+	}
+
+	private boolean containsRecipeid(ArrayList<Recipe> targetList, String recipeid) {
+
+		for (Recipe thisRecipe : targetList) {
+			if (thisRecipe.getRecipeid().equals(recipeid)) {
+				return true;
 			}
 		}
 
+		return false;
 	}
 
 	/**
@@ -519,9 +503,8 @@ public class RecipeBook {
 	protected void publishRecipeById(String recipeid) {
 
 		final Recipe targetRecipe = searchById(recipeid);
-
 		targetRecipe.generateTags();
-		
+
 		final WebServiceClient wsb = new WebServiceClient();
 
 		AsyncTask<Void, Void, Void> task = new AsyncTask<Void, Void, Void>() {
@@ -530,8 +513,6 @@ public class RecipeBook {
 			protected Void doInBackground(Void... arg0) {
 
 				try {
-					// WebServiceClient wsb = new WebServiceClient();
-					Log.v("tests", "checkpoint " + "AsyncTask begin");
 					wsb.insertRecipe(targetRecipe);
 				} catch (IllegalStateException e) {
 					e.printStackTrace();
