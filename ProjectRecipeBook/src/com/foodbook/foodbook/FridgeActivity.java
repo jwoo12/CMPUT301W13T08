@@ -99,6 +99,9 @@ public class FridgeActivity extends TitleBarOverride {
 
 			@Override
 			public void onClick(View v) {
+				
+				// reset results book before starting a new search
+				ResultsBook.getInstance().reset();
 
 				// local results of 'see what I can make' search
 				ArrayList<String> localResults, localID;
@@ -107,8 +110,9 @@ public class FridgeActivity extends TitleBarOverride {
 				localID = localNamesAndIDs.get(1);
 
 				// online results of 'see what I can make' search
+				
 				ArrayList<String> onlineResults, onlineID;
-				ArrayList<ArrayList<String>> onlineNamesAndIDs = RecipeBook.getNamesAndIDs(OnlineDataBase.searchOnlineByIngredients(myFridge.getIngredients()));
+				ArrayList<ArrayList<String>> onlineNamesAndIDs = RecipeBook.getNamesAndIDs(OnlineDataBase.searchByIngredientsOnline(myFridge.getIngredients()));
 				onlineResults = onlineNamesAndIDs.get(0);
 				onlineID = onlineNamesAndIDs.get(1);
 
@@ -117,10 +121,8 @@ public class FridgeActivity extends TitleBarOverride {
 				ingredientSeach.setClass(getApplicationContext(), SearchResult.class);
 				ingredientSeach.putExtra("localResults", localResults);
 				ingredientSeach.putExtra("localID", localID);
-//				ingredientSeach.putExtra("onlineResults", onlineResults);
-//				ingredientSeach.putExtra("onlineID", onlineID);
-				ingredientSeach.putExtra("onlineResults", new ArrayList<String>());
-				ingredientSeach.putExtra("onlineID", new ArrayList<String>());
+				 ingredientSeach.putExtra("onlineResults", onlineResults);
+				 ingredientSeach.putExtra("onlineID", onlineID);
 				startActivity(ingredientSeach);
 			}
 		});
@@ -185,6 +187,7 @@ public class FridgeActivity extends TitleBarOverride {
 	 * @param position
 	 *            element at which the selected ingredient is located
 	 */
+	
 	private void showOptionDialog(final int position) {
 		AlertDialog.Builder alertdg = new AlertDialog.Builder(this);
 		final String titleOfDialog = myFridge.getIngredientAtIndex(position);

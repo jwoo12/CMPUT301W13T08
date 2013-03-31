@@ -17,49 +17,48 @@ import com.foodbook.foodbook.R;
 import com.foodbook.foodbook.Recipe;
 import com.foodbook.foodbook.TitleBarOverride;
 
-
 /**
  * 
- * <p> Implementation for the ability to query recipes </p>
+ * <p>
+ * Implementation for the ability to query recipes
+ * </p>
  * 
  * 
  * @see Recipe
  * @author Jaeseo Park (jaeseo1), Jasmine Woo (jwoo), Nhu Bui (nbui), Robert Janes (rjanes)
- *
+ * 
  */
 
 public class OnlineSearch extends TitleBarOverride {
 
 	private EditText keywordField;
 	private Button searchButton;
-	
-	
+
 	ArrayList<Recipe> onlineResults;
-	
+
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.online_search);
-		
+
 		keywordField = (EditText) findViewById(R.id.searchBar);
 		searchButton = (Button) findViewById(R.id.searchButton);
-		
+
 		searchButton.setOnClickListener(new OnClickListener() {
-			
+
 			public void onClick(View v) {
-				final String keyword = keywordField.getText().toString(); //had to change to final for try block
-				//ArrayList<Recipe> onlineResults = OnlineDataBase.searchByKeyword(keyword);
-				
-				
-				AsyncTask<Void, Void, Void> task = new AsyncTask<Void, Void, Void> (){
-					
+				final String keyword = keywordField.getText().toString(); // had to change to final for try block
+				// ArrayList<Recipe> onlineResults = OnlineDataBase.searchByKeyword(keyword);
+
+				AsyncTask<Void, Void, Void> task = new AsyncTask<Void, Void, Void>() {
+
 					@Override
 					protected Void doInBackground(Void... arg0) {
-						
+
 						Log.v("tests", "checkpoint doInBackground");
-						
-						//ArrayList<Recipe> searchResult = null;
-				
+
+						// ArrayList<Recipe> searchResult = null;
+
 						WebServiceClient wsc = new WebServiceClient();
 						try {
 							Log.v("tests", "checkpoint before search");
@@ -72,21 +71,18 @@ public class OnlineSearch extends TitleBarOverride {
 							e.printStackTrace();
 						}
 						return null;
-						
-					}
-						
-				}.execute();
-				
 
-			
-				
+					}
+
+				}.execute();
+
 			}
 		});
 	}
+
 	@Override
 	public void onResume() {
 		super.onResume();
 		keywordField.setText("");
 	}
 }
-

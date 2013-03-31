@@ -81,6 +81,7 @@ public class PhotoManager extends Activity {
 	}
 
 	protected void deletePic(int position, Context applicationContext) {
+
 		pictures.remove(position);
 
 		try {
@@ -91,6 +92,7 @@ public class PhotoManager extends Activity {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+
 	}
 
 	protected void readBMP() {

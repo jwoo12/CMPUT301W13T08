@@ -54,7 +54,7 @@
         <activity
             android:name="com.foodbook.foodbook.RecipeDetailsActivity"
             android:label="@string/recipe_details_title_bar"
-            android:launchMode="singleTop" >
+            android:launchMode="singleInstance" >
         </activity>
         <activity
             android:name="com.foodbook.foodbook.Search"

@@ -9,20 +9,15 @@ import com.foodbook.foodbook.FridgeActivity;
 
 /**
  * <p>
- * This class is testing the ingredients in fridgeactivity test add an
- * ingredient test edit an ingredient test delete an ingredient test see what i
- * can make and it will show what they can make
+ * This class is testing the ingredients in fridgeactivity test add an ingredient test edit an ingredient test delete an ingredient test see what i can make and it will show what they can make
  * </p>
  * 
- * @author Jaeseo Park (jaeseo1), Jasmine Woo (jwoo), Nhu Bui (nbui), Robert
- *         Janes (rjanes)
+ * @author Jaeseo Park (jaeseo1), Jasmine Woo (jwoo), Nhu Bui (nbui), Robert Janes (rjanes)
  * 
  */
-public class IngredientValidation extends
-		ActivityInstrumentationTestCase2<FridgeActivity> {
+public class IngredientValidation extends ActivityInstrumentationTestCase2<FridgeActivity> {
 	private Fridge testFridge;
 
-	
 	/**
 	 * method for creating super for FridgeActivity
 	 */
@@ -41,13 +36,10 @@ public class IngredientValidation extends
 
 	}
 
-
 	/**
 	 * method for testing adding ingredients in fridgeActivity.
 	 * 
-	 * If the app is running for the first time, it prompts for username, and
-	 * this will interfere with the test. So the test should not be ran when the
-	 * app hasn't been opened after installation.
+	 * If the app is running for the first time, it prompts for username, and this will interfere with the test. So the test should not be ran when the app hasn't been opened after installation.
 	 * 
 	 */
 	public void testAddIngredients() {
@@ -60,8 +52,7 @@ public class IngredientValidation extends
 			ArrayList<String> temp = new ArrayList<String>();
 
 			// check if the dummy entry is in fridge
-			assertTrue("added ingredient should ", testFridge.getIngredients()
-					.contains("dummy entry"));
+			assertTrue("added ingredient should ", testFridge.getIngredients().contains("dummy entry"));
 		} catch (Exception e) {
 			fail("Exception occurred");
 		}
@@ -79,8 +70,7 @@ public class IngredientValidation extends
 			testFridge.addIngredient(oldName);
 			testFridge.editIngredientByName(oldName, newName);
 
-			assertTrue("the fridge now contains newnewnewname", testFridge
-					.getIngredients().contains(newName));
+			assertTrue("the fridge now contains newnewnewname", testFridge.getIngredients().contains(newName));
 		} catch (Exception e) {
 			fail("Exception occurred");
 		}
@@ -94,14 +84,13 @@ public class IngredientValidation extends
 			String toBeDeleted = "this should be deleted";
 			testFridge.addIngredient(toBeDeleted);
 			assertTrue(testFridge.getIngredients().contains(toBeDeleted));
-			
+
 			testFridge.removeIngredientByName(toBeDeleted);
 			assertFalse(testFridge.getIngredients().contains(toBeDeleted));
-			
+
 		} catch (Exception e) {
 			fail("Exception occurred");
 		}
 	}
-
 
 }

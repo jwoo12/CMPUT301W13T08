@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
@@ -13,8 +14,8 @@ import android.widget.ListView;
 import com.foodbook.foodbook.R;
 import com.foodbook.foodbook.Recipe;
 import com.foodbook.foodbook.RecipeBook;
-import com.foodbook.foodbook.RecipeBookActivity;
 import com.foodbook.foodbook.RecipeDetailsActivity;
+import com.foodbook.foodbook.ResultsBook;
 import com.foodbook.foodbook.TitleBarOverride;
 import com.foodbook.foodbook.UpdateListView;
 
@@ -61,12 +62,12 @@ public class SearchResult extends TitleBarOverride {
 	}
 
 	private void showSearchResults() {
-		
+
 		readIntent();
 		constructCombinedLists();
 		setupListView();
 		UpdateListView.updateListView(getApplicationContext(), combinedResults, resultListView);
-		
+
 	}
 
 	protected void setupListView() {
@@ -76,18 +77,22 @@ public class SearchResult extends TitleBarOverride {
 			@Override
 			public void onItemClick(AdapterView<?> arg0, View arg1, int position, long arg3) {
 
+				Log.v("mylog", "opening a recipe details activity");
 				Intent recipeDetailsIntent = new Intent();
+
 				String recipeid = combinedID.get(position);
-				
+
 				if (position < localResults.size()) {
-					ArrayList<String> recipeInfo = RecipeBook.getInstance().getRecipeInfo(recipeid);
-					recipeDetailsIntent.setClass(getApplicationContext(), RecipeDetailsActivity.class);
-					//recipeDetailsIntent = RecipeBookActivity.makeIntent(recipeDetailsIntent, recipeInfo);
+					Log.v("", "this is a local recipe");
+					recipeDetailsIntent = RecipeBook.getInstance().makeRecipeIntentFromRecipeID(recipeid);
 
 				} else {
-					int offset = combinedID.size() - localResults.size();
+					Log.v("", "this is an online recipe");
+					recipeDetailsIntent = ResultsBook.getInstance().makeRecipeIntentFromRecipeID(recipeid);
+					recipeDetailsIntent.putExtra("onlineRecipe", true);
 				}
 
+				recipeDetailsIntent.setClass(getApplicationContext(), RecipeDetailsActivity.class);
 				startActivity(recipeDetailsIntent);
 			}
 		});

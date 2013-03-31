@@ -1,23 +1,17 @@
 package com.foodbook.foodbook;
 
-import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Arrays;
 
 import android.content.Context;
 import android.content.Intent;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.Gravity;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
-
-import com.foodbook.onlinemanager.WebServiceClient;
 
 /**
  * 
@@ -34,7 +28,6 @@ import com.foodbook.onlinemanager.WebServiceClient;
 public class RecipeDetailsActivity extends TitleBarOverride {
 
 	private Context context;
-
 	private boolean onlineRecipe;
 
 	@Override
@@ -43,22 +36,27 @@ public class RecipeDetailsActivity extends TitleBarOverride {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.recipe_details);
 		context = getApplicationContext();
-
+		
+		updateOnlineRecipeBoolean();
 		setupButtons();
 		hideUnnecessaryButtons();
 		updateTextViews();
 
 	}
+	
+	protected void updateOnlineRecipeBoolean() {
+		onlineRecipe = getIntent().getBooleanExtra("onlineRecipe", false);
+	}
 
 	protected void setupButtons() {
-		
+
 		Button editButton;
 		Button deleteButton;
 		Button publishButton;
 		Button downloadButton;
 		Button shareButton;
 		Button photoManagerButton;
-		
+
 		photoManagerButton = (Button) findViewById(R.id.recipeDetails_photoButton);
 		editButton = (Button) findViewById(R.id.recipeDetails_editButton);
 		deleteButton = (Button) findViewById(R.id.recipeDetails_deleteButton);
@@ -79,7 +77,11 @@ public class RecipeDetailsActivity extends TitleBarOverride {
 
 			@Override
 			public void onClick(View v) {
-				RecipeBook.getInstance().deleteById(getIntent().getStringExtra("recipeid"));
+				if (onlineRecipe) {
+					// TODO delete from server
+				} else {
+					RecipeBook.getInstance().deleteById(getIntent().getStringExtra("recipeid"));
+				}
 				finish();
 			}
 		});
@@ -88,17 +90,11 @@ public class RecipeDetailsActivity extends TitleBarOverride {
 
 			@Override
 			public void onClick(View v) {
-				
-				RecipeBook.getInstance().publishRecipeById(getIntent().getStringExtra("recipeid"));
-				
-				Context context = getApplicationContext();
-				CharSequence text = "Recipe published!";
-				int duration = Toast.LENGTH_SHORT;
 
-				Toast toast = Toast.makeText(context, text, duration);
-				toast.setGravity(Gravity.TOP | Gravity.LEFT, 300, 100);
-				toast.show();
-				
+				RecipeBook.getInstance().publishRecipeById(getIntent().getStringExtra("recipeid"));
+
+				Toast.makeText(getApplicationContext(), "Recipe published!", Toast.LENGTH_LONG).show();
+
 			}
 
 		});
@@ -107,7 +103,7 @@ public class RecipeDetailsActivity extends TitleBarOverride {
 
 			@Override
 			public void onClick(View v) {
-				// TODO download
+				ResultsBook.getInstance().download(getIntent().getStringExtra("recipeid"));
 			}
 		});
 
@@ -133,7 +129,15 @@ public class RecipeDetailsActivity extends TitleBarOverride {
 					}
 				}
 
-				ArrayList<String> pics = RecipeBook.getInstance().getPicturesById(getIntent().getStringExtra("recipeid"));
+				ArrayList<String> pics = null;
+
+				if (onlineRecipe) {
+					// for online
+					pics = ResultsBook.getInstance().getPicturesById(getIntent().getStringExtra("recipeid"));
+				} else {
+					// for offline
+					pics = RecipeBook.getInstance().getPicturesById(getIntent().getStringExtra("recipeid"));
+				}
 
 				if (pics != null) {
 					// pics is not null.. now check the size.
@@ -192,6 +196,7 @@ public class RecipeDetailsActivity extends TitleBarOverride {
 	public void onNewIntent(Intent newIntent) {
 		super.onNewIntent(newIntent);
 		setIntent(newIntent);
+		updateOnlineRecipeBoolean();
 		hideUnnecessaryButtons();
 		updateTextViews();
 	}
@@ -204,14 +209,14 @@ public class RecipeDetailsActivity extends TitleBarOverride {
 	 */
 
 	public void updateTextViews() {
-		
+
 		TextView nameField = (TextView) findViewById(R.id.recipeDetails_foodName);
 		TextView authorField = (TextView) findViewById(R.id.recipeDetails_author);
 		TextView descField = (TextView) findViewById(R.id.recipeDetails_desc);
 		TextView instField = (TextView) findViewById(R.id.recipeDetails_instructions);
 		TextView ingredientsField = (TextView) findViewById(R.id.recipeDetails_ingredients);
 		TextView categoryField = (TextView) findViewById(R.id.recipeDetails_category);
-		
+
 		Intent in = getIntent();
 		nameField.setText(in.getStringExtra("name"));
 		authorField.setText(in.getStringExtra("author"));
@@ -231,23 +236,18 @@ public class RecipeDetailsActivity extends TitleBarOverride {
 	 */
 
 	private void hideUnnecessaryButtons() {
-		
-		RelativeLayout editLayout;
-		RelativeLayout deleteLayout;
-		RelativeLayout publishLayout;
-		RelativeLayout downloadLayout;
-		
-		editLayout = (RelativeLayout) findViewById(R.id.recipeDetails_editLayout);
-		deleteLayout = (RelativeLayout) findViewById(R.id.recipeDetails_deleteLayout);
-		publishLayout = (RelativeLayout) findViewById(R.id.recipeDetails_publishLayout);
-		downloadLayout = (RelativeLayout) findViewById(R.id.recipeDetails_downloadLayout);
-		
+
+		RelativeLayout editLayout = (RelativeLayout) findViewById(R.id.recipeDetails_editLayout);
+		RelativeLayout deleteLayout = (RelativeLayout) findViewById(R.id.recipeDetails_deleteLayout);
+		RelativeLayout publishLayout = (RelativeLayout) findViewById(R.id.recipeDetails_publishLayout);
+		RelativeLayout downloadLayout = (RelativeLayout) findViewById(R.id.recipeDetails_downloadLayout);
+
 		if (!RecipeBook.getInstance().getUserid().equals(RecipeBook.getInstance().getUserid())) {
 			editLayout.setVisibility(View.GONE);
 			deleteLayout.setVisibility(View.GONE);
 			publishLayout.setVisibility(View.GONE);
 		}
-		if (getIntent().getBooleanExtra("onlineRecipe", false)) {
+		if (onlineRecipe) {
 			publishLayout.setVisibility(View.GONE);
 			editLayout.setVisibility(View.GONE);
 		} else {

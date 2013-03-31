@@ -50,7 +50,7 @@ public class RecipeBook {
 	/**
 	 * This is a constructor method for RecipeBook. It creates new ArrayList of Recipe.
 	 */
-	
+
 	protected RecipeBook() {
 
 		this.mine = new ArrayList<Recipe>();
@@ -65,7 +65,7 @@ public class RecipeBook {
 	 * 
 	 * @return RecipeBook instance
 	 */
-	
+
 	public static RecipeBook getInstance() {
 		return recipeBookInstance;
 	}
@@ -313,7 +313,7 @@ public class RecipeBook {
 		outputArray.add(found.getUserid());
 		return outputArray;
 	}
-	
+
 	public ArrayList<String> getPicturesById(String recipeid) {
 		Recipe found = searchById(recipeid);
 		if (found != null) {
@@ -485,12 +485,12 @@ public class RecipeBook {
 		}
 		return false;
 	}
-	
+
 	public void updatePic(String recipeid, ArrayList<String> newpic) {
 		Recipe found = this.searchById(recipeid);
 		found.setPictures(newpic);
 	}
-	
+
 	public static Intent makeRecipeIntent(Recipe sourceRecipe) {
 		Intent intentOut = new Intent();
 		intentOut.putExtra("name", sourceRecipe.getName());
@@ -501,29 +501,27 @@ public class RecipeBook {
 		intentOut.putStringArrayListExtra("ingredients", sourceRecipe.getIngredients());
 		intentOut.putExtra("recipeid", sourceRecipe.getRecipeid());
 		intentOut.putExtra("userid", sourceRecipe.getUserid());
-		
+
 		/*
-		 * This method is missing "pictures" attribute, because pictures slow application down.
-		 * Request pictures only when needed.
+		 * This method is missing "pictures" attribute, because pictures slow application down. Request pictures only when needed.
 		 */
-		
+
 		return intentOut;
 	}
-	
-	protected Intent makeRecipeIntentFromRecipeID(String recipeid) {
+
+	public Intent makeRecipeIntentFromRecipeID(String recipeid) {
 		Recipe found = searchById(recipeid);
 		if (found != null) {
 			return makeRecipeIntent(found);
-		}
-		else {
+		} else {
 			return null;
 		}
 	}
 
 	protected void publishRecipeById(String recipeid) {
-		
+
 		final Recipe targetRecipe = searchById(recipeid);
-		
+
 		final WebServiceClient wsb = new WebServiceClient();
 
 		AsyncTask<Void, Void, Void> task = new AsyncTask<Void, Void, Void>() {
@@ -547,6 +545,6 @@ public class RecipeBook {
 		};
 
 		task.execute();
-		
+
 	}
 }

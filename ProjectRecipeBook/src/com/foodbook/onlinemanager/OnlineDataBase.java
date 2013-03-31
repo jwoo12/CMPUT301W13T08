@@ -9,7 +9,9 @@ import android.app.Activity;
 import android.os.AsyncTask;
 import android.util.Log;
 
+import com.foodbook.foodbook.Fridge;
 import com.foodbook.foodbook.Recipe;
+import com.foodbook.foodbook.ResultsBook;
 
 /**
  * 
@@ -23,7 +25,7 @@ import com.foodbook.foodbook.Recipe;
 
 public class OnlineDataBase extends Activity {
 
-	private static String keyword = "";
+	private static String keyword;
 
 	/**
 	 * Given the keyword, returns a list of recipes that match
@@ -45,7 +47,7 @@ public class OnlineDataBase extends Activity {
 	 * @return
 	 */
 
-	public static ArrayList<Recipe> searchOnlineByIngredients(ArrayList<String> ingredients) {
+	public static ArrayList<Recipe> searchByIngredientsOnline(ArrayList<String> ingredients) {
 
 		if (ingredients.size() == 0) {
 			return new ArrayList<Recipe>();
@@ -88,9 +90,25 @@ public class OnlineDataBase extends Activity {
 		while (searchResult.size() == 0) {
 
 		}
+		
+		// filtering
+		ArrayList<Recipe> output = new ArrayList<Recipe>();
+		boolean skip;
+		for (Recipe recipe : searchResult) {
+			skip = false;
+			for (String ingInRecipe : recipe.getIngredients()) {
+				if (!Fridge.getInstance().getIngredients().contains(ingInRecipe)) {
+					skip = true;
+					break;
+				}
+			}
+			if (!skip) {
+				output.add(recipe);
+			}
+		}
 
-		keyword = "";
-		return searchResult;
+		ResultsBook.getInstance().setSearchResults(output);
+		return output;
 	}
 
 }

@@ -35,7 +35,7 @@ public class WebServiceClient {
 
 	private String URL = "http://cmput301.softwareprocess.es:8080/CMPUT301W13T08/testing/";
 
-	private String test_URL = "http://cmput301.softwareprocess.es:8080/testing/lab97/";
+	private String test_URL = "http://cmput301.softwareprocess.es:8080/testing/lab9901208/";
 
 	public void insertRecipe(Recipe recipe) throws IllegalStateException, IOException {
 

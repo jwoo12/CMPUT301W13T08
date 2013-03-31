@@ -12,9 +12,7 @@ import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
 
 /**
- * DataBaseHandle extends SQLiteOpenHelper, this class will help open a writable
- * database in which data will be written to. This class will also contain
- * methods to get and set information in the database.
+ * DataBaseHandle extends SQLiteOpenHelper, this class will help open a writable database in which data will be written to. This class will also contain methods to get and set information in the database.
  * 
  * @author rjanes
  * 
@@ -73,8 +71,7 @@ public class DataBaseHandle extends SQLiteOpenHelper {
 	DataBaseHandle databasehelper;
 
 	/**
-	 * This constructor will call sqlitehelper database name and version to
-	 * prepare for commands
+	 * This constructor will call sqlitehelper database name and version to prepare for commands
 	 * 
 	 * @param context
 	 * @param db
@@ -85,45 +82,24 @@ public class DataBaseHandle extends SQLiteOpenHelper {
 	}
 
 	/**
-	 * Creates a DataBase: NOTE: This method will only activate IF there is NO
-	 * DATABASE ALREADY. If the database is purposely deleted, just running the
-	 * program will create a new one. Also, this will check for updates to the
-	 * database and deal with them "in the background." It just works.
+	 * Creates a DataBase: NOTE: This method will only activate IF there is NO DATABASE ALREADY. If the database is purposely deleted, just running the program will create a new one. Also, this will check for updates to the database and deal with them "in the background." It just works.
 	 */
 	@Override
 	public void onCreate(SQLiteDatabase db) {
-		Log.i("TAGGG",
-				"Creating New DataBase NOW! *Will not appear again if database"
-						+ " is created because this onCreate will not run");
+		Log.i("TAGGG", "Creating New DataBase NOW! *Will not appear again if database" + " is created because this onCreate will not run");
 		this.db = db;
 		// Creates Recipe Table
 
-		String CREATE_RECIPE_TABLE = "CREATE TABLE IF NOT EXISTS "
-				+ RECIPE_TABLE + " "
-				+ "(r_id INTEGER PRIMARY KEY AUTOINCREMENT, " + 
-				RECIPE_TITLE + " TEXT, " + 
-				RECIPE_USERNAME + " TEXT, " + 
-				RECIPE_DESCRIPTION + " TEXT, " +
-				RECIPE_CATEGORY + " TEXT, " +
-				RECIPE_INGREDIENTS + " TEXT, " +
-				RECIPE_INSTRUCTIONS + " TEXT, " +
-				RECIPE_ID + " TEXT " + 
-				USER_ID + " TEXT);";
+		String CREATE_RECIPE_TABLE = "CREATE TABLE IF NOT EXISTS " + RECIPE_TABLE + " " + "(r_id INTEGER PRIMARY KEY AUTOINCREMENT, " + RECIPE_TITLE + " TEXT, " + RECIPE_USERNAME + " TEXT, " + RECIPE_DESCRIPTION + " TEXT, " + RECIPE_CATEGORY + " TEXT, " + RECIPE_INGREDIENTS + " TEXT, " + RECIPE_INSTRUCTIONS + " TEXT, " + RECIPE_ID + " TEXT " + USER_ID + " TEXT);";
 		db.execSQL(CREATE_RECIPE_TABLE);
 
 		// String CREATE_RECIPE_TABLE =
 		// "create table Recipe(R_ID INTEGER PRIMARY KEY AUTOINCREMENT, RecipeTitle TEXT, Description TEXT, Category TEXT, Ingredients TEXT, Insttructions TEXT)";
 		// db.execSQL(CREATE_RECIPE_TABLE);
 		// Creates Ingredients Table
-		String CREATE_INGREDIENT_TABLE = "CREATE TABLE " + INGREDIENT_TABLE
-				+ "(I_ID INTEGER PRIMARY KEY AUTOINCREMENT, " + INGREDIENT_KEY
-				+ "TEXT " + INGREDIENT_NAME + ")";
+		String CREATE_INGREDIENT_TABLE = "CREATE TABLE " + INGREDIENT_TABLE + "(I_ID INTEGER PRIMARY KEY AUTOINCREMENT, " + INGREDIENT_KEY + "TEXT " + INGREDIENT_NAME + ")";
 		// db.execSQL(CREATE_INGREDIENT_TABLE);
-		String CREATE_SEARCH_TABLE = "CREATE TABLE "
-				+ SEARCH_RECIPE_INGREDIENTS_TABLE
-				+ "(S_ID INTEGER PRIMARY KEY AUTOINCREMENT, "
-				+ "FOREIGN KEY (r_id) REFERENCES " + INGREDIENT_TABLE
-				+ "(I_id)";
+		String CREATE_SEARCH_TABLE = "CREATE TABLE " + SEARCH_RECIPE_INGREDIENTS_TABLE + "(S_ID INTEGER PRIMARY KEY AUTOINCREMENT, " + "FOREIGN KEY (r_id) REFERENCES " + INGREDIENT_TABLE + "(I_id)";
 
 		// String CREATE_SEARCH_RECIPE_INGREDIENTS_TABLE = "CREATE TABLE " +
 		// SEARCH_RECIPE_INGREDIENTS_TABLE + "(FOREIGN KEY (" + INGREDIENT_KEY
@@ -149,17 +125,13 @@ public class DataBaseHandle extends SQLiteOpenHelper {
 	}
 
 	String getSingleRecipe(String recipeid) {
-		Cursor cursor = db.query(RECIPE_TABLE, new String[] { "_id", "title",
-				"title_raw" }, "title_raw like " + "'%Smith%'", null, null,
-				null, null);
+		Cursor cursor = db.query(RECIPE_TABLE, new String[] { "_id", "title", "title_raw" }, "title_raw like " + "'%Smith%'", null, null, null, null);
 		return recipeid;
 
 	}
 
 	/**
-	 * Gets a list<String> containing a string of each row's (objects) info
-	 * NOTE: this method can easily be adjusted to send back strings in many
-	 * ways
+	 * Gets a list<String> containing a string of each row's (objects) info NOTE: this method can easily be adjusted to send back strings in many ways
 	 * 
 	 * @param everythinglist
 	 * @return
@@ -182,9 +154,7 @@ public class DataBaseHandle extends SQLiteOpenHelper {
 				String category = cursor.getString(3);
 				String ingredients = cursor.getString(4);
 				String instructions = cursor.getString(5);
-				String recipecombined = title + ", " + user + ", "
-						+ description + ", " + category + ", " + ingredients
-						+ ", " + instructions;
+				String recipecombined = title + ", " + user + ", " + description + ", " + category + ", " + ingredients + ", " + instructions;
 				everythinglist.add(recipecombined);
 			} while (cursor.moveToNext());
 		}
@@ -195,20 +165,19 @@ public class DataBaseHandle extends SQLiteOpenHelper {
 	public ArrayList<String> getSingle(String id) {
 
 		ArrayList<String> output = new ArrayList<String>();
-		
+
 		// Select All Query
-		String selectQuery = "SELECT  * FROM " + RECIPE_TABLE + " where "
-				+ R_PRIMARY_KEY + "=" + id;
+		String selectQuery = "SELECT  * FROM " + RECIPE_TABLE + " where " + R_PRIMARY_KEY + "=" + id;
 
 		db = getWritableDatabase();
 		Cursor cursor = db.rawQuery(selectQuery, null);
 
 		// looping through all rows and adding to list
 		if (cursor.moveToFirst()) {
-			
-			//Log.i("TAGGG", "JUST ABOUT TO PRINT SINGLE");
-			//System.out.println(result);
-			//String r_id = cursor.getString(0);
+
+			// Log.i("TAGGG", "JUST ABOUT TO PRINT SINGLE");
+			// System.out.println(result);
+			// String r_id = cursor.getString(0);
 			String name = cursor.getString(1);
 			String author = cursor.getString(2);
 			String desc = cursor.getString(3);
@@ -217,7 +186,7 @@ public class DataBaseHandle extends SQLiteOpenHelper {
 			String inst = cursor.getString(6);
 			String recipeid = cursor.getString(7);
 			String userid = cursor.getString(8);
-			
+
 			output.add(recipeid);
 			output.add(name);
 			output.add(author);
@@ -226,51 +195,45 @@ public class DataBaseHandle extends SQLiteOpenHelper {
 			output.add(ing);
 			output.add(cate);
 			output.add(userid);
-			
+
 		}
 		db.close();
 		// return contact list
 		return output;
 	}
-	
+
 	/**
-	 * GetSingleNoReturn does not return anything.  Can be modified, if necessary, to
-	 * return an array or String of an recipe by it's id.
+	 * GetSingleNoReturn does not return anything. Can be modified, if necessary, to return an array or String of an recipe by it's id.
+	 * 
 	 * @param id
 	 */
-    public void getSingleNoReturn(int id) {
-        
-        // Select All Query
-        String selectQuery = "SELECT  * FROM " + RECIPE_TABLE + " where " + R_PRIMARY_KEY + "=" + id;
-       
-        db = getWritableDatabase();
-        Cursor cursor = db.rawQuery(selectQuery, null);
- 
-        // looping through all rows and adding to list
-        if (cursor.moveToFirst()) {
-        	Log.i("TAGGG", "JUST ABOUT TO PRINT SINGLE");
-            	String result = cursor.getString(1);
-            	System.out.println(result);
-        }
-        db.close();
-        // return contact list
-        
-    }
-    
+	public void getSingleNoReturn(int id) {
 
+		// Select All Query
+		String selectQuery = "SELECT  * FROM " + RECIPE_TABLE + " where " + R_PRIMARY_KEY + "=" + id;
+
+		db = getWritableDatabase();
+		Cursor cursor = db.rawQuery(selectQuery, null);
+
+		// looping through all rows and adding to list
+		if (cursor.moveToFirst()) {
+			Log.i("TAGGG", "JUST ABOUT TO PRINT SINGLE");
+			String result = cursor.getString(1);
+			System.out.println(result);
+		}
+		db.close();
+		// return contact list
+
+	}
 
 	/**
-	 * getAllRecipes will return a cursor with all values in the database (in a
-	 * string array).
+	 * getAllRecipes will return a cursor with all values in the database (in a string array).
 	 * 
 	 * @return
 	 */
 	public Cursor getAllRecipes() {
 		db = getWritableDatabase();
-		return db.query(RECIPE_TABLE, new String[] { RECIPE_TITLE,
-				RECIPE_USERNAME, RECIPE_DESCRIPTION, RECIPE_CATEGORY,
-				RECIPE_INGREDIENTS, RECIPE_INSTRUCTIONS }, null, null, null,
-				null, null);
+		return db.query(RECIPE_TABLE, new String[] { RECIPE_TITLE, RECIPE_USERNAME, RECIPE_DESCRIPTION, RECIPE_CATEGORY, RECIPE_INGREDIENTS, RECIPE_INSTRUCTIONS }, null, null, null, null, null);
 		// need to close so maybe do query first then return it.
 	}
 
@@ -283,11 +246,7 @@ public class DataBaseHandle extends SQLiteOpenHelper {
 	 */
 	public Cursor getRecipe(long primkey) throws SQLException {
 		db = getWritableDatabase();
-		Cursor mCursor = db.query(true, RECIPE_TABLE, new String[] {
-				R_PRIMARY_KEY, RECIPE_TITLE, RECIPE_USERNAME,
-				RECIPE_DESCRIPTION, RECIPE_CATEGORY, RECIPE_INGREDIENTS,
-				RECIPE_INSTRUCTIONS }, R_PRIMARY_KEY + "=" + primkey, null,
-				null, null, null, null);
+		Cursor mCursor = db.query(true, RECIPE_TABLE, new String[] { R_PRIMARY_KEY, RECIPE_TITLE, RECIPE_USERNAME, RECIPE_DESCRIPTION, RECIPE_CATEGORY, RECIPE_INGREDIENTS, RECIPE_INSTRUCTIONS }, R_PRIMARY_KEY + "=" + primkey, null, null, null, null, null);
 		if (mCursor != null) {
 			mCursor.moveToFirst();
 		}
@@ -296,8 +255,7 @@ public class DataBaseHandle extends SQLiteOpenHelper {
 	}
 
 	/**
-	 * UpdateRecipe is the method in which the user will be able to UPDATE a
-	 * UNIQUE recipe.
+	 * UpdateRecipe is the method in which the user will be able to UPDATE a UNIQUE recipe.
 	 * 
 	 * @param id
 	 * @param title
@@ -308,9 +266,7 @@ public class DataBaseHandle extends SQLiteOpenHelper {
 	 * @param instructions
 	 * @return boolean
 	 */
-	public boolean updateRecipe(long id, String title, String user,
-			String description, String category, String ingredients,
-			String instructions) {
+	public boolean updateRecipe(long id, String title, String user, String description, String category, String ingredients, String instructions) {
 		ContentValues args = new ContentValues();
 		args.put(RECIPE_TITLE, title);
 		args.put(RECIPE_USERNAME, user);
@@ -324,6 +280,7 @@ public class DataBaseHandle extends SQLiteOpenHelper {
 
 	/**
 	 * Main method to insert a recipe (uses the field IN CORRECT ORDER)
+	 * 
 	 * @param rname
 	 * @param user
 	 * @param description
@@ -334,8 +291,7 @@ public class DataBaseHandle extends SQLiteOpenHelper {
 	 * @param userid
 	 * @return
 	 */
-	public long insertRecipe(String rname, String user, String description,
-			String category, String ingredients, String instructions, String recipeid, String userid) {
+	public long insertRecipe(String rname, String user, String description, String category, String ingredients, String instructions, String recipeid, String userid) {
 
 		ContentValues values = new ContentValues();
 		values.put(RECIPE_TITLE, rname);
@@ -348,9 +304,7 @@ public class DataBaseHandle extends SQLiteOpenHelper {
 	}
 
 	/**
-	 * If the tables need to be altered, reset, or changed this we drop the
-	 * tables in the database then re-add the original tables again. (To start
-	 * fresh, without users that we added in testing, for example).
+	 * If the tables need to be altered, reset, or changed this we drop the tables in the database then re-add the original tables again. (To start fresh, without users that we added in testing, for example).
 	 */
 	@Override
 	public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
@@ -359,17 +313,14 @@ public class DataBaseHandle extends SQLiteOpenHelper {
 	}
 
 	/**
-	 * used to delete the tables so we don't get errors while testing. REMOVE
-	 * any calls to this method before submiting
+	 * used to delete the tables so we don't get errors while testing. REMOVE any calls to this method before submiting
 	 */
 	public void dropTables() {
 		db.execSQL("DROP TABLE IF EXISTS " + RECIPE_TABLE);
 	}
 
 	/**
-	 * getNameandId will get a PAIR of list<String>. One has a list of
-	 * recipe_titles and the other has a list of ids. Together, these can/will
-	 * be used to search for clicked items being displayed on an activity.
+	 * getNameandId will get a PAIR of list<String>. One has a list of recipe_titles and the other has a list of ids. Together, these can/will be used to search for clicked items being displayed on an activity.
 	 * 
 	 * @return List<List<String>> List of two lists
 	 */
@@ -383,10 +334,8 @@ public class DataBaseHandle extends SQLiteOpenHelper {
 		if (crsr != null) {
 			if (crsr.moveToFirst()) {
 				do {
-					String recipename = crsr.getString(crsr
-							.getColumnIndex(RECIPE_TABLE));
-					String id = crsr.getString(crsr
-							.getColumnIndex(R_PRIMARY_KEY));
+					String recipename = crsr.getString(crsr.getColumnIndex(RECIPE_TABLE));
+					String id = crsr.getString(crsr.getColumnIndex(R_PRIMARY_KEY));
 					names.add(recipename);
 					ids.add(id);
 				} while (crsr.moveToNext());
@@ -400,9 +349,7 @@ public class DataBaseHandle extends SQLiteOpenHelper {
 	}
 
 	/**
-	 * Creating content values by passing in recipe info in the proper order.
-	 * This will create a string that does not need to be parsed by the database
-	 * and thus has greater performance.
+	 * Creating content values by passing in recipe info in the proper order. This will create a string that does not need to be parsed by the database and thus has greater performance.
 	 * 
 	 * @param rname
 	 * @param user
@@ -412,9 +359,7 @@ public class DataBaseHandle extends SQLiteOpenHelper {
 	 * @param instructions
 	 * @return ContentValues (used in sqlite as 'values' paramater)
 	 */
-	private ContentValues createContentValues(String rname, String user,
-			String description, String category, String ingredients,
-			String instructions) {
+	private ContentValues createContentValues(String rname, String user, String description, String category, String ingredients, String instructions) {
 		ContentValues values = new ContentValues();
 		values.put(RECIPE_TITLE, rname);
 		values.put(RECIPE_USERNAME, user);
@@ -427,22 +372,16 @@ public class DataBaseHandle extends SQLiteOpenHelper {
 	}
 
 	/**
-	 * Will fetch all recipes (this method does not iterate through and send
-	 * back a list). Rather, it sends back the cursor and the caller can do as
-	 * they please with the results.
+	 * Will fetch all recipes (this method does not iterate through and send back a list). Rather, it sends back the cursor and the caller can do as they please with the results.
 	 * 
 	 * @return Cursor
 	 */
 	public Cursor fetchAllRecipes() {
-		return db.query(RECIPE_TABLE, new String[] { R_PRIMARY_KEY,
-				RECIPE_TITLE, RECIPE_USERNAME, RECIPE_DESCRIPTION,
-				RECIPE_CATEGORY, RECIPE_INGREDIENTS, RECIPE_INSTRUCTIONS },
-				null, null, null, null, null);
+		return db.query(RECIPE_TABLE, new String[] { R_PRIMARY_KEY, RECIPE_TITLE, RECIPE_USERNAME, RECIPE_DESCRIPTION, RECIPE_CATEGORY, RECIPE_INGREDIENTS, RECIPE_INSTRUCTIONS }, null, null, null, null, null);
 	}
 
 	/**
-	 * Deletes a UNIQUE recipe by it's ID. Will return true if successful and
-	 * false if is unable.
+	 * Deletes a UNIQUE recipe by it's ID. Will return true if successful and false if is unable.
 	 * 
 	 * @param rowId
 	 * @return boolean
@@ -452,8 +391,7 @@ public class DataBaseHandle extends SQLiteOpenHelper {
 	}
 
 	/**
-	 * Inserts into a recipe the values. This is an extra insert method that is
-	 * not currently being used.
+	 * Inserts into a recipe the values. This is an extra insert method that is not currently being used.
 	 */
 	void insert() {
 
@@ -470,12 +408,7 @@ public class DataBaseHandle extends SQLiteOpenHelper {
 		// Recipe Instructions
 
 		/*
-		 * DOES WORK ContentValues values = new ContentValues(); values =
-		 * createContentValues("LASAG", "ROB", "noodles and sauce","PASTA",
-		 * "THIS, THAT, OTHER", "EAT YUMMMM");
-		 * db.insertWithOnConflict(RECIPE_TABLE, null, values,
-		 * SQLiteDatabase.CONFLICT_REPLACE); db.close(); // Closing database
-		 * connection
+		 * DOES WORK ContentValues values = new ContentValues(); values = createContentValues("LASAG", "ROB", "noodles and sauce","PASTA", "THIS, THAT, OTHER", "EAT YUMMMM"); db.insertWithOnConflict(RECIPE_TABLE, null, values, SQLiteDatabase.CONFLICT_REPLACE); db.close(); // Closing database connection
 		 */
 	}
 }

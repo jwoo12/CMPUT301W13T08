@@ -1,4 +1,3 @@
-
 package com.foodbook.foodbook.test;
 
 import java.util.ArrayList;
@@ -8,14 +7,12 @@ import android.test.ActivityInstrumentationTestCase2;
 import com.foodbook.foodbook.FridgeActivity;
 import com.foodbook.foodbook.RecipeBook;
 
-
 /**
  * <p>
- * This class test the creation of author 
+ * This class test the creation of author
  * </p>
  * 
- * @author Jaeseo Park (jaeseo1), Jasmine Woo (jwoo), Nhu Bui (nbui), Robert
- *         Janes (rjanes)
+ * @author Jaeseo Park (jaeseo1), Jasmine Woo (jwoo), Nhu Bui (nbui), Robert Janes (rjanes)
  * 
  */
 
@@ -49,24 +46,18 @@ public class AuthorValidation extends ActivityInstrumentationTestCase2 {
 		testRecipeBook = RecipeBook.getInstance();
 	}
 
-
 	/**
 	 * method to test User/author
 	 */
 	public void testAuthor() {
-		try{
+		try {
 			testRecipeBook.addRecipe(rName, rDesc, rInst, rIng, rCate, null);
 
-			//assertTrue(testRecipeBook.getRecipeInfo(rAuth).contains());
-			
-			} catch (Exception e) {
-            fail("Exception occurred");
-        }
-    }
+			// assertTrue(testRecipeBook.getRecipeInfo(rAuth).contains());
 
-	
+		} catch (Exception e) {
+			fail("Exception occurred");
+		}
+	}
+
 }
-
-
-
-

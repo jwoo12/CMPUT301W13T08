@@ -1,5 +1,7 @@
 package com.foodbook.foodbook;
 
+import com.foodbook.onlinemanager.OnlineSearch;
+
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
@@ -11,7 +13,6 @@ import android.view.MenuItem;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 
-import com.foodbook.onlinemanager.OnlineSearch;
 
 /**
  * <p>

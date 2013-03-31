@@ -100,18 +100,16 @@ public class RecipeBookActivity extends TitleBarOverride {
 					break;
 				}
 
-				
 				Log.v("", "position/id: " + position + " / " + recipeid);
-				
+
 				Intent recipeDetailsIntent = RecipeBook.getInstance().makeRecipeIntentFromRecipeID(recipeid);
 				recipeDetailsIntent.setClass(getApplicationContext(), RecipeDetailsActivity.class);
 				startActivity(recipeDetailsIntent);
-				
+
 			}
 
 		});
 	}
-
 
 	@Override
 	public void onResume() {
@@ -135,12 +133,21 @@ public class RecipeBookActivity extends TitleBarOverride {
 	 */
 
 	private void reloadRecipeBook() {
-		sourceAll = RecipeBook.getNames(RecipeBook.getInstance().getRecipeBook());
+		
 		sourceMine = RecipeBook.getNames(RecipeBook.getInstance().getMine());
 		sourceDownloads = RecipeBook.getNames(RecipeBook.getInstance().getDownloads());
-		idAll = RecipeBook.getRecipeid(RecipeBook.getInstance().getRecipeBook());
+		
 		idMine = RecipeBook.getRecipeid(RecipeBook.getInstance().getMine());
 		idDownloads = RecipeBook.getRecipeid(RecipeBook.getInstance().getDownloads());
+		
+		sourceAll = new ArrayList<String>();
+		sourceAll.addAll(sourceMine);
+		sourceAll.addAll(sourceDownloads);
+
+		idAll = new ArrayList<String>();
+		idAll.addAll(idMine);
+		idAll.addAll(idDownloads);
+		
 	}
 
 	/**
