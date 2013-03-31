@@ -71,7 +71,7 @@ public class OnlineDataBase extends Activity {
 				try {
 
 					Log.v("tests", "checkpoint before search");
-					ArrayList<Recipe> onlineResults = wsc.searchRecipes(keyword);
+					ArrayList<Recipe> onlineResults = wsc.searchRecipes(keyword, false);
 					Log.v("tests", "test size " + onlineResults.size());
 					searchResult.addAll(onlineResults);
 				} catch (ClientProtocolException e) {

@@ -127,14 +127,25 @@ public class WebServiceClient {
 		}
 	}
 
-	public ArrayList<Recipe> searchRecipes(String str) throws ClientProtocolException, IOException {
+	public ArrayList<Recipe> searchRecipes(String str, boolean category) throws ClientProtocolException, IOException {
 
 		Log.v("tests", "keyword " + str);
+		
+		String query;
+		
+		if(category){ // if category is true, then search by recipe title instead of ingredient
+			
+			query = "{\"query\" : {\"query_string\" : {\"default_field\" : \"category\",\"query\" : \"" + str + "\"}}}";
+			
+		}else{
+			query = "{\"query\" : {\"query_string\" : {\"default_field\" : \"ingredients\",\"query\" : \"" + str + "\"}}}";
+		}
+		
 
 		ArrayList<Recipe> results = new ArrayList<Recipe>();
 
 		HttpPost searchRequest = new HttpPost(test_URL + "_search?pretty=1");
-		String query = "{\"query\" : {\"query_string\" : {\"default_field\" : \"ingredients\",\"query\" : \"" + str + "\"}}}";
+		
 
 		// do 2 queries: one for title and one for category then combine array
 
