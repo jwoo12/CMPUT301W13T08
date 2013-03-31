@@ -62,7 +62,7 @@ public class OnlineSearch extends TitleBarOverride {
 						WebServiceClient wsc = new WebServiceClient();
 						try {
 							Log.v("tests", "checkpoint before search");
-							onlineResults = wsc.searchRecipes(keyword, true);
+							onlineResults = wsc.searchRecipes(keyword, false);
 						} catch (ClientProtocolException e) {
 							// TODO Auto-generated catch block
 							e.printStackTrace();

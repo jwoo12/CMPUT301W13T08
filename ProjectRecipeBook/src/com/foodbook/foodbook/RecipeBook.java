@@ -520,6 +520,8 @@ public class RecipeBook {
 
 		final Recipe targetRecipe = searchById(recipeid);
 
+		targetRecipe.generateTags();
+		
 		final WebServiceClient wsb = new WebServiceClient();
 
 		AsyncTask<Void, Void, Void> task = new AsyncTask<Void, Void, Void>() {

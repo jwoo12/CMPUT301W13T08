@@ -127,18 +127,20 @@ public class WebServiceClient {
 		}
 	}
 
-	public ArrayList<Recipe> searchRecipes(String str, boolean category) throws ClientProtocolException, IOException {
+	public ArrayList<Recipe> searchRecipes(String str, boolean ingredient) throws ClientProtocolException, IOException {
 
 		Log.v("tests", "keyword " + str);
 		
 		String query;
 		
-		if(category){ // if category is true, then search by recipe title instead of ingredient
+		if(ingredient){
 			
-			query = "{\"query\" : {\"query_string\" : {\"default_field\" : \"category\",\"query\" : \"" + str + "\"}}}";
+			query = "{\"query\" : {\"query_string\" : {\"default_field\" : \"ingredient\",\"query\" : \"" + str + "\"}}}";
 			
 		}else{
-			query = "{\"query\" : {\"query_string\" : {\"default_field\" : \"ingredients\",\"query\" : \"" + str + "\"}}}";
+
+		query = "{\"query\" : {\"query_string\" : {\"default_field\" : \"tags\",\"query\" : \"" + str + "\"}}}";
+			
 		}
 		
 
@@ -210,21 +212,30 @@ public class WebServiceClient {
 	/**
 	 * delete an entry specified by the id
 	 */
-	public void deleteRecipe() throws IOException {
-		HttpDelete httpDelete = new HttpDelete("http://cmput301.softwareprocess.es:8080/testing/lab02/1");
+	public void deleteRecipe(Recipe toDelete) throws IOException {
+		HttpDelete httpDelete = new HttpDelete("test_URL" + toDelete.getRecipeid());
 		httpDelete.addHeader("Accept", "application/json");
 
 		HttpResponse response = httpclient.execute(httpDelete);
 
 		String status = response.getStatusLine().toString();
-		System.out.println(status);
+		//System.out.println(status);
+		
+		Log.v("tests", "delete status " +status);
+		
 
 		HttpEntity entity = response.getEntity();
 		BufferedReader br = new BufferedReader(new InputStreamReader(entity.getContent()));
 		String output;
-		System.err.println("Output from Server -> ");
+		//System.err.println("Output from Server -> ");
+		
+		Log.v("tests", "DELETE Output from Server ->");
+		
 		while ((output = br.readLine()) != null) {
-			System.err.println(output);
+			//System.err.println(output);
+			
+			Log.v("tests", "output" + output);
+			
 		}
 
 		// EntityUtils.consume(entity);
