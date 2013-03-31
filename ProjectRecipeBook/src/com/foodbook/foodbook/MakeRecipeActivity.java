@@ -2,8 +2,6 @@ package com.foodbook.foodbook;
 
 import java.util.ArrayList;
 
-import android.content.Intent;
-
 /**
  * <p>
  * A subclass of EditRecipeActivity.

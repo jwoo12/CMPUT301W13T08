@@ -9,14 +9,12 @@ import java.math.BigInteger;
 import java.security.SecureRandom;
 import java.util.ArrayList;
 
-import com.foodbook.onlinemanager.WebServiceClient;
-
 import android.content.Context;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.util.Log;
-import android.view.Gravity;
-import android.widget.Toast;
+
+import com.foodbook.onlinemanager.WebServiceClient;
 
 /**
  * <p>

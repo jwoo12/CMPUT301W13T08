@@ -2,7 +2,9 @@ package com.foodbook.foodbook;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Date;
+import java.util.HashSet;
 
 /**
  * A recipe is a set of instructions that a User can record or save to describe how to prepare a food item.
@@ -39,6 +41,8 @@ public class Recipe implements Serializable {
 	private String recipeid; // recipeid is permanent, and will be in this format: (userid) + (date in milisecond) + (first character of the food name)
 	private String userid; // userid is permanent.
 	private ArrayList<String> pictures;
+	
+	private ArrayList<String> tags;
 
 	// userid is perminant id, given to each user, this will be used to identify
 	// the owner of recipes.
@@ -279,5 +283,30 @@ public class Recipe implements Serializable {
 			return StringOperations.intoOneString(category, ", ");
 		}
 
+	}
+	
+	public void generateTags() {
+		this.tags.clear();
+		
+		ArrayList<String> titleSplitArray = new ArrayList<String>(Arrays.asList(this.getName().split(" ")));
+		
+		ArrayList<String> sourcesOfTags = new ArrayList<String>();
+		sourcesOfTags.add(this.getName());
+		sourcesOfTags.addAll(titleSplitArray);
+		sourcesOfTags.addAll(this.category);
+		sourcesOfTags.addAll(this.getIngredients());
+		
+		HashSet<String> tmpSet = new HashSet<String>();
+		
+		for (String item : sourcesOfTags) {
+			tmpSet.add(item);
+			ArrayList<String> itemSplit = new ArrayList<String>(Arrays.asList(item.split(" ")));
+			for (String subitem : itemSplit) {
+				tmpSet.add(subitem);
+			}
+		}
+		
+		this.tags.addAll(tmpSet);
+		
 	}
 }
