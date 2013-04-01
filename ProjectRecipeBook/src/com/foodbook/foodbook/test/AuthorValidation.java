@@ -29,6 +29,7 @@ public class AuthorValidation extends ActivityInstrumentationTestCase2 {
 	Recipe downloadRecipe = null;
 
 	String newAuth = "newauth";
+	String changeAuth = "changeauth";
 	String DownloadAuth = "Downloadauth";
 
 	/**
@@ -60,15 +61,28 @@ public class AuthorValidation extends ActivityInstrumentationTestCase2 {
      	   }
    	 }
 	/**
-	 * method to test that downloaded recipes cannot allow change author
+	 * method to test the edit of an author
+	 */
+	public void testEditAuthor() {
+		try{
+			testRecipeBook.setAuthor(newAuth);
+			assertTrue(testRecipeBook.getAuthor().equals(newAuth));	
+			testRecipeBook.setAuthor(changeAuth);
+			assertTrue(testRecipeBook.getAuthor().equals(changeAuth));	
+			} catch (Exception e) {
+            fail("Exception occurred");
+     	   }
+   	 }
+	/**
+	 * method to test that downloaded recipes kept the original author's name
 	 */
 	public void testdownloadedAuthor() {
 		try{
 			//set author
-			downloadRecipe.setauthor(DownloadAuth);
-			testRecipeBook.getDownloads();
-			assertTrue(testRecipeBook.getAuthor().equals(DownloadAuth));	
-			
+			downloadRecipe.setAuthor("somethong");
+			Log.i("******", testRecipeBook.getDownloads().toString());
+			assertTrue(downloadRecipe.getauthor().equals(DownloadAuth));	
+			//TODO
 			} catch (Exception e) {
             fail("Exception occurred");
         }
