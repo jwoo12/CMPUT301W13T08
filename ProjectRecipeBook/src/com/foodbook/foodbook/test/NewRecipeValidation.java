@@ -188,7 +188,7 @@ public class NewRecipeValidation extends ActivityInstrumentationTestCase2 {
 	}
 
 	/**
-	 * method to test the edit of a recipe
+	 * method to test the edit of a recipe. Editing the recipe name, description, instruction, ingredient, and category of a recipe. 
 	 */
 	public void testEditNewRecipe() {
 		try {
@@ -206,10 +206,11 @@ public class NewRecipeValidation extends ActivityInstrumentationTestCase2 {
 			testRecipeBook.editRecipe(editrName, editrDesc, editrInst, editrIng, editrCate, recipeID, new ArrayList<String>());
 
 			// check if edited successfully
-			assertFalse("edit name successful", testRecipeBook.getMine().get(newSize - 1).getName().equals(editrName));
+			assertTrue("edit name successful", testRecipeBook.getMine().get(newSize - 1).getName().equals(editrName));
 			assertTrue("edit description successful", testRecipeBook.getMine().get(newSize - 1).getDesc().equals(editrDesc));
-			assertTrue("edit Instruction successful", testRecipeBook.getMine().get(newSize - 1).getDesc().equals(editrInst));
-			assertTrue("edit Ingredient successful", testRecipeBook.getMine().get(newSize - 1).getDesc().equals(editrIng));
+			assertTrue("edit Instruction successful", testRecipeBook.getMine().get(newSize - 1).getInst().equals(editrInst));
+			assertTrue("edit Ingredient successful", testRecipeBook.getMine().get(newSize - 1).getIngredients().equals(editrIng));
+			assertTrue("edit Ingredient successful", testRecipeBook.getMine().get(newSize - 1).getCategory().equals(editrCate));
 
 		} catch (Exception e) {
 			fail("Exception occurred");
