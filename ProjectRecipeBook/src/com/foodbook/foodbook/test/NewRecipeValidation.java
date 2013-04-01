@@ -16,7 +16,7 @@ import com.foodbook.foodbook.RecipeBook;
  * 
  */
 
-public class NewRecipeValidation extends ActivityInstrumentationTestCase2 {
+public class NewRecipeValidation extends ActivityInstrumentationTestCase2<FridgeActivity> {
 
 	private RecipeBook testRecipeBook;
 
@@ -37,9 +37,8 @@ public class NewRecipeValidation extends ActivityInstrumentationTestCase2 {
 	/**
 	 * method to inherit from fridgeactivity
 	 */
-	@SuppressWarnings({ "unchecked", "deprecation" })
 	public NewRecipeValidation() {
-		super("com.foodbook.foodbook.test", FridgeActivity.class);
+		super(FridgeActivity.class);
 	}
 
 	/**
