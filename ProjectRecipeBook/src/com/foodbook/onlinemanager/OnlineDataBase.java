@@ -26,6 +26,7 @@ import com.foodbook.foodbook.ResultsBook;
 public class OnlineDataBase extends Activity {
 
 	private static String keyword;
+	private static boolean searchDone;
 
 	/**
 	 * Given the keyword, returns a list of recipes that match
@@ -61,6 +62,7 @@ public class OnlineDataBase extends Activity {
 		}
 
 		final ArrayList<Recipe> searchResult = new ArrayList<Recipe>();
+		searchDone = false;
 
 		AsyncTask<Void, Void, Void> task = new AsyncTask<Void, Void, Void>() {
 
@@ -74,6 +76,7 @@ public class OnlineDataBase extends Activity {
 					ArrayList<Recipe> onlineResults = wsc.searchRecipes(keyword, true);
 					Log.v("tests", "test size " + onlineResults.size());
 					searchResult.addAll(onlineResults);
+					searchDone = true;
 				} catch (ClientProtocolException e) {
 					e.printStackTrace();
 				} catch (IOException e) {
@@ -85,14 +88,11 @@ public class OnlineDataBase extends Activity {
 
 		task.execute();
 
-		Log.v("tests", "test searchresults size " + searchResult.size());
+		while (!searchDone) {
 
-		while (searchResult.size() == 0) {
-
-			
-			
-			
 		}
+
+		Log.v("tests", "test searchresults size " + searchResult.size());
 		
 		// filtering
 		ArrayList<Recipe> output = new ArrayList<Recipe>();
