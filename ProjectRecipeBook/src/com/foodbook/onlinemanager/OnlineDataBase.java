@@ -6,11 +6,13 @@ import java.util.ArrayList;
 import org.apache.http.client.ClientProtocolException;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.util.Log;
 
 import com.foodbook.foodbook.Fridge;
 import com.foodbook.foodbook.Recipe;
+import com.foodbook.foodbook.RecipeBook;
 import com.foodbook.foodbook.ResultsBook;
 
 /**
@@ -25,7 +27,7 @@ import com.foodbook.foodbook.ResultsBook;
 
 public class OnlineDataBase extends Activity {
 
-	private static String keyword;
+	private static String queryString;
 	private static boolean searchDone;
 
 	/**
@@ -36,9 +38,44 @@ public class OnlineDataBase extends Activity {
 	 * @return list of relevant recipes
 	 */
 
-	public static ArrayList<Recipe> searchByKeyword(String keyword) {
-		ArrayList<Recipe> ouput = new ArrayList<Recipe>();
-		return ouput;
+	public static ArrayList<Recipe> searchByKeyword(final String keyword) {
+		
+		final ArrayList<Recipe> searchResult = new ArrayList<Recipe>();
+		searchDone = false;
+		
+		AsyncTask<Void, Void, Void> task = new AsyncTask<Void, Void, Void>() {
+
+			@Override
+			protected Void doInBackground(Void... arg0) {
+
+				Log.v("tests", "checkpoint doInBackground");
+				WebServiceClient wsc = new WebServiceClient();
+				try {
+					ArrayList<Recipe> onlineResults = wsc.searchRecipes(keyword, false);
+					searchResult.addAll(onlineResults);
+					searchDone = true;
+				} catch (ClientProtocolException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				return null;
+
+			}
+
+		};
+		
+		task.execute();
+		
+		while (!searchDone) {
+			//infinite loop
+		}
+		
+		ResultsBook.getInstance().setSearchResults(searchResult);
+		return searchResult;
+		
 	}
 
 	/**
@@ -54,11 +91,11 @@ public class OnlineDataBase extends Activity {
 			return new ArrayList<Recipe>();
 		}
 
-		keyword = ingredients.get(0);
+		queryString = ingredients.get(0);
 
 		for (int i = 1; i < ingredients.size(); i++) {
 
-			keyword += " OR " + ingredients.get(i);
+			queryString += " OR " + ingredients.get(i);
 		}
 
 		final ArrayList<Recipe> searchResult = new ArrayList<Recipe>();
@@ -73,7 +110,7 @@ public class OnlineDataBase extends Activity {
 				try {
 
 					Log.v("tests", "checkpoint before search");
-					ArrayList<Recipe> onlineResults = wsc.searchRecipes(keyword, true);
+					ArrayList<Recipe> onlineResults = wsc.searchRecipes(queryString, true);
 					Log.v("tests", "test size " + onlineResults.size());
 					searchResult.addAll(onlineResults);
 					searchDone = true;
@@ -113,5 +150,4 @@ public class OnlineDataBase extends Activity {
 		ResultsBook.getInstance().setSearchResults(output);
 		return output;
 	}
-
 }
