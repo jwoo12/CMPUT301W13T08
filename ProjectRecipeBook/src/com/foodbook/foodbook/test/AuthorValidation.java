@@ -1,10 +1,7 @@
 package com.foodbook.foodbook.test;
 
-import java.util.ArrayList;
 
 import android.test.ActivityInstrumentationTestCase2;
-import android.util.Log;
-
 import com.foodbook.foodbook.FridgeActivity;
 import com.foodbook.foodbook.Recipe;
 import com.foodbook.foodbook.RecipeBook;
@@ -24,7 +21,6 @@ import com.foodbook.foodbook.RecipeBook;
 public class AuthorValidation extends ActivityInstrumentationTestCase2 {
 
 	private RecipeBook testRecipeBook;
-	private ArrayList<Recipe> downloadrecipe;
 	
 	Recipe downloadRecipe = null;
 
@@ -75,23 +71,6 @@ public class AuthorValidation extends ActivityInstrumentationTestCase2 {
             fail("Exception occurred");
      	   }
    	 }
-	/**
-	 * method to test that downloaded recipes kept the original author's name
-	 */
-	public void testdownloadedAuthor() {
-		try{
-			//set author
-			ArrayList<String> sourceDownloads;
-			downloadRecipe.setAuthor("somethong");
-
-			Log.i("******", testRecipeBook.getDownloads().toString());
-			assertTrue(downloadRecipe.getauthor().equals(DownloadAuth));	
-			//TODO
-			} catch (Exception e) {
-            fail("Exception occurred");
-        }
-    }
-
 	
 }
 
