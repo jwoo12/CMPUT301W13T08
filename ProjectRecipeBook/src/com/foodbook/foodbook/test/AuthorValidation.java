@@ -61,14 +61,16 @@ public class AuthorValidation extends ActivityInstrumentationTestCase2 {
      	   }
    	 }
 	/**
-	 * method to test the edit of an author
+	 * method to test the edit of an author but making sure the user id does not change
 	 */
 	public void testEditAuthor() {
 		try{
 			testRecipeBook.setAuthor(newAuth);
+			String UserID = testRecipeBook.getUserid();
 			assertTrue(testRecipeBook.getAuthor().equals(newAuth));	
 			testRecipeBook.setAuthor(changeAuth);
 			assertTrue(testRecipeBook.getAuthor().equals(changeAuth));	
+			assertTrue(testRecipeBook.getUserid().equals(UserID));	
 			} catch (Exception e) {
             fail("Exception occurred");
      	   }
@@ -79,7 +81,9 @@ public class AuthorValidation extends ActivityInstrumentationTestCase2 {
 	public void testdownloadedAuthor() {
 		try{
 			//set author
+			ArrayList<String> sourceDownloads;
 			downloadRecipe.setAuthor("somethong");
+
 			Log.i("******", testRecipeBook.getDownloads().toString());
 			assertTrue(downloadRecipe.getauthor().equals(DownloadAuth));	
 			//TODO
