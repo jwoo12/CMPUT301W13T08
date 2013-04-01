@@ -1,9 +1,6 @@
 package com.foodbook.foodbook.test;
 
-import java.util.ArrayList;
-
 import android.test.ActivityInstrumentationTestCase2;
-
 import com.foodbook.foodbook.Fridge;
 import com.foodbook.foodbook.FridgeActivity;
 
@@ -47,10 +44,6 @@ public class IngredientValidation extends ActivityInstrumentationTestCase2<Fridg
 
 			// add a dummy entry into the testFridge
 			testFridge.addIngredient("dummy entry");
-
-			// get result
-			ArrayList<String> temp = new ArrayList<String>();
-
 			// check if the dummy entry is in fridge
 			assertTrue("added ingredient should ", testFridge.getIngredients().contains("dummy entry"));
 		} catch (Exception e) {
@@ -62,9 +55,7 @@ public class IngredientValidation extends ActivityInstrumentationTestCase2<Fridg
 	 * method for testing editing ingredients in fridgeActivity
 	 */
 	public void testEditIngredients() {
-		try {// we use sendKeys instead of setText so it goes through entry
-				// click on first ingredient
-				// click on add tab
+		try {
 			String oldName = "oldoldoldname";
 			String newName = "newnewnewname";
 			testFridge.addIngredient(oldName);
