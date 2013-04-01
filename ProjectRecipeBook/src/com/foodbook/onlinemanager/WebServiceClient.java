@@ -35,7 +35,7 @@ public class WebServiceClient {
 
 	private String URL = "http://cmput301.softwareprocess.es:8080/CMPUT301W13T08/testing/";
 
-	private String test_URL = "http://cmput301.softwareprocess.es:8080/testing/lab9901208/";
+	private String test_URL = "http://cmput301.softwareprocess.es:8080/testing/lab33844/";
 
 	public void insertRecipe(Recipe recipe) throws IllegalStateException, IOException {
 
@@ -135,7 +135,7 @@ public class WebServiceClient {
 		
 		if(ingredient){
 			
-			query = "{\"query\" : {\"query_string\" : {\"default_field\" : \"ingredient\",\"query\" : \"" + str + "\"}}}";
+			query = "{\"query\" : {\"query_string\" : {\"default_field\" : \"ingredients\",\"query\" : \"" + str + "\"}}}";
 			
 		}else{
 
@@ -143,7 +143,10 @@ public class WebServiceClient {
 			
 		}
 		
-
+		
+		Log.v("tests", "query " + query);
+		
+		
 		ArrayList<Recipe> results = new ArrayList<Recipe>();
 
 		HttpPost searchRequest = new HttpPost(test_URL + "_search?pretty=1");
@@ -155,6 +158,9 @@ public class WebServiceClient {
 
 		searchRequest.setHeader("Accept", "application/json");
 		searchRequest.setEntity(stringentity);
+		
+		
+		Log.v("tests", "executing....");
 
 		HttpResponse response = httpclient.execute(searchRequest);
 		String status = response.getStatusLine().toString();
@@ -181,6 +187,9 @@ public class WebServiceClient {
 			// System.err.println(recipe);
 		}
 
+		
+		Log.v("tests", "size of results " + results.size());
+		
 		return results;
 		// TODO Release Connection not working
 

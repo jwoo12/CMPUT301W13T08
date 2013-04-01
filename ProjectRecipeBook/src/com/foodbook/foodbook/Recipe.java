@@ -6,6 +6,8 @@ import java.util.Arrays;
 import java.util.Date;
 import java.util.HashSet;
 
+import android.util.Log;
+
 /**
  * A recipe is a set of instructions that a User can record or save to describe how to prepare a food item.
  * 
@@ -289,6 +291,7 @@ public class Recipe implements Serializable {
 		this.tags.clear();
 		
 		ArrayList<String> sourcesOfTags = new ArrayList<String>();
+		sourcesOfTags.add(this.author);
 		sourcesOfTags.add(this.getName());
 		sourcesOfTags.addAll(this.category);
 		sourcesOfTags.addAll(this.getIngredients());
@@ -304,6 +307,9 @@ public class Recipe implements Serializable {
 		}
 		
 		this.tags.addAll(tmpSet);
+		
+		
+		Log.v("tests", "hashSet" + tags.toString());
 		
 	}
 }

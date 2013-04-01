@@ -89,6 +89,9 @@ public class OnlineDataBase extends Activity {
 
 		while (searchResult.size() == 0) {
 
+			
+			
+			
 		}
 		
 		// filtering
