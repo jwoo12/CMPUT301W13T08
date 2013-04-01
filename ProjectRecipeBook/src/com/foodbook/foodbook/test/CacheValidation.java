@@ -14,14 +14,14 @@ import android.test.ActivityInstrumentationTestCase2;
  *         Janes (rjanes)
  * 
  */
-public class EmailValidation extends ActivityInstrumentationTestCase2
+public class CacheValidation extends ActivityInstrumentationTestCase2
 {
   private RecipeBook testRecipeBook;
 
 	/**
 	 * method to inherit from fridgeactivity
 	 */
-	public EmailValidation(String name)
+	public CacheValidation(String name)
 	{
 
 		super("com.foodbook.foodbook.test", FridgeActivity.class);
@@ -34,7 +34,7 @@ public class EmailValidation extends ActivityInstrumentationTestCase2
 	{
 
 		super.setUp();
-		testRecipeBook = new RecipeBook();
+		//testRecipeBook = new RecipeBook();
 	}
 	
 	/**
