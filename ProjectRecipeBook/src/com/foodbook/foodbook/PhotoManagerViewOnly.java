@@ -9,12 +9,12 @@ public class PhotoManagerViewOnly extends PhotoManagerAddOnly {
 
 	@Override
 	public void addPhoto() throws IOException {
-		Toast.makeText(this, "Not author: you can only view!", Toast.LENGTH_SHORT).show();
+		Toast.makeText(this, "Online recipe: you can only view!", Toast.LENGTH_SHORT).show();
 	}
 	
 	@Override
 	protected void deletePic(int position, Context applicationContext) {
-		Toast.makeText(this, "Not author: you can only view!", Toast.LENGTH_SHORT).show();
+		Toast.makeText(this, "Online recipe: you can only view!", Toast.LENGTH_SHORT).show();
 	}
 
 }
