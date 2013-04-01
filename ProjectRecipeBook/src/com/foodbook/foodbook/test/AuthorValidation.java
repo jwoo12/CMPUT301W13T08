@@ -3,16 +3,20 @@ package com.foodbook.foodbook.test;
 import java.util.ArrayList;
 
 import android.test.ActivityInstrumentationTestCase2;
+import android.util.Log;
 
 import com.foodbook.foodbook.FridgeActivity;
+import com.foodbook.foodbook.Recipe;
 import com.foodbook.foodbook.RecipeBook;
+
 
 /**
  * <p>
- * This class test the creation of author
+ * This class test the creation of author 
  * </p>
  * 
- * @author Jaeseo Park (jaeseo1), Jasmine Woo (jwoo), Nhu Bui (nbui), Robert Janes (rjanes)
+ * @author Jaeseo Park (jaeseo1), Jasmine Woo (jwoo), Nhu Bui (nbui), Robert
+ *         Janes (rjanes)
  * 
  */
 
@@ -20,14 +24,12 @@ import com.foodbook.foodbook.RecipeBook;
 public class AuthorValidation extends ActivityInstrumentationTestCase2 {
 
 	private RecipeBook testRecipeBook;
+	private ArrayList<Recipe> downloadrecipe;
+	
+	Recipe downloadRecipe = null;
 
-	String rName = "name";
-	String rDesc = "desc";
-	String rInst = "inst";
-	ArrayList<String> rIng = new ArrayList<String>();
-	ArrayList<String> rCate = new ArrayList<String>();
-	String rUserID = "123";
-	String rAuth = "auth";
+	String newAuth = "newauth";
+	String DownloadAuth = "Downloadauth";
 
 	/**
 	 * method to inherit from fridgeactivity
@@ -47,17 +49,34 @@ public class AuthorValidation extends ActivityInstrumentationTestCase2 {
 	}
 
 	/**
-	 * method to test User/author
+	 * method to test the correct author
 	 */
 	public void testAuthor() {
-		try {
-			testRecipeBook.addRecipe(rName, rDesc, rInst, rIng, rCate, null);
+		try{
+			testRecipeBook.setAuthor(newAuth);
+			assertTrue(testRecipeBook.getAuthor().equals(newAuth));	
+			} catch (Exception e) {
+            fail("Exception occurred");
+     	   }
+   	 }
+	/**
+	 * method to test that downloaded recipes cannot allow change author
+	 */
+	public void testdownloadedAuthor() {
+		try{
+			//set author
+			downloadRecipe.setauthor(DownloadAuth);
+			testRecipeBook.getDownloads();
+			assertTrue(testRecipeBook.getAuthor().equals(DownloadAuth));	
+			
+			} catch (Exception e) {
+            fail("Exception occurred");
+        }
+    }
 
-			// assertTrue(testRecipeBook.getRecipeInfo(rAuth).contains());
-
-		} catch (Exception e) {
-			fail("Exception occurred");
-		}
-	}
-
+	
 }
+
+
+
+
