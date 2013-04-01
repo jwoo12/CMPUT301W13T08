@@ -3,11 +3,8 @@ package com.foodbook.foodbook.test;
 import java.util.ArrayList;
 
 import android.test.ActivityInstrumentationTestCase2;
-import android.util.Log;
-
 import com.foodbook.foodbook.Fridge;
 import com.foodbook.foodbook.FridgeActivity;
-import com.foodbook.foodbook.Recipe;
 import com.foodbook.foodbook.RecipeBook;
 
 /**
@@ -47,7 +44,7 @@ public class MakeValidation extends
 	 * method for creating super for FridgeActivity
 	 */
 	public MakeValidation() {
-		super("com.foodbook.foodbook.test", FridgeActivity.class);
+		super(FridgeActivity.class);
 	}
 
 	/**
@@ -78,7 +75,6 @@ public class MakeValidation extends
 	    	 //fridge does not contain any ingredient to make a recipe
 			 ArrayList<ArrayList<String>> testlocalNamesAndIDs = RecipeBook.getNamesAndIDs(testRecipeBook.searchByIngredientsLocal(TestFridge.getIngredients()));
 			 testlocalResults = testlocalNamesAndIDs.get(0);
-			 Log.i("******", testlocalResults.toString());
 			 assertTrue(testlocalResults.isEmpty());
 			 TestFridge.clearFridge();
 			} catch (Exception e) {
@@ -110,7 +106,7 @@ public class MakeValidation extends
 	 */
 	 public void testMakeResult2() {
 		 try{
-			 //all ingredients required in a recipe is now testFridge 
+			 //all ingredients required for 2 recipes is now testFridge 
 	    	 TestFridge.addIngredient(Ing1);
 	    	 TestFridge.addIngredient(Ingr2);
 	    	 TestFridge.addIngredient(Ingr3);
