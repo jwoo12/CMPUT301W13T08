@@ -2,12 +2,13 @@ package com.foodbook.foodbook.test;
 
 import com.foodbook.foodbook.FridgeActivity;
 import com.foodbook.foodbook.RecipeBook;
+import com.foodbook.foodbook.ResultsBook;
 
 import android.test.ActivityInstrumentationTestCase2;
 
 /**
  * <p>
- * This class test the creation of auther 
+ * This class test the caching of a recipe
  * </p>
  * 
  * @author Jaeseo Park (jaeseo1), Jasmine Woo (jwoo), Nhu Bui (nbui), Robert
@@ -17,6 +18,7 @@ import android.test.ActivityInstrumentationTestCase2;
 public class CacheValidation extends ActivityInstrumentationTestCase2
 {
   private RecipeBook testRecipeBook;
+	private ResultsBook testResults;
 
 	/**
 	 * method to inherit from fridgeactivity
@@ -34,21 +36,22 @@ public class CacheValidation extends ActivityInstrumentationTestCase2
 	{
 
 		super.setUp();
-		//testRecipeBook = new RecipeBook();
+		testResults= ResultsBook.getInstance();
 	}
 	
 	/**
-	 * method to test the creation of a new recipe and adding to the recipebook
+	 * method to test caching of a recipe 
 	 */
-	public void testAuthor() {
+	public void testAddCache() {
 		try{
 
-
+			fail("Not yet implemented"); // TODO
 			
 			} catch (Exception e) {
             fail("Exception occurred");
         }
     }
+
 
 }
 
