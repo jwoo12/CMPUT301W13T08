@@ -18,8 +18,8 @@ public class ResultsBook {
 		return resultsBookInstance;
 	}
 
-	protected void reset() {
-		this.resultsbooklist.clear();
+	public void reset() {
+		resultsBookInstance.resultsbooklist.clear();
 	}
 
 	protected Recipe searchById(String recipeid) {

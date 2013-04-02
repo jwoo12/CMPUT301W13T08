@@ -40,6 +40,7 @@ public class OnlineDataBase extends Activity {
 
 	public static ArrayList<Recipe> searchByKeyword(final String keyword) {
 		
+		ResultsBook.getInstance().reset();
 		final ArrayList<Recipe> searchResult = new ArrayList<Recipe>();
 		searchDone = false;
 		
@@ -98,6 +99,7 @@ public class OnlineDataBase extends Activity {
 			queryString += " OR " + ingredients.get(i);
 		}
 
+		ResultsBook.getInstance().reset();
 		final ArrayList<Recipe> searchResult = new ArrayList<Recipe>();
 		searchDone = false;
 
