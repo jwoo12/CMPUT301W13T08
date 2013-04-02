@@ -91,6 +91,12 @@
             <intent-filter>
             </intent-filter>
         </activity>
+        <activity
+            android:name=".PhotoManagerAddOnly"
+            android:label="@string/photo_manager" >
+            <intent-filter>
+            </intent-filter>
+        </activity>
     </application>
 
 </manifest>
