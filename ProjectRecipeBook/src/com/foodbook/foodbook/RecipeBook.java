@@ -500,7 +500,7 @@ public class RecipeBook {
 	 * @param recipeid
 	 */
 	
-	protected void publishRecipeById(String recipeid) {
+	public void publishRecipeById(String recipeid) {
 
 		final Recipe targetRecipe = recipeBookRecipeID.searchById(recipeid, this);
 		targetRecipe.generateTags();
