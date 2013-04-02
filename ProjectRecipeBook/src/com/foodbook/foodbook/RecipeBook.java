@@ -37,6 +37,7 @@ import com.foodbook.onlinemanager.WebServiceClient;
 
 public class RecipeBook {
 
+	private RecipeBookRecipeID recipeBookRecipeID = new RecipeBookRecipeID();
 	public static final String RecipeBookFilename = "recipe.sav";
 	public static final RecipeBook recipeBookInstance = new RecipeBook();
 
@@ -135,13 +136,7 @@ public class RecipeBook {
 	 */
 
 	public static ArrayList<String> getRecipeid(ArrayList<Recipe> inputArray) {
-		ArrayList<String> outputArrayList = new ArrayList<String>();
-
-		for (Recipe recipe : inputArray) {
-			outputArrayList.add(recipe.getRecipeid());
-		}
-
-		return outputArrayList;
+		return RecipeBookRecipeID.getRecipeid(inputArray);
 	}
 
 	/**
@@ -291,20 +286,7 @@ public class RecipeBook {
 	}
 
 	public ArrayList<String> getPicturesById(String recipeid) {
-		Recipe found = searchById(recipeid);
-		if (found != null) {
-			return found.getPictures();
-		}
-		return new ArrayList<String>();
-	}
-
-	public Recipe searchById(String recipeid) {
-		for (Recipe recipe : this.getRecipeBook()) {
-			if (recipe.getRecipeid().equals(recipeid)) {
-				return recipe;
-			}
-		}
-		return null;
+		return recipeBookRecipeID.getPicturesById(recipeid, this);
 	}
 
 	/**
@@ -316,24 +298,13 @@ public class RecipeBook {
 
 	public void deleteById(String recipeid) {
 
-		Recipe found = searchById(recipeid);
-		if (containsRecipeid(mine, recipeid)) {
+		Recipe found = recipeBookRecipeID.searchById(recipeid, this);
+		if (recipeBookRecipeID.containsRecipeid(mine, recipeid)) {
 			this.mine.remove(found);
 		} else {
 			this.downloads.remove(found);
 		}
 
-	}
-
-	private boolean containsRecipeid(ArrayList<Recipe> targetList, String recipeid) {
-
-		for (Recipe thisRecipe : targetList) {
-			if (thisRecipe.getRecipeid().equals(recipeid)) {
-				return true;
-			}
-		}
-
-		return false;
 	}
 
 	/**
@@ -446,7 +417,7 @@ public class RecipeBook {
 	public static ArrayList<ArrayList<String>> getNamesAndIDs(ArrayList<Recipe> recipeArray) {
 		ArrayList<ArrayList<String>> output = new ArrayList<ArrayList<String>>();
 		output.add(getNames(recipeArray));
-		output.add(getRecipeid(recipeArray));
+		output.add(RecipeBookRecipeID.getRecipeid(recipeArray));
 		return output;
 	}
 
@@ -460,17 +431,11 @@ public class RecipeBook {
 	 */
 
 	public boolean containsRecipeOfID(String recipeidIn) {
-		for (Recipe eachRecipe : this.getRecipeBook()) {
-			if (eachRecipe.getRecipeid().equals(recipeidIn)) {
-				return true;
-			}
-		}
-		return false;
+		return recipeBookRecipeID.containsRecipeOfID(recipeidIn, this);
 	}
 
 	public void updatePic(String recipeid, ArrayList<String> newpic) {
-		Recipe found = this.searchById(recipeid);
-		found.setPictures(newpic);
+		recipeBookRecipeID.updatePic(recipeid, newpic, this);
 	}
 
 	public static Intent makeRecipeIntent(Recipe sourceRecipe) {
@@ -492,17 +457,12 @@ public class RecipeBook {
 	}
 
 	public Intent makeRecipeIntentFromRecipeID(String recipeid) {
-		Recipe found = searchById(recipeid);
-		if (found != null) {
-			return makeRecipeIntent(found);
-		} else {
-			return null;
-		}
+		return recipeBookRecipeID.makeRecipeIntentFromRecipeID(recipeid, this);
 	}
 
 	protected void publishRecipeById(String recipeid) {
 
-		final Recipe targetRecipe = searchById(recipeid);
+		final Recipe targetRecipe = recipeBookRecipeID.searchById(recipeid, this);
 		targetRecipe.generateTags();
 
 		final WebServiceClient wsb = new WebServiceClient();

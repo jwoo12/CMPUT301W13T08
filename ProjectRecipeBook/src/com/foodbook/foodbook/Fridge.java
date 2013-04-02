@@ -25,10 +25,10 @@ import android.content.Context;
 @SuppressWarnings("unchecked")
 public class Fridge {
 
+	private FridgeRemove fridgeRemove = new FridgeRemove();
+	private FridgeIO fridgeIO = new FridgeIO();
 	private static final Fridge fridgeInstance = new Fridge();;
 	private ArrayList<String> ingredients;
-	private final String fridgeFilename = "fridge.sav";
-
 	/**
 	 * 
 	 * Creates a new Fridge object.
@@ -101,7 +101,7 @@ public class Fridge {
 	 */
 
 	public void removeIngredientByIndex(int ingrdIndex) {
-		this.ingredients.remove(ingrdIndex);
+		fridgeRemove.removeIngredientByIndex(ingrdIndex, ingredients);
 	}
 
 	/**
@@ -112,13 +112,7 @@ public class Fridge {
 	 */
 
 	public void removeIngredientByName(String targetName) {
-		ArrayList<String> tmp = this.getIngredients();
-		for (int i = 0; i < tmp.size(); i++) {
-			if (tmp.get(i).equals(targetName)) {
-				this.removeIngredientByIndex(i);
-				return;
-			}
-		}
+		fridgeRemove.removeIngredientByName(targetName, ingredients);
 	}
 
 	/**
@@ -129,16 +123,7 @@ public class Fridge {
 
 	public void loadFromFile(Context context) {
 
-		try {
-			ObjectInputStream in = new ObjectInputStream(context.openFileInput(fridgeFilename));
-			ArrayList<String> myFridge = (ArrayList<String>) in.readObject();
-			this.setIngredients(myFridge);
-		} catch (EOFException eof) {
-		} catch (IOException e) {
-			e.printStackTrace();
-		} catch (ClassNotFoundException e) {
-			e.printStackTrace();
-		}
+		fridgeIO.loadFromFile(context, this);
 
 	}
 
@@ -152,16 +137,7 @@ public class Fridge {
 
 	public void saveToFile(Context context) {
 
-		try {
-			@SuppressWarnings("static-access")
-			ObjectOutputStream out = new ObjectOutputStream(context.openFileOutput(fridgeFilename, context.MODE_PRIVATE));
-			out.writeObject(this.ingredients);
-			out.close();
-		} catch (FileNotFoundException e) {
-			e.printStackTrace();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
+		fridgeIO.saveToFile(context, ingredients);
 
 	}
 

@@ -131,19 +131,7 @@ public class WebServiceClient {
 
 		Log.v("tests", "keyword " + str);
 		
-		String query;
-		
-		if(ingredient){
-			
-			query = "{\"query\" : {\"query_string\" : {\"default_field\" : \"ingredients\",\"query\" : \"" + str + "\"}}}";
-			
-		}else{
-
-		query = "{\"query\" : {\"query_string\" : {\"default_field\" : \"tags\",\"query\" : \"" + str + "\"}}}";
-			
-		}
-		
-		
+		String query = query(str, ingredient);
 		Log.v("tests", "query " + query);
 		
 		
@@ -194,6 +182,37 @@ public class WebServiceClient {
 		// TODO Release Connection not working
 
 		// searchRequest.releaseConnection();
+	}
+
+	
+	/**
+
+ * 
+ * This class was made as a suggestion from JDeodorant. 
+ * 
+ * Long methods from this class, dealing with the selection of queries, were moved to this class
+ * 
+ * @param str keyword to search
+ * @param ingredient true if searching by ingredients. false if searching by tags
+ * @return query string to search
+ * 
+ * @author Jaeseo Park (jaeseo1), Jasmine Woo (jwoo), Nhu Bui (nbui), Robert Janes (rjanes)
+ *  
+ *
+ */
+	 
+	
+	
+	private String query(String str, boolean ingredient) {
+		String query;
+		if (ingredient) {
+			query = "{\"query\" : {\"query_string\" : {\"default_field\" : \"ingredients\",\"query\" : \""
+					+ str + "\"}}}";
+		} else {
+			query = "{\"query\" : {\"query_string\" : {\"default_field\" : \"tags\",\"query\" : \""
+					+ str + "\"}}}";
+		}
+		return query;
 	}
 
 	/**
