@@ -17,7 +17,8 @@ import com.foodbook.foodbook.TitleBarOverride;
 /**
  * 
  * <p>
- * Implementation for the ability to query recipes
+ * Implementation for the ability to query recipes. A controller within the MVC architecture that handles a User's
+ * query for recipes. Users are able to search via keyword. A keyword may contain a recipe's title, author, or category.
  * </p>
  * 
  * 

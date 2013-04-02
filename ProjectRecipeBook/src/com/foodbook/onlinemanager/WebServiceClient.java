@@ -23,6 +23,29 @@ import com.foodbook.foodbook.Recipe;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
+
+/**
+ * 
+ * Adapted from ESDemo by Chenlei Zhang.
+ * 
+ * @see https://github.com/rayzhangcl/ESDemo
+ * 
+ * This class is a model within the MVC architecture. It holds the methods used for a user's interaction with
+ * the web service. 
+ * 
+ * Elastic Search is used to search through the web service. Gson is used to handle recipe objects
+ * 
+ * 
+ * 
+ * 
+ * @author Jaeseo Park (jaeseo1), Jasmine Woo (jwoo), Nhu Bui (nbui), Robert Janes (rjanes), and Chenlei Zhang
+ *
+ * @param <T> 
+ */
+
+
+
+
 public class WebServiceClient {
 
 	// Http Connector
@@ -37,6 +60,21 @@ public class WebServiceClient {
 
 	private String test_URL = "http://cmput301.softwareprocess.es:8080/testing/lab33844/";
 
+	
+	/**
+	 * 
+	 * Recieves a recipe to be published on the web service. 
+	 * 
+	 * 
+	 * 
+	 * @param recipe The recipe to be published
+	 * @throws IllegalStateException
+	 * @throws IOException
+	 */
+	
+	
+	
+	
 	public void insertRecipe(Recipe recipe) throws IllegalStateException, IOException {
 
 		Log.v("tests", "checkpoint insertRecipe");
@@ -92,6 +130,17 @@ public class WebServiceClient {
 		// httpPost.releaseConnection();
 	}
 
+	
+	/**
+	 * 
+	 * Downloads a recipe from the web service. 
+	 * 
+	 * 
+	 */
+	
+	
+	
+	
 	public void getRecipe() {
 		try {
 			HttpGet getRequest = new HttpGet(test_URL + "?pretty=1");// S4bRPFsuSwKUDSJImbCE2g?pretty=1
@@ -127,6 +176,30 @@ public class WebServiceClient {
 		}
 	}
 
+	
+	
+	/**
+	 * 
+	 * Searches for recipes on the web service by keywords or ingredients. 
+	 * 
+	 * The query string is based on whether or not an ingredient search is used. This variable will differ
+	 * if searching by keyword instead. 
+	 * 
+	 * Keywords are based on a Recipe's "tag" array. The tag array includes a recipe's category, author name, and title. 
+	 * By using this tag array, we were able to implement a universal search for a recipe.
+	 * 
+	 * 
+	 * @see FridgeActivity search by ingredients using "See What I Can Make" button
+	 * @see OnlineDataBase search by keyword using the edit box in activity
+	 * 
+	 * @param str the ingredients or keyword to be queried
+	 * @param ingredient if we are searching by ingredients then true. False if search by keyword
+	 * @return an ArrayList of found recipes 
+	 * @throws ClientProtocolException
+	 * @throws IOException
+	 */
+	
+	
 	public ArrayList<Recipe> searchRecipes(String str, boolean ingredient) throws ClientProtocolException, IOException {
 
 		Log.v("tests", "keyword " + str);
@@ -217,6 +290,10 @@ public class WebServiceClient {
 
 	/**
 	 * update a field in a recipe
+	 * 
+	 * @param str the field to be updated
+	 * 
+	 * 
 	 */
 	public void updateRecipes(String str) throws ClientProtocolException, IOException {
 		HttpPost updateRequest = new HttpPost("http://cmput301.softwareprocess.es:8080/testing/lab02/1/_update");
@@ -238,7 +315,11 @@ public class WebServiceClient {
 	}
 
 	/**
-	 * delete an entry specified by the id
+	 * delete an entry specified by the recipe's id
+	 * 
+	 * 
+	 * @param toDelete the recipe to be deleted. 
+	 * 
 	 */
 	public void deleteRecipe(Recipe toDelete) throws IOException {
 		HttpDelete httpDelete = new HttpDelete("test_URL" + toDelete.getRecipeid());
@@ -273,6 +354,17 @@ public class WebServiceClient {
 		// httpDelete.releaseConnection();
 	}
 
+	
+	/**
+	 * 
+	 * reads from the http resonse and Json 
+	 * 
+	 * @param response the Http web service response
+	 * @return a String representation of the entity
+	 * @throws IOException
+	 */
+	
+	
 	String getEntityContent(HttpResponse response) throws IOException {
 		BufferedReader br = new BufferedReader(new InputStreamReader((response.getEntity().getContent())));
 		String output;

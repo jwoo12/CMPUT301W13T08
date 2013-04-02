@@ -17,13 +17,17 @@ import com.foodbook.foodbook.ResultsBook;
 
 /**
  * 
- * HTTP and web service implementation
+ * Web service and local implementation for searching recipes by ingredients or keywords.
  * 
+ * A keyword can be a recipe's title, author, or category.
+ * 
+ * Searching is completed by ElasticSearch
  * 
  * 
  * @author Jaeseo Park (jaeseo1), Jasmine Woo (jwoo), Nhu Bui (nbui), Robert Janes (rjanes)
  * 
  */
+
 
 public class OnlineDataBase extends Activity {
 
@@ -31,12 +35,20 @@ public class OnlineDataBase extends Activity {
 	private static boolean searchDone;
 
 	/**
-	 * Given the keyword, returns a list of recipes that match
+	 * Given the keyword, returns a list of recipes that match.
+	 * 
+	 * A keyword can be a recipe's category, author, or title. 
+	 * 
+	 * @see Recipe
+	 * @see WebServiceClient
+	 * 
 	 * 
 	 * @param keyword
 	 *            searchable term
 	 * @return list of relevant recipes
 	 */
+
+
 
 	public static ArrayList<Recipe> searchByKeyword(final String keyword) {
 		
@@ -80,12 +92,12 @@ public class OnlineDataBase extends Activity {
 	}
 
 	/**
-	 * Iterate through the web sevice to find recipes that can be made from what is in the fridge
+	 * Iterate through the web sevice to find recipes that can be made from what is in the fridge (ingredients).
 	 * 
-	 * @param ingredients
-	 * @return
+	 * 
+	 * @param ingredients the list of ingredients to be searched. The list will be parsed into one string using logical operators. 
+	 * @return an arraylist of recipes found on the web service
 	 */
-
 	public static ArrayList<Recipe> searchByIngredientsOnline(ArrayList<String> ingredients) {
 
 		if (ingredients.size() == 0) {

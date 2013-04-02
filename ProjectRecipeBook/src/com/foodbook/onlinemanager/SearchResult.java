@@ -22,11 +22,13 @@ import com.foodbook.foodbook.UpdateListView;
 /**
  * 
  * <p>
- * Queried recipes are displayed
+ * Queried recipes are displayed. A view within the MVC architecture. This class handles the results found from the
+ * ElasticSearch and displays them to screen
  * </p>
  * 
  * 
  * @see Recipe
+ * @see WebServiceClient
  * @author Jaeseo Park (jaeseo1), Jasmine Woo (jwoo), Nhu Bui (nbui), Robert Janes (rjanes)
  * 
  */
@@ -51,7 +53,15 @@ public class SearchResult extends TitleBarOverride {
 		resetAttributes();
 		showSearchResults();
 	}
-
+	
+	
+	/**
+	 * 
+	 * Create new ArrayLists for local and online results and their IDs
+	 * 
+	 * 
+	 */
+	
 	protected void resetAttributes() {
 		localResults = new ArrayList<String>();
 		localID = new ArrayList<String>();
@@ -61,6 +71,18 @@ public class SearchResult extends TitleBarOverride {
 		combinedID = new ArrayList<String>();
 	}
 
+	/**
+	 * 
+	 * Take intents, combine them in a list, then show the list on screen.
+	 * 
+	 * A view with the MVC architecture.
+	 * 
+	 * 
+	 * 
+	 */
+	
+	
+	
 	private void showSearchResults() {
 
 		readIntent();
@@ -70,6 +92,18 @@ public class SearchResult extends TitleBarOverride {
 
 	}
 
+	
+	/**
+	 * 
+	 * Initialise the listview for the results
+	 * 
+	 * 
+	 */
+	
+	
+	
+	
+	
 	protected void setupListView() {
 		resultListView = (ListView) findViewById(R.id.searchResult_listView);
 		resultListView.setOnItemClickListener(new OnItemClickListener() {
@@ -98,6 +132,17 @@ public class SearchResult extends TitleBarOverride {
 		});
 	}
 
+	
+
+	/**
+	 * 
+	 * combine the results with their IDs
+	 * 
+	 * 
+	 */
+	
+	
+	
 	protected void constructCombinedLists() {
 		combinedResults.addAll(localResults);
 		combinedResults.addAll(onlineResults);
@@ -105,6 +150,15 @@ public class SearchResult extends TitleBarOverride {
 		combinedID.addAll(onlineID);
 	}
 
+	
+	/**
+	 * 
+	 * Read intents from the calling methods
+	 * 
+	 * 
+	 */
+	
+	
 	protected void readIntent() {
 		Intent in = getIntent();
 		if (in.hasExtra("localResults")) {
@@ -117,6 +171,15 @@ public class SearchResult extends TitleBarOverride {
 		}
 	}
 
+	
+
+	/**
+	 * 
+	 * New Intents 
+	 * 
+	 * 
+	 */
+	
 	@Override
 	public void onNewIntent(Intent newIntent) {
 		super.onNewIntent(newIntent);
