@@ -247,7 +247,6 @@ public class RecipeDetailsActivity extends TitleBarOverride {
 		
 		if (!RecipeBook.getInstance().getUserid().equals(useridOfThisRecipe)) {
 			editLayout.setVisibility(View.GONE);
-			publishLayout.setVisibility(View.GONE);
 		}
 		if (onlineRecipe) {
 			publishLayout.setVisibility(View.GONE);
