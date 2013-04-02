@@ -1,4 +1,3 @@
-
 package com.foodbook.foodbook.test;
 
 import java.io.IOException;
@@ -196,7 +195,6 @@ public class DatabaseValidation extends TestCase {
 		
 		//get a recipe
 		testresults.download(recipeID);
-		Log.i("something", "hello"+testRecipeBook.getDownloads().toString());
 		assertTrue(testRecipeBook.getDownloads().contains(rName));
 		
 		} catch (Exception e) {
