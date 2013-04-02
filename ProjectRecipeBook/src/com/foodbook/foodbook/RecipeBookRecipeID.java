@@ -93,4 +93,26 @@ public class RecipeBookRecipeID {
 		Recipe found = this.searchById(recipeid, recipeBook);
 		found.setPictures(newpic);
 	}
+
+	/**
+	 * Remove a recipe by finding it with its ID
+	 * 
+	 * 
+	 * This method was moved due to type envy suggested by JDeodorant 
+	 * 
+	 * 
+	 * @param recipeid recipe to be deleted
+	 * @param mine
+	 * @param downloads
+	 * @param recipeBook
+	 */
+	public void deleteById(String recipeid, ArrayList<Recipe> mine,
+			ArrayList<Recipe> downloads, RecipeBook recipeBook) {
+		Recipe found = searchById(recipeid, recipeBook);
+		if (containsRecipeid(mine, recipeid)) {
+			mine.remove(found);
+		} else {
+			downloads.remove(found);
+		}
+	}
 }

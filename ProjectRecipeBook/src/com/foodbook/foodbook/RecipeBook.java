@@ -298,12 +298,7 @@ public class RecipeBook {
 
 	public void deleteById(String recipeid) {
 
-		Recipe found = recipeBookRecipeID.searchById(recipeid, this);
-		if (recipeBookRecipeID.containsRecipeid(mine, recipeid)) {
-			this.mine.remove(found);
-		} else {
-			this.downloads.remove(found);
-		}
+		recipeBookRecipeID.deleteById(recipeid, mine, downloads, this);
 
 	}
 
