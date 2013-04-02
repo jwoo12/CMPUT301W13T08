@@ -19,7 +19,11 @@ import android.widget.AdapterView.OnItemLongClickListener;
 import android.widget.Button;
 import android.widget.Gallery;
 
-// http://android-er.blogspot.ca/2012/07/implement-android-gallery-widget-with.html
+/**
+ *
+ * Manages pictures of recipes.
+ *
+ */
 
 public class PhotoManager extends Activity {
 
@@ -68,6 +72,13 @@ public class PhotoManager extends Activity {
 		});
 	}
 
+	/**
+	 *
+	 * Finds the gallery component from xml and bounds to a variable
+	 * 
+	 * @param applicationContext
+	 */
+	
 	protected void setupGallery(final Context applicationContext) {
 		myPhotoGallery = (Gallery) findViewById(R.id.photomanager_gallery);
 		myPhotoGallery.setOnItemLongClickListener(new OnItemLongClickListener() {
@@ -79,6 +90,14 @@ public class PhotoManager extends Activity {
 			}
 		});
 	}
+	
+	/**
+	 * 
+	 * Removes picture from the picture list
+	 * 
+	 * @param position
+	 * @param applicationContext
+	 */
 
 	protected void deletePic(int position, Context applicationContext) {
 
@@ -95,20 +114,44 @@ public class PhotoManager extends Activity {
 
 	}
 
+	/**
+	 * 
+	 * Reads bitmap files in the SD card
+	 * 
+	 */
+	
 	protected void readBMP() {
 		boolean deleteFiles = false;
 		iterateThroughFiles(deleteFiles);
 	}
 
+	/**
+	 * 
+	 * Deletes temporary files in the SD card
+	 * 
+	 */
+	
 	protected void emptyFolder() {
 		boolean deleteFiles = true;
 		iterateThroughFiles(deleteFiles);
 	}
+	
+	/**
+	 * 
+	 * Updates Gallery by setting adapter
+	 * 
+	 */
 
 	protected void updateScreen() {
 		myPhotoGallery.setAdapter(myGalleryBaseAdapter);
 	}
 
+	/**
+	 * 
+	 * Sets the folder path
+	 * 
+	 */
+	
 	protected void setFolder() {
 
 		String folder = Environment.getExternalStorageDirectory().getAbsolutePath() + "/recipePic";
@@ -121,6 +164,13 @@ public class PhotoManager extends Activity {
 		picFolderPath = folder;
 
 	}
+	
+	/**
+	 * 
+	 * Iterate through every file in the folder, performing appropriate actions.
+	 * 
+	 * @param delete
+	 */
 
 	protected void iterateThroughFiles(boolean delete) {
 
@@ -138,6 +188,14 @@ public class PhotoManager extends Activity {
 		}
 
 	}
+	
+	/**
+	 * 
+	 * Converts bitmap strings into actual BMP files and save them as files so that they can be displayed
+	 * 
+	 * @param con
+	 * @throws IOException
+	 */
 
 	protected void readPictures(Context con) throws IOException {
 
@@ -148,12 +206,28 @@ public class PhotoManager extends Activity {
 			saveBMP(imageFile, bmp);
 		}
 	}
+	
+	/**
+	 * 
+	 * Save BMP file
+	 * 
+	 * @param intentPicture
+	 * @param ourBMP
+	 * @throws IOException
+	 */
 
 	protected void saveBMP(File intentPicture, Bitmap ourBMP) throws IOException {
 		OutputStream out = new FileOutputStream(intentPicture);
 		ourBMP.compress(Bitmap.CompressFormat.JPEG, 75, out);
 		out.close();
 	}
+	
+	/**
+	 * 
+	 * Generates a random bitmap image using BogoPicGen class
+	 * 
+	 * @throws IOException
+	 */
 
 	public void addPhoto() throws IOException {
 

@@ -1,10 +1,5 @@
 package com.foodbook.foodbook;
 
-import java.io.EOFException;
-import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 
 import android.content.Context;
@@ -22,7 +17,6 @@ import android.content.Context;
  * 
  */
 
-@SuppressWarnings("unchecked")
 public class Fridge {
 
 	private FridgeRemove fridgeRemove = new FridgeRemove();
@@ -41,6 +35,13 @@ public class Fridge {
 	private Fridge() {
 		this.ingredients = new ArrayList<String>();
 	}
+	
+	/**
+	 * 
+	 * Returns an instance of Fridge object. Follows Singleton design pattern.
+	 * 
+	 * @return Fridge object
+	 */
 
 	public static Fridge getInstance() {
 		return fridgeInstance;
@@ -60,7 +61,7 @@ public class Fridge {
 
 	/**
 	 * 
-	 * Edit an existing ingredient.
+	 * Edits an existing ingredient.
 	 * 
 	 * @param ingredientIndex
 	 *            element of the ingredient selected
@@ -74,7 +75,7 @@ public class Fridge {
 
 	/**
 	 * 
-	 * change an ingredient by name instead of ID
+	 * Finds ingredient by name, and changes it to the new name.
 	 * 
 	 * @param oldName
 	 *            name to be changed
@@ -94,7 +95,7 @@ public class Fridge {
 
 	/**
 	 * 
-	 * Remove an ingredient from the Fridge list.
+	 * Remove an ingredient from the ingredient list.
 	 * 
 	 * @param ingrdIndex
 	 *            element of the ingredient selected
@@ -143,7 +144,7 @@ public class Fridge {
 
 	/**
 	 * 
-	 * Display a list of the current ingredients
+	 * Returns a list of the current ingredients
 	 * 
 	 * @return the list of ingredients
 	 */

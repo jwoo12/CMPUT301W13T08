@@ -21,18 +21,45 @@ public class PictureContainer {
 	private PictureContainer() {
 		this.pics = null;
 	}
+	
+	/**
+	 * 
+	 * getter method for pictures
+	 * 
+	 * @return
+	 */
 
 	public ArrayList<String> getPics() {
 		return picCon.pics;
 	}
 
+	/**
+	 * 
+	 * setter methods for pictures
+	 * 
+	 * @param pics
+	 */
+	
 	public void setPics(ArrayList<String> pics) {
 		picCon.pics = pics;
 	}
+	
+	/**
+	 * 
+	 * resets contents of pictures
+	 * 
+	 */
 
 	public void reset() {
 		picCon.pics = null;
 	}
+	
+	/**
+	 * 
+	 * Singleton instnace access method
+	 * 
+	 * @return
+	 */
 
 	public static PictureContainer getInstance() {
 		return picCon;

@@ -101,14 +101,12 @@ public class FridgeActivity extends TitleBarOverride {
 			public void onClick(View v) {
 
 				// local results of 'see what I can make' search
-				ArrayList<String> localResults = RecipeBook.getNamesAndIDs(OnlineDataBase.searchByIngredientsOnline(Fridge.getInstance().getIngredients())).get(0);
-				ArrayList<String> localID = RecipeBook.getNamesAndIDs(OnlineDataBase.searchByIngredientsOnline(Fridge.getInstance().getIngredients())).get(1);
+				ArrayList<String> localResults = RecipeBook.getNamesAndIDs(RecipeBook.getInstance().searchByIngredientsLocal(Fridge.getInstance().getIngredients())).get(0);
+				ArrayList<String> localID = RecipeBook.getNamesAndIDs(RecipeBook.getInstance().searchByIngredientsLocal(Fridge.getInstance().getIngredients())).get(1);
 				// online results of 'see what I can make' search
-
-				ArrayList<String> onlineResults, onlineID;
-				ArrayList<ArrayList<String>> onlineNamesAndIDs = RecipeBook.getNamesAndIDs(OnlineDataBase.searchByIngredientsOnline(myFridge.getIngredients()));
-				onlineResults = onlineNamesAndIDs.get(0);
-				onlineID = onlineNamesAndIDs.get(1);
+				ArrayList<String> onlineResults = RecipeBook.getNamesAndIDs(OnlineDataBase.searchByIngredientsOnline(Fridge.getInstance().getIngredients())).get(0);
+				ArrayList<String> onlineID = RecipeBook.getNamesAndIDs(OnlineDataBase.searchByIngredientsOnline(Fridge.getInstance().getIngredients())).get(1);
+				
 
 				// display results
 				Intent ingredientSeach = new Intent();

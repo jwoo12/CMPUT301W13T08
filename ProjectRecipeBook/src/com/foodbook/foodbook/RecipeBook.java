@@ -12,7 +12,6 @@ import java.util.ArrayList;
 import android.content.Context;
 import android.content.Intent;
 import android.os.AsyncTask;
-import android.util.Log;
 
 import com.foodbook.onlinemanager.WebServiceClient;
 
@@ -105,12 +104,11 @@ public class RecipeBook {
 
 	/**
 	 * 
-	 * Takes a given list of recipes and converts them to an array of strings
+	 * Extracts names only from the given list of Recipes
 	 * 
 	 * @param inputArray
 	 *            a list of recipes to be converted to strings
 	 * @return outputArray an ArrayList of strings representing recipes
-	 * 
 	 * 
 	 */
 
@@ -127,8 +125,7 @@ public class RecipeBook {
 
 	/**
 	 * 
-	 * Returns the identification code for a recipe
-	 * 
+	 * Extracts ID's only from the given list of Recipes 
 	 * 
 	 * @param inputArray
 	 *            recipe list
@@ -140,11 +137,10 @@ public class RecipeBook {
 	}
 
 	/**
-	 * 
-	 * "Getter" method for downloaded recipes
+	 *
+	 * A setter method for the downloads list
 	 * 
 	 * @param downloads
-	 *            a list of downloaded recipes
 	 */
 
 	public void setDownloads(ArrayList<Recipe> downloads) {
@@ -152,8 +148,8 @@ public class RecipeBook {
 	}
 
 	/**
-	 * This is a getter for the entire RecipeBook. Since there are two recipe books ("mine" and "downloaded"), this method will simply combine them and return the resulting array.
-	 * 
+	 * This is a getter for the entire RecipeBook.
+	 * Combines mine and downloads and returns the resulting list.
 	 * 
 	 * @return List of downloaded and local Recipes
 	 */
@@ -285,6 +281,13 @@ public class RecipeBook {
 		}
 	}
 
+	/**
+	 * 
+	 * gets the picture of the recipe of the given recipeID
+	 * 
+	 * @param recipeid
+	 * @return pictures
+	 */
 	public ArrayList<String> getPicturesById(String recipeid) {
 		return recipeBookRecipeID.getPicturesById(recipeid, this);
 	}
@@ -313,6 +316,14 @@ public class RecipeBook {
 		SecureRandom randomKey = new SecureRandom();
 		return (new BigInteger(130, randomKey).toString(32));
 	}
+	
+	/**
+	 * 
+	 * Saves RecipeBook instance to a file
+	 * 
+	 * @param context
+	 * @return boolean value, denoting result
+	 */
 
 	public boolean saveToFile(Context context) {
 
@@ -405,8 +416,10 @@ public class RecipeBook {
 
 	/**
 	 * 
+	 * Given a list of Recipe objects, extracts names and recipeID for each element, and return them.
+	 * 
 	 * @param recipeArray
-	 * @return
+	 * @return ArrayList<ArrayList<String>> namesAndIDs
 	 */
 
 	public static ArrayList<ArrayList<String>> getNamesAndIDs(ArrayList<Recipe> recipeArray) {
@@ -428,11 +441,28 @@ public class RecipeBook {
 	public boolean containsRecipeOfID(String recipeidIn) {
 		return recipeBookRecipeID.containsRecipeOfID(recipeidIn, this);
 	}
+	
+	/**
+	 * 
+	 * Find the recipe with given recipeID and replaces the picture swith the new set of pictures
+	 * This method is missing "pictures" attribute, because pictures slow application down. Request pictures only when needed.
+	 * 
+	 * @param recipeid
+	 * @param newpic
+	 */
 
 	public void updatePic(String recipeid, ArrayList<String> newpic) {
 		recipeBookRecipeID.updatePic(recipeid, newpic, this);
 	}
 
+	/**
+	 * 
+	 * Parses intent for the recipe with the given recipeID
+	 * 
+	 * @param sourceRecipe
+	 * @return intent, containing the recipe info of the Recipe specified by the given recipeID
+	 */
+	
 	public static Intent makeRecipeIntent(Recipe sourceRecipe) {
 		Intent intentOut = new Intent();
 		intentOut.putExtra("name", sourceRecipe.getName());
@@ -450,11 +480,26 @@ public class RecipeBook {
 
 		return intentOut;
 	}
+	
+	/**
+	 * 
+	 * Calls makeRecipeIntentFromRecipeID after finding the recipe by recipeID
+	 * 
+	 * @param recipeid
+	 * @return intent
+	 */
 
 	public Intent makeRecipeIntentFromRecipeID(String recipeid) {
 		return recipeBookRecipeID.makeRecipeIntentFromRecipeID(recipeid, this);
 	}
 
+	/**
+	 * 
+	 * Publishes Recipe to the webserver
+	 * 
+	 * @param recipeid
+	 */
+	
 	protected void publishRecipeById(String recipeid) {
 
 		final Recipe targetRecipe = recipeBookRecipeID.searchById(recipeid, this);

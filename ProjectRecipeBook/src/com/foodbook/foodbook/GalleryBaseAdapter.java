@@ -13,10 +13,23 @@ import android.widget.Gallery;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 
+/**
+ * 
+ * Adapter for gallery.
+ * <p>code taken from: http://android-er.blogspot.ca/2012/07/implement-android-gallery-widget-with.html
+ *
+ */
+
+
 public class GalleryBaseAdapter extends BaseAdapter {
 
 	ArrayList<String> GalleryFileList;
 	Context context;
+	
+	/**
+	 * Constructor method for adapter
+	 * @param cont
+	 */
 
 	public GalleryBaseAdapter(Context cont) {
 		context = cont;
@@ -57,9 +70,26 @@ public class GalleryBaseAdapter extends BaseAdapter {
 
 	}
 
+	/**
+	 * 
+	 * Adds new item
+	 * 
+	 * @param newitem
+	 */
+	
 	public void add(String newitem) {
 		GalleryFileList.add(newitem);
 	}
+	
+	/**
+	 * 
+	 * Resizes image to a smaller size
+	 * 
+	 * @param path
+	 * @param reqWidth
+	 * @param reqHeight
+	 * @return
+	 */
 
 	public Bitmap decodeSampledBitmapFromUri(String path, int reqWidth, int reqHeight) {
 		Bitmap bm = null;
@@ -78,6 +108,16 @@ public class GalleryBaseAdapter extends BaseAdapter {
 
 		return bm;
 	}
+	
+	/**
+	 * 
+	 * Calculates sample size (for resizing)
+	 * 
+	 * @param options
+	 * @param reqWidth
+	 * @param reqHeight
+	 * @return
+	 */
 
 	public int calculateInSampleSize(BitmapFactory.Options options, int reqWidth, int reqHeight) {
 		// Raw height and width of image

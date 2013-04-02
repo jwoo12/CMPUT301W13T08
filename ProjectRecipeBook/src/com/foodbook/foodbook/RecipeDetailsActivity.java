@@ -47,6 +47,12 @@ public class RecipeDetailsActivity extends TitleBarOverride {
 	protected void updateOnlineRecipeBoolean() {
 		onlineRecipe = getIntent().getBooleanExtra("onlineRecipe", false);
 	}
+	
+	/**
+	 * 
+	 * Sets onClick methods for each button in the activity
+	 * 
+	 */
 
 	protected void setupButtons() {
 
@@ -180,11 +186,11 @@ public class RecipeDetailsActivity extends TitleBarOverride {
 	}
 
 	/**
-	 * Used to create a new intent directing to the edit recipe activity
 	 * 
+	 * Opens EditRecipeActivity for the current recipe
 	 * 
 	 */
-
+	
 	public void editRecipe() {
 		String recipeid = getIntent().getStringExtra("recipeid");
 		Intent editActivityIntent = RecipeBook.getInstance().makeRecipeIntentFromRecipeID(recipeid);

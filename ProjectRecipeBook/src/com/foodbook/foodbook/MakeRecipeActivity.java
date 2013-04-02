@@ -19,10 +19,21 @@ import java.util.ArrayList;
  * */
 public class MakeRecipeActivity extends EditRecipeActivity {
 
+	/**
+	 * 
+	 * Since there is no Extras passed in, create a new pictures array
+	 * 
+	 */
 	@Override
 	protected void readIntent() {
 		pictures = new ArrayList<String>();
 	}
+	
+	/**
+	 * 
+	 * Empty function for new recipes
+	 * 
+	 */
 
 	@Override
 	protected void updateTextFields() {

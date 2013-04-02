@@ -3,8 +3,23 @@ package com.foodbook.foodbook;
 import java.util.ArrayList;
 import java.util.Arrays;
 
+/**
+ * 
+ * Dealing with common string operations. 
+ *
+ */
+
 public class StringOperations {
 
+	/**
+	 * 
+	 * Given a original text and the splitter, returns arraylist of string after splitting.
+	 * 
+	 * @param text original string
+	 * @param splitter
+	 * @return arraylist after splitting
+	 */
+	
 	public static ArrayList<String> SplitToArrayList(String text, String splitter) {
 		String[] stringArray = text.split(splitter);
 		ArrayList<String> outputArrayList = new ArrayList<String>(Arrays.asList(stringArray));
@@ -12,6 +27,14 @@ public class StringOperations {
 	}
 	
 
+	/**
+	 * 
+	 * Adds all elements of the given arraylist of string
+	 * 
+	 * @param input
+	 * @param separator gets insterted in between each element
+	 * @return output string after addition
+	 */
 	
 	public static String intoOneString(ArrayList<String> input, String separator) {
 		
@@ -37,6 +60,7 @@ public class StringOperations {
 	 * @param input
 	 *            The ArrayList to be formatted
 	 * @return
+	 * outputArray after formatting
 	 */
 
 	public static ArrayList<String> formatArray(ArrayList<String> input) {
@@ -57,6 +81,16 @@ public class StringOperations {
 		return output;
 
 	}
+	
+	/**
+	 * 
+	 * Keeps replacing oldStr with newStr until there is no occurence of oldStr in the text
+	 * 
+	 * @param input
+	 * @param oldStr
+	 * @param newStr
+	 * @return string after replacing
+	 */
 	
 	public static String replaceLoop(String input, String oldStr, String newStr) {
 		while (input.contains(oldStr)) {

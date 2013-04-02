@@ -20,6 +20,12 @@ import com.foodbook.foodbook.RecipeBook;
  */
 public class PhotoValidation extends
 		ActivityInstrumentationTestCase2<FridgeActivity> {
+	public PhotoValidation(Class<FridgeActivity> activityClass) {
+		super(activityClass);
+		// TODO Auto-generated constructor stub
+	}
+
+
 	private RecipeBook testRecipeBook;
 	
 	String rName = "name";
@@ -32,14 +38,6 @@ public class PhotoValidation extends
 	
 	String Ing1= "sugar";
 	String Ingr2= "chicken";
-
-	
-	/**
-	 * method for creating super for FridgeActivity
-	 */
-	public PhotoValidation() {
-		super("com.foodbook.foodbook.test", FridgeActivity.class);
-	}
 
 	/**
 	 * method to create/setup testing

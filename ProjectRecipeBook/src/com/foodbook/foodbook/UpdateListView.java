@@ -8,9 +8,6 @@ import android.widget.ListView;
 
 /**
  * 
- * 
- * EDIT
- * 
  * A view in the MVC architecture. Handles displaying of ingredients to screen
  * 
  * @see ArrayAdapter
@@ -22,6 +19,15 @@ import android.widget.ListView;
  */
 
 public class UpdateListView {
+	
+	/**
+	 * Creates an adapter to update the contents of given ListView.
+	 * 
+	 * @param c context of the activity that calls this method from
+	 * @param sourceList
+	 * @param targetListView
+	 * 
+	 */
 
 	public static void updateListView(Context c, ArrayList<String> sourceList, ListView targetListView) {
 		ArrayAdapter<String> adapter = new ArrayAdapter<String>(c, R.layout.mytextview, sourceList);

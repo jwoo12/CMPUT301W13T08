@@ -46,8 +46,38 @@ public class Recipe implements Serializable {
 	
 	private ArrayList<String> tags = new ArrayList<String>();
 
-	// userid is perminant id, given to each user, this will be used to identify
-	// the owner of recipes.
+	/**
+	 * 
+	 * Creates a new Recipe object.
+	 * 
+	 * @param recipename
+	 *            name of recipe
+	 * @param recipeDescriptions
+	 *            description of recipe
+	 * @param recipeInstructions
+	 *            recipe instructions
+	 * @param ingredients
+	 *            list of ingredients needed
+	 * @param category
+	 *            genre of recipe
+	 * @param userid
+	 *            id of user
+	 * @param author
+	 *            name of user
+	 */
+
+	public Recipe(String recipename, String recipeDescriptions, String recipeInstructions, ArrayList<String> ingredients, ArrayList<String> category, String userid, String author, ArrayList<String> pics) {
+		this.name = recipename;
+		this.inst = recipeInstructions;
+		this.desc = recipeDescriptions;
+		this.author = author;
+		this.ingredients = ingredients;
+		this.category = category;
+		this.recipeid = userid + String.valueOf((new Date()).getTime()) + recipename.charAt(0);
+		this.userid = userid;
+		this.pictures = pics;
+	}
+	
 
 	/**
 	 * Description "getter" for a given recipe
@@ -222,46 +252,28 @@ public class Recipe implements Serializable {
 
 	/**
 	 * 
-	 * Creates a new Recipe object.
+	 * Getter method for the pictures
 	 * 
-	 * @param recipename
-	 *            name of recipe
-	 * @param recipeDescriptions
-	 *            description of recipe
-	 * @param recipeInstructions
-	 *            recipe instructions
-	 * @param ingredients
-	 *            list of ingredients needed
-	 * @param category
-	 *            genre of recipe
-	 * @param userid
-	 *            id of user
-	 * @param author
-	 *            name of user
+	 * @return pictures
 	 */
-
-	public Recipe(String recipename, String recipeDescriptions, String recipeInstructions, ArrayList<String> ingredients, ArrayList<String> category, String userid, String author, ArrayList<String> pics) {
-		this.name = recipename;
-		this.inst = recipeInstructions;
-		this.desc = recipeDescriptions;
-		this.author = author;
-		this.ingredients = ingredients;
-		this.category = category;
-		this.recipeid = userid + String.valueOf((new Date()).getTime()) + recipename.charAt(0);
-		this.userid = userid;
-		this.pictures = pics;
-	}
-
+	
 	public ArrayList<String> getPictures() {
 		return pictures;
 	}
+	
+	/**
+	 * 
+	 * setter method for the pictures
+	 * 
+	 * @param pictures
+	 */
 
 	public void setPictures(ArrayList<String> pictures) {
 		this.pictures = pictures;
 	}
 
 	/**
-	 * This method will return list of ingredients as a string, in the following format: ingr_0\ningr_1\ningr_2 ... ingr_n If there is no ingredients added yet, then empty string is returned.
+	 * This method will return list of ingredients as a string
 	 */
 
 	public String getIngredientsString() {
@@ -274,7 +286,7 @@ public class Recipe implements Serializable {
 	}
 
 	/**
-	 * This method will return list of categories as a string, in the following format: categ_0\ncateg_1\ncateg_2 ... categ_n If there is no categories added yet, then empty string is returned.
+	 * This method will return list of category as a string
 	 */
 
 	public String getCategoryString() {
@@ -286,6 +298,13 @@ public class Recipe implements Serializable {
 		}
 
 	}
+	
+	/**
+	 * 
+	 * Generates tagging when being uploaded online.
+	 * This allows users to search recipes by title, categories, and/or ingredients.
+	 * 
+	 */
 	
 	public void generateTags() {
 		this.tags.clear();

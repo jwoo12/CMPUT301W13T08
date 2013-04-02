@@ -35,6 +35,7 @@ public class FridgeIO {
 	/**
 	 * Load previous ingredients from file.
 	 */
+	@SuppressWarnings("unchecked")
 	public void loadFromFile(Context context, Fridge fridge) {
 		try {
 			ObjectInputStream in = new ObjectInputStream(

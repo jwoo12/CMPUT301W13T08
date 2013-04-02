@@ -33,7 +33,7 @@ public class EditRecipeActivity extends TitleBarOverride {
 	protected String recipeid;
 	protected String author;
 	protected ArrayList<String> pictures;
-	
+
 	protected boolean photoManagerOpened = false;
 
 	protected ArrayList<String> categoryArrayList;
@@ -48,8 +48,13 @@ public class EditRecipeActivity extends TitleBarOverride {
 		updateTextFields();
 		activateSaveButton();
 		activatePhotoManagerButton();
-		
+
 	}
+
+	/**
+	 * Setting onClick method for the save button
+	 * 
+	 */
 
 	protected void activateSaveButton() {
 		Button saveButton = (Button) findViewById(R.id.editRecipeSaveButton);
@@ -71,6 +76,12 @@ public class EditRecipeActivity extends TitleBarOverride {
 		});
 	}
 
+	/**
+	 * 
+	 * Setting onClick method for the photo manager button
+	 * 
+	 */
+
 	protected void activatePhotoManagerButton() {
 		Button photoManagerButton = (Button) findViewById(R.id.editRecipePhotoManagerButton);
 		photoManagerButton.setOnClickListener(new OnClickListener() {
@@ -83,6 +94,12 @@ public class EditRecipeActivity extends TitleBarOverride {
 		});
 	}
 
+	/**
+	 * 
+	 * Retrieves data from the intent
+	 * 
+	 */
+
 	protected void readIntent() {
 		recipeid = getIntent().getStringExtra("recipeid");
 		name = getIntent().getStringExtra("name");
@@ -93,21 +110,27 @@ public class EditRecipeActivity extends TitleBarOverride {
 		pictures = RecipeBook.getInstance().getPicturesById(recipeid);
 	}
 
+	/**
+	 * 
+	 * Opens PhotoManager activity.
+	 * Pictures belonging to the corresponding recipe, if there is any, will be sent to PhotoManager through intent.
+	 * 
+	 */
+
 	protected void openPhotoManager() {
 		Intent photoManagerIntent = new Intent();
 		photoManagerIntent.setClass(getApplicationContext(), PhotoManager.class);
 		if (recipeid != null && !photoManagerOpened) {
 			photoManagerIntent.putExtra("pictures", RecipeBook.getInstance().getPicturesById(recipeid));
-		}
-		else if (photoManagerOpened) {
+		} else if (photoManagerOpened) {
 			photoManagerIntent.putExtra("pictures", pictures);
 		}
 		startActivity(photoManagerIntent);
 	}
-	
+
 	/**
-	 * This function is used to check whether or not required fields are empty. If a recipe is missing important information (ex. name), then this function will return false.
-	 * 
+	 *
+	 * Checks to see if the user filled out the required fields.
 	 * 
 	 * @return false if any required fields are empty
 	 */
@@ -121,30 +144,30 @@ public class EditRecipeActivity extends TitleBarOverride {
 	}
 
 	/**
-	 * This function sets the contents of text fields according to the recipe. If recipe has no information (ie. when creating a new recipe), everything will be blank.
 	 * 
-	 * 
+	 * Sets the contents of textfields after retrieving information from intent.
 	 * 
 	 */
 	protected void updateTextFields() {
-		
-		
+
 		EditText recipeNameField = (EditText) findViewById(R.id.editRecipeName);
 		EditText descField = (EditText) findViewById(R.id.editRecipeDesc);
 		EditText categoryField = (EditText) findViewById(R.id.editRecipeCategory);
 		EditText ingredientsField = (EditText) findViewById(R.id.editRecipeIngredients);
 		EditText instField = (EditText) findViewById(R.id.editRecipeInst);
-		
+
 		recipeNameField.setText(name);
 		descField.setText(desc);
 		categoryField.setText(category);
 		ingredientsField.setText(ingredients);
 		instField.setText(inst);
-		
+
 	}
 
 	/**
-	 * This function reads contents of the edited text fields and saves them in global variables.
+	 *
+	 * Reads text from textfields and converts them to string.
+	 * Strings are saved as private attribute within the class.
 	 * 
 	 * @author Jaeseo Park (jaeseo1), Jasmine Woo (jwoo), Nhu Bui (nbui), Robert Janes (rjanes)
 	 * 
@@ -156,7 +179,7 @@ public class EditRecipeActivity extends TitleBarOverride {
 		EditText categoryField = (EditText) findViewById(R.id.editRecipeCategory);
 		EditText ingredientsField = (EditText) findViewById(R.id.editRecipeIngredients);
 		EditText instField = (EditText) findViewById(R.id.editRecipeInst);
-		
+
 		// these are regular strings
 		name = recipeNameField.getText().toString();
 		desc = descField.getText().toString();
@@ -171,7 +194,8 @@ public class EditRecipeActivity extends TitleBarOverride {
 	}
 
 	/**
-	 * This function edits the existing recipe object in the RecipeBook using the User edited text.
+	 * 
+	 * Saves all changes done on the recipe.
 	 * 
 	 * @see readTextfields
 	 * 
@@ -193,7 +217,7 @@ public class EditRecipeActivity extends TitleBarOverride {
 			container.reset();
 		}
 	}
-	
+
 	/**
 	 * makes an intent for RecipeDetailsActivity. info about the recipe will be displayed in RecipeDetailsActivity.
 	 * 
