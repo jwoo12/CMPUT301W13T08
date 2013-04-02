@@ -100,6 +100,10 @@ public class FridgeActivity extends TitleBarOverride {
 			@Override
 			public void onClick(View v) {
 
+				
+				
+				
+				
 				// local results of 'see what I can make' search
 				ArrayList<String> localResults = RecipeBook.getNamesAndIDs(RecipeBook.getInstance().searchByIngredientsLocal(Fridge.getInstance().getIngredients())).get(0);
 				ArrayList<String> localID = RecipeBook.getNamesAndIDs(RecipeBook.getInstance().searchByIngredientsLocal(Fridge.getInstance().getIngredients())).get(1);

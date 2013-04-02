@@ -295,8 +295,8 @@ public class WebServiceClient {
 	 * 
 	 * 
 	 */
-	public void updateRecipes(String str) throws ClientProtocolException, IOException {
-		HttpPost updateRequest = new HttpPost("http://cmput301.softwareprocess.es:8080/testing/lab02/1/_update");
+	public void updateRecipes(String str, Recipe toUpdate) throws ClientProtocolException, IOException {
+		HttpPost updateRequest = new HttpPost(URL + toUpdate.getRecipeid() + "/_update");
 		String query = "{\"script\" : \"ctx._source." + str + "}";
 		StringEntity stringentity = new StringEntity(query);
 
