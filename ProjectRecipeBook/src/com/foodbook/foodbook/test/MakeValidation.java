@@ -10,7 +10,7 @@ import com.foodbook.foodbook.RecipeBook;
 /**
  * <p>
  * This class is testing the ingredients in fridgeactivity test and then test the see what i
- * can make and it will show what they can make
+ * can make and it will show what they can make with the ingredients they have. 
  * </p>
  * 
  * @author Jaeseo Park (jaeseo1), Jasmine Woo (jwoo), Nhu Bui (nbui), Robert
