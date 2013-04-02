@@ -56,7 +56,7 @@ public class WebServiceClient {
 
 	// ERROR : java.lang.NoClassDefFoundError: com.google.gson.Gson
 
-	private String URL = "http://cmput301.softwareprocess.es:8080/CMPUT301W13T08/testing/";
+	private String URL = "http://cmput301.softwareprocess.es:8080/cmput301w13t08/";
 
 	private String test_URL = "http://cmput301.softwareprocess.es:8080/testing/lab33844/";
 
@@ -79,7 +79,7 @@ public class WebServiceClient {
 
 		Log.v("tests", "checkpoint insertRecipe");
 
-		HttpPost httpPost = new HttpPost(test_URL + recipe.getRecipeid());
+		HttpPost httpPost = new HttpPost(URL + recipe.getRecipeid());
 		StringEntity stringentity = null;
 		try {
 			stringentity = new StringEntity(gson.toJson(recipe));
@@ -143,7 +143,7 @@ public class WebServiceClient {
 	
 	public void getRecipe() {
 		try {
-			HttpGet getRequest = new HttpGet(test_URL + "?pretty=1");// S4bRPFsuSwKUDSJImbCE2g?pretty=1
+			HttpGet getRequest = new HttpGet(URL + "?pretty=1");// S4bRPFsuSwKUDSJImbCE2g?pretty=1
 
 			getRequest.addHeader("Accept", "application/json");
 
@@ -210,7 +210,7 @@ public class WebServiceClient {
 		
 		ArrayList<Recipe> results = new ArrayList<Recipe>();
 
-		HttpPost searchRequest = new HttpPost(test_URL + "_search?pretty=1");
+		HttpPost searchRequest = new HttpPost(URL + "_search?pretty=1");
 		
 
 		// do 2 queries: one for title and one for category then combine array
@@ -322,7 +322,7 @@ public class WebServiceClient {
 	 * 
 	 */
 	public void deleteRecipe(Recipe toDelete) throws IOException {
-		HttpDelete httpDelete = new HttpDelete("test_URL" + toDelete.getRecipeid());
+		HttpDelete httpDelete = new HttpDelete("URL" + toDelete.getRecipeid());
 		httpDelete.addHeader("Accept", "application/json");
 
 		HttpResponse response = httpclient.execute(httpDelete);
